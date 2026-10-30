@@ -159,6 +159,11 @@ def detail(c, today, end):
                          "house" if "house" in styles or "tech-house" in styles else "", "electronica" if "electronica" in styles else "") if t]
     music = music or music_tags(title + " " + (desc or "")) or ["techno"]
     typ = "tardeo" if start and "12:00" <= start < "20:00" else "club"
+    # botón "BUY TICKETS" de la ficha: enlace de compra externo (RA, DICE, Xceed…); con él merge.py cruza el evento con la ticketera
+    ticket = url
+    for a in s.select("a[href^='http']"):
+        if re.search(r"entradas|tickets|comprar", a.get_text(" "), re.I) and "fulltechno.club" not in a["href"]:
+            ticket = a["href"].strip(); break
     return event(title=title, date=ndate, start=start, end=endt, venue=venue, address=address, type=typ, music=music,
                  priceMin=pmin, priceMax=pmax, priceText=ptxt, lineup=lineup[:12], description=(desc[:400] if desc else None),
-                 sources=[{"name": NAME, "url": url}], ticketUrl=url)
+                 sources=[{"name": NAME, "url": url}], ticketUrl=ticket)

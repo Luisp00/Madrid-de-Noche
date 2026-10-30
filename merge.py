@@ -101,16 +101,21 @@ GENERIC = {"lunes","martes","miercoles","jueves","viernes","sabado","domingo","m
  "january","february","march","april","june","july","august","september","october","november","december",
  "halloween","fiesta","fiestas","noche","noches","sesion","session","sesiones","sessions","club","madrid","party","parties","night","nights",
  "especial","special","edition","edicion","presenta","presents","entradas","tickets","oficial","official","weekend","concierto","conciertos",
- "concert","directo","teatro","tardeo","afterwork","after","halloweek","halloweekend","viernes","sabados","jueves","domingos"}
+ "concert","directo","teatro","tardeo","afterwork","after","halloweek","halloweekend","viernes","sabados","jueves","domingos",
+ # plurales en inglés: "FRIDAYS" en Saint Club, Rubicón y Vennus a las 00:00 se fusionaban como si fuera el mismo evento
+ "mondays","tuesdays","wednesdays","thursdays","fridays","saturdays","sundays"}
 WEEKDAYS = r"(lunes|martes|miercoles|jueves|viernes|sabado|domingo)"
 WEEKDAYS_EN = r"(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mondays|tuesdays|wednesdays|thursdays|fridays|saturdays|sundays)"
 GENERIC_TITLE = [re.compile(r"^"+WEEKDAYS+r"s? (en |de |at |night |noche )?[a-z0-9 ']{1,40}$"), re.compile(r"^noche en .+"), re.compile(r".+ entradas$"),
                  re.compile(r"^[a-z0-9 ']{1,40} "+WEEKDAYS+r"s?$"), re.compile(r"^"+WEEKDAYS_EN+r"('?s)? (at|in|night|nights) [a-z0-9 ']{1,40}$"),
-                 re.compile(r"^[a-z0-9 ']{1,40} "+WEEKDAYS_EN+r"('?s)?$"), re.compile(r"^(sesion|session|fiesta|noche|night|party|club) (de )?"+WEEKDAYS+r"s?$")]
-GENERIC_SOURCES = {"Bynova","Nightlife Madrid","All Madrid Nightlife","Applinkers","Discomadrid","Discoruta","Clubbable","Discotecas Gratis"}
+                 re.compile(r"^[a-z0-9 ']{1,40} "+WEEKDAYS_EN+r"('?s)?$"), re.compile(r"^(sesion|session|fiesta|noche|night|party|club) (de )?"+WEEKDAYS+r"s?$"),
+                 re.compile(r"^("+WEEKDAYS+r"|"+WEEKDAYS_EN+r")( ?s)?$"),
+                 # entradas fijas de agenda de bares de música ("Concierto de Jazz" cada noche en El Despertar Café)
+                 re.compile(r"^(concierto|conciertos|jam session|jam|musica en directo|musica en vivo|directo)( de| en)?( jazz| blues| swing| soul| funk| directo| vivo)?$")]
+GENERIC_SOURCES = {"Bynova","Nightlife Madrid","All Madrid Nightlife","Applinkers","Discomadrid","Discoruta","Clubbable","Discotecas Gratis","Fourvenues"}
 # nombre de fuente según el host del enlace: varias webs (Applinkers, All Madrid Nightlife, Bynova…) enlazan a la misma
 # página de la ticketera; para el usuario la fuente real es la ticketera y un mismo enlace no debe salir tres veces
-HOST_SOURCE = [("site.fourvenues.com","Fourvenues"),("fourvenues.com","Fourvenues"),("xceed.me","Xceed"),("dice.fm","DICE"),("feverup.com","Fever"),
+HOST_SOURCE = [("site.fourvenues.com","Fourvenues"),("fourvenues.com","Fourvenues"),("xceed.me","Xceed"),("dice.fm","DICE"),("feverup.com","Fever"),("fever.pxf.io","Fever"),
                ("app.whan.es","WHAN"),("whan.es","WHAN"),("ra.co","Resident Advisor"),("shotgun.live","Shotgun"),("taquilla.com","Taquilla.com"),
                ("eventbrite.","Eventbrite"),("entradium.com","Entradium"),("wegow.com","Wegow"),("discotech.me","Discotech"),("tickets.nightlifemadrid.com","Nightlife Madrid")]
 def source_name_for(url, default):
@@ -260,7 +265,8 @@ def addr_key(a):
         if w.isdigit() and i>0 and not toks[i-1].isdigit(): return toks[i-1]+" "+w
     return None
 
-SELLER_HOSTS = ("xceed.me","dice.fm","feverup.com","app.whan.es","site.fourvenues.com","fourvenues.com","ra.co","shotgun.live","taquilla.com","eventbrite","entradium.com","wegow.com","tickets.nightlifemadrid.com","geeticket","oneboxtds","tomaticket","woutick","enterticket","discotech.me")
+SELLER_HOSTS = ("xceed.me","dice.fm","feverup.com","app.whan.es","site.fourvenues.com","fourvenues.com","ra.co","shotgun.live","taquilla.com","eventbrite","entradium.com","wegow.com","tickets.nightlifemadrid.com","geeticket","oneboxtds","tomaticket","woutick","enterticket","discotech.me",
+              "entradas.conciertos.club","tixxlab.com","ticketmaster.es","entradas.com","eventim-light.com","ticketclub.es")
 def ticket_key(u):
     """Clave de comparación de un enlace de compra: host + ruta sin parámetros ni barra final, en minúsculas. None si no es una ticketera conocida."""
     if not u: return None
@@ -271,7 +277,18 @@ def ticket_key(u):
     if not any(h in host for h in SELLER_HOSTS): return None
     path=re.sub(r"/(es|en)(/|$)", "/", path)          # xceed.me/es/... y /en/... son la misma página
     if not path or path in ("/","/events","/event"): return None
+    if "fourvenues.com" in host:
+        # el código del evento es global: /es/allmadridnightlife/events/QBP3 y /es/nova-nightlife-madrid/events/QBP3 son la misma sesión
+        fv=re.search(r"/events/([a-z0-9]+)$", path)
+        if fv: return "fourvenues.com/events/"+fv.group(1)
+    if host.endswith("ra.co"): host="ra.co"           # es.ra.co/events/N = ra.co/events/N
+    # parámetros que identifican la sesión: taquilla.com/entradas/fabrik?event=32696751 y ?event=32745876 son dos noches distintas
+    q=re.search(r"[?&](event|session|sesion|session_id|sessionid|event_id|eventid)=([^&#]+)", u)
+    if q: path+=f"?{q.group(1)}={q.group(2)}"
     return host+path
+
+def fourvenues_codes(e):
+    return {k for k in ticket_keys(e) if k.startswith("fourvenues.com/events/")}
 
 def ticket_keys(e):
     ks={ticket_key(e.get("ticketUrl"))}
@@ -322,7 +339,15 @@ def is_match(m, e):
             if any(is_generic(t) for t in TA+TB): return True
             # misma sala, misma noche y misma hora de inicio con títulos cortos (nombres de artista): es el mismo cartel
             if all(len(plain(t).split())<=3 for t in TA+TB): return True
+        # entrada semanal genérica ("Viernes", "Graf Fridays", "Concierto de Jazz") a ≤30 min de otra sesión de la misma sala
+        # (≤60 si las dos son genéricas): es la misma noche publicada por dos webs con horas redondeadas distintas
+        if ta is not None and tb is not None and not any(PUBCRAWL.search(t) for t in TA+TB):
+            ga, gb = any(is_generic(t) for t in TA), any(is_generic(t) for t in TB)
+            if (ga and gb) or ((ga or gb) and abs(ta-tb)<=30): return True
         return False
+    # salas distintas con códigos de Fourvenues distintos: son sesiones distintas (cada código es una sesión)
+    fa, fb = fourvenues_codes(m), fourvenues_codes(e)
+    if fa and fb and not (fa & fb): return False
     pairs = [(sim(a,b),a,b) for a in TA for b in TB]
     best = max(p[0] for p in pairs)
     if best>=0.8 and (not m.get("venue") or not e.get("venue")): return True
@@ -337,8 +362,23 @@ def is_generic(title):
     t = plain(title)
     return any(p.match(t) for p in GENERIC_TITLE) or t in ("lunes","martes","miercoles","jueves","viernes","sabado","domingo","monday","tuesday","wednesday","thursday","friday","saturday","sunday")
 
+DIRECT_SELLER = ("feverup.com","xceed.me","dice.fm","app.whan.es","site.fourvenues.com","taquilla.com","shotgun.live","eventbrite.","entradium.com","wegow.com","tickets.nightlifemadrid.com")
+def seller_rank(e):
+    """0 = el precio viene de la página propia de la ticketera (alguna fuente del evento ES la ticketera); 1 = de un agregador o afiliado."""
+    for s0 in e.get("sources") or []:
+        u=str(s0.get("url") or "").lower()
+        if any(h in u for h in DIRECT_SELLER) and "pxf.io" not in u: return 0
+    return 1
+
 def merge(a,b):
     """a: existente (prioritario cuando tiene dato); b: nuevo."""
+    # si solo uno de los dos trae el precio desde la página propia de la ticketera, ese manda (los agregadores
+    # repiten precios viejos o de afiliado): se intercambian los papeles para que su precio/enlace sea el elegido
+    if a.get("priceMin") is not None and b.get("priceMin") is not None and seller_rank(a)!=seller_rank(b):
+        direct, other = (a,b) if seller_rank(a)==0 else (b,a)
+        other=dict(other); other["priceMin"]=None; other["priceMax"]=None; other["priceText"]=None   # el agregador no compite en precio
+        a,b = (direct,other) if direct is a else (other,direct)
+        if direct is not a and not a.get("ticketUrl"): pass
     out=dict(a)
     for k in ["start","end","address","priceText","dressCode","ageMin","description","ticketUrl"]:
         if out.get(k) in (None,"",[]) and b.get(k) not in (None,"",[]): out[k]=b[k]
@@ -504,6 +544,7 @@ def main(data_dir, existing_path, out_dir, today=None):
     counts={"nuevos":0,"actualizados":0,"sinCambios":0,"quitadosPasados":0,"quitadosCancelados":0,"quitadosDuplicados":0,"conservadosNoVistos":0}
     by_date={}
     for xid,xd in existing.items(): by_date.setdefault(xd.get("date"),[]).append((xid,xd))
+    today_by_date={}   # fecha -> [(id, evento de hoy con _titles)] para fundir existentes no vistos que son duplicados
     for e in merged:
         titles=e.get("_titles") or [e["title"]]
         eid=make_id(e)
@@ -513,6 +554,7 @@ def main(data_dir, existing_path, out_dir, today=None):
         tt=[t for t in titles if len(strip(t).split())>=2] or titles
         for xid,xd in by_date.get(e["date"],[]):
             if xid in seen or xid in cands: continue
+            if ticket_keys(e) & ticket_keys(xd): cands.append(xid); continue   # mismo enlace de compra (p. ej. feverup.com/m/124925)
             if strip(xd.get("venue") or "")==v_e or (a_e and addr_key(xd.get("address"))==a_e):
                 if max(sim(xd.get("title",""),t) for t in tt)>=0.5: cands.append(xid)
         if cands:
@@ -535,6 +577,7 @@ def main(data_dir, existing_path, out_dir, today=None):
             counts["nuevos"]+=1; doc["updatedAt"]=now
         doc["lastSeen"]=today
         final[eid]=doc
+        today_by_date.setdefault(e["date"],[]).append((eid,e))
     for xid,xd in existing.items():
         if xid in seen: continue
         xs=[s0 for s0 in xd.get("sources",[]) if s0.get("name") not in EXCLUDED_SOURCES and "madridlux.com" not in str(s0.get("url",""))]
@@ -543,6 +586,24 @@ def main(data_dir, existing_path, out_dir, today=None):
             xd=dict(xd); xd["sources"]=xs
             if "madridlux.com" in str(xd.get("ticketUrl","")): xd["ticketUrl"]=xs[0]["url"]
         d=xd.get("date",""); last=(xd.get("lastSeen") or (xd.get("updatedAt") or "")[:10] or "0000-00-00")
+        # no visto hoy pero es el mismo evento que uno de hoy (otro título/hora de otra fuente, p. ej. de un agente o de una
+        # extracción anterior): se funde en el de hoy en vez de salir duplicado; aporta precio y campos que falten
+        if d and d >= today and xd.get("title"):
+            xm=dict(xd, venue=canon_venue(xd.get("venue")))
+            hit=next((eid for eid,e in today_by_date.get(d,[]) if is_match(e,xm)), None)
+            if hit:
+                doc=final[hit]; before=json.dumps(doc,sort_keys=True,ensure_ascii=False)
+                if doc.get("priceMin") is None and doc.get("priceMax") is None and (xd.get("priceMin") is not None or xd.get("priceMax") is not None):
+                    for k in ("priceMin","priceMax","priceText"):
+                        if xd.get(k) is not None: doc[k]=xd[k]
+                    if xd.get("free"): doc["free"]=True
+                    if doc.get("status") in (None,"desconocido") and xd.get("status") not in (None,"desconocido"): doc["status"]=xd["status"]
+                for k in STABLE_FIELDS:
+                    if doc.get(k) in (None,[],"") and xd.get(k) not in (None,[],""): doc[k]=xd[k]
+                doc["sources"]=dedupe_sources(list(doc.get("sources") or [])+[s0 for s0 in xs if s0.get("url") not in {x.get("url") for x in doc.get("sources") or []}])
+                if json.dumps(doc,sort_keys=True,ensure_ascii=False)!=before: doc["updatedAt"]=now
+                warn(f"fundido con uno de hoy (no visto): {d} {xd.get('venue')} «{str(xd.get('title'))[:50]}» -> «{doc.get('title','')[:50]}»")
+                counts["quitadosDuplicados"]+=1; continue
         if not d or d < yesterday: counts["quitadosPasados"]+=1
         elif d >= today and last <= stale_limit and (last <= hard_limit or any(s.get("name") in sources_today for s in xd.get("sources",[]))):
             counts["quitadosCancelados"]+=1; warn(f"quitado (no visto desde {last}): {d} {xd.get('venue')} «{str(xd.get('title'))[:60]}»")

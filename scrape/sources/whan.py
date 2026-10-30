@@ -118,6 +118,28 @@ def _type(name, a, s, e):
     if s.hour >= 6 and s.hour < 21 and e and e < s.replace(hour=0, minute=0) + datetime.timedelta(days=1, hours=2) and e > s: return "tardeo"
     return "club"
 
+def price_info(det):
+    """Precio, estado, dress code, edad y nota a partir del detalle del API (/event/{id}?preview=1). Lo usan scrape() y enrich.py."""
+    dress, age_txt = _dress(det.get("dressCode"))
+    lists, notes = _lists(det)
+    all_p, avail_p, tparts, flags = _tickets(det)
+    pool = avail_p or all_p
+    pmin, pmax, status = None, None, "desconocido"
+    if pool: pmin, pmax = _n(min(pool)), _n(max(pool))
+    if flags: status = "disponible" if any(flags) else "agotado"
+    if lists: pmin = 0
+    if pmax is not None and pmax <= (pmin or 0): pmax = None
+    if lists and pool and pmax is None and pool and _n(min(pool)) > 0: pmax = _n(max(pool))
+    ptxt = " · ".join(lists + tparts)[:120] or None
+    if len(" · ".join(lists + tparts)) > 120: ptxt = ptxt[:117].rstrip(" ·") + "…"
+    desc = []
+    if notes: desc.append(notes[0][:200])
+    res = [float(x["price"]) for x in det.get("floorImagesEnabled") or [] if x.get("price") and not x.get("salesClosed")]
+    if res: desc.append(f"Reservados desde {_n(min(res))} €.")
+    if age_txt: desc.append(age_txt)
+    return {"priceMin": pmin, "priceMax": pmax, "priceText": ptxt, "status": status, "dressCode": dress, "lists": lists,
+            "free": bool(lists) or pmin == 0, "ageMin": _age(det.get("dressCode")), "desc": desc}
+
 def scrape(today, end):
     cands = _list(today, end)
     out, ndet = [], 0
@@ -134,23 +156,9 @@ def scrape(today, end):
         if WEEKDAY.match(name): name = f"{name} en {venue}"
         slug = det.get("slug")
         url = WEB + (slug or it["id"])
-        dress, age_txt = _dress(det.get("dressCode"))
-        lists, notes = _lists(det)
-        all_p, avail_p, tparts, flags = _tickets(det)
-        pool = avail_p or all_p
-        pmin, pmax, status = None, None, "desconocido"
-        if pool: pmin, pmax = _n(min(pool)), _n(max(pool))
-        if flags: status = "disponible" if any(flags) else "agotado"
-        if lists: pmin = 0
-        if pmax is not None and pmax <= (pmin or 0): pmax = None
-        if lists and pool and pmax is None and pool and _n(min(pool)) > 0: pmax = _n(max(pool))
-        ptxt = " · ".join(lists + tparts)[:120] or None
-        if len(" · ".join(lists + tparts)) > 120: ptxt = ptxt[:117].rstrip(" ·") + "…"
-        desc = []
-        if notes: desc.append(notes[0][:200])
-        res = [float(x["price"]) for x in det.get("floorImagesEnabled") or [] if x.get("price") and not x.get("salesClosed")]
-        if res: desc.append(f"Reservados desde {_n(min(res))} €.")
-        if age_txt: desc.append(age_txt)
+        pi = price_info(det)
+        pmin, pmax, ptxt, status, dress, lists = pi["priceMin"], pi["priceMax"], pi["priceText"], pi["status"], pi["dressCode"], pi["lists"]
+        desc = pi["desc"]
         out.append(event(title=name, date=date, start=start, end=e.strftime("%H:%M") if e else None, venue=venue,
                          type=_type(name, a, s, e), music=music_tags(det.get("musicType") or a.get("musicType") or ""),
                          priceMin=pmin, priceMax=pmax, priceText=ptxt, free=bool(lists) or pmin == 0, dressCode=dress, ageMin=_age(det.get("dressCode")),
