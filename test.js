@@ -97,6 +97,12 @@ const fs=require('fs'); const path=require('path');
       check(!(await p.$eval('#dateSheet',s=>s.classList.contains('show'))), 'Ver resultados cierra el calendario');
       check((await p.$eval('#dateChips .chip.on',e=>e.textContent)).includes('–'), 'el chip muestra el rango: '+(await p.$eval('#dateChips .chip.on',e=>e.textContent)));
       await p.click('text=7 días'); await p.waitForTimeout(200);
+      // volver al chip con las fechas guardadas: debe reactivar ese rango sin tener que elegirlo otra vez
+      await p.locator('#dateChips .chip', {hasText:'–'}).click(); await p.waitForTimeout(350);
+      check((await p.$eval('#dateChips .chip.on',e=>e.textContent)).includes('–'), 'tocar el chip con fechas guardadas vuelve a aplicar ese rango');
+      check((await p.$$eval('#calGrid .day.inrange, #calGrid .day.sel',e=>e.length))>=2, 'el calendario reabre con el rango marcado');
+      await p.click('#applyDate'); await p.waitForTimeout(200);
+      await p.click('text=7 días'); await p.waitForTimeout(200);
       // actualizar ahora
       await p.click('#refreshBtn'); await p.waitForTimeout(200); await p.click('#toastAct'); await p.waitForTimeout(200);
       check(await p.evaluate(()=>window.__fired.length===1 && window.__fired[0][1]==='fire_trigger'), 'botón actualizar llama a fire_trigger');
