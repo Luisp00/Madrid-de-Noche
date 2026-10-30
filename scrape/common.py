@@ -166,19 +166,22 @@ def night_date(date, start):
     return date
 
 def parse_price(s):
-    """'Desde 15 €', '12,50€', 'Gratis', '15-25 €' -> (min, max, free). None si no hay precio."""
+    """'Desde 15 €', '12,50€', 'Gratis', '15-25 €' -> (min, max, free). (None, None, False) si no hay precio."""
     if s is None: return (None, None, False)
-    p = plain(str(s))
-    if re.search(r"\b(gratis|free|gratuit|lista gratis)\b", p) and not re.search(r"\d", p): return (0, None, True)
-    nums = [float(x.replace(",", ".")) for x in re.findall(r"(\d+(?:[.,]\d{1,2})?)\s*(?:€|eur|euros?)", p)]
-    if not nums: nums = [float(x.replace(",", ".")) for x in re.findall(r"(?:€|eur)\s*(\d+(?:[.,]\d{1,2})?)", p)]
-    if not nums: return (None, None, bool(re.search(r"\bgratis\b|\bfree\b", p)))
-    nums = [int(n) if n == int(n) else round(n, 2) for n in nums]
-    free = 0 in nums or bool(re.search(r"\bgratis\b|\bfree\b", p))
+    p = plain(str(s).replace("€", " eur ").replace("euros", " eur ").replace("euro", " eur "))
+    is_free = bool(re.search(r"\b(gratis|gratuit[oa]?|free|lista gratis|entrada libre)\b", p))
+    if "eur" not in p:
+        return (0, None, True) if is_free else (None, None, False)
+    # números que no forman parte de una hora (1:00) ni de una fecha (31/10)
+    nums = [float(x.replace(",", ".")) for x in re.findall(r"(?<![\d:/.])(\d+(?:[.,]\d{1,2})?)(?![\d:/])(?!\s*(?:h\b|am\b|pm\b|%))", p)]
+    nums = [int(n) if n == int(n) else round(n, 2) for n in nums if n <= 500]
+    if not nums: return (0, None, True) if is_free else (None, None, False)
+    free = is_free or 0 in nums
     pos = [n for n in nums if n > 0]
-    if re.search(r"\b(desde|from|a partir)\b", p): return (min(pos) if pos else 0, None, free)
+    if re.search(r"\b(desde|from|a partir)\b", p): return (0 if free else (min(pos) if pos else 0), None, free)
     if not pos: return (0, None, True)
-    return (min(pos) if not free else 0, max(pos) if len(nums) > 1 or free else None, free)
+    if free: return (0, max(pos), True)
+    return (min(pos), max(pos) if len(pos) > 1 else None, False)
 
 def in_window(date, today, end):
     return bool(date) and today <= date <= end
