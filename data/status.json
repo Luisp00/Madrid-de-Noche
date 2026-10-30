@@ -1,20 +1,19 @@
 {
- "lastUpdated": "2026-10-30T08:21:35+00:00",
- "eventCount": 1580,
+ "lastUpdated": "2026-10-30T09:45:06+00:00",
+ "eventCount": 1572,
  "chunks": 9,
  "sources": {
-  "Madrid en Vivo": 397,
+  "Madrid en Vivo": 398,
   "Fourvenues": 318,
   "Conciertos.club": 291,
   "Technoparty": 180,
   "Techno Airlines": 158,
-  "Fulltechno": 116,
+  "Fulltechno": 105,
   "WHAN": 104,
-  "DICE": 102,
+  "DICE": 103,
   "Xceed": 95,
   "Discotech": 81,
-  "Bynova": 64,
-  "Fever": 46,
+  "Fever": 47,
   "Taquilla.com": 45,
   "La Ganzúa": 39,
   "Siroco": 35,
@@ -30,12 +29,13 @@
  },
  "run": {
   "date": "2026-10-30",
-  "new": 16,
-  "updated": 497,
-  "removed": 107,
-  "unchanged": 750,
+  "new": 15,
+  "updated": 114,
+  "removed": 5,
+  "unchanged": 1098,
   "files": [
    "_enrich_report.json",
+   "_links_report.json",
    "_scrape_report.json",
    "allevents.json",
    "allmadridnightlife.json",
@@ -65,5 +65,7 @@
   ]
  },
  "running": false,
- "note": "Actualización diaria"
+ "note": "Actualización diaria",
+ "failedSources": [],
+ "publisher": "github-actions"
 }
