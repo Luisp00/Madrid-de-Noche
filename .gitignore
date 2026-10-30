@@ -1,3 +1,4 @@
 node_modules/
 *.png
 merge.py.txt
+__pycache__/

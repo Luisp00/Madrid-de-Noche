@@ -1,9 +1,43 @@
 #!/usr/bin/env python3
-"""Fusiona data/*.json en eventos únicos y genera ops para la base de datos del artifact.
-Uso: python3 -I merge.py data/ existing.json out/
-  existing.json: salida de db_query (una línea JSON por doc, con id/data/version) o [] si está vacía.
-  out/: escribe merged.json y ops_NN.json (≤50 ops cada uno) listos para db_write.
-Avisos (intercambios de precio, descartes) van a stderr; las estadísticas a stdout.
+"""Fusiona data/*.json en eventos únicos y genera los lotes de escritura para la base de datos del artifact.
+
+Uso: python3 -I merge.py data/ EXISTENTE out/ [--today YYYY-MM-DD]
+  data/      archivos *.json de los agentes extractores (arrays de eventos según SPEC.md).
+  EXISTENTE  estado actual de la BD. Admite tres formas:
+               - un directorio tal como lo deja `ArtifactData` con `out_dir`: …/events/<id>.json
+                 (contenido = data del documento) MÁS un archivo `versions.txt` con las versiones
+                 de los documentos, que la herramienta imprime pero no guarda en los archivos:
+                 basta pegar en él el texto del resultado (líneas con "<id> … version N" o
+                 '"<id>" N'); opcionalmente …/meta/seen.json (mapa id → última fecha vista),
+               - un archivo JSON con un array [{"id","version","data"}],
+               - o "-" / inexistente si la BD está vacía.
+             Sin versiones no se puede escribir sobre documentos existentes: el script se niega a
+             generar lotes si hay documentos y ninguna versión (salvo --force).
+  out/       se escriben:
+               merged.json            eventos únicos (depuración)
+               docs/<id>.json         documento completo de cada evento nuevo o cambiado
+               batch_NN.json          lotes de ≤50 escrituras para `ArtifactData` action "batch"
+                                      (campo `writes`), con los documentos EN LÍNEA (`data`)
+               batchf_NN.json         los mismos lotes pero referenciando docs/<id>.json con `file_path`
+                                      (mucho más barato en contexto si la herramienta lo admite)
+               seen.json              nuevo mapa id → última fecha vista, para `set` en meta/seen
+               status.json            propuesta de documento meta/status (completar lastUpdated)
+               summary.json           estadísticas (también se imprimen por stdout)
+Avisos (precios intercambiados, descartes) van a stderr; las estadísticas a stdout.
+
+Reglas de fusión con la BD:
+  - Un evento ya existente conserva su id aunque cambie el título (misma sala + fecha + título parecido).
+  - Los campos "estables" (dirección, dress code, edad, descripción, line-up, hora de cierre) se
+    conservan del documento existente si la extracción de hoy no los trae.
+  - Precio, estado y enlace vienen siempre de la extracción de hoy (el más barato gana).
+  - Los eventos sin cambios no generan escritura. La fecha de la última extracción en que apareció cada
+    evento se guarda en el documento meta/seen (mapa id → fecha) y, en los documentos escritos, en `lastSeen`.
+    Los no vistos hoy:
+      · fecha pasada (anterior a ayer)                      → se borran
+      · futuros no vistos en 3 extracciones seguidas, si al menos una de sus fuentes sí se extrajo hoy
+        (o no vistos en 7 días, sea cual sea la fuente)     → se borran (cancelados / duplicados viejos)
+      · el resto                                           → se dejan tal cual
+  - Si dos documentos existentes corresponden al mismo evento de hoy, se conserva uno y el otro se borra.
 """
 import json, re, sys, os, glob, hashlib, unicodedata, datetime
 
@@ -18,7 +52,55 @@ VENUE_ALIAS = {
  "strong":"Sala Strong","sala strong":"Sala Strong","strong club":"Sala Strong",
  "live las ventas":"Las Ventas","las ventas":"Las Ventas",
  "mondo disko sala but":"Sala But","sala but mondo":"Sala But","sala but mondo disko":"Sala But",
+ "core":"Core","core club":"Core","core madrid":"Core",
+ "tiffany s":"Tiffany's The Club","tiffanys":"Tiffany's The Club","tiffany s the club":"Tiffany's The Club",
+ "jazzville cafe":"Jazzville","sala vesta":"Sala Vesta","vesta":"Sala Vesta",
+ "el despertar":"El Despertar Café","el despertar cafe":"El Despertar Café",
+ "movistar arena":"Movistar Arena","wizink center":"Movistar Arena","palacio de los deportes":"Movistar Arena",
 }
+
+# ---------- zonas ----------
+ZONE_BY_CP = {
+ "28004":"Malasaña / Chueca","28012":"Centro / Sol","28013":"Centro / Sol","28014":"Centro / Sol","28005":"La Latina","28045":"Atocha",
+ "28015":"Argüelles / Moncloa","28008":"Argüelles / Moncloa","28003":"Chamberí","28010":"Chamberí","28001":"Salamanca","28006":"Salamanca",
+ "28009":"Salamanca","28028":"Salamanca","28007":"Retiro","28020":"Tetuán / Azca","28002":"Chamartín","28016":"Chamartín","28036":"Chamartín",
+ "28018":"Vallecas","28038":"Vallecas","28031":"Vallecas","28026":"Usera / Carabanchel","28019":"Usera / Carabanchel","28025":"Usera / Carabanchel",
+ "28034":"Otros norte","28042":"Barajas","28023":"Aravaca / Pozuelo","28970":"Humanes (Fabrik)","28942":"Fuenlabrada","28943":"Fuenlabrada",
+ "28922":"Alcorcón","28100":"Alcobendas","28220":"Majadahonda","28046":"Chamartín","28035":"Otros norte","28029":"Otros norte","28039":"Tetuán / Azca",
+ "28011":"Argüelles / Moncloa","28017":"Salamanca","28027":"Chamartín","28030":"Retiro","28033":"Chamartín","28037":"Otros","28040":"Argüelles / Moncloa",
+ "28041":"Usera / Carabanchel","28043":"Chamartín","28044":"Usera / Carabanchel","28047":"Usera / Carabanchel",
+}
+# sala canónica → zona (manda sobre el código postal; SPEC.md "Salas conocidas")
+VENUE_ZONE = {
+ "Teatro Kapital":"Atocha","Fabrik":"Humanes (Fabrik)","Teatro Barceló":"Malasaña / Chueca","Shoko":"La Latina","Opium Madrid":"Chamberí","Joy Eslava":"Centro / Sol",
+ "Mondo Disko":"Centro / Sol","Club Cocó":"Centro / Sol","Goya Social Club":"Salamanca","Panda Club":"Chamartín","Vandido":"Salamanca","Independance Club":"Atocha",
+ "Oh My Club":"Tetuán / Azca","Sala But":"Malasaña / Chueca","Sala Mon":"Argüelles / Moncloa","Sala Copérnico":"Argüelles / Moncloa","Siroco":"Malasaña / Chueca",
+ "LAB theCLUB":"Chamartín","Nazca":"Tetuán / Azca","Lula Club":"Centro / Sol","The Bassement":"Argüelles / Moncloa","Specka":"Tetuán / Azca","La Riviera":"La Latina",
+ "Sala Caracol":"Atocha","Sala El Sol":"Centro / Sol","Moby Dick":"Chamartín","Medias Puri":"Centro / Sol","Uñas Chung Lee":"Centro / Sol","Toni 2":"Centro / Sol",
+ "Cadavra":"Centro / Sol","Icon Madrid":"Salamanca","Gabana 1800":"Salamanca","Liberty Supper Club":"Chamberí","Rubicón":"Salamanca","Istar":"Centro / Sol","Graf":"Centro / Sol",
+ "Villa Panthera":"Chamartín","Teatro Magno":"Centro / Sol","Fitz Club":"Argüelles / Moncloa","Stardust":"Centro / Sol","Boite":"Centro / Sol","Core":"Centro / Sol",
+ "Blackhaus":"Aravaca / Pozuelo","VG Fuenlabrada":"Fuenlabrada","Ya'sta Club":"Malasaña / Chueca","Sala Wagon":"Atocha","Leona Bar":"Malasaña / Chueca",
+ "Sala Strong":"Centro / Sol","Las Ventas":"Salamanca","Cadillac Solitario":"Otros norte","Jazzville":"Retiro","El Despertar Café":"Atocha","Sala Vesta":"Malasaña / Chueca",
+ "Tiffany's The Club":"Chamartín","Bonded Club":"Chamberí","Cristo Social Club":"Salamanca","Green Social Club":"Salamanca","Kube":"Tetuán / Azca","Marabú":"Chamberí",
+ "Manamá":"Centro / Sol","Todos Santos":"Malasaña / Chueca","Blue Club":"Tetuán / Azca","Etnia Club":"Tetuán / Azca","Saint Club":"Salamanca","Chamán":"Tetuán / Azca",
+ "Pabblo Club":"Tetuán / Azca","Global Club":"Salamanca","Movistar Arena":"Salamanca","Café Berlín":"Centro / Sol","Changó":"Argüelles / Moncloa","Ochoymedio":"Argüelles / Moncloa",
+ "B12":"Chamartín","Honky Tonk":"Chamberí","Sala Villanos":"Usera / Carabanchel","Café Central Ateneo":"Centro / Sol","Moe Club":"Chamberí","La Coquette":"Centro / Sol",
+ "Café La Palma":"Malasaña / Chueca","El Sótano":"Centro / Sol","Intruso Bar":"Malasaña / Chueca","Mitty":"Centro / Sol","Maravillas Club":"Malasaña / Chueca",
+ "Sala Rockville":"Centro / Sol","Fun House":"Centro / Sol","Sala Clamores":"Chamberí","Big Mama Ballroom":"Argüelles / Moncloa","Sala Uni":"Chamberí","Toy Room Madrid":"Chamberí",
+ "Vennus Madrid":"Malasaña / Chueca","Elefante Blanco":"Centro / Sol","Studio 76":"Chamberí","Revi Live":"Salamanca","Sala Olvido":"Usera / Carabanchel","Sala B":"Atocha",
+ "Marula Café":"La Latina","Enbabia":"Centro / Sol","Posh (Liberata)":"Centro / Sol","Houdinni":"Centro / Sol","Bodeguita de Enmedio":"Centro / Sol","Sala Silikona":"Vallecas",
+ "La Nueva Cubierta de Leganés":"Otros sur","Mökai Beach Club":"Chamberí",
+}
+ZONES = set(ZONE_BY_CP.values()) | set(VENUE_ZONE.values()) | {"Otros","Otros sur","Barajas","Retiro"}
+
+def infer_zone(zone, venue, address):
+    if venue in VENUE_ZONE: return VENUE_ZONE[venue]
+    if zone and zone.strip() and zone.strip().lower() != "otros":
+        z = zone.strip()
+        return z
+    m = re.search(r"\b(28\d{3})\b", address or "")
+    if m and m.group(1) in ZONE_BY_CP: return ZONE_BY_CP[m.group(1)]
+    return "Otros"
 
 # palabras que no cuentan como "token poco común" para fusionar
 GENERIC = {"lunes","martes","miercoles","jueves","viernes","sabado","domingo","monday","tuesday","wednesday","thursday","friday","saturday","sunday",
@@ -31,12 +113,14 @@ WEEKDAYS = r"(lunes|martes|miercoles|jueves|viernes|sabado|domingo)"
 GENERIC_TITLE = [re.compile(r"^"+WEEKDAYS+r" en .+"), re.compile(r"^noche en .+"), re.compile(r".+ entradas$")]
 GENERIC_SOURCES = {"Bynova","Nightlife Madrid","All Madrid Nightlife","Applinkers"}
 PUBCRAWL = re.compile(r"pub ?crawl|ruta de bares", re.I)
-EXCLUDED = re.compile(r"karaoke|bingo|\bclases? de\b|\btalleres?\b|\btablao\b|\bteatro\b|sin esperas|shisha|cena[ -]espect[aá]culo|candlelight|infantil|\bmuseo\b", re.I)
+EXCLUDED = re.compile(r"karaoke|bingo|\bclases? de\b|\btalleres?\b|\btablao\b|\bteatro\b|sin esperas|shisha|cena[ -]espect[aá]culo|candlelight|infantil|\bmuseo\b|\btributo a\b|\btribute to\b|\bdrag (show|queens?)\b|this is drag|\bmon[oó]logos?\b|stand[ -]?up|\bc[oó]mico\b", re.I)
 MUSICAL_TITLE = re.compile(r"\bmusical\b", re.I)                     # en el título
 MUSICAL_DESC = re.compile(r"\b(el|un|del|al|este) musical\b", re.I)   # en la descripción ("propuesta musical" no cuenta)
 NIGHTLIFE_VENUES = {"Teatro Kapital","Teatro Barceló","Teatro Eslava","Joy Eslava","Teatro Magno","Museo Chicote"}  # su nombre no dispara la exclusión
 # teatros/auditorios con butaca: fuera salvo sesiones club/after
 SEATED_VENUE = re.compile(r"^(teatro|nuevo teatro|auditorio)\b|^ateneo de madrid$|^circulo de bellas artes$")
+# campos que se conservan del documento existente si la extracción de hoy no los trae
+STABLE_FIELDS = ["start","end","address","dressCode","ageMin","description","lineup","music"]
 
 def strip(s):
     s = unicodedata.normalize("NFKD", s or "").encode("ascii","ignore").decode().lower()
@@ -72,6 +156,16 @@ def num(x):
         v=float(str(x).replace("€","").replace(",",".").strip()); return int(v) if v==int(v) else round(v,2)
     except: return None
 
+def norm_time(s):
+    """'23:30', '23.30', '23h', '23:30:00', '7:00' -> 'HH:MM' o None."""
+    if s is None: return None
+    m = re.match(r"^\s*(\d{1,2})(?:[:.h](\d{2}))?", str(s))
+    if not m: return None
+    h, mi = int(m.group(1)), int(m.group(2) or 0)
+    if h>29 or mi>59: return None
+    if h>=24: h-=24
+    return f"{h:02d}:{mi:02d}"
+
 def warn(*a):
     print(*a, file=sys.stderr)
 
@@ -93,9 +187,10 @@ def clean(e):
     srcs=[]
     for s in e.get("sources") or []:
         if isinstance(s,dict) and s.get("name") and s.get("url"): srcs.append({"name":str(s["name"])[:40],"url":str(s["url"])[:500]})
-    return {"title":title[:140],"date":date,"start":e.get("start") or None,"end":e.get("end") or None,"venue":venue,"address":(e.get("address") or None),
-            "zone":(e.get("zone") or "Otros"),"type":typ,"music":music,"priceMin":pmin,"priceMax":pmax,"priceText":(e.get("priceText") or None),
-            "free":free,"dressCode":(e.get("dressCode") or None),"ageMin":num(e.get("ageMin")),"lineup":[str(x)[:80] for x in (e.get("lineup") or [])][:12],
+    address = (e.get("address") or None)
+    return {"title":title[:140],"date":date,"start":norm_time(e.get("start")),"end":norm_time(e.get("end")),"venue":venue,"address":address,
+            "zone":infer_zone(e.get("zone"), venue, address),"type":typ,"music":music,"priceMin":pmin,"priceMax":pmax,"priceText":(str(e.get("priceText"))[:160] if e.get("priceText") else None),
+            "free":free,"dressCode":(str(e.get("dressCode"))[:120] if e.get("dressCode") else None),"ageMin":num(e.get("ageMin")),"lineup":[str(x)[:80] for x in (e.get("lineup") or [])][:12],
             "description":(str(e.get("description"))[:400] if e.get("description") else None),"status":st,"sources":srcs,"ticketUrl":(e.get("ticketUrl") or (srcs[0]["url"] if srcs else None)),
             "_titles":[title[:140]]}
 
@@ -162,7 +257,8 @@ def titles_match(TA, TB, venue_names, vtoks):
         for b in TB:
             if sim(a,b)>=0.5: return True
             sa, sb = strip(a), strip(b)
-            if sa and sb and sa!=sb and (sa in sb or sb in sa) and sa not in venue_names and sb not in venue_names: return True
+            short_t = sa if len(sa)<=len(sb) else sb
+            if sa and sb and sa!=sb and (sa in sb or sb in sa) and sa not in venue_names and sb not in venue_names and (len(short_t.split())>=2 or len(short_t)>=12): return True
             if shared_rare(a, b, vtoks): return True
     return False
 
@@ -275,72 +371,214 @@ def madrid_today():
         local=now.astimezone(datetime.timezone(datetime.timedelta(hours=1)))
     return (local-datetime.timedelta(hours=6)).strftime("%Y-%m-%d")
 
-def main(data_dir, existing_path, out_dir):
-    today=madrid_today()
-    events=[]; drops={}; nread=0
+# ---------- estado actual de la BD ----------
+ID_RE=re.compile(r"(\d{4}-\d{2}-\d{2}-[0-9a-f]{10})")
+def parse_versions(txt):
+    """Extrae {id: version} de texto libre: '"<id>"  795 bytes  version 2  "/ruta"' o '"<id>" 2,' o '<id> 2'."""
+    out={}
+    ms=list(ID_RE.finditer(txt))
+    for i,m in enumerate(ms):
+        seg=txt[m.end(): ms[i+1].start() if i+1<len(ms) else len(txt)]
+        seg=seg.split("\n",1)[0] if "version" not in seg else seg
+        v=re.search(r"version\s*[:=]?\s*(\d+)",seg)
+        if not v: v=re.match(r"[^0-9\n]{0,6}(\d+)(?!\d*\s*bytes)",seg)
+        if v: out[m.group(1)]=int(v.group(1))
+    return out
+
+def load_seen(path):
+    """mapa id → última fecha vista (meta/seen) si existe en el directorio."""
+    for p in (os.path.join(path,"meta","seen.json"), os.path.join(path,"seen.json")):
+        if os.path.exists(p):
+            try:
+                d=json.load(open(p))
+                d=d.get("data",d) if isinstance(d,dict) else {}
+                d=d.get("ids",d) if isinstance(d,dict) else {}
+                return {k:v for k,v in d.items() if isinstance(v,str)}
+            except Exception as ex: warn("ERROR leyendo",p,ex)
+    return {}
+
+def load_existing(path):
+    """Devuelve {id: {"version": int|None, "data": {...}}}."""
+    existing={}
+    if not path or path=="-" or not os.path.exists(path): return existing
+    def add(d):
+        if not isinstance(d,dict) or "id" not in d: return
+        data=d.get("data") if isinstance(d.get("data"),dict) else {k:v for k,v in d.items() if k not in ("id","version","updatedAt","_meta")}
+        existing[d["id"]]={"version":d.get("version"),"data":data}
+    if os.path.isdir(path):
+        # directorio de ArtifactData out_dir: busca <algo>/events/*.json o *.json directamente
+        files=sorted(glob.glob(os.path.join(path,"events","*.json")) or glob.glob(os.path.join(path,"*.json")))
+        versions={}
+        for vt in glob.glob(os.path.join(path,"*.txt"))+glob.glob(os.path.join(path,"events","*.txt")):
+            try: versions.update(parse_versions(open(vt,errors="ignore").read()))
+            except Exception as ex: warn("ERROR leyendo",vt,ex)
+        for extra in ("index.json","_index.json","versions.json"):
+            p=os.path.join(path,extra)
+            if os.path.exists(p):
+                try:
+                    for d in json.load(open(p)): versions[d["id"]]=d.get("version")
+                except Exception: pass
+        for f in files:
+            name=os.path.basename(f)[:-5]
+            if name.endswith(".meta") or name in ("index","_index","versions"): continue
+            try: d=json.load(open(f))
+            except Exception as ex: warn("ERROR leyendo",f,ex); continue
+            if not isinstance(d,dict): continue
+            if "data" in d and isinstance(d["data"],dict):   # {"id","version","data"}
+                existing[d.get("id",name)]={"version":d.get("version"),"data":d["data"]}
+            else:
+                v=d.pop("version",None) if "version" in d and "date" not in d else d.get("_version")
+                data={k:v2 for k,v2 in d.items() if not k.startswith("_") and k!="version"}
+                existing[name]={"version":versions.get(name,v),"data":data}
+            mp=f[:-5]+".meta.json"
+            if os.path.exists(mp):
+                try: existing[name]["version"]=json.load(open(mp)).get("version",existing[name]["version"])
+                except Exception: pass
+        return existing
+    txt=open(path).read().strip()
+    if not txt: return existing
+    if txt.startswith("["):
+        for d in json.loads(txt): add(d)
+    else:
+        for line in txt.splitlines():
+            line=line.strip()
+            if line.startswith("{"):
+                try: add(json.loads(line))
+                except Exception: continue
+    return existing
+
+def main(data_dir, existing_path, out_dir, today=None, force=False):
+    today=today or madrid_today()
+    yesterday=(datetime.date.fromisoformat(today)-datetime.timedelta(days=1)).isoformat()
+    stale_limit=(datetime.date.fromisoformat(today)-datetime.timedelta(days=2)).isoformat()   # no visto en 3 extracciones seguidas
+    hard_limit=(datetime.date.fromisoformat(today)-datetime.timedelta(days=6)).isoformat()    # no visto en 7 días
+    events=[]; drops={}; nread=0; files_read=[]
     for f in sorted(glob.glob(os.path.join(data_dir,"*.json"))):
         try: arr=json.load(open(f))
-        except Exception as ex: print("ERROR leyendo",f,ex); continue
+        except Exception as ex: warn("ERROR leyendo",f,ex); continue
+        n0=len(events); files_read.append(os.path.basename(f))
         for e in arr if isinstance(arr,list) else []:
             c=clean(e) if isinstance(e,dict) else None
             if not c: continue
             nread+=1
             r=excluded_reason(c, today)
             if r: drops[r.split(" (")[0]]=drops.get(r.split(" (")[0],0)+1; warn(f"descartado ({r}): {c['date']} {c['venue']} «{c['title'][:60]}»"); continue
+            if c["date"]<today: drops["pasado"]=drops.get("pasado",0)+1; continue
             events.append(c)
+        warn(f"{os.path.basename(f)}: {len(events)-n0} eventos válidos")
     merged=dedupe(events)
     merged,ngen=drop_generic(merged)
     if ngen: drops["genérico semanal"]=ngen
-    # ids y comparación con existentes
-    existing={}
-    if existing_path and os.path.exists(existing_path):
-        txt=open(existing_path).read().strip()
-        if txt.startswith("["):
-            for d in json.loads(txt): existing[d["id"]]={"version":d.get("version"),"data":d.get("data",{})}
-        else:
-            for line in txt.splitlines():
-                line=line.strip()
-                if line.startswith("{"):
-                    try: d=json.loads(line)
-                    except: continue
-                    if "id" in d: existing[d["id"]]={"version":d.get("version"),"data":d.get("data",{})}
+    existing=load_existing(existing_path)
+    seen_old=load_seen(existing_path) if existing_path and os.path.isdir(existing_path) else {}
+    nver=sum(1 for x in existing.values() if x.get("version") is not None)
+    if existing and nver==0 and not force:
+        warn("ERROR: hay",len(existing),"documentos existentes pero ninguna versión conocida. Crea versions.txt en",existing_path,"con las parejas id/versión que imprime ArtifactData (o usa --force).")
+        sys.exit(2)
+    if existing and nver<len(existing): warn(f"AVISO: {len(existing)-nver} documentos existentes sin versión conocida; sus escrituras fallarán.")
+    seen_new={}
+    # fuentes extraídas hoy (para decidir si un evento ausente se puede dar por cancelado)
+    sources_today={s["name"] for e in merged for s in e["sources"]}
     now=datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
-    ops=[]; seen=set()
+    os.makedirs(os.path.join(out_dir,"docs"),exist_ok=True)
+    for old in glob.glob(os.path.join(out_dir,"docs","*.json")): os.remove(old)
+    for old in glob.glob(os.path.join(out_dir,"batch*_*.json")): os.remove(old)
+    writes=[]; seen=set(); counts={"nuevos":0,"actualizados":0,"sinCambios":0,"borradosPasados":0,"borradosCancelados":0,"borradosDuplicados":0,"conservadosNoVistos":0}
+    def by_place_date(e):
+        out=[]
+        for xid,x in existing.items():
+            xd=x["data"]
+            if xd.get("date")!=e["date"]: continue
+            if strip(xd.get("venue") or "")==strip(canon_venue(e.get("venue")) or "") or (addr_key(xd.get("address")) and addr_key(xd.get("address"))==addr_key(e.get("address"))):
+                out.append((xid,x))
+        return out
     for e in merged:
         titles=e.get("_titles") or [e["title"]]
-        if e["date"]<today: continue
         eid=make_id(e)
         if eid in seen: continue
+        # si existe un doc previo con misma sala/dirección+fecha y título parecido pero distinto id, conservar su id
+        cands=[]
+        if eid in existing: cands.append(eid)
+        for xid,x in by_place_date(e):
+            if xid in seen or xid==eid: continue
+            xd=x["data"]
+            tt=[t for t in titles if len(strip(t).split())>=2] or titles
+            if max(sim(xd.get("title",""),t) for t in tt)>=0.5: cands.append(xid)
+        if cands:
+            eid=cands[0]
+            for dup in cands[1:]:   # duplicados antiguos del mismo evento → fuera
+                if dup in seen: continue
+                seen.add(dup); writes.append({"op":"delete","collection":"events","doc_id":dup,"if_version":existing[dup]["version"]})
+                counts["borradosDuplicados"]+=1
         seen.add(eid)
-        # si existe un doc previo con misma venue+date y título parecido (a cualquiera de los títulos vistos) pero distinto id, conservar su id
-        if eid not in existing:
-            for xid,x in existing.items():
-                if xid in seen: continue
-                xd=x["data"]
-                if xd.get("date")==e["date"] and strip(xd.get("venue") or "")==strip(e.get("venue") or "") and max(sim(xd.get("title",""),t) for t in titles)>=0.5:
-                    eid=xid; seen.add(eid); break
-        doc={k:v for k,v in e.items() if v not in (None,[],"") and not k.startswith("_")}; doc["updatedAt"]=now
+        doc={k:v for k,v in e.items() if v not in (None,[],"") and not k.startswith("_")}
         if eid in existing:
-            old=dict(existing[eid]["data"]); old.pop("updatedAt",None); cmp=dict(doc); cmp.pop("updatedAt",None)
-            if old==cmp: continue
-            ops.append({"op":"set","path":f"events/{eid}","data":doc,"ifVersion":existing[eid]["version"]})
+            old=dict(existing[eid]["data"])
+            for k in STABLE_FIELDS:
+                if k not in doc and old.get(k) not in (None,[],""): doc[k]=old[k]
+            if doc.get("zone")=="Otros" and old.get("zone") not in (None,"","Otros","otros"): doc["zone"]=old["zone"]
+            seen_new[eid]=today
+            cmp_old={k:v for k,v in old.items() if k not in ("updatedAt","lastSeen")}
+            if cmp_old==doc:
+                counts["sinCambios"]+=1
+                continue
+            doc["updatedAt"]=now; doc["lastSeen"]=today
+            writes.append({"op":"set","collection":"events","doc_id":eid,"data":doc,"if_version":existing[eid]["version"]})
+            counts["actualizados"]+=1
         else:
-            ops.append({"op":"set","path":f"events/{eid}","data":doc})
-    # borrar eventos pasados (más de 1 día) para no acumular
+            doc["updatedAt"]=now; doc["lastSeen"]=today; seen_new[eid]=today
+            writes.append({"op":"set","collection":"events","doc_id":eid,"data":doc})
+            counts["nuevos"]+=1
+    # documentos existentes que no han aparecido hoy
     for xid,x in existing.items():
+        if xid in seen: continue
         d=x["data"].get("date","")
-        if d and d < (datetime.date.fromisoformat(today)-datetime.timedelta(days=1)).isoformat():
-            ops.append({"op":"delete","path":f"events/{xid}","ifVersion":x["version"]})
+        last=(seen_old.get(xid) or x["data"].get("lastSeen") or (x["data"].get("updatedAt") or "")[:10] or "0000-00-00")
+        if not d or d < yesterday:
+            writes.append({"op":"delete","collection":"events","doc_id":xid,"if_version":x["version"]}); counts["borradosPasados"]+=1
+        elif d >= today and last <= stale_limit and (last <= hard_limit or any(s.get("name") in sources_today for s in x["data"].get("sources",[]))):
+            writes.append({"op":"delete","collection":"events","doc_id":xid,"if_version":x["version"]}); counts["borradosCancelados"]+=1
+            warn(f"borrado (no visto desde {last}): {d} {x['data'].get('venue')} «{str(x['data'].get('title'))[:60]}»")
+        else:
+            counts["conservadosNoVistos"]+=1; seen_new[xid]=last
+    # quitar if_version nulos (documentos cuya versión no conocemos)
+    for w in writes:
+        if w.get("if_version") is None: w.pop("if_version",None)
     for e in merged: e.pop("_titles",None)
-    os.makedirs(out_dir,exist_ok=True)
     json.dump(merged,open(os.path.join(out_dir,"merged.json"),"w"),ensure_ascii=False,indent=1)
-    for i in range(0,len(ops),50):
-        json.dump(ops[i:i+50],open(os.path.join(out_dir,f"ops_{i//50:02d}.json"),"w"),ensure_ascii=False)
+    # lotes: inline (batch_NN) y con file_path (batchf_NN)
+    docs_dir=os.path.abspath(os.path.join(out_dir,"docs"))
+    for w in writes:
+        if w["op"]=="set":
+            p=os.path.join(docs_dir,w["doc_id"]+".json")
+            json.dump(w["data"],open(p,"w"),ensure_ascii=False)
+    nb=0
+    for i in range(0,len(writes),50):
+        chunk=writes[i:i+50]
+        json.dump(chunk,open(os.path.join(out_dir,f"batch_{i//50:02d}.json"),"w"),ensure_ascii=False)
+        fchunk=[]
+        for w in chunk:
+            if w["op"]=="set":
+                w2={k:v for k,v in w.items() if k!="data"}; w2["file_path"]=os.path.join(docs_dir,w["doc_id"]+".json"); fchunk.append(w2)
+            else: fchunk.append(w)
+        json.dump(fchunk,open(os.path.join(out_dir,f"batchf_{i//50:02d}.json"),"w"),ensure_ascii=False)
+        nb+=1
     stats={}
     for e in merged:
         for s in e["sources"]: stats[s["name"]]=stats.get(s["name"],0)+1
     if drops: warn("descartes:", json.dumps(drops,ensure_ascii=False))
-    print(json.dumps({"leidos":nread,"unicos":len(merged),"ops":len(ops),"lotes":(len(ops)+49)//50,"porFuente":stats},ensure_ascii=False))
+    json.dump({"updated":now,"ids":seen_new},open(os.path.join(out_dir,"seen.json"),"w"),ensure_ascii=False)
+    summary={"hoy":today,"archivos":files_read,"leidos":nread,"unicos":len(merged),"escrituras":len(writes),"lotes":nb,"enBD":len(existing),"eventCountTrasSubida":len(existing)+counts["nuevos"]-counts["borradosPasados"]-counts["borradosCancelados"]-counts["borradosDuplicados"],**counts,"descartes":drops,"porFuente":dict(sorted(stats.items(),key=lambda kv:-kv[1]))}
+    json.dump(summary,open(os.path.join(out_dir,"summary.json"),"w"),ensure_ascii=False,indent=1)
+    status={"lastUpdated":now,"eventCount":summary["eventCountTrasSubida"],"sources":summary["porFuente"],"run":{"date":today,"new":counts["nuevos"],"updated":counts["actualizados"],"deleted":counts["borradosPasados"]+counts["borradosCancelados"]+counts["borradosDuplicados"],"unchanged":counts["sinCambios"],"files":files_read},"running":False,"note":"Actualización diaria"}
+    json.dump(status,open(os.path.join(out_dir,"status.json"),"w"),ensure_ascii=False,indent=1)
+    print(json.dumps(summary,ensure_ascii=False))
 
 if __name__=="__main__":
-    main(sys.argv[1], sys.argv[2] if len(sys.argv)>2 else None, sys.argv[3] if len(sys.argv)>3 else "out")
+    args=[a for a in sys.argv[1:] if not a.startswith("--")]
+    today=None
+    for i,a in enumerate(sys.argv):
+        if a=="--today" and i+1<len(sys.argv): today=sys.argv[i+1]
+        if a.startswith("--today="): today=a.split("=",1)[1]
+    if len(args)<1: print(__doc__); sys.exit(1)
+    main(args[0], args[1] if len(args)>1 else None, args[2] if len(args)>2 else "out", today, force="--force" in sys.argv)
