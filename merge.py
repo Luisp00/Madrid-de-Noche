@@ -108,6 +108,17 @@ GENERIC_TITLE = [re.compile(r"^"+WEEKDAYS+r"s? (en |de |at |night |noche )?[a-z0
                  re.compile(r"^[a-z0-9 ']{1,40} "+WEEKDAYS+r"s?$"), re.compile(r"^"+WEEKDAYS_EN+r"('?s)? (at|in|night|nights) [a-z0-9 ']{1,40}$"),
                  re.compile(r"^[a-z0-9 ']{1,40} "+WEEKDAYS_EN+r"('?s)?$"), re.compile(r"^(sesion|session|fiesta|noche|night|party|club) (de )?"+WEEKDAYS+r"s?$")]
 GENERIC_SOURCES = {"Bynova","Nightlife Madrid","All Madrid Nightlife","Applinkers","Discomadrid","Discoruta","Clubbable","Discotecas Gratis"}
+# nombre de fuente según el host del enlace: varias webs (Applinkers, All Madrid Nightlife, Bynova…) enlazan a la misma
+# página de la ticketera; para el usuario la fuente real es la ticketera y un mismo enlace no debe salir tres veces
+HOST_SOURCE = [("site.fourvenues.com","Fourvenues"),("fourvenues.com","Fourvenues"),("xceed.me","Xceed"),("dice.fm","DICE"),("feverup.com","Fever"),
+               ("app.whan.es","WHAN"),("whan.es","WHAN"),("ra.co","Resident Advisor"),("shotgun.live","Shotgun"),("taquilla.com","Taquilla.com"),
+               ("eventbrite.","Eventbrite"),("entradium.com","Entradium"),("wegow.com","Wegow"),("discotech.me","Discotech"),("tickets.nightlifemadrid.com","Nightlife Madrid")]
+def source_name_for(url, default):
+    try: host=re.match(r"https?://([^/?#]+)", str(url).lower()).group(1).replace("www.","")
+    except Exception: return default
+    for h,n in HOST_SOURCE:
+        if h in host: return n
+    return default
 # fuentes que no se usan (petición del usuario, 30 oct 2026): se quitan de los eventos y, si un evento solo venía de ellas, se descarta
 EXCLUDED_SOURCES = {"Madrid Lux","MadridLux","madridlux.com"}
 PUBCRAWL = re.compile(r"pub ?crawl|ruta de bares", re.I)
@@ -186,7 +197,8 @@ def clean(e):
     for s in e.get("sources") or []:
         if isinstance(s,dict) and s.get("name") and s.get("url"):
             if s["name"] in EXCLUDED_SOURCES or "madridlux.com" in str(s["url"]): continue
-            srcs.append({"name":str(s["name"])[:40],"url":str(s["url"])[:500]})
+            srcs.append({"name":source_name_for(s["url"], str(s["name"]))[:40],"url":str(s["url"])[:500]})
+    srcs=dedupe_sources(srcs)
     if not srcs and (e.get("sources") or []): return None   # solo venía de fuentes excluidas
     address = (e.get("address") or None)
     return {"title":title[:140],"date":date,"start":norm_time(e.get("start")),"end":norm_time(e.get("end")),"venue":venue,"address":address,
@@ -265,6 +277,15 @@ def ticket_keys(e):
     ks={ticket_key(e.get("ticketUrl"))}
     for s in e.get("sources") or []: ks.add(ticket_key(s.get("url")))
     ks.discard(None); return ks
+
+def dedupe_sources(srcs):
+    """Quita enlaces repetidos (misma página de ticketera aunque cambie es/en o parámetros) y nombres repetidos con la misma url."""
+    out=[]; keys=set()
+    for s in srcs:
+        k=ticket_key(s["url"]) or s["url"].rstrip("/").lower()
+        if k in keys: continue
+        keys.add(k); out.append(s)
+    return out
 
 def same_place(m, e):
     if m.get("venue") and e.get("venue") and strip(m["venue"])==strip(e["venue"]): return True
@@ -348,6 +369,7 @@ def merge(a,b):
     urls={s["url"] for s in out["sources"]}
     for s in b.get("sources",[]):
         if s["url"] not in urls: out["sources"].append(s); urls.add(s["url"])
+    out["sources"]=dedupe_sources(out["sources"])
     out["_titles"]=list(dict.fromkeys((a.get("_titles") or [a["title"]])+(b.get("_titles") or [b["title"]])))
     # título: el más informativo (más largo sin ser genérico); dos nombres cortos distintos (cartel) se unen con " + "
     ta_, tb_ = a["title"], b["title"]
