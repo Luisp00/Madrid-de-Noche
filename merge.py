@@ -103,8 +103,11 @@ GENERIC = {"lunes","martes","miercoles","jueves","viernes","sabado","domingo","m
  "especial","special","edition","edicion","presenta","presents","entradas","tickets","oficial","official","weekend","concierto","conciertos",
  "concert","directo","teatro","tardeo","afterwork","after","halloweek","halloweekend","viernes","sabados","jueves","domingos"}
 WEEKDAYS = r"(lunes|martes|miercoles|jueves|viernes|sabado|domingo)"
-GENERIC_TITLE = [re.compile(r"^"+WEEKDAYS+r" en .+"), re.compile(r"^noche en .+"), re.compile(r".+ entradas$")]
-GENERIC_SOURCES = {"Bynova","Nightlife Madrid","All Madrid Nightlife","Applinkers"}
+WEEKDAYS_EN = r"(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mondays|tuesdays|wednesdays|thursdays|fridays|saturdays|sundays)"
+GENERIC_TITLE = [re.compile(r"^"+WEEKDAYS+r"s? (en |de |at |night |noche )?[a-z0-9 ']{1,40}$"), re.compile(r"^noche en .+"), re.compile(r".+ entradas$"),
+                 re.compile(r"^[a-z0-9 ']{1,40} "+WEEKDAYS+r"s?$"), re.compile(r"^"+WEEKDAYS_EN+r"('?s)? (at|in|night|nights) [a-z0-9 ']{1,40}$"),
+                 re.compile(r"^[a-z0-9 ']{1,40} "+WEEKDAYS_EN+r"('?s)?$"), re.compile(r"^(sesion|session|fiesta|noche|night|party|club) (de )?"+WEEKDAYS+r"s?$")]
+GENERIC_SOURCES = {"Bynova","Nightlife Madrid","All Madrid Nightlife","Applinkers","Madrid Lux","Discomadrid","Discoruta","Clubbable","Discotecas Gratis"}
 PUBCRAWL = re.compile(r"pub ?crawl|ruta de bares", re.I)
 EXCLUDED = re.compile(r"karaoke|bingo|\bclases? de\b|\btalleres?\b|\btablao\b|\bteatro\b|sin esperas|shisha|cena[ -]espect[aá]culo|candlelight|infantil|\bmuseo\b|\btributo a\b|\btribute to\b|\bdrag (show|queens?)\b|this is drag|\bmon[oó]logos?\b|stand[ -]?up|\bc[oó]mico\b", re.I)
 MUSICAL_TITLE = re.compile(r"\bmusical\b", re.I)                     # en el título
@@ -282,7 +285,7 @@ def is_match(m, e):
 
 def is_generic(title):
     t = plain(title)
-    return any(p.match(t) for p in GENERIC_TITLE) or t in ("sabado","viernes","jueves","saturday","friday","thursday")
+    return any(p.match(t) for p in GENERIC_TITLE) or t in ("lunes","martes","miercoles","jueves","viernes","sabado","domingo","monday","tuesday","wednesday","thursday","friday","saturday","sunday")
 
 def merge(a,b):
     """a: existente (prioritario cuando tiene dato); b: nuevo."""
@@ -345,7 +348,7 @@ def drop_generic(merged):
     named=[e for e in merged if not is_generic(e["title"])]
     for e in merged:
         names={s["name"] for s in e.get("sources",[])}
-        if is_generic(e["title"]) and names and names<=GENERIC_SOURCES and names&{"Bynova","Nightlife Madrid"}:
+        if is_generic(e["title"]) and names and names<=GENERIC_SOURCES:
             if any(n is not e and n["date"]==e["date"] and same_place(n,e) for n in named):
                 warn(f"descartado (genérico semanal): {e['date']} {e['venue']} «{e['title'][:60]}»"); dropped+=1; continue
         keep.append(e)
