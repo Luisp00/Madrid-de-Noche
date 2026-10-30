@@ -15,7 +15,7 @@ Principio: **el script hace el trabajo; los agentes solo entran cuando el script
 
 ## 0. Preparación
 La sesión de ejecución diaria (creada con el repo como fuente, rama `gh-pages`, modo `auto`) tiene su directorio de trabajo en un clon de `gh-pages` (la web estática) y puede hacer push a esa rama; el código se clona aparte. Si en cambio estás en una sesión normal con el repo de código, trabaja en él y publica la web como dice el paso 6.
-1. Código: `rm -rf /tmp/code && git clone -q --depth 1 -b main https://github.com/Luisp00/Madrid-de-Noche.git /tmp/code` (si la rama de código vigente es otra, p. ej. `ccr-7f46cbaa-sonpg4`, úsala con `-b`). Todo lo que sigue se ejecuta con `cd /tmp/code`.
+1. Código: `rm -rf /tmp/code && git clone -q --depth 1 -b main https://github.com/Luisp00/Madrid-de-Noche.git /tmp/code`. Todo lo que sigue se ejecuta con `cd /tmp/code`.
 2. `pip install -q requests beautifulsoup4 lxml` (un contenedor nuevo no las trae) y comprueba `node -e "require('playwright')"`.
 3. `mkdir -p run/data run/db run/out run/site`.
 4. HOY = fecha en Europe/Madrid (si son las 00:00–05:59, el día anterior). `scrape.py` y `merge.py` la calculan solos; solo pásala con `--today` si quieres forzarla.
@@ -26,8 +26,9 @@ La sesión de ejecución diaria (creada con el repo como fuente, rama `gh-pages`
 
 ## 2. Extracción con Python
 `python3 scrape.py --out run/data` (tarda 3–8 min; ejecuta todos los parsers de `scrape/sources/` en paralelo, con caché de 1 h). Imprime por fuente el nº de eventos o el error, y deja `run/data/_scrape_report.json` con la lista `failed` (parsers con error o con menos eventos que su `MIN_EVENTS`).
+- **Enriquecimiento de precios:** `python3 enrich.py run/data` visita la página de compra de los eventos que han quedado sin precio (Xceed, DICE, Fever, WHAN, Taquilla…) y rellena precio/estado. Deja `run/data/_enrich_report.json`.
 - Si `failed` está vacío → paso 3.
-- Si hay fallos, reintenta una vez solo esos: `python3 scrape.py --out run/data --only mod1,mod2`. Lo que siga fallando pasa al respaldo:
+- Si hay fallos, reintenta una vez solo esos: `python3 scrape.py --out run/data --only mod1,mod2`. Si un parser falla por **error de código** (excepción, no por bloqueo de la web), lanza un agente `Agent` con `model: "opus"`, `effort: "high"` para que lo diagnostique y lo arregle en `/tmp/code` (el usuario quiere que la revisión y reparación de los scripts la haga Opus 5.5 en high); vuelve a ejecutar ese parser y, si el arreglo funciona, guarda el parche (`git -C /tmp/code diff > run/out/patch_<modulo>.diff`) y cópialo a `data/patches/` de la web (paso 6) para aplicarlo al repo. Lo que siga fallando pasa al respaldo:
 
 ### 2a. Respaldo con agentes (solo fuentes fallidas)
 Para cada módulo fallido, lanza un agente `Agent` (`model: "sonnet"`, `effort: "high"`, en background) con el prompt estándar del apéndice (cabecera común + el bloque de la fuente correspondiente, **solo esa fuente**), pidiéndole que guarde en `run/data/agente_<modulo>.json`. Correspondencia módulo → bloque del apéndice: `fever`→A; `technoairlines`, `dice`, `fulltechno`, `technoparty`, `xceed` (https://xceed.me/es/madrid/events), `whan` (https://app.whan.es/explore)→B; `bynova`, `nightlifemadrid`→C; `taquilla`, `notikumi`, `dondego`, `discotech`, `allevents`→D; `siroco`, `salaelsol`, `lariviera`, `wurlitzer`, `galileo`→E (solo esa sala); `applinkers`, `allmadridnightlife`→F; `conciertos_club`, `laganzua`, `madridenvivo`, `esmadrid`→G. Resident Advisor no tiene parser activo (`scrape/disabled/ra.py` usa su API saltándose la protección anti-bot y se ha dejado fuera; Techno Airlines replica la mayoría de sus eventos). Acceso a la web en el agente: WebFetch si funciona; si no, `node tools/fetch.js URL` por Bash. Espera como mucho 40 min; si no llega, sigue sin esa fuente.
