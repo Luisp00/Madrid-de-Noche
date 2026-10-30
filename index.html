@@ -200,14 +200,16 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
 
 <script>
 /* ===================== Datos / esquema =====================
- Colección "events". Documento por evento (id = YYYY-MM-DD-<hash>):
- { title, date:"YYYY-MM-DD" (noche en que empieza), start:"23:30", end:"06:00",
+ Colección "chunks": pocos documentos grandes {i, n, count, updatedAt, events:[…]} (≤150 KB cada uno).
+ Cada evento (id = YYYY-MM-DD-<hash>):
+ { id, title, date:"YYYY-MM-DD" (noche en que empieza), start:"23:30", end:"06:00",
    venue, address, zone, type: club|concierto|fiesta|after|bar|tardeo|festival|otro,
    music:["reggaeton","techno",...], priceMin, priceMax, priceText, priceNote, free:bool,
    dressCode:string|null, ageMin:number|null, lineup:[...], description,
    status: disponible|ultimas|agotado|desconocido,
    sources:[{name,url}], ticketUrl, updatedAt, lastSeen }
- Documento "meta/status": { lastUpdated, eventCount, sources:{nombre:n}, running, runStartedAt, failedSources, lastError, note }
+ Documento "meta/status": { lastUpdated, eventCount, chunks, sources:{nombre:n}, running, runStartedAt, failedSources, lastError, note }
+ Versión estática (GitHub Pages): sin `claude`, lee data/events.json y data/status.json.
  Documento "data/users/<id>/prefs": { favs:[ids] }  (favoritos del usuario, además de localStorage)
 ============================================================= */
 
@@ -378,6 +380,7 @@ function render(){
   const list = state.events.filter(passes).sort((a,b)=> a.date.localeCompare(b.date) || (nightMin(a.start)-nightMin(b.start)) || (a.title||"").localeCompare(b.title||""));
   let html="";
   if (state.partial) html+='<div class="notice">No se han podido cargar todos los eventos. Recarga la página en unos segundos.</div>';
+  if (state.meta?.lastError && !isRunning()) html+=`<div class="notice">La última actualización automática falló: ${esc(String(state.meta.lastError).slice(0,200))}</div>`;
   if (!list.length){
     main.innerHTML = html + (state.events.length ? '<div class="empty"><h3>Nada con estos filtros</h3>Prueba otra fecha o quita algún filtro.</div>'
       : '<div class="empty"><h3>Todavía no hay eventos</h3>La primera carga de datos está en marcha. Vuelve en unos minutos.</div>');
@@ -525,24 +528,30 @@ try{ new ResizeObserver(en=>{ for(const x of en) document.documentElement.style.
 
 /* ---------- datos ---------- */
 loadFavs(); renderDateChips(); render();
+function setEvents(list){ const t=addDays(todayStr(),-1); state.events=list.filter(e=>e && e.date && e.date>=t); state.loaded=true; render(); }
+async function loadStatic(){
+  // Versión web estática (GitHub Pages): los datos están en data/events.json y data/status.json
+  try {
+    const [ev, st] = await Promise.all([fetch("data/events.json",{cache:"no-cache"}), fetch("data/status.json",{cache:"no-cache"}).catch(()=>null)]);
+    if (!ev.ok) throw new Error("events.json "+ev.status);
+    const list = await ev.json(); state.meta = st && st.ok ? await st.json() : null; setEvents(list);
+  } catch(e){ console.error(e); state.loaded=true; state.partial=true; render(); }
+}
 (async()=>{
+  if (typeof claude==="undefined" || !claude || typeof claude.use!=="function"){ loadStatic(); return; }
   let db=null;
   try { db = await claude.use("db"); } catch(e){ db=null; }
   if (!db){ state.loaded=true; state.dbMissing=true; render(); return; }
-  const since = addDays(todayStr(),-1);
-  // Varias ventanas de fechas (cada consulta devuelve como mucho 1000 documentos)
-  const windows = [[since, addDays(since,3)], [addDays(since,3), addDays(since,6)], [addDays(since,6), addDays(since,10)], [addDays(since,10), null]];
-  const byWindow = new Map(); let pending=windows.length;
-  const recompute = () => { const all=new Map(); for (const arr of byWindow.values()) for (const e of arr) all.set(e.id,e); state.events=[...all.values()]; if (pending<=0) state.loaded=true; render(); };
+  // Los eventos están en la colección "chunks": pocos documentos grandes ({i, n, count, events:[…]})
   try {
-    windows.forEach(([from,to],i)=>{
-      let q = db.collection("events").where("date",">=",from); if (to) q = q.where("date","<",to);
-      let first=true;
-      q.orderBy("date").limit(1000).onSnapshot(snap=>{ byWindow.set(i, snap.docs.map(d=>({id:d.id,...d.data()}))); if (snap.docs.length>=1000) console.warn("ventana",i,"llena"); if(first){first=false;pending--;} recompute(); },
-        err=>{ console.error(err); if(first){first=false;pending--;} state.partial=true; recompute(); });
-    });
+    db.collection("chunks").onSnapshot(snap=>{
+      const docs=snap.docs.map(d=>d.data()).sort((a,b)=>(a.i||0)-(b.i||0));
+      const all=new Map(); for (const c of docs) for (const e of (c.events||[])) if (e && e.id) all.set(e.id,e);
+      state.partial = docs.length>0 && docs.some(c=>c.n && c.n>docs.length);
+      setEvents([...all.values()]);
+    }, err=>{ console.error(err); state.loaded=true; state.partial=true; render(); toast("No se pudieron cargar los eventos"); });
     db.doc("meta/status").onSnapshot(s=>{ state.meta=s.exists?s.data():null; render(); }, ()=>{});
-    setTimeout(()=>{ if(!state.loaded){ state.loaded=true; state.partial=state.events.length===0; render(); } }, 12000);
+    setTimeout(()=>{ if(!state.loaded){ state.loaded=true; state.partial=true; render(); } }, 12000);
   } catch(e){ console.error(e); state.loaded=true; render(); }
   // favoritos del usuario (documento privado) y botón de actualización para el propietario
   try {

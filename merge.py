@@ -1,43 +1,36 @@
 #!/usr/bin/env python3
-"""Fusiona data/*.json en eventos únicos y genera los lotes de escritura para la base de datos del artifact.
+"""Fusiona data/*.json en eventos únicos y genera los documentos "chunk" para la base de datos del artifact
+y el events.json de la versión web estática.
 
 Uso: python3 -I merge.py data/ EXISTENTE out/ [--today YYYY-MM-DD]
   data/      archivos *.json de los agentes extractores (arrays de eventos según SPEC.md).
-  EXISTENTE  estado actual de la BD. Admite tres formas:
-               - un directorio tal como lo deja `ArtifactData` con `out_dir`: …/events/<id>.json
-                 (contenido = data del documento) MÁS un archivo `versions.txt` con las versiones
-                 de los documentos, que la herramienta imprime pero no guarda en los archivos:
-                 basta pegar en él el texto del resultado (líneas con "<id> … version N" o
-                 '"<id>" N'); opcionalmente …/meta/seen.json (mapa id → última fecha vista),
-               - un archivo JSON con un array [{"id","version","data"}],
-               - o "-" / inexistente si la BD está vacía.
-             Sin versiones no se puede escribir sobre documentos existentes: el script se niega a
-             generar lotes si hay documentos y ninguna versión (salvo --force).
+  EXISTENTE  estado actual: un directorio tal como lo deja `ArtifactData query … out_dir`
+               - …/chunks/chunk-NN.json  (formato actual: {"i","n","events":[…]}), o
+               - …/events/<id>.json      (formato antiguo, un documento por evento; solo lectura),
+             o un events.json (array de eventos con id), o "-" / inexistente si está vacío.
+             Las versiones de los chunks existentes pueden darse en <EXISTENTE>/versions.txt (líneas
+             "chunk-00 3" o el texto del resultado de la herramienta pegado tal cual); si faltan, el
+             archivo de escrituras no lleva if_version y hay que ponerlo a mano antes de subir.
   out/       se escriben:
-               merged.json            eventos únicos (depuración)
-               docs/<id>.json         documento completo de cada evento nuevo o cambiado
-               batch_NN.json          lotes de ≤50 escrituras para `ArtifactData` action "batch"
-                                      (campo `writes`), con los documentos EN LÍNEA (`data`)
-               batchf_NN.json         los mismos lotes pero referenciando docs/<id>.json con `file_path`
-                                      (mucho más barato en contexto si la herramienta lo admite)
-               seen.json              nuevo mapa id → última fecha vista, para `set` en meta/seen
-               status.json            propuesta de documento meta/status (completar lastUpdated)
-               summary.json           estadísticas (también se imprimen por stdout)
+               chunks/chunk-NN.json   documentos a escribir en la colección `chunks` (≤ 150 KB cada uno)
+               writes.json            lista de escrituras para `ArtifactData` (set de cada chunk con
+                                      file_path + delete de los chunks sobrantes), con if_version si se conoce
+               events.json            todos los eventos (para la web estática: docs/data/events.json)
+               status.json            documento meta/status (también docs/data/status.json)
+               merged.json            eventos únicos de la extracción de hoy (depuración)
+               summary.json           estadísticas (también por stdout)
 Avisos (precios intercambiados, descartes) van a stderr; las estadísticas a stdout.
 
-Reglas de fusión con la BD:
+Reglas de fusión con lo existente:
   - Un evento ya existente conserva su id aunque cambie el título (misma sala + fecha + título parecido).
-  - Los campos "estables" (dirección, dress code, edad, descripción, line-up, hora de cierre) se
-    conservan del documento existente si la extracción de hoy no los trae.
-  - Precio, estado y enlace vienen siempre de la extracción de hoy (el más barato gana).
-  - Los eventos sin cambios no generan escritura. La fecha de la última extracción en que apareció cada
-    evento se guarda en el documento meta/seen (mapa id → fecha) y, en los documentos escritos, en `lastSeen`.
-    Los no vistos hoy:
-      · fecha pasada (anterior a ayer)                      → se borran
-      · futuros no vistos en 3 extracciones seguidas, si al menos una de sus fuentes sí se extrajo hoy
-        (o no vistos en 7 días, sea cual sea la fuente)     → se borran (cancelados / duplicados viejos)
-      · el resto                                           → se dejan tal cual
-  - Si dos documentos existentes corresponden al mismo evento de hoy, se conserva uno y el otro se borra.
+  - Los campos "estables" (dirección, dress code, edad, descripción, line-up, música, hora de cierre) se
+    conservan del evento existente si la extracción de hoy no los trae. Precio, estado y enlace vienen
+    siempre de la extracción de hoy (el más barato gana).
+  - Cada evento lleva `lastSeen` (fecha de la última extracción en que apareció). Los no vistos hoy:
+      · fecha anterior a ayer                                → se quitan
+      · futuros no vistos en 3 extracciones seguidas, si alguna de sus fuentes sí se extrajo hoy
+        (o no vistos en 7 días, sea cual sea la fuente)      → se quitan (cancelados / duplicados viejos)
+      · el resto                                            → se conservan tal cual
 """
 import json, re, sys, os, glob, hashlib, unicodedata, datetime
 
@@ -371,10 +364,10 @@ def madrid_today():
         local=now.astimezone(datetime.timezone(datetime.timedelta(hours=1)))
     return (local-datetime.timedelta(hours=6)).strftime("%Y-%m-%d")
 
-# ---------- estado actual de la BD ----------
-ID_RE=re.compile(r"(\d{4}-\d{2}-\d{2}-[0-9a-f]{10})")
+# ---------- estado actual ----------
+ID_RE=re.compile(r"(chunk-\d{2,3}|\d{4}-\d{2}-\d{2}-[0-9a-f]{10})")
 def parse_versions(txt):
-    """Extrae {id: version} de texto libre: '"<id>"  795 bytes  version 2  "/ruta"' o '"<id>" 2,' o '<id> 2'."""
+    """Extrae {id: version} de texto libre: '"chunk-00"  120000 bytes  version 2  "/ruta"' o 'chunk-00 2'."""
     out={}
     ms=list(ID_RE.finditer(txt))
     for i,m in enumerate(ms):
@@ -385,75 +378,52 @@ def parse_versions(txt):
         if v: out[m.group(1)]=int(v.group(1))
     return out
 
-def load_seen(path):
-    """mapa id → última fecha vista (meta/seen) si existe en el directorio."""
-    for p in (os.path.join(path,"meta","seen.json"), os.path.join(path,"seen.json")):
-        if os.path.exists(p):
-            try:
-                d=json.load(open(p))
-                d=d.get("data",d) if isinstance(d,dict) else {}
-                d=d.get("ids",d) if isinstance(d,dict) else {}
-                return {k:v for k,v in d.items() if isinstance(v,str)}
-            except Exception as ex: warn("ERROR leyendo",p,ex)
-    return {}
-
 def load_existing(path):
-    """Devuelve {id: {"version": int|None, "data": {...}}}."""
-    existing={}
-    if not path or path=="-" or not os.path.exists(path): return existing
-    def add(d):
-        if not isinstance(d,dict) or "id" not in d: return
-        data=d.get("data") if isinstance(d.get("data"),dict) else {k:v for k,v in d.items() if k not in ("id","version","updatedAt","_meta")}
-        existing[d["id"]]={"version":d.get("version"),"data":data}
+    """Devuelve (eventos existentes {id: evento}, chunks existentes {doc_id: version|None})."""
+    events={}; chunks={}
+    if not path or path=="-" or not os.path.exists(path): return events, chunks
+    def add_event(e, eid=None):
+        if not isinstance(e,dict): return
+        eid = eid or e.get("id")
+        if not eid or not e.get("date"): return
+        events[eid]={k:v for k,v in e.items() if k!="id"}
     if os.path.isdir(path):
-        # directorio de ArtifactData out_dir: busca <algo>/events/*.json o *.json directamente
-        files=sorted(glob.glob(os.path.join(path,"events","*.json")) or glob.glob(os.path.join(path,"*.json")))
         versions={}
-        for vt in glob.glob(os.path.join(path,"*.txt"))+glob.glob(os.path.join(path,"events","*.txt")):
+        for vt in glob.glob(os.path.join(path,"*.txt"))+glob.glob(os.path.join(path,"chunks","*.txt")):
             try: versions.update(parse_versions(open(vt,errors="ignore").read()))
             except Exception as ex: warn("ERROR leyendo",vt,ex)
-        for extra in ("index.json","_index.json","versions.json"):
-            p=os.path.join(path,extra)
-            if os.path.exists(p):
-                try:
-                    for d in json.load(open(p)): versions[d["id"]]=d.get("version")
-                except Exception: pass
-        for f in files:
+        cfiles=sorted(glob.glob(os.path.join(path,"chunks","*.json")))
+        for f in cfiles:
             name=os.path.basename(f)[:-5]
-            if name.endswith(".meta") or name in ("index","_index","versions"): continue
             try: d=json.load(open(f))
             except Exception as ex: warn("ERROR leyendo",f,ex); continue
-            if not isinstance(d,dict): continue
-            if "data" in d and isinstance(d["data"],dict):   # {"id","version","data"}
-                existing[d.get("id",name)]={"version":d.get("version"),"data":d["data"]}
-            else:
-                v=d.pop("version",None) if "version" in d and "date" not in d else d.get("_version")
-                data={k:v2 for k,v2 in d.items() if not k.startswith("_") and k!="version"}
-                existing[name]={"version":versions.get(name,v),"data":data}
-            mp=f[:-5]+".meta.json"
-            if os.path.exists(mp):
-                try: existing[name]["version"]=json.load(open(mp)).get("version",existing[name]["version"])
-                except Exception: pass
-        return existing
-    txt=open(path).read().strip()
-    if not txt: return existing
-    if txt.startswith("["):
-        for d in json.loads(txt): add(d)
-    else:
-        for line in txt.splitlines():
-            line=line.strip()
-            if line.startswith("{"):
-                try: add(json.loads(line))
-                except Exception: continue
-    return existing
+            d=d.get("data",d) if isinstance(d,dict) and "data" in d and "events" not in d else d
+            chunks[name]=versions.get(name, d.get("version") if isinstance(d,dict) else None)
+            for e in (d.get("events") or []) if isinstance(d,dict) else []: add_event(e)
+        if not cfiles:
+            for f in sorted(glob.glob(os.path.join(path,"events","*.json"))):
+                name=os.path.basename(f)[:-5]
+                if name.endswith(".meta"): continue
+                try: d=json.load(open(f))
+                except Exception as ex: warn("ERROR leyendo",f,ex); continue
+                if isinstance(d,dict) and isinstance(d.get("data"),dict): add_event(d["data"], d.get("id",name))
+                else: add_event(d, name)
+        return events, chunks
+    try:
+        d=json.load(open(path))
+        for e in (d if isinstance(d,list) else d.get("events",[])): add_event(e)
+    except Exception as ex: warn("ERROR leyendo",path,ex)
+    return events, chunks
 
-def main(data_dir, existing_path, out_dir, today=None, force=False):
+CHUNK_BYTES=150_000
+
+def main(data_dir, existing_path, out_dir, today=None):
     today=today or madrid_today()
     yesterday=(datetime.date.fromisoformat(today)-datetime.timedelta(days=1)).isoformat()
     stale_limit=(datetime.date.fromisoformat(today)-datetime.timedelta(days=2)).isoformat()   # no visto en 3 extracciones seguidas
     hard_limit=(datetime.date.fromisoformat(today)-datetime.timedelta(days=6)).isoformat()    # no visto en 7 días
     events=[]; drops={}; nread=0; files_read=[]
-    for f in sorted(glob.glob(os.path.join(data_dir,"*.json"))):
+    for f in sorted(glob.glob(os.path.join(data_dir,"*.json"))) if data_dir and os.path.isdir(data_dir) else []:
         try: arr=json.load(open(f))
         except Exception as ex: warn("ERROR leyendo",f,ex); continue
         n0=len(events); files_read.append(os.path.basename(f))
@@ -469,108 +439,89 @@ def main(data_dir, existing_path, out_dir, today=None, force=False):
     merged=dedupe(events)
     merged,ngen=drop_generic(merged)
     if ngen: drops["genérico semanal"]=ngen
-    existing=load_existing(existing_path)
-    seen_old=load_seen(existing_path) if existing_path and os.path.isdir(existing_path) else {}
-    nver=sum(1 for x in existing.values() if x.get("version") is not None)
-    if existing and nver==0 and not force:
-        warn("ERROR: hay",len(existing),"documentos existentes pero ninguna versión conocida. Crea versions.txt en",existing_path,"con las parejas id/versión que imprime ArtifactData (o usa --force).")
-        sys.exit(2)
-    if existing and nver<len(existing): warn(f"AVISO: {len(existing)-nver} documentos existentes sin versión conocida; sus escrituras fallarán.")
-    seen_new={}
-    # fuentes extraídas hoy (para decidir si un evento ausente se puede dar por cancelado)
+    existing, old_chunks = load_existing(existing_path)
     sources_today={s["name"] for e in merged for s in e["sources"]}
     now=datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
-    os.makedirs(os.path.join(out_dir,"docs"),exist_ok=True)
-    for old in glob.glob(os.path.join(out_dir,"docs","*.json")): os.remove(old)
-    for old in glob.glob(os.path.join(out_dir,"batch*_*.json")): os.remove(old)
-    writes=[]; seen=set(); counts={"nuevos":0,"actualizados":0,"sinCambios":0,"borradosPasados":0,"borradosCancelados":0,"borradosDuplicados":0,"conservadosNoVistos":0}
-    def by_place_date(e):
-        out=[]
-        for xid,x in existing.items():
-            xd=x["data"]
-            if xd.get("date")!=e["date"]: continue
-            if strip(xd.get("venue") or "")==strip(canon_venue(e.get("venue")) or "") or (addr_key(xd.get("address")) and addr_key(xd.get("address"))==addr_key(e.get("address"))):
-                out.append((xid,x))
-        return out
+    final={}; seen=set()
+    counts={"nuevos":0,"actualizados":0,"sinCambios":0,"quitadosPasados":0,"quitadosCancelados":0,"quitadosDuplicados":0,"conservadosNoVistos":0}
+    by_date={}
+    for xid,xd in existing.items(): by_date.setdefault(xd.get("date"),[]).append((xid,xd))
     for e in merged:
         titles=e.get("_titles") or [e["title"]]
         eid=make_id(e)
         if eid in seen: continue
-        # si existe un doc previo con misma sala/dirección+fecha y título parecido pero distinto id, conservar su id
-        cands=[]
-        if eid in existing: cands.append(eid)
-        for xid,x in by_place_date(e):
-            if xid in seen or xid==eid: continue
-            xd=x["data"]
-            tt=[t for t in titles if len(strip(t).split())>=2] or titles
-            if max(sim(xd.get("title",""),t) for t in tt)>=0.5: cands.append(xid)
+        cands=[eid] if eid in existing else []
+        v_e=strip(canon_venue(e.get("venue")) or ""); a_e=addr_key(e.get("address"))
+        tt=[t for t in titles if len(strip(t).split())>=2] or titles
+        for xid,xd in by_date.get(e["date"],[]):
+            if xid in seen or xid in cands: continue
+            if strip(xd.get("venue") or "")==v_e or (a_e and addr_key(xd.get("address"))==a_e):
+                if max(sim(xd.get("title",""),t) for t in tt)>=0.5: cands.append(xid)
         if cands:
             eid=cands[0]
-            for dup in cands[1:]:   # duplicados antiguos del mismo evento → fuera
-                if dup in seen: continue
-                seen.add(dup); writes.append({"op":"delete","collection":"events","doc_id":dup,"if_version":existing[dup]["version"]})
-                counts["borradosDuplicados"]+=1
+            for dup in cands[1:]:
+                if dup not in seen: seen.add(dup); counts["quitadosDuplicados"]+=1
         seen.add(eid)
         doc={k:v for k,v in e.items() if v not in (None,[],"") and not k.startswith("_")}
         if eid in existing:
-            old=dict(existing[eid]["data"])
+            old=existing[eid]
             for k in STABLE_FIELDS:
                 if k not in doc and old.get(k) not in (None,[],""): doc[k]=old[k]
             if doc.get("zone")=="Otros" and old.get("zone") not in (None,"","Otros","otros"): doc["zone"]=old["zone"]
-            seen_new[eid]=today
             cmp_old={k:v for k,v in old.items() if k not in ("updatedAt","lastSeen")}
             if cmp_old==doc:
-                counts["sinCambios"]+=1
-                continue
-            doc["updatedAt"]=now; doc["lastSeen"]=today
-            writes.append({"op":"set","collection":"events","doc_id":eid,"data":doc,"if_version":existing[eid]["version"]})
-            counts["actualizados"]+=1
+                counts["sinCambios"]+=1; doc["updatedAt"]=old.get("updatedAt",now)
+            else:
+                counts["actualizados"]+=1; doc["updatedAt"]=now
         else:
-            doc["updatedAt"]=now; doc["lastSeen"]=today; seen_new[eid]=today
-            writes.append({"op":"set","collection":"events","doc_id":eid,"data":doc})
-            counts["nuevos"]+=1
-    # documentos existentes que no han aparecido hoy
-    for xid,x in existing.items():
+            counts["nuevos"]+=1; doc["updatedAt"]=now
+        doc["lastSeen"]=today
+        final[eid]=doc
+    for xid,xd in existing.items():
         if xid in seen: continue
-        d=x["data"].get("date","")
-        last=(seen_old.get(xid) or x["data"].get("lastSeen") or (x["data"].get("updatedAt") or "")[:10] or "0000-00-00")
-        if not d or d < yesterday:
-            writes.append({"op":"delete","collection":"events","doc_id":xid,"if_version":x["version"]}); counts["borradosPasados"]+=1
-        elif d >= today and last <= stale_limit and (last <= hard_limit or any(s.get("name") in sources_today for s in x["data"].get("sources",[]))):
-            writes.append({"op":"delete","collection":"events","doc_id":xid,"if_version":x["version"]}); counts["borradosCancelados"]+=1
-            warn(f"borrado (no visto desde {last}): {d} {x['data'].get('venue')} «{str(x['data'].get('title'))[:60]}»")
+        d=xd.get("date",""); last=(xd.get("lastSeen") or (xd.get("updatedAt") or "")[:10] or "0000-00-00")
+        if not d or d < yesterday: counts["quitadosPasados"]+=1
+        elif d >= today and last <= stale_limit and (last <= hard_limit or any(s.get("name") in sources_today for s in xd.get("sources",[]))):
+            counts["quitadosCancelados"]+=1; warn(f"quitado (no visto desde {last}): {d} {xd.get('venue')} «{str(xd.get('title'))[:60]}»")
         else:
-            counts["conservadosNoVistos"]+=1; seen_new[xid]=last
-    # quitar if_version nulos (documentos cuya versión no conocemos)
-    for w in writes:
-        if w.get("if_version") is None: w.pop("if_version",None)
+            counts["conservadosNoVistos"]+=1; final[xid]=xd
+    # salida
     for e in merged: e.pop("_titles",None)
+    os.makedirs(os.path.join(out_dir,"chunks"),exist_ok=True)
+    for old in glob.glob(os.path.join(out_dir,"chunks","*.json")): os.remove(old)
+    allev=[dict(id=i,**d) for i,d in sorted(final.items(), key=lambda kv:(kv[1].get("date",""), tmin(kv[1].get("start")) or 9999, kv[1].get("title","")))]
     json.dump(merged,open(os.path.join(out_dir,"merged.json"),"w"),ensure_ascii=False,indent=1)
-    # lotes: inline (batch_NN) y con file_path (batchf_NN)
-    docs_dir=os.path.abspath(os.path.join(out_dir,"docs"))
-    for w in writes:
-        if w["op"]=="set":
-            p=os.path.join(docs_dir,w["doc_id"]+".json")
-            json.dump(w["data"],open(p,"w"),ensure_ascii=False)
-    nb=0
-    for i in range(0,len(writes),50):
-        chunk=writes[i:i+50]
-        json.dump(chunk,open(os.path.join(out_dir,f"batch_{i//50:02d}.json"),"w"),ensure_ascii=False)
-        fchunk=[]
-        for w in chunk:
-            if w["op"]=="set":
-                w2={k:v for k,v in w.items() if k!="data"}; w2["file_path"]=os.path.join(docs_dir,w["doc_id"]+".json"); fchunk.append(w2)
-            else: fchunk.append(w)
-        json.dump(fchunk,open(os.path.join(out_dir,f"batchf_{i//50:02d}.json"),"w"),ensure_ascii=False)
-        nb+=1
+    json.dump(allev,open(os.path.join(out_dir,"events.json"),"w"),ensure_ascii=False,separators=(",",":"))
+    chunks=[]; cur=[]; size=2
+    for e in allev:
+        b=len(json.dumps(e,ensure_ascii=False,separators=(",",":")).encode())+1
+        if cur and size+b>CHUNK_BYTES: chunks.append(cur); cur=[]; size=2
+        cur.append(e); size+=b
+    if cur or not chunks: chunks.append(cur)
+    writes=[]
+    for i,ch in enumerate(chunks):
+        name=f"chunk-{i:02d}"; p=os.path.abspath(os.path.join(out_dir,"chunks",name+".json"))
+        json.dump({"i":i,"n":len(chunks),"count":len(ch),"updatedAt":now,"events":ch},open(p,"w"),ensure_ascii=False,separators=(",",":"))
+        w={"op":"set","collection":"chunks","doc_id":name,"file_path":p}
+        if name in old_chunks and old_chunks[name] is not None: w["if_version"]=old_chunks[name]
+        writes.append(w)
+    for name,v in old_chunks.items():
+        if name not in {f"chunk-{i:02d}" for i in range(len(chunks))}:
+            w={"op":"delete","collection":"chunks","doc_id":name}
+            if v is not None: w["if_version"]=v
+            writes.append(w)
+    json.dump(writes,open(os.path.join(out_dir,"writes.json"),"w"),ensure_ascii=False,indent=1)
     stats={}
     for e in merged:
         for s in e["sources"]: stats[s["name"]]=stats.get(s["name"],0)+1
     if drops: warn("descartes:", json.dumps(drops,ensure_ascii=False))
-    json.dump({"updated":now,"ids":seen_new},open(os.path.join(out_dir,"seen.json"),"w"),ensure_ascii=False)
-    summary={"hoy":today,"archivos":files_read,"leidos":nread,"unicos":len(merged),"escrituras":len(writes),"lotes":nb,"enBD":len(existing),"eventCountTrasSubida":len(existing)+counts["nuevos"]-counts["borradosPasados"]-counts["borradosCancelados"]-counts["borradosDuplicados"],**counts,"descartes":drops,"porFuente":dict(sorted(stats.items(),key=lambda kv:-kv[1]))}
+    missing=[w["doc_id"] for w in writes if w["doc_id"] in old_chunks and "if_version" not in w]
+    if missing: warn("AVISO: chunks existentes sin versión conocida (pon if_version a mano antes de subir):",missing)
+    summary={"hoy":today,"archivos":files_read,"leidos":nread,"unicos":len(merged),"eventosTotales":len(allev),"chunks":len(chunks),"escrituras":len(writes),"existentes":len(existing),**counts,"descartes":drops,"porFuente":dict(sorted(stats.items(),key=lambda kv:-kv[1]))}
     json.dump(summary,open(os.path.join(out_dir,"summary.json"),"w"),ensure_ascii=False,indent=1)
-    status={"lastUpdated":now,"eventCount":summary["eventCountTrasSubida"],"sources":summary["porFuente"],"run":{"date":today,"new":counts["nuevos"],"updated":counts["actualizados"],"deleted":counts["borradosPasados"]+counts["borradosCancelados"]+counts["borradosDuplicados"],"unchanged":counts["sinCambios"],"files":files_read},"running":False,"note":"Actualización diaria"}
+    status={"lastUpdated":now,"eventCount":len(allev),"chunks":len(chunks),"sources":summary["porFuente"],
+            "run":{"date":today,"new":counts["nuevos"],"updated":counts["actualizados"],"removed":counts["quitadosPasados"]+counts["quitadosCancelados"]+counts["quitadosDuplicados"],"unchanged":counts["sinCambios"],"files":files_read},
+            "running":False,"note":"Actualización diaria"}
     json.dump(status,open(os.path.join(out_dir,"status.json"),"w"),ensure_ascii=False,indent=1)
     print(json.dumps(summary,ensure_ascii=False))
 
@@ -581,4 +532,4 @@ if __name__=="__main__":
         if a=="--today" and i+1<len(sys.argv): today=sys.argv[i+1]
         if a.startswith("--today="): today=a.split("=",1)[1]
     if len(args)<1: print(__doc__); sys.exit(1)
-    main(args[0], args[1] if len(args)>1 else None, args[2] if len(args)>2 else "out", today, force="--force" in sys.argv)
+    main(args[0], args[1] if len(args)>1 else None, args[2] if len(args)>2 else "out", today)

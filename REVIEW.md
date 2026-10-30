@@ -1,5 +1,7 @@
 # Revisión: Madrid de Noche (30 oct 2026, segunda pasada)
 
+> Actualización de las 08:30: tras esta revisión se cambió además el **almacenamiento**: en vez de un documento por evento (que obligaba a conocer ~1000 versiones al día y a subir hasta 20 lotes), los eventos van en 4–8 documentos `chunk-NN` que se reescriben enteros. Desaparecen `versions.txt` de 1000 líneas, los lotes y `meta/seen`; la tarea hace 4–8 escrituras. Los 981 eventos ya están migrados. Y la misma app funciona como **web estática** (rama `gh-pages`, pendiente de activar GitHub Pages) para compartirla sin cuenta de Claude; el runbook incluye un paso opcional que la actualiza mediante una sesión hija con acceso al repo. Los puntos 1–4 de "Actualización diaria" quedan así sustituidos por este diseño más simple.
+
 Revisión completa del proyecto antes de la primera ejecución de la tarea diaria (hoy 22:00). Se contrastó el código local con el artifact publicado, la BD (981 documentos descargados y analizados) y la tarea programada, y se ejecutó una sesión programada de prueba para ver qué herramientas tiene realmente la tarea.
 
 ## Lo que estaba roto y se ha arreglado

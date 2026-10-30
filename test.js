@@ -1,5 +1,5 @@
 // Prueba de la app con Playwright y una base de datos simulada.
-// Uso: node test.js [directorio con events/*.json tal como los guarda ArtifactData out_dir]
+// Uso: node test.js [directorio con events/*.json | archivo events.json]
 // Sin argumento usa dos eventos de ejemplo. Escribe shot1-3.png y falla (exit 1) si algo no cuadra.
 const { chromium } = require('playwright');
 const fs=require('fs'); const path=require('path');
@@ -15,14 +15,13 @@ const fs=require('fs'); const path=require('path');
    {id:"d",d:{title:"Tardeo Sunset con un título larguísimo que debería partirse en varias líneas sin romper nada",date:T2,start:"18:00",venue:"Café Berlín",zone:"Centro / Sol",type:"tardeo",music:["house"],free:true,priceText:"Gratis con reserva hasta completar aforo, después 10 € con consumición",sources:[{name:"Tardeo Madrid",url:"https://t.example/d"}],ticketUrl:"https://t.example/d",status:"disponible"}},
   ];
   const dir=process.argv[2];
-  if (dir){ sample=fs.readdirSync(path.join(dir,'events')).filter(f=>f.endsWith('.json')).map(f=>({id:f.slice(0,-5),d:JSON.parse(fs.readFileSync(path.join(dir,'events',f),'utf8'))})); }
-  const mock = `<script>window.__sample=${JSON.stringify(sample)};
+  if (dir){ sample = fs.existsSync(path.join(dir,'events')) ? fs.readdirSync(path.join(dir,'events')).filter(f=>f.endsWith('.json')).map(f=>({id:f.slice(0,-5),d:JSON.parse(fs.readFileSync(path.join(dir,'events',f),'utf8'))})) : JSON.parse(fs.readFileSync(dir,'utf8')).map(e=>({id:e.id,d:e})); }
+  const chunks=[]; for(let i=0;i<sample.length;i+=400) chunks.push({i:chunks.length,n:Math.ceil(sample.length/400)||1,events:sample.slice(i,i+400).map(x=>({id:x.id,...x.d}))});
+  const mock = `<script>window.__chunks=${JSON.stringify(chunks)};
   window.__fired=[]; window.__favWrites=[];
   window.claude={use:async(n)=>{
     if(n==="db") return {
-      collection:(c)=>{const w=[];const q={where:(f,op,v)=>{w.push([f,op,v]);return q},orderBy:()=>q,limit:()=>q,onSnapshot:(cb)=>{
-        const docs=window.__sample.filter(x=>w.every(([f,op,v])=> op===">="? x.d[f]>=v : op==="<" ? x.d[f]<v : true)).map(x=>({id:x.id,data:()=>x.d}));
-        setTimeout(()=>cb({docs}),50); return ()=>{};}};return q;},
+      collection:(c)=>({onSnapshot:(cb)=>{ setTimeout(()=>cb({docs:window.__chunks.map(d=>({id:"chunk-"+d.i,data:()=>d}))}),50); return ()=>{}; }}),
       doc:(p)=>({onSnapshot:(cb)=>cb({exists:true,data:()=>({lastUpdated:new Date().toISOString(),running:false})}), get:async()=>({exists:true,data:()=>({favs:["c"]})}), set:async(d)=>{window.__favWrites.push(d)}})
     };
     if(n==="user") return {id:async()=>"u_test", isOwner:async()=>true, canEdit:async()=>true};
@@ -81,6 +80,17 @@ const fs=require('fs'); const path=require('path');
       check(await p.evaluate(()=>window.__fired.length===1 && window.__fired[0][1]==='fire_trigger'), 'botón actualizar llama a fire_trigger');
       console.log('status:', await p.textContent('#status'));
     }
+    await p.close();
+  }
+  // modo web estática (sin window.claude): los datos vienen de data/events.json
+  {
+    const p=await b.newPage({viewport:{width:390,height:844}}); p.on('pageerror',e=>errs.push(e.message)); p.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
+    await p.route('**/data/events.json',r=>r.fulfill({contentType:'application/json',body:JSON.stringify(sample.map(x=>({id:x.id,...x.d})))}));
+    await p.route('**/data/status.json',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({lastUpdated:new Date().toISOString(),eventCount:sample.length})}));
+    await p.route('https://mdn.test/index.html',r=>r.fulfill({contentType:'text/html',body:html.replace(mock,'')}));
+    await p.goto('https://mdn.test/index.html',{waitUntil:'networkidle'}); await p.waitForTimeout(600);
+    check((await p.$$eval('.card',e=>e.length))>0, 'modo estático: carga eventos desde data/events.json');
+    check(!(await p.locator('#refreshBtn').isVisible()), 'modo estático: sin botón actualizar');
     await p.close();
   }
   console.log('errores de página:',errs);

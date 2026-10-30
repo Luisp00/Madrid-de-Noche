@@ -1,18 +1,19 @@
 # Madrid de Noche — procedimiento de actualización diaria
 
 Artifact: https://claude.ai/artifact/N1LKQtKKWsz2K2xYH1Uc4V (slug `aa1bd110-8301-4d75-8ffa-b7f5e5264d2e`, app "Madrid de Noche").
-Base de datos del artifact: colección `events` (un documento por evento, id = `YYYY-MM-DD-<hash>`), documento `meta/status` (estado que muestra la app) y documento `meta/seen` (mapa id → última fecha en que cada evento apareció en alguna fuente).
+Base de datos del artifact: colección `chunks` (pocos documentos grandes `chunk-00`, `chunk-01`, … de ≤150 KB, cada uno `{i, n, count, updatedAt, events:[…]}`; entre todos contienen todos los eventos, cada uno con su `id` y `lastSeen`) y documento `meta/status` (estado que muestra la app). La colección antigua `events` (un documento por evento) ya no se usa: no la leas ni la escribas.
+Versión web pública (GitHub Pages, rama `gh-pages` del repo https://github.com/Luisp00/Madrid-de-Noche): `index.html` + `data/events.json` + `data/status.json`; la misma app leyendo archivos en vez de la BD.
 
 Herramientas (comprobadas desde una sesión programada el 30-oct-2026):
 - `Artifact` → action `read` con `url` y `path` (`spec.md`, `merge.py.txt`, `runbook.md`): guarda el archivo en local y dice dónde.
-- `ArtifactData` → acciones `get`, `query`, `set`, `update`, `batch`, siempre con `url`. `query` admite `out_dir` (guarda cada documento en `<out_dir>/events/<id>.json`) y `batch` admite hasta 50 escrituras `{op, collection, doc_id, data | file_path, if_version}`; `file_path` funciona.
-- Si en lugar de esas existen `mcp__claude-artifacts__read_file / db_query / db_get / db_write` (cárgalas con ToolSearch), son equivalentes: `db_write` acepta la misma lista de escrituras.
+- `ArtifactData` → acciones `get`, `query`, `set`, `update`, `delete`, siempre con `url`. `query` admite `out_dir` (guarda cada documento en `<out_dir>/<colección>/<id>.json`) y `set` admite `file_path` (el archivo JSON se envía como documento); funciona. Toda escritura sobre un documento existente exige `if_version` = la versión que imprimió la última lectura.
+- Si en lugar de esas existen `mcp__claude-artifacts__read_file / db_query / db_get / db_write` (cárgalas con ToolSearch), son equivalentes.
 - Extracción: agentes `Agent` (tipo `general-purpose`, `model: "opus"`, `effort: "high"`) con WebFetch/WebSearch. El usuario quiere que el trabajo lo haga Opus 5.5 en high y que la sesión principal solo coordine.
 - Python 3.11 y Bash están disponibles; `/home/claude/madrid-noche` es escribible. **Nada de curl/python contra webs externas** (está bloqueado); las webs solo con WebFetch/WebSearch.
 
 ## 0. Preparación
-1. `mkdir -p /home/claude/madrid-noche/data /home/claude/madrid-noche/db /home/claude/madrid-noche/out` y borra cualquier contenido antiguo de `data/`, `db/` y `out/`.
-2. Con `Artifact` read (url arriba) lee `spec.md` y `merge.py.txt` y cópialos tal cual a `/home/claude/madrid-noche/SPEC.md` y `/home/claude/madrid-noche/merge.py`.
+1. `mkdir -p /home/claude/madrid-noche/data /home/claude/madrid-noche/db /home/claude/madrid-noche/out /home/claude/madrid-noche/site` y borra cualquier contenido antiguo de `data/`, `db/`, `out/` y `site/`.
+2. Con `Artifact` read (url arriba) lee `spec.md`, `merge.py.txt`, `build_site.py.txt` e `index.html` y cópialos tal cual a `/home/claude/madrid-noche/SPEC.md`, `merge.py`, `build_site.py` e `index.html`.
 3. Calcula HOY en Europe/Madrid (si son las 00:00–05:59, HOY es el día anterior) y FIN = HOY + 14 días. Sustituye `{HOY}` y `{FIN}` en los prompts de abajo.
 4. Marca el inicio: `ArtifactData` get `meta/status` (anota su `version`) y luego `update` de `meta/status` con `if_version` y data `{"running": true, "runStartedAt": "<ISO UTC ahora>"}`. La app muestra "actualizando…" mientras `running` sea true.
 
@@ -45,26 +46,28 @@ https://conciertos.club/madrid (~350 eventos: fecha, hora, sala, género, precio
 **Espera.** Los agentes en background te avisan al terminar; no hace falta sondear. Mientras tanto puedes hacer el paso 2. Da por terminada la extracción cuando hayan avisado los 7 o hayan pasado **60 minutos** desde el lanzamiento (la primera carga tardó unos 40). Si alguno falla o no llega, sigue con los archivos que haya (`ls data/`). Si falla un agente y aún no han pasado 45 min, relánzalo una vez.
 
 ## 2. Estado actual de la base de datos (puede hacerse mientras extraen)
-1. `ArtifactData` action `query`, collection `events`, query `{"limit": 1000}`, `out_dir` = `/home/claude/madrid-noche/db`. Si el resultado trae `next_cursor`, repite con `query: {"limit": 1000, "cursor": "<next_cursor>"}` hasta que no haya más.
-2. **Versiones.** La herramienta guarda los documentos en `db/events/<id>.json` pero la versión de cada documento solo aparece en el texto del resultado (`"<id>" … version N` en los primeros y `"<id>" N` en la lista compacta del resto). Hace falta para escribir. Crea `/home/claude/madrid-noche/db/versions.txt` pegando con Bash (heredoc) **todas** las parejas id/versión del resultado, una por línea, en el formato `<id> <versión>` (vale pegar el texto del resultado tal cual: `merge.py` lo interpreta). Comprueba que no falta ninguna: `cd /home/claude/madrid-noche && python3 -c "import merge,os;v=merge.parse_versions(open('db/versions.txt').read());f=[x[:-5] for x in os.listdir('db/events')];print(len(v),'versiones de',len(f),'docs; faltan:',[x for x in f if x not in v][:10])"` (debe decir que faltan 0). Puedes delegar todo este paso 2 en un agente (model opus) para que el listado largo no ocupe tu contexto.
-3. `ArtifactData` get collection `meta`, doc_id `seen`, con `out_dir` = `/home/claude/madrid-noche/db` (queda en `db/meta/seen.json`). Anota su `version`. Si no existe, no pasa nada (primera vez).
+`ArtifactData` action `query`, collection `chunks`, query `{"limit": 100}`, `out_dir` = `/home/claude/madrid-noche/db`. Deja los documentos en `db/chunks/chunk-NN.json`. **Apunta la versión de cada chunk** que imprime el resultado y escríbelas en `/home/claude/madrid-noche/db/versions.txt`, una por línea: `chunk-00 3`, `chunk-01 3`, … (son 4–8 líneas). Si la colección está vacía, no pasa nada.
 
 ## 3. Fusión
 `cd /home/claude/madrid-noche && python3 -I merge.py data/ db/ out/`
-- Imprime un JSON con `unicos`, `nuevos`, `actualizados`, `sinCambios`, `borrados…`, `porFuente` y lo guarda en `out/summary.json`. Los avisos y descartes van a stderr.
-- Genera `out/batchf_NN.json` (lotes de ≤50 escrituras que apuntan a `out/docs/<id>.json` con `file_path`), `out/batch_NN.json` (los mismos lotes con los documentos en línea), `out/seen.json` (nuevo `meta/seen`) y `out/status.json` (nuevo `meta/status`).
-- Si termina con error "ninguna versión conocida", falta `db/versions.txt` (paso 2.2). No uses `--force` salvo que la BD esté vacía.
-- **Si `unicos` < 100**, la extracción ha fallado: mira qué agentes no han escrito su archivo, relánzalos una vez y repite la fusión. Si sigue por debajo de 100, **no subas eventos**: salta al paso 5 escribiendo solo `meta/status` con `running:false` y `lastError` explicando qué pasó.
+- Imprime un JSON con `unicos` (eventos de la extracción de hoy), `eventosTotales` (lo que quedará en la BD), `nuevos`, `actualizados`, `sinCambios`, `quitados…`, `porFuente`; también en `out/summary.json`. Avisos y descartes van a stderr.
+- Genera `out/chunks/chunk-NN.json`, `out/writes.json` (qué escribir: un `set` por chunk con `file_path` e `if_version`, y `delete` de los chunks sobrantes), `out/events.json`, `out/status.json`.
+- Si avisa de "chunks existentes sin versión conocida", falta `db/versions.txt` (paso 2): complétalo y repite.
+- **Si `unicos` < 100**, la extracción ha fallado: mira qué agentes no han escrito su archivo, relánzalos una vez y repite la fusión. Si sigue por debajo de 100, **no subas nada**: salta al paso 5 escribiendo solo `meta/status` con `running:false` y `lastError` explicando qué pasó.
 
 ## 4. Subida
-Para cada `out/batchf_NN.json` en orden (00, 01, …): léelo con Bash (`cat`) y llama a `ArtifactData` action `batch`, `url` del artifact, `writes` = ese array tal cual. Puedes delegarlo en un agente (model opus) para no llenar el contexto principal; dale esta misma instrucción y la ruta de `out/`.
-- Si la herramienta rechaza `file_path`, usa `out/batch_NN.json` (mismo lote con `data` en línea).
-- Si un lote falla por versión ("changed since" / conflicto en una entrada), haz `get` de ese documento, corrige su `if_version` en el archivo del lote (`python3 -I - <<EOF` con json) y reintenta solo ese lote. Si el documento ya no existe, quita esa entrada del lote.
-- Si un lote falla por otra causa, anótalo y sigue con el siguiente; al final reintenta los fallidos una vez.
+Lee `out/writes.json` y ejecuta cada entrada en orden con `ArtifactData`: para `set` → action `set`, collection `chunks`, doc_id, `file_path` e `if_version` tal como vienen; para `delete` → action `delete` con doc_id e `if_version`. Son 4–8 llamadas.
+- Si una falla por versión (el documento cambió), haz `get` de ese chunk (sin out_dir no hace falta; basta la versión que imprime; usa out_dir para no llenar el contexto) y repite con la versión correcta.
+- Si una falla por tamaño, baja `CHUNK_BYTES` en merge.py a 120000, repite la fusión y la subida.
 
 ## 5. Meta
-1. `meta/seen`: `ArtifactData` action `set`, collection `meta`, doc_id `seen`, `file_path` = `/home/claude/madrid-noche/out/seen.json`, `if_version` = la versión anotada en 2.3 (sin `if_version` si no existía).
-2. `meta/status`: `get` para la versión actual y luego `set` con `file_path` = `/home/claude/madrid-noche/out/status.json` e `if_version`. El archivo ya trae `lastUpdated`, `eventCount`, `sources`, `run` y `running:false`. Si hubo fuentes que fallaron, añade antes al JSON `"failedSources": ["…"]` (con python) para que la app lo muestre.
+`ArtifactData` get `meta/status` para la versión actual y luego `set` con `file_path` = `/home/claude/madrid-noche/out/status.json` e `if_version`. El archivo ya trae `lastUpdated`, `eventCount`, `chunks`, `sources`, `run` y `running:false`. Si hubo fuentes que fallaron, añade antes al JSON `"failedSources": ["…"]` (con python) para que la app lo muestre.
 
-## 6. Informe
-Resumen de 3-4 líneas: eventos únicos, nuevos/actualizados/borrados, fuentes que fallaron (agentes que no entregaron archivo o fuentes con 0 eventos) y cualquier lote que no se pudo subir. Si una fuente lleva dos días seguidos fallando (compáralo con `failedSources` del `meta/status` anterior), dilo explícitamente.
+## 6. Versión web pública (opcional; si falla, el artifact sigue funcionando)
+1. `cd /home/claude/madrid-noche && python3 -I build_site.py out/ site/` → `site/index.html`, `site/data/events.json`, `site/data/status.json`, `site/.nojekyll`.
+2. Esta sesión no puede hacer `git push`. Crea una sesión hija con `mcp__claude-code-remote__create_session` (cárgala con ToolSearch si hace falta): `environment_id` = `env_011iohJDNuqisdiyXfRcwZbg` (entorno "Madrid de Noche", tiene acceso al repo pero no a la web), `source_url` = `https://github.com/Luisp00/Madrid-de-Noche`, `source_revision` = `gh-pages`, `outcome_branch` = `gh-pages`, `permission_mode` = `acceptEdits`, `title` = "Madrid de Noche · publicar web {HOY}", y este `prompt`:
+   > Publica la web estática de Madrid de Noche. 1) Con `ArtifactData` (url https://claude.ai/artifact/N1LKQtKKWsz2K2xYH1Uc4V) haz `query` de la colección `chunks` con `{"limit":100}` y `out_dir` = `/tmp/mdn` y `get` de `meta/status` con `out_dir` = `/tmp/mdn`. 2) En el repo (rama gh-pages, ya es la actual) escribe `data/events.json` = la concatenación de los arrays `events` de todos los chunks ordenados por `i` (JSON compacto) y `data/status.json` = el campo `data` del documento status (si el archivo guardado ya es el documento, cópialo tal cual). Con python: `import json,glob; ev=[e for f in sorted(glob.glob('/tmp/mdn/chunks/*.json')) for e in json.load(open(f))['events']]; json.dump(ev,open('data/events.json','w'),ensure_ascii=False,separators=(',',':'))`. No toques index.html salvo que no exista. 3) `git add data && git commit -m "Datos {HOY}" && git push origin gh-pages` (reintenta el push hasta 3 veces). Responde con el número de eventos y si el push ha ido bien.
+   No esperes a que termine; la sesión hija se encarga sola.
+
+## 7. Informe
+Resumen de 3-4 líneas: eventos únicos y totales, nuevos/actualizados/quitados, fuentes que fallaron (agentes que no entregaron archivo o fuentes con 0 eventos) y cualquier escritura que no se pudo hacer. Si una fuente lleva dos días seguidos fallando (compáralo con `failedSources` del `meta/status` anterior), dilo explícitamente.
