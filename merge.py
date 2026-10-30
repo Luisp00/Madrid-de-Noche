@@ -107,7 +107,9 @@ WEEKDAYS_EN = r"(monday|tuesday|wednesday|thursday|friday|saturday|sunday|monday
 GENERIC_TITLE = [re.compile(r"^"+WEEKDAYS+r"s? (en |de |at |night |noche )?[a-z0-9 ']{1,40}$"), re.compile(r"^noche en .+"), re.compile(r".+ entradas$"),
                  re.compile(r"^[a-z0-9 ']{1,40} "+WEEKDAYS+r"s?$"), re.compile(r"^"+WEEKDAYS_EN+r"('?s)? (at|in|night|nights) [a-z0-9 ']{1,40}$"),
                  re.compile(r"^[a-z0-9 ']{1,40} "+WEEKDAYS_EN+r"('?s)?$"), re.compile(r"^(sesion|session|fiesta|noche|night|party|club) (de )?"+WEEKDAYS+r"s?$")]
-GENERIC_SOURCES = {"Bynova","Nightlife Madrid","All Madrid Nightlife","Applinkers","Madrid Lux","Discomadrid","Discoruta","Clubbable","Discotecas Gratis"}
+GENERIC_SOURCES = {"Bynova","Nightlife Madrid","All Madrid Nightlife","Applinkers","Discomadrid","Discoruta","Clubbable","Discotecas Gratis"}
+# fuentes que no se usan (petición del usuario, 30 oct 2026): se quitan de los eventos y, si un evento solo venía de ellas, se descarta
+EXCLUDED_SOURCES = {"Madrid Lux","MadridLux","madridlux.com"}
 PUBCRAWL = re.compile(r"pub ?crawl|ruta de bares", re.I)
 EXCLUDED = re.compile(r"karaoke|bingo|\bclases? de\b|\btalleres?\b|\btablao\b|\bteatro\b|sin esperas|shisha|cena[ -]espect[aá]culo|candlelight|infantil|\bmuseo\b|\btributo a\b|\btribute to\b|\bdrag (show|queens?)\b|this is drag|\bmon[oó]logos?\b|stand[ -]?up|\bc[oó]mico\b", re.I)
 MUSICAL_TITLE = re.compile(r"\bmusical\b", re.I)                     # en el título
@@ -182,12 +184,15 @@ def clean(e):
     st = e.get("status") if e.get("status") in STATUS else "desconocido"
     srcs=[]
     for s in e.get("sources") or []:
-        if isinstance(s,dict) and s.get("name") and s.get("url"): srcs.append({"name":str(s["name"])[:40],"url":str(s["url"])[:500]})
+        if isinstance(s,dict) and s.get("name") and s.get("url"):
+            if s["name"] in EXCLUDED_SOURCES or "madridlux.com" in str(s["url"]): continue
+            srcs.append({"name":str(s["name"])[:40],"url":str(s["url"])[:500]})
+    if not srcs and (e.get("sources") or []): return None   # solo venía de fuentes excluidas
     address = (e.get("address") or None)
     return {"title":title[:140],"date":date,"start":norm_time(e.get("start")),"end":norm_time(e.get("end")),"venue":venue,"address":address,
             "zone":infer_zone(e.get("zone"), venue, address),"type":typ,"music":music,"priceMin":pmin,"priceMax":pmax,"priceText":(str(e.get("priceText"))[:160] if e.get("priceText") else None),
             "free":free,"dressCode":(str(e.get("dressCode"))[:120] if e.get("dressCode") else None),"ageMin":num(e.get("ageMin")),"lineup":[str(x)[:80] for x in (e.get("lineup") or [])][:12],
-            "description":(str(e.get("description"))[:400] if e.get("description") else None),"status":st,"sources":srcs,"ticketUrl":(e.get("ticketUrl") or (srcs[0]["url"] if srcs else None)),
+            "description":(str(e.get("description"))[:400] if e.get("description") else None),"status":st,"sources":srcs,"ticketUrl":((e.get("ticketUrl") if e.get("ticketUrl") and "madridlux.com" not in str(e.get("ticketUrl")) else None) or (srcs[0]["url"] if srcs else None)),
             "_titles":[title[:140]]}
 
 # ---------- reglas de inclusión ----------
@@ -482,6 +487,11 @@ def main(data_dir, existing_path, out_dir, today=None):
         final[eid]=doc
     for xid,xd in existing.items():
         if xid in seen: continue
+        xs=[s0 for s0 in xd.get("sources",[]) if s0.get("name") not in EXCLUDED_SOURCES and "madridlux.com" not in str(s0.get("url",""))]
+        if not xs: counts["quitadosFuenteExcluida"]=counts.get("quitadosFuenteExcluida",0)+1; continue
+        if len(xs)!=len(xd.get("sources",[])):
+            xd=dict(xd); xd["sources"]=xs
+            if "madridlux.com" in str(xd.get("ticketUrl","")): xd["ticketUrl"]=xs[0]["url"]
         d=xd.get("date",""); last=(xd.get("lastSeen") or (xd.get("updatedAt") or "")[:10] or "0000-00-00")
         if not d or d < yesterday: counts["quitadosPasados"]+=1
         elif d >= today and last <= stale_limit and (last <= hard_limit or any(s.get("name") in sources_today for s in xd.get("sources",[]))):

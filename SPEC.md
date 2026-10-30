@@ -93,6 +93,7 @@ Teatro Kapital → Atocha, comercial/reggaeton/house · Fabrik → Humanes (Fabr
 - No inventes datos: si un campo no aparece, null/[]/"desconocido".
 - Enlaces: cada evento debe llevar la URL de su propia página (la que tiene fecha, precio y botón de compra). Un enlace al listado general solo vale si la web no tiene páginas por evento.
 - `status`: "disponible" solo si la web de venta lo muestra a la venta; "agotado" solo si lo dice la propia web de venta (no un agregador); si no se ve, "desconocido".
+- Fuentes vetadas: no uses madridlux.com (Madrid Lux) ni cites sus datos.
 - Nombres de fuente: usa siempre el mismo nombre corto para la misma web (p. ej. "Fever", "Resident Advisor", "Applinkers", "Conciertos.club", "Salir Madrid", "Bynova"), sin variantes.
 - Zona: si no sabes la zona, deja "Otros" pero pon la dirección con código postal; merge.py deduce la zona a partir del código postal y de la lista de salas.
 - Las fechas sin año: deduce el año (hoy es 2026-10-30; si el mes es anterior al actual, es 2027).
