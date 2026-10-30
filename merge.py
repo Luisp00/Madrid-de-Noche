@@ -277,6 +277,8 @@ def is_match(m, e):
         if ta is not None and ta==tb:
             if any(words(a, vtoks) & words(b, vtoks) for a in TA for b in TB): return True
             if any(is_generic(t) for t in TA+TB): return True
+            # misma sala, misma noche y misma hora de inicio con títulos cortos (nombres de artista): es el mismo cartel
+            if all(len(plain(t).split())<=3 for t in TA+TB): return True
         return False
     pairs = [(sim(a,b),a,b) for a in TA for b in TB]
     best = max(p[0] for p in pairs)
@@ -325,8 +327,12 @@ def merge(a,b):
     for s in b.get("sources",[]):
         if s["url"] not in urls: out["sources"].append(s); urls.add(s["url"])
     out["_titles"]=list(dict.fromkeys((a.get("_titles") or [a["title"]])+(b.get("_titles") or [b["title"]])))
-    # título: el más informativo (más largo sin ser genérico)
-    if len(b["title"])>len(a["title"]) and not is_generic(b["title"]): out["title"]=b["title"]
+    # título: el más informativo (más largo sin ser genérico); dos nombres cortos distintos (cartel) se unen con " + "
+    ta_, tb_ = a["title"], b["title"]
+    if len(plain(ta_).split())<=3 and len(plain(tb_).split())<=3 and strip(ta_)!=strip(tb_) and strip(tb_) not in strip(ta_) and strip(ta_) not in strip(tb_) and not is_generic(ta_) and not is_generic(tb_) and len(ta_)+len(tb_)<120:
+        out["title"]=ta_+" + "+tb_
+        out["lineup"]=list(dict.fromkeys(out.get("lineup",[])+[ta_,tb_]))[:12]
+    elif len(b["title"])>len(a["title"]) and not is_generic(b["title"]): out["title"]=b["title"]
     elif is_generic(a["title"]) and not is_generic(b["title"]): out["title"]=b["title"]
     return out
 
