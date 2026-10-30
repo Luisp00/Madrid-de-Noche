@@ -8,7 +8,7 @@ Herramientas (comprobadas desde una sesión programada el 30-oct-2026):
 - `Artifact` → action `read` con `url` y `path` (`spec.md`, `merge.py.txt`, `runbook.md`): guarda el archivo en local y dice dónde.
 - `ArtifactData` → acciones `get`, `query`, `set`, `update`, `delete`, siempre con `url`. `query` admite `out_dir` (guarda cada documento en `<out_dir>/<colección>/<id>.json`) y `set` admite `file_path` (el archivo JSON se envía como documento); funciona. Toda escritura sobre un documento existente exige `if_version` = la versión que imprimió la última lectura.
 - Si en lugar de esas existen `mcp__claude-artifacts__read_file / db_query / db_get / db_write` (cárgalas con ToolSearch), son equivalentes.
-- Extracción: agentes `Agent` (tipo `general-purpose`, `model: "sonnet"`) con WebFetch/WebSearch. El usuario quiere Sonnet 5.5 en los agentes para ahorrar tokens; la sesión principal solo coordina.
+- Extracción: agentes `Agent` (tipo `general-purpose`, `model: "sonnet"`, `effort: "high"`) con WebFetch/WebSearch. El usuario quiere Sonnet 5.5 con esfuerzo high en los agentes; la sesión principal solo coordina.
 - Python 3.11 y Bash están disponibles; `/home/claude/madrid-noche` es escribible. **Nada de curl/python contra webs externas**; las webs solo con WebFetch/WebSearch. Excepción: si la sesión tiene Node con Playwright y Chromium (comprueba con `node -e "require('playwright')"`), los agentes pueden usar `node fetch.js URL` (archivo `fetch.js.txt` del artifact, cópialo a `/home/claude/madrid-noche/fetch.js`) como sustituto de WebFetch para las webs que lo bloqueen; ra.co y shotgun.live bloquean a todos los navegadores de centro de datos.
 
 ## 0. Preparación
@@ -18,7 +18,7 @@ Herramientas (comprobadas desde una sesión programada el 30-oct-2026):
 4. Marca el inicio: `ArtifactData` get `meta/status` (anota su `version`) y luego `update` de `meta/status` con `if_version` y data `{"running": true, "runStartedAt": "<ISO UTC ahora>"}`. La app muestra "actualizando…" mientras `running` sea true.
 
 ## 1. Extracción (7 agentes en paralelo, en background)
-Lanza los 7 a la vez con `Agent` (`subagent_type: "general-purpose"`, `model: "sonnet"`, `run_in_background: true`). Cada prompt empieza con:
+Lanza los 7 a la vez con `Agent` (`subagent_type: "general-purpose"`, `model: "sonnet"`, `effort: "high"`, `run_in_background: true`). Cada prompt empieza con:
 
 > *Lee /home/claude/madrid-noche/SPEC.md primero y síguelo exactamente. Hoy es {HOY} (Europe/Madrid). Ventana: {HOY} a {FIN}. Solo WebFetch/WebSearch (nada de curl/python a webs externas). Si WebFetch rechaza una URL por no estar en la allowlist, haz una WebSearch (mode extended) que la devuelva y reintenta. Presupuesto ~70 fetches. Deduplica dentro del archivo por sala+fecha+título parecido fusionando fuentes. Nada inventado; solo Madrid y la ventana. Guarda el resultado en {RUTA} (un array JSON) y termina validando con `python3 -I -c "import json;d=json.load(open('{RUTA}'));print(len(d))"`. Informa en <120 palabras: eventos por fuente y qué falló.*
 
