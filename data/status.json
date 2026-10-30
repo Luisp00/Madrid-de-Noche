@@ -1,13 +1,12 @@
 {
- "lastUpdated": "2026-10-30T07:00:26+00:00",
- "eventCount": 1348,
+ "lastUpdated": "2026-10-30T07:27:20+00:00",
+ "eventCount": 1293,
  "chunks": 7,
  "sources": {
   "Conciertos.club": 302,
   "Discomadrid": 270,
   "All Madrid Nightlife": 212,
   "Techno Airlines": 157,
-  "Madrid Lux": 109,
   "Taquilla.com": 96,
   "Discoruta": 87,
   "Discotech": 85,
@@ -50,10 +49,10 @@
  },
  "run": {
   "date": "2026-10-30",
-  "new": 373,
-  "updated": 737,
-  "removed": 6,
-  "unchanged": 0,
+  "new": 3,
+  "updated": 65,
+  "removed": 13,
+  "unchanged": 986,
   "files": [
    "electronica.json",
    "extra1.json",
