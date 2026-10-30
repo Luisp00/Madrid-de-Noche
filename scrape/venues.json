@@ -3214,5 +3214,21 @@
   "verified": false,
   "source": "https://conciertos.club/madrid/conciertos/129651-nito-serrano-y-lapurasangre",
   "note": "Torrelodones; la fuente no da calle"
+ },
+ {
+  "name": "Teatro Barceló",
+  "aliases": [
+   "Barceló",
+   "Barcelo Teatro",
+   "Teatro Barcelo"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Barceló 11, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.teatrobarcelo.com/",
+  "note": "Discoteca; comparte edificio con Sala But (conciertos)."
  }
 ]
