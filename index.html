@@ -241,7 +241,7 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
  { id, title, date:"YYYY-MM-DD" (noche en que empieza), start:"23:30", end:"06:00",
    venue, address, zone, type: club|concierto|fiesta|after|bar|tardeo|festival|otro,
    music:["reggaeton","techno",...], priceMin, priceMax, priceText, priceNote, free:bool,
-   venueKind: discoteca|sala|bar|recinto|hostel|rooftop|otro (tipo de local, del directorio scrape/venues.json),
+   venueKind: discoteca|sala|bar|recinto|rooftop|pubcrawl|otro (tipo de local, del directorio scrape/venues.json; pubcrawl = quedada que recorre varios bares),
    dressCode:string|null, ageMin:number|null, lineup:[...], description,
    status: disponible|ultimas|agotado|desconocido,
    sources:[{name,url}], ticketUrl, updatedAt, lastSeen }
@@ -252,7 +252,7 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
 
 const MUSIC_LABELS = {reggaeton:"Reggaetón",latino:"Latino",comercial:"Comercial",pop:"Pop",techno:"Techno",house:"House",electronica:"Electrónica",hiphop:"Hip-hop",trap:"Trap",rnb:"R&B",afro:"Afro",dancehall:"Dancehall",indie:"Indie",rock:"Rock",dnb:"Drum & Bass",hardtechno:"Hard techno",disco:"Disco/Funk",salsa:"Salsa/Bachata",flamenco:"Flamenco",remember:"Remember",urban:"Urbano",variado:"Variado",otros:"Otros"};
 const TYPE_LABELS = {club:"Club",concierto:"Concierto",fiesta:"Fiesta",after:"After",bar:"Bar / DJ",tardeo:"Tardeo",festival:"Festival",otro:"Otro"};
-const KIND_LABELS = {discoteca:"Discoteca",sala:"Sala de conciertos",bar:"Bar / pub",recinto:"Recinto grande",hostel:"Hostel",rooftop:"Rooftop",otro:"Otro local"};
+const KIND_LABELS = {discoteca:"Discoteca",sala:"Sala de conciertos",bar:"Bar / pub",recinto:"Recinto grande",rooftop:"Rooftop",pubcrawl:"Pub crawl",otro:"Otro local"};
 const PRICE_OPTS = [{v:0,l:"Gratis"},{v:10,l:"≤ 10 €"},{v:15,l:"≤ 15 €"},{v:20,l:"≤ 20 €"},{v:30,l:"≤ 30 €"},{v:null,l:"Cualquiera"}];
 const DRESS_OPTS = [{v:"any",l:"Cualquiera"},{v:"none",l:"Sin dress code"},{v:"smart",l:"Elegante / arreglado"}];
 const AGE_OPTS = [{v:null,l:"Cualquiera"},{v:18,l:"Tengo 18–19"},{v:20,l:"Tengo 20"},{v:21,l:"Tengo 21–24"},{v:25,l:"Tengo 25 o más"}];

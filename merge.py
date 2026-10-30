@@ -86,11 +86,16 @@ VENUE_ZONE = {
 }
 ZONES = set(ZONE_BY_CP.values()) | set(VENUE_ZONE.values()) | {"Otros","Otros sur","Barajas","Retiro"}
 
+PUBCRAWL_RE = re.compile(r"pub ?crawl|bar ?crawl|ruta de (?:bares|pubs)|punto de encuentro", re.I)
+def event_kind(kind, title, venue):
+    """Los pub crawls son quedadas que recorren varios bares: el local donde empiezan (hostel, bar, plaza) no es el local del evento."""
+    if PUBCRAWL_RE.search(title or "") or PUBCRAWL_RE.search(venue or ""): return "pubcrawl"
+    return kind
 def guess_kind(venue):
     p=plain(venue or "")
     if not p: return "otro"
     if re.search(r"\b(arena|palacio|estadio|hipodromo|recinto|pabellon|ifema|auditorio|wizink|vistalegre|caja magica|la cubierta)\b", p): return "recinto"
-    if re.search(r"\b(hostel|albergue)\b", p): return "hostel"
+    if re.search(r"\b(hostel|albergue)\b", p): return "pubcrawl"
     if re.search(r"\b(rooftop|azotea|sky bar|terraza)\b", p): return "rooftop"
     if re.search(r"\b(bar|pub|cafe|cafeteria|taberna|tasca|cocktail|coctel|bodega|cerveceria|irish|tavern|lounge|restaurante|bistro)\b", p): return "bar"
     if re.search(r"\b(sala|teatro|live|club de musica|jazz|auditorio)\b", p): return "sala"
@@ -242,6 +247,7 @@ def clean(e):
         if ent.get("address") and (ent.get("verified") or not address): address = ent["address"]   # la dirección verificada manda
         if ent.get("zone") and (ent.get("verified") or not zone_hint or zone_hint=="Otros"): zone_hint = ent["zone"]
     if not kind: kind = guess_kind(venue)
+    kind = event_kind(kind, title, venue)
     zone_final = ent["zone"] if (ent and ent.get("verified") and ent.get("zone") and ent["zone"]!="Otros") else infer_zone(zone_hint, venue, address)
     return {"title":title[:140],"date":date,"start":norm_time(e.get("start")),"end":norm_time(e.get("end")),"venue":venue,"address":address,"venueKind":kind,
             "zone":zone_final,"type":typ,"music":music,"priceMin":pmin,"priceMax":pmax,"priceText":(str(e.get("priceText"))[:160] if e.get("priceText") else None),
@@ -655,6 +661,7 @@ def main(data_dir, existing_path, out_dir, today=None):
                 if ent.get("zone") and (ent.get("verified") or xd.get("zone") in (None,"Otros")): xd["zone"]=ent["zone"]
                 xd["venueKind"]=ent.get("kind") if ent.get("kind") not in (None,"marca") else "otro"
             elif not xd.get("venueKind"): xd["venueKind"]=guess_kind(xd.get("venue"))
+            xd["venueKind"]=event_kind(xd["venueKind"], xd.get("title"), xd.get("venue"))
             final[xid]=xd
     # salida
     for e in merged: e.pop("_titles",None)

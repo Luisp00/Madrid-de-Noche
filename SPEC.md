@@ -21,7 +21,7 @@ Un archivo JSON con un array de objetos. Guárdalo en la ruta que te indiquen. C
   "venue": "Teatro Kapital",       // nombre canónico de la sala (ver lista)
   "address": "C/ Atocha 125, 28012 Madrid",   // o null
   "zone": "Atocha",                // ver tabla de zonas; "Otros" si no se sabe
-  "venueKind": "discoteca",        // lo pone merge.py desde scrape/venues.json: discoteca | sala | bar | recinto | rooftop | hostel | otro. No hace falta rellenarlo
+  "venueKind": "discoteca",        // lo pone merge.py desde scrape/venues.json: discoteca | sala | bar | recinto | rooftop | pubcrawl | otro (pubcrawl = quedada que recorre varios bares; lo detecta por el título). No hace falta rellenarlo
   "type": "club",                  // club | concierto | fiesta | after | bar | tardeo | festival | otro
   "music": ["reggaeton","comercial"],   // etiquetas de la lista cerrada; [] si no se sabe
   "priceMin": 15,                  // precio más bajo de entrada general en €, número; 0 si hay lista/entrada gratis; null si no se publica

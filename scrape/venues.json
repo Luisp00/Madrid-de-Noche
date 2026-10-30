@@ -1890,14 +1890,14 @@
    "2060 The Newton Hostel & Market",
    "Newton Hostel"
   ],
-  "kind": "hostel",
+  "kind": "pubcrawl",
   "address": "C/ Cabeza 11, 28012 Madrid",
   "postcode": "28012",
   "city": "Madrid",
   "zone": "Atocha",
   "verified": true,
   "source": "https://www.hostelworld.com/hostels/p/282289/2060-the-newton-hostel/",
-  "note": "hostel con rooftop bar (Lavapiés); punto de salida de pub crawls"
+  "note": "Punto de salida de pub crawls; no es el local del evento."
  },
  {
   "name": "Sala Pirandello",
@@ -2606,14 +2606,14 @@
  {
   "name": "Mola! Hostel Madrid",
   "aliases": [],
-  "kind": "hostel",
+  "kind": "pubcrawl",
   "address": null,
   "postcode": null,
   "city": null,
   "zone": "Otros",
   "verified": false,
   "source": "https://www.eventbrite.es/e/friday-scary-halloweekend-party-pubcarwl-tickets-1048107225927",
-  "note": "punto de salida de pub crawl"
+  "note": "Punto de salida de pub crawls; no es el local del evento."
  },
  {
   "name": "Hermès Canalejas (punto de encuentro)",
