@@ -14,10 +14,11 @@ Herramientas:
 Principio: **el script hace el trabajo; los agentes solo entran cuando el script falla.** Un día normal no debería lanzar ningún agente.
 
 ## 0. Preparación
-1. `cd` al repo. Si no lo tienes, `git clone https://github.com/Luisp00/Madrid-de-Noche.git ~/madrid-noche && cd ~/madrid-noche`. Si lo tienes, `git pull`.
-2. `mkdir -p run/data run/db run/out run/site && rm -rf run/data/* run/db/* run/out/* run/site/*` (la caché `run/cache` puede quedarse).
-3. HOY = fecha en Europe/Madrid (si son las 00:00–05:59, el día anterior). `scrape.py` y `merge.py` la calculan solos; solo pásala con `--today` si quieres forzarla.
-4. Marca el inicio: `ArtifactData` get `meta/status` (anota `version`) y `update` con `if_version` y data `{"running": true, "runStartedAt": "<ISO UTC ahora>"}`.
+1. `cd` al repo (la sesión lo trae clonado; si no, `git clone https://github.com/Luisp00/Madrid-de-Noche.git ~/madrid-noche && cd ~/madrid-noche`). `git pull` por si acaso.
+2. `pip install -q requests beautifulsoup4 lxml` (un contenedor nuevo no las trae) y comprueba `node -e "require('playwright')"`.
+3. `mkdir -p run/data run/db run/out run/site && rm -rf run/data/* run/db/* run/out/* run/site/*` (la caché `run/cache` puede quedarse).
+4. HOY = fecha en Europe/Madrid (si son las 00:00–05:59, el día anterior). `scrape.py` y `merge.py` la calculan solos; solo pásala con `--today` si quieres forzarla.
+5. Marca el inicio: `ArtifactData` get `meta/status` (anota `version`) y `update` con `if_version` y data `{"running": true, "runStartedAt": "<ISO UTC ahora>"}`.
 
 ## 1. Estado actual de la base de datos
 `ArtifactData` action `query`, collection `chunks`, query `{"limit": 100}`, `out_dir` = `<repo>/run/db`. Apunta la versión de cada chunk que imprime el resultado en `run/db/versions.txt`, una por línea (`chunk-00 3`, `chunk-01 3`, …). Son 5–10 líneas.
