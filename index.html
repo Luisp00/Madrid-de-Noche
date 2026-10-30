@@ -344,7 +344,7 @@ function renderDateChips(){
   const c=$("#dateChips"); c.innerHTML="";
   for (const o of dateOptions()){
     const b=document.createElement("button"); b.type="button"; b.className="chip"+(state.dateMode===o.k?" on":""); b.textContent=o.l; b.setAttribute("role","tab"); b.setAttribute("aria-selected",state.dateMode===o.k);
-    b.onclick=()=>{ if(o.k==="fecha"){ openCalendar(); return;} state.dateMode=o.k; renderDateChips(); render(); };
+    b.onclick=()=>{ if(o.k==="fecha"){ if(state.customDate && state.dateMode!=="fecha"){ state.dateMode="fecha"; renderDateChips(); render(); } openCalendar(); return;} state.dateMode=o.k; renderDateChips(); render(); };
     c.appendChild(b);
   }
 }
@@ -599,7 +599,7 @@ $("#applyBtn").onclick=closeSheets;
 $("#closeFilters").onclick=closeSheets;
 $("#clearFilters").onclick=()=>{ clearFilters(); render(); };
 $("#closeDetail").onclick=closeSheets; $("#overlay").onclick=closeSheets;
-$("#closeDate").onclick=closeSheets; $("#applyDate").onclick=closeSheets;
+$("#closeDate").onclick=closeSheets; $("#applyDate").onclick=()=>{ if(state.customDate && state.dateMode!=="fecha"){ state.dateMode="fecha"; renderDateChips(); render(); } closeSheets(); };
 $("#clearDate").onclick=()=>{ state.customDate=null; state.customDateTo=null; if(state.dateMode==="fecha") state.dateMode="semana"; renderCalendar(); renderDateChips(); render(); };
 $("#calPrev").onclick=()=>{ const [y,m]=state.calMonth.split("-").map(Number); const d=new Date(y,m-2,1); state.calMonth=`${d.getFullYear()}-${pad2(d.getMonth()+1)}`; renderCalendar(); };
 $("#calNext").onclick=()=>{ const [y,m]=state.calMonth.split("-").map(Number); const d=new Date(y,m,1); state.calMonth=`${d.getFullYear()}-${pad2(d.getMonth()+1)}`; renderCalendar(); };
