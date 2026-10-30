@@ -14,9 +14,10 @@ Herramientas:
 Principio: **el script hace el trabajo; los agentes solo entran cuando el script falla.** Un día normal no debería lanzar ningún agente.
 
 ## 0. Preparación
-1. `cd` al repo (la sesión lo trae clonado; si no, `git clone https://github.com/Luisp00/Madrid-de-Noche.git ~/madrid-noche && cd ~/madrid-noche`). `git pull` por si acaso.
+La sesión de ejecución diaria (creada con el repo como fuente, rama `gh-pages`, modo `auto`) tiene su directorio de trabajo en un clon de `gh-pages` (la web estática) y puede hacer push a esa rama; el código se clona aparte. Si en cambio estás en una sesión normal con el repo de código, trabaja en él y publica la web como dice el paso 6.
+1. Código: `rm -rf /tmp/code && git clone -q --depth 1 -b main https://github.com/Luisp00/Madrid-de-Noche.git /tmp/code` (si la rama de código vigente es otra, p. ej. `ccr-7f46cbaa-sonpg4`, úsala con `-b`). Todo lo que sigue se ejecuta con `cd /tmp/code`.
 2. `pip install -q requests beautifulsoup4 lxml` (un contenedor nuevo no las trae) y comprueba `node -e "require('playwright')"`.
-3. `mkdir -p run/data run/db run/out run/site && rm -rf run/data/* run/db/* run/out/* run/site/*` (la caché `run/cache` puede quedarse).
+3. `mkdir -p run/data run/db run/out run/site`.
 4. HOY = fecha en Europe/Madrid (si son las 00:00–05:59, el día anterior). `scrape.py` y `merge.py` la calculan solos; solo pásala con `--today` si quieres forzarla.
 5. Marca el inicio: `ArtifactData` get `meta/status` (anota `version`) y `update` con `if_version` y data `{"running": true, "runStartedAt": "<ISO UTC ahora>"}`.
 
@@ -48,10 +49,11 @@ Ejecuta cada entrada de `run/out/writes.json` con `ArtifactData`: `set` (collect
 Añade a `run/out/status.json` (con python) `"failedSources": [nombres de las fuentes que no dieron datos hoy]` y, si tocaba cola larga, `"longTailAt"`. Luego `ArtifactData` get `meta/status` (versión) y `set` con `file_path` = `run/out/status.json` e `if_version`.
 
 ## 6. Web pública
-`python3 -I build_site.py run/out run/site`, y luego publica `run/site/` en la rama `gh-pages`:
+`python3 -I build_site.py run/out run/site` genera `run/site/` (index.html, data/events.json, data/status.json, .nojekyll).
+- **Sesión de ejecución diaria** (tu directorio de trabajo es el clon de `gh-pages`): `cp -r /tmp/code/run/site/. <directorio de trabajo>/ && cd <directorio de trabajo> && git add -A && git -c user.name=mdn-bot -c user.email=bot@madrid-de-noche commit -m "Datos $(date -u +%F)" && git push origin HEAD:gh-pages`. Si el push falla por no estar al día, `git pull --rebase origin gh-pages` y repite.
+- **Sesión normal con el repo de código:**
 ```
-git fetch origin gh-pages && git worktree add -f /tmp/ghp origin/gh-pages 2>/dev/null || git worktree add /tmp/ghp gh-pages
-cp -r run/site/. /tmp/ghp/ && cd /tmp/ghp && git checkout -B gh-pages && git add -A && git -c user.name=mdn-bot -c user.email=bot@madrid-de-noche commit -m "Datos $(date -u +%F)" && git push origin gh-pages; cd - && git worktree remove --force /tmp/ghp
+git fetch origin gh-pages && git worktree add --detach /tmp/ghp origin/gh-pages && cd /tmp/ghp && git checkout -B gh-pages && cp -r <repo>/run/site/. . && git add -A && git -c user.name=mdn-bot -c user.email=bot@madrid-de-noche commit -m "Datos $(date -u +%F)" && git push origin gh-pages; cd - && git worktree remove --force /tmp/ghp
 ```
 Si el push falla, reintenta 3 veces con pausa; si sigue fallando, anótalo en el informe (el artifact ya está al día).
 
