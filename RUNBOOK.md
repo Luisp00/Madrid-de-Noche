@@ -1,26 +1,69 @@
-# Madrid de Noche — procedimiento de actualización diaria
+# Madrid de Noche — procedimiento de actualización diaria (v2: Python primero, agentes de respaldo)
 
-Artifact: https://claude.ai/artifact/N1LKQtKKWsz2K2xYH1Uc4V (slug `aa1bd110-8301-4d75-8ffa-b7f5e5264d2e`, app "Madrid de Noche").
-Base de datos del artifact: colección `chunks` (pocos documentos grandes `chunk-00`, `chunk-01`, … de ≤150 KB, cada uno `{i, n, count, updatedAt, events:[…]}`; entre todos contienen todos los eventos, cada uno con su `id` y `lastSeen`) y documento `meta/status` (estado que muestra la app). La colección antigua `events` (un documento por evento) ya no se usa: no la leas ni la escribas.
-Versión web pública (GitHub Pages, rama `gh-pages` del repo https://github.com/Luisp00/Madrid-de-Noche): `index.html` + `data/events.json` + `data/status.json`; la misma app leyendo archivos en vez de la BD.
+Artifact: https://claude.ai/artifact/N1LKQtKKWsz2K2xYH1Uc4V (slug `aa1bd110-8301-4d75-8ffa-b7f5e5264d2e`).
+Base de datos del artifact: colección `chunks` (documentos `chunk-00`, `chunk-01`, … de ≤150 KB, cada uno `{i, n, count, updatedAt, events:[…]}`; entre todos contienen todos los eventos) y documento `meta/status` (lo que muestra la app). La colección antigua `events` no se usa: no la leas ni la escribas.
+Web pública: https://luisp00.github.io/Madrid-de-Noche/ (rama `gh-pages` del repo https://github.com/Luisp00/Madrid-de-Noche: `index.html` + `data/events.json` + `data/status.json`).
+Repo de código: rama `main` (o la rama de trabajo que te indiquen) con `scrape.py`, `scrape/`, `merge.py`, `build_site.py`, `tools/fetch.js`, `SPEC.md` y este runbook.
 
-Herramientas (comprobadas desde una sesión programada el 30-oct-2026):
-- `Artifact` → action `read` con `url` y `path` (`spec.md`, `merge.py.txt`, `runbook.md`): guarda el archivo en local y dice dónde.
-- `ArtifactData` → acciones `get`, `query`, `set`, `update`, `delete`, siempre con `url`. `query` admite `out_dir` (guarda cada documento en `<out_dir>/<colección>/<id>.json`) y `set` admite `file_path` (el archivo JSON se envía como documento); funciona. Toda escritura sobre un documento existente exige `if_version` = la versión que imprimió la última lectura.
-- Si en lugar de esas existen `mcp__claude-artifacts__read_file / db_query / db_get / db_write` (cárgalas con ToolSearch), son equivalentes.
-- Extracción: agentes `Agent` (tipo `general-purpose`, `model: "sonnet"`, `effort: "high"`) con WebFetch/WebSearch. El usuario quiere Sonnet 5.5 con esfuerzo high en los agentes; la sesión principal solo coordina.
-- Python 3.11 y Bash están disponibles; `/home/claude/madrid-noche` es escribible. **Nada de curl/python contra webs externas**; las webs solo con WebFetch/WebSearch. Excepción: si la sesión tiene Node con Playwright y Chromium (comprueba con `node -e "require('playwright')"`), los agentes pueden usar `node fetch.js URL` (archivo `fetch.js.txt` del artifact, cópialo a `/home/claude/madrid-noche/fetch.js`) como sustituto de WebFetch para las webs que lo bloqueen; ra.co y shotgun.live bloquean a todos los navegadores de centro de datos.
+Herramientas:
+- `Artifact` → action `read` con `url` y `path` (por si hay que leer archivos del artifact).
+- `ArtifactData` → `get`, `query`, `set`, `update`, `delete`, siempre con `url`. `query` admite `out_dir`; `set` admite `file_path`. Toda escritura sobre un documento existente exige `if_version`.
+- Bash con Python 3.11 (`requests`, `bs4`, `lxml`), Node con Playwright y Chromium, `git` con acceso al repo. Red abierta (proxy del entorno: `curl`, `requests` y Chromium funcionan; `WebFetch` puede no funcionar en una sesión abierta antes de que se abriera la red).
+- Agentes `Agent` (`general-purpose`, `model: "sonnet"`, `effort: "high"`): SOLO para las fuentes que fallen en Python (paso 2) y para la extracción semanal de la cola larga (paso 2b).
+
+Principio: **el script hace el trabajo; los agentes solo entran cuando el script falla.** Un día normal no debería lanzar ningún agente.
 
 ## 0. Preparación
-1. `mkdir -p /home/claude/madrid-noche/data /home/claude/madrid-noche/db /home/claude/madrid-noche/out /home/claude/madrid-noche/site` y borra cualquier contenido antiguo de `data/`, `db/`, `out/` y `site/`.
-2. Con `Artifact` read (url arriba) lee `spec.md`, `merge.py.txt`, `build_site.py.txt` e `index.html` y cópialos tal cual a `/home/claude/madrid-noche/SPEC.md`, `merge.py`, `build_site.py` e `index.html`.
-3. Calcula HOY en Europe/Madrid (si son las 00:00–05:59, HOY es el día anterior) y FIN = HOY + 14 días. Sustituye `{HOY}` y `{FIN}` en los prompts de abajo.
-4. Marca el inicio: `ArtifactData` get `meta/status` (anota su `version`) y luego `update` de `meta/status` con `if_version` y data `{"running": true, "runStartedAt": "<ISO UTC ahora>"}`. La app muestra "actualizando…" mientras `running` sea true.
+1. `cd` al repo. Si no lo tienes, `git clone https://github.com/Luisp00/Madrid-de-Noche.git ~/madrid-noche && cd ~/madrid-noche`. Si lo tienes, `git pull`.
+2. `mkdir -p run/data run/db run/out run/site && rm -rf run/data/* run/db/* run/out/* run/site/*` (la caché `run/cache` puede quedarse).
+3. HOY = fecha en Europe/Madrid (si son las 00:00–05:59, el día anterior). `scrape.py` y `merge.py` la calculan solos; solo pásala con `--today` si quieres forzarla.
+4. Marca el inicio: `ArtifactData` get `meta/status` (anota `version`) y `update` con `if_version` y data `{"running": true, "runStartedAt": "<ISO UTC ahora>"}`.
 
-## 1. Extracción (7 agentes en paralelo, en background)
-Lanza los 7 a la vez con `Agent` (`subagent_type: "general-purpose"`, `model: "sonnet"`, `effort: "high"`, `run_in_background: true`). Cada prompt empieza con:
+## 1. Estado actual de la base de datos
+`ArtifactData` action `query`, collection `chunks`, query `{"limit": 100}`, `out_dir` = `<repo>/run/db`. Apunta la versión de cada chunk que imprime el resultado en `run/db/versions.txt`, una por línea (`chunk-00 3`, `chunk-01 3`, …). Son 5–10 líneas.
 
-> *Lee /home/claude/madrid-noche/SPEC.md primero y síguelo exactamente. Hoy es {HOY} (Europe/Madrid). Ventana: {HOY} a {FIN}. Solo WebFetch/WebSearch (nada de curl/python a webs externas). Si WebFetch rechaza una URL por no estar en la allowlist, haz una WebSearch (mode extended) que la devuelva y reintenta. Presupuesto ~70 fetches. Deduplica dentro del archivo por sala+fecha+título parecido fusionando fuentes. Nada inventado; solo Madrid y la ventana. Guarda el resultado en {RUTA} (un array JSON) y termina validando con `python3 -I -c "import json;d=json.load(open('{RUTA}'));print(len(d))"`. Informa en <120 palabras: eventos por fuente y qué falló.*
+## 2. Extracción con Python
+`python3 scrape.py --out run/data` (tarda 3–8 min; ejecuta todos los parsers de `scrape/sources/` en paralelo, con caché de 1 h). Imprime por fuente el nº de eventos o el error, y deja `run/data/_scrape_report.json` con la lista `failed` (parsers con error o con menos eventos que su `MIN_EVENTS`).
+- Si `failed` está vacío → paso 3.
+- Si hay fallos, reintenta una vez solo esos: `python3 scrape.py --out run/data --only mod1,mod2`. Lo que siga fallando pasa al respaldo:
+
+### 2a. Respaldo con agentes (solo fuentes fallidas)
+Para cada módulo fallido, lanza un agente `Agent` (`model: "sonnet"`, `effort: "high"`, en background) con el prompt estándar del apéndice (cabecera común + el bloque de la fuente correspondiente, **solo esa fuente**), pidiéndole que guarde en `run/data/agente_<modulo>.json`. Correspondencia módulo → bloque del apéndice: `fever`→A; `technoairlines`, `dice`, `fulltechno`, `technoparty`→B; `bynova`, `nightlifemadrid`→C; `taquilla`, `notikumi`, `dondego`, `discotech`, `allevents`→D; `applinkers`, `allmadridnightlife`→F; `conciertos_club`, `laganzua`, `madridenvivo`, `esmadrid`→G; `xceed`→B (Xceed: https://xceed.me/es/madrid/events). Acceso a la web en el agente: WebFetch si funciona; si no, `node tools/fetch.js URL` por Bash. Espera como mucho 40 min; si no llega, sigue sin esa fuente.
+
+### 2b. Cola larga con agentes (lunes y jueves, o si el `meta/status` anterior tiene `longTailAt` de hace más de 4 días)
+Fuentes sin parser: webs de salas (bloque E), listas de clubs sin parser (Madrid Lux, Clubbable, Discomadrid, Discoruta, Discotecas Gratis, Salir Madrid: bloque C sin Bynova/Nightlife Madrid) y agregadores menores (Tardeo Madrid, Yass Party, Songkick, Hoy Madrid: bloque F sin Applinkers/All Madrid Nightlife). Lanza esos 3 agentes (`model: "sonnet"`, `effort: "high"`, background) con salida en `run/data/agente_salas.json`, `run/data/agente_listas.json`, `run/data/agente_extra.json`. Espera hasta 60 min. Añade `"longTailAt": "<ISO>"` al status final. Los días que no toca, los eventos de esas fuentes se conservan de la última vez (merge.py mantiene lo no visto hasta 3 extracciones).
+
+## 3. Fusión
+`python3 -I merge.py run/data run/db run/out`
+- Imprime `unicos` (eventos de hoy), `eventosTotales` (lo que quedará), `nuevos`, `actualizados`, `sinCambios`, `quitados…`, `porFuente`; también en `run/out/summary.json`.
+- Genera `run/out/chunks/chunk-NN.json`, `run/out/writes.json`, `run/out/events.json`, `run/out/status.json`.
+- Si avisa de chunks sin versión conocida, falta `run/db/versions.txt` (paso 1).
+- **Si `unicos` < 300**, algo grave ha fallado (un día normal da 900–1300): no subas; escribe `meta/status` con `running:false` y `lastError` y termina explicándolo.
+
+## 4. Subida al artifact
+Ejecuta cada entrada de `run/out/writes.json` con `ArtifactData`: `set` (collection `chunks`, doc_id, `file_path`, `if_version` tal como vienen) o `delete`. Si una falla por versión, `get` de ese chunk (con `out_dir` para no llenar el contexto) y repite con la versión correcta. Si falla por tamaño, baja `CHUNK_BYTES` en merge.py a 120000 y repite 3 y 4.
+
+## 5. Meta
+Añade a `run/out/status.json` (con python) `"failedSources": [nombres de las fuentes que no dieron datos hoy]` y, si tocaba cola larga, `"longTailAt"`. Luego `ArtifactData` get `meta/status` (versión) y `set` con `file_path` = `run/out/status.json` e `if_version`.
+
+## 6. Web pública
+`python3 -I build_site.py run/out run/site`, y luego publica `run/site/` en la rama `gh-pages`:
+```
+git fetch origin gh-pages && git worktree add -f /tmp/ghp origin/gh-pages 2>/dev/null || git worktree add /tmp/ghp gh-pages
+cp -r run/site/. /tmp/ghp/ && cd /tmp/ghp && git checkout -B gh-pages && git add -A && git -c user.name=mdn-bot -c user.email=bot@madrid-de-noche commit -m "Datos $(date -u +%F)" && git push origin gh-pages; cd - && git worktree remove --force /tmp/ghp
+```
+Si el push falla, reintenta 3 veces con pausa; si sigue fallando, anótalo en el informe (el artifact ya está al día).
+
+## 7. Informe
+3–5 líneas: eventos únicos y totales, nuevos/actualizados/quitados, fuentes que fallaron en Python y si el respaldo las cubrió, si se hizo la cola larga, y si la web pública se publicó. Si una fuente lleva dos días fallando (compara con `failedSources` del status anterior), dilo.
+
+---
+
+## Apéndice: prompts de los agentes de extracción (respaldo y cola larga)
+
+Cabecera común de cada prompt (sustituye `{HOY}`, `{FIN}` = HOY+14, `{RUTA}`):
+
+> *Lee <repo>/SPEC.md primero y síguelo exactamente. Hoy es {HOY} (Europe/Madrid). Ventana: {HOY} a {FIN}. Para abrir webs usa WebFetch/WebSearch; si WebFetch falla o la web lo bloquea, usa por Bash `node <repo>/tools/fetch.js "URL"` (texto visible + enlaces; `--max 60000`, `--links 400`, `--raw`). Nada de curl ni python contra webs externas. Presupuesto ~70 páginas. Deduplica dentro del archivo por sala+fecha+título parecido fusionando fuentes. Nada inventado; solo Madrid y la ventana. Guarda el resultado en {RUTA} (array JSON con el formato de SPEC.md) y valida con `python3 -I -c "import json;d=json.load(open('{RUTA}'));print(len(d))"`. Informa en <120 palabras: eventos por fuente y qué falló.*
 
 ### Agente A → data/fever.json — fuente "Fever"
 Listados: https://feverup.com/madrid/vida-nocturna-clubs · https://feverup.com/en/madrid/night-clubs · https://feverup.com/en/madrid/themed-parties · https://feverup.com/en/madrid/pub-crawl · venue pages https://feverup.com/es/madrid/venue/fabrik , /en/madrid/venue/teatro-kapital , /en/madrid/venue/teatro-eslava , /en/madrid/venue/enbabia-infused , /es/madrid/venue/vg-fuenlabrada , /en/madrid/venue/independance-club . Detalle: https://feverup.com/m/{ID}/en (fechas con año, horas, dirección, tramos de precio, música, edad, agotado). Recurrentes (p. ej. Kapital https://feverup.com/m/121772/en): un objeto por noche con sesión/precio en el calendario. Descarta bingo, shisha, karaoke, escape rooms, cenas-espectáculo y los productos "Fiesta VIP sin esperas". Pub crawls: tipo "otro", solo las próximas 3 noches. Presupuesto 60 fetches.
@@ -42,32 +85,3 @@ https://applinkers.com/entradas/madrid/listas-gratis/ (réplica de Fourvenues: P
 
 ### Agente G → data/extra2.json — fuentes "Conciertos.club", "Madrid en Vivo", "La Ganzúa", "esMadrid"
 https://conciertos.club/madrid (~350 eventos: fecha, hora, sala, género, precio; quedarse con los que empiezan ≥20:00 o etiquetados Electrónica/Dance/DJ; "concierto" para directo, "club" para DJ) · https://madridenvivo.com/agenda-de-conciertos-y-espectaculo/clubbing/ y https://madridenvivo.com/agenda-de-conciertos-y-espectaculo/ (solo hoy) · https://www.laganzua.net/conciertos/madrid (+ madrid-pagina-2) · https://www.esmadrid.com/agenda-musica-madrid (grandes conciertos ≥20:00).
-
-**Espera.** Los agentes en background te avisan al terminar; no hace falta sondear. Mientras tanto puedes hacer el paso 2. Da por terminada la extracción cuando hayan avisado los 7 o hayan pasado **60 minutos** desde el lanzamiento (la primera carga tardó unos 40). Si alguno falla o no llega, sigue con los archivos que haya (`ls data/`). Si falla un agente y aún no han pasado 45 min, relánzalo una vez.
-
-## 2. Estado actual de la base de datos (puede hacerse mientras extraen)
-`ArtifactData` action `query`, collection `chunks`, query `{"limit": 100}`, `out_dir` = `/home/claude/madrid-noche/db`. Deja los documentos en `db/chunks/chunk-NN.json`. **Apunta la versión de cada chunk** que imprime el resultado y escríbelas en `/home/claude/madrid-noche/db/versions.txt`, una por línea: `chunk-00 3`, `chunk-01 3`, … (son 4–8 líneas). Si la colección está vacía, no pasa nada.
-
-## 3. Fusión
-`cd /home/claude/madrid-noche && python3 -I merge.py data/ db/ out/`
-- Imprime un JSON con `unicos` (eventos de la extracción de hoy), `eventosTotales` (lo que quedará en la BD), `nuevos`, `actualizados`, `sinCambios`, `quitados…`, `porFuente`; también en `out/summary.json`. Avisos y descartes van a stderr.
-- Genera `out/chunks/chunk-NN.json`, `out/writes.json` (qué escribir: un `set` por chunk con `file_path` e `if_version`, y `delete` de los chunks sobrantes), `out/events.json`, `out/status.json`.
-- Si avisa de "chunks existentes sin versión conocida", falta `db/versions.txt` (paso 2): complétalo y repite.
-- **Si `unicos` < 100**, la extracción ha fallado: mira qué agentes no han escrito su archivo, relánzalos una vez y repite la fusión. Si sigue por debajo de 100, **no subas nada**: salta al paso 5 escribiendo solo `meta/status` con `running:false` y `lastError` explicando qué pasó.
-
-## 4. Subida
-Lee `out/writes.json` y ejecuta cada entrada en orden con `ArtifactData`: para `set` → action `set`, collection `chunks`, doc_id, `file_path` e `if_version` tal como vienen; para `delete` → action `delete` con doc_id e `if_version`. Son 4–8 llamadas.
-- Si una falla por versión (el documento cambió), haz `get` de ese chunk (sin out_dir no hace falta; basta la versión que imprime; usa out_dir para no llenar el contexto) y repite con la versión correcta.
-- Si una falla por tamaño, baja `CHUNK_BYTES` en merge.py a 120000, repite la fusión y la subida.
-
-## 5. Meta
-`ArtifactData` get `meta/status` para la versión actual y luego `set` con `file_path` = `/home/claude/madrid-noche/out/status.json` e `if_version`. El archivo ya trae `lastUpdated`, `eventCount`, `chunks`, `sources`, `run` y `running:false`. Si hubo fuentes que fallaron, añade antes al JSON `"failedSources": ["…"]` (con python) para que la app lo muestre.
-
-## 6. Versión web pública (opcional; si falla, el artifact sigue funcionando)
-1. `cd /home/claude/madrid-noche && python3 -I build_site.py out/ site/` → `site/index.html`, `site/data/events.json`, `site/data/status.json`, `site/.nojekyll`.
-2. Esta sesión no puede hacer `git push`. Crea una sesión hija con `mcp__claude-code-remote__create_session` (cárgala con ToolSearch si hace falta): `environment_id` = `env_011iohJDNuqisdiyXfRcwZbg` (entorno "Madrid de Noche", tiene acceso al repo pero no a la web), `source_url` = `https://github.com/Luisp00/Madrid-de-Noche`, `source_revision` = `gh-pages`, `outcome_branch` = `gh-pages`, `permission_mode` = `acceptEdits`, `title` = "Madrid de Noche · publicar web {HOY}", y este `prompt`:
-   > Publica la web estática de Madrid de Noche. 1) Con `ArtifactData` (url https://claude.ai/artifact/N1LKQtKKWsz2K2xYH1Uc4V) haz `query` de la colección `chunks` con `{"limit":100}` y `out_dir` = `/tmp/mdn` y `get` de `meta/status` con `out_dir` = `/tmp/mdn`. 2) En el repo (rama gh-pages, ya es la actual) escribe `data/events.json` = la concatenación de los arrays `events` de todos los chunks ordenados por `i` (JSON compacto) y `data/status.json` = el campo `data` del documento status (si el archivo guardado ya es el documento, cópialo tal cual). Con python: `import json,glob; ev=[e for f in sorted(glob.glob('/tmp/mdn/chunks/*.json')) for e in json.load(open(f))['events']]; json.dump(ev,open('data/events.json','w'),ensure_ascii=False,separators=(',',':'))`. No toques index.html salvo que no exista. 3) `git add data && git commit -m "Datos {HOY}" && git push origin gh-pages` (reintenta el push hasta 3 veces). Responde con el número de eventos y si el push ha ido bien.
-   No esperes a que termine; la sesión hija se encarga sola.
-
-## 7. Informe
-Resumen de 3-4 líneas: eventos únicos y totales, nuevos/actualizados/quitados, fuentes que fallaron (agentes que no entregaron archivo o fuentes con 0 eventos) y cualquier escritura que no se pudo hacer. Si una fuente lleva dos días seguidos fallando (compáralo con `failedSources` del `meta/status` anterior), dilo explícitamente.
