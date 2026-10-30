@@ -1,0 +1,2386 @@
+[
+  {
+    "title": "Fiesta VIP sin esperas en Enbabia Library",
+    "date": "2026-10-29",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Enbabia",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas (si la sala no está llena) y cócteles de autor de la carta Booktails. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/256114"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/256114"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Hood Dogs",
+    "date": "2026-10-29",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Hood Dogs by Planet Club",
+    "address": "C/ Príncipe 20, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 12,
+    "priceMax": 30,
+    "priceText": "Entrada + 1 copa + 1 chupito 12 € · + 2 copas + chupito 20 € / 30 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express a todas las salas sin cola y promociones en chupitos y cócteles. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257640"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257640"
+  },
+  {
+    "title": "Noche de chicas en La Xida",
+    "date": "2026-10-29",
+    "start": "20:00",
+    "end": "22:00",
+    "venue": "La Xida",
+    "address": "C/ López de Hoyos 11, 28006 Madrid",
+    "zone": "Salamanca",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 35,
+    "priceMax": 35,
+    "priceText": "Entrada 35 € con barra libre y tapas",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Cada jueves: barra libre de 2 h con selección de bebidas y dos raciones de tapas para compartir. Hay que confirmar la reserva por email tras la compra.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/300281"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/300281"
+  },
+  {
+    "title": "Madrid Pub Crawl: 4 bares, chupitos y entrada VIP a discoteca",
+    "date": "2026-10-29",
+    "start": "22:00",
+    "end": "03:00",
+    "venue": "The Pubcrawl Company (Núñez de Arce)",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 10,
+    "priceMax": 10,
+    "priceText": "Entrada 10 €: 4 locales, chupito en cada bar y entrada VIP a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Ruta diaria de 4 locales con guía local, chupito por bar, descuentos en bebidas, reportaje fotográfico y entrada sin cola a la discoteca de la noche.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/114458"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/114458"
+  },
+  {
+    "title": "Halloween Evil Circus Pub Crawl",
+    "date": "2026-10-29",
+    "start": "23:00",
+    "end": null,
+    "venue": "2060 The Newton Hostel",
+    "address": "C/ Cabeza 11, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 15,
+    "priceMax": 15,
+    "priceText": "Entrada 15 €: 3 bares con chupito + entrada gratis a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Ruta de 3 bares del centro con chupito de bienvenida, descuentos 'Wolfpack' y entrada a una discoteca que varía por noche (Calle 365, Teresa, Shoko, Gunilla, Icon...).",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/250827"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/250827"
+  },
+  {
+    "title": "Sesión Teatro Kapital (jueves)",
+    "date": "2026-10-29",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Teatro Kapital",
+    "address": "C/ Atocha 125, 28012 Madrid",
+    "zone": "Atocha",
+    "type": "club",
+    "music": [
+      "house",
+      "comercial",
+      "reggaeton",
+      "urban"
+    ],
+    "priceMin": 21,
+    "priceMax": 21,
+    "priceText": "Entrada 21 € con 2 copas antes de la 1:00 (1 después)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Discoteca de varias plantas: Main Room house con show, 'The Party' comercial, 4ª planta 'El Cielo' house, 5ª planta reggaeton/urban. 2 copas si entras antes de la 1:00, 1 copa después. Mesas VIP desde 200 €.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/121772"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/121772"
+  },
+  {
+    "title": "PubCrawl por la noche de Madrid (Lovo)",
+    "date": "2026-10-29",
+    "start": "23:30",
+    "end": null,
+    "venue": "Lovo Cocktail Bar / Commo",
+    "address": "C/ Echegaray 20, 28014 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 15,
+    "priceMax": 15,
+    "priceText": "Entrada 15 €: 3 bares, 3 chupitos (dom-mié: 1 cerveza/sangría + 2 chupitos) + entrada a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Todos los días con ruta distinta: guía local, 3 bares y entrada gratis a una discoteca top de Madrid.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/254626"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/254626"
+  },
+  {
+    "title": "Danze Afrika Halloween Special · DJ MBA + DJ MOIS",
+    "date": "2026-10-29",
+    "start": "23:45",
+    "end": "05:30",
+    "venue": "Café Berlín",
+    "address": "Costanilla de los Ángeles 20, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "fiesta",
+    "music": [
+      "afro",
+      "hiphop",
+      "dancehall",
+      "rnb",
+      "reggaeton"
+    ],
+    "priceMin": 10.31,
+    "priceMax": null,
+    "priceText": "Desde 10,31 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "DJ MBA",
+      "DJ MOIS"
+    ],
+    "description": "Especial Halloween de Danze Afrika Club: afrohouse, amapiano, afrobeat, hip hop, dancehall y R&B con percusión africana en directo.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/805418"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/805418"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Commo Cocktail Bar",
+    "date": "2026-10-30",
+    "start": "20:00",
+    "end": null,
+    "venue": "Commo Cocktail Bar",
+    "address": "C/ Espoz y Mina 22, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas, chupitos, cócteles y shisha con promociones. Calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257747"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257747"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Enbabia Library",
+    "date": "2026-10-30",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Enbabia",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas (si la sala no está llena) y cócteles de autor de la carta Booktails. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/256114"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/256114"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Hood Dogs",
+    "date": "2026-10-30",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Hood Dogs by Planet Club",
+    "address": "C/ Príncipe 20, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 12,
+    "priceMax": 30,
+    "priceText": "Entrada + 1 copa + 1 chupito 12 € · + 2 copas + chupito 20 € / 30 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express a todas las salas sin cola y promociones en chupitos y cócteles. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257640"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257640"
+  },
+  {
+    "title": "SHARK Halloween XXL",
+    "date": "2026-10-30",
+    "start": "22:00",
+    "end": "06:00",
+    "venue": "Fabrik",
+    "address": "Av. de la Industria 82, 28970 Humanes de Madrid",
+    "zone": "Humanes (Fabrik)",
+    "type": "fiesta",
+    "music": [
+      "comercial",
+      "urban",
+      "electronica",
+      "reggaeton"
+    ],
+    "priceMin": 35,
+    "priceMax": 35,
+    "priceText": "General 6º lote 35 € (últimas 46) · 2 copas 22-23h, 1 copa 23-00h · VIP Experience 60 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Alex Martini",
+      "Vilu Gontero"
+    ],
+    "description": "Primera vez de SHARK en Fabrik, 4 zonas: Main, Satélite (electrónica), Club Area (reggaeton old school) y Crystal 360 (Bolinga Club). Mesas VIP desde 300 €. Bus desde Madrid/Fuenlabrada 5-10 €. ~85% vendido.",
+    "status": "ultimas",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/664043"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/664043"
+  },
+  {
+    "title": "Universiparty Halloween (Area 19)",
+    "date": "2026-10-30",
+    "start": "22:00",
+    "end": "06:00",
+    "venue": "Fabrik",
+    "address": "Av. de la Industria 82, 28970 Humanes de Madrid",
+    "zone": "Humanes (Fabrik)",
+    "type": "fiesta",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 40,
+    "priceMax": 40,
+    "priceText": "Entrada 40 € · 2 copas 22-23h, 1 copa 23-00h · VIP Experience 90 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "'La fiesta de Halloween más grande de España', temática iglesia/catedral, concurso de disfraces con premios. Más de 8 h de fiesta. Bus desde Madrid 6 € / ida y vuelta 10 €.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/704921"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/704921"
+  },
+  {
+    "title": "Madrid Pub Crawl: 4 bares, chupitos y entrada VIP a discoteca",
+    "date": "2026-10-30",
+    "start": "22:00",
+    "end": "03:00",
+    "venue": "The Pubcrawl Company (Núñez de Arce)",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 10,
+    "priceMax": 10,
+    "priceText": "Entrada 10 €: 4 locales, chupito en cada bar y entrada VIP a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Ruta diaria de 4 locales con guía local, chupito por bar, descuentos en bebidas, reportaje fotográfico y entrada sin cola a la discoteca de la noche.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/114458"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/114458"
+  },
+  {
+    "title": "PubCrawl Madlife: ruta de bares + entrada a discoteca",
+    "date": "2026-10-30",
+    "start": "22:30",
+    "end": "05:00",
+    "venue": "Puerta del Sol (Vodafone)",
+    "address": "Puerta del Sol 13, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 12,
+    "priceMax": 12,
+    "priceText": "Entrada 12 €: 3-4 bares con chupito de bienvenida + entrada a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Viernes y sábados. Ruta por bares de Sol (Enbabia, Planet, Commo, The Room, Manama, Samsara, Moondance) y final en discoteca con entrada incluida.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/124925"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/124925"
+  },
+  {
+    "title": "Halloween Evil Circus Pub Crawl",
+    "date": "2026-10-30",
+    "start": "23:00",
+    "end": null,
+    "venue": "2060 The Newton Hostel",
+    "address": "C/ Cabeza 11, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 15,
+    "priceMax": 15,
+    "priceText": "Entrada 15 €: 3 bares con chupito + entrada gratis a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Ruta de 3 bares del centro con chupito de bienvenida, descuentos 'Wolfpack' y entrada a una discoteca que varía por noche (Calle 365, Teresa, Shoko, Gunilla, Icon...).",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/250827"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/250827"
+  },
+  {
+    "title": "Día de los Muertos – Pre-Halloween con Sunnery James & Ryan Marciano",
+    "date": "2026-10-30",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Teatro Kapital",
+    "address": "C/ Atocha 125, 28012 Madrid",
+    "zone": "Atocha",
+    "type": "fiesta",
+    "music": [
+      "house",
+      "comercial",
+      "reggaeton",
+      "urban",
+      "electronica"
+    ],
+    "priceMin": 30,
+    "priceMax": 35,
+    "priceText": "Entrada Día de los Muertos 35 € · Sesión general 2ª sección 30 € (1ª sección 27 € agotada) · 2 copas antes 1:00",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Sunnery James & Ryan Marciano"
+    ],
+    "description": "Noche Día de los Muertos / pre-Halloween con los DJs holandeses Sunnery James & Ryan Marciano en la Main Room. Discoteca de varias plantas: Main Room house con show, 'The Party' comercial, 4ª planta 'El Cielo' house, 5ª planta reggaeton/urban. 2 copas si entras antes de la 1:00, 1 copa después. Mesas VIP desde 200 €.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/766285"
+      },
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/121772"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/766285"
+  },
+  {
+    "title": "PubCrawl por la noche de Madrid (Lovo)",
+    "date": "2026-10-30",
+    "start": "23:30",
+    "end": null,
+    "venue": "Lovo Cocktail Bar / Commo",
+    "address": "C/ Echegaray 20, 28014 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 15,
+    "priceMax": 15,
+    "priceText": "Entrada 15 €: 3 bares, 3 chupitos (dom-mié: 1 cerveza/sangría + 2 chupitos) + entrada a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Todos los días con ruta distinta: guía local, 3 bares y entrada gratis a una discoteca top de Madrid.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/254626"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/254626"
+  },
+  {
+    "title": "Hallowfest 2026",
+    "date": "2026-10-31",
+    "start": "17:00",
+    "end": "06:00",
+    "venue": "Fabrik",
+    "address": "Av. de la Industria 82, 28970 Humanes de Madrid",
+    "zone": "Humanes (Fabrik)",
+    "type": "festival",
+    "music": [
+      "techno",
+      "hardtechno",
+      "house",
+      "electronica"
+    ],
+    "priceMin": 40,
+    "priceMax": 80,
+    "priceText": "Early ticket 17-19h 40 € (sin copas) · General 10º lote 60 € · General + Morning Session 80 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Charlotte de Witte",
+      "Nastia",
+      "Future.666",
+      "Brennan Heart",
+      "Sickmode",
+      "D-Block & S-te-fan",
+      "Svetec",
+      "Alfredo Pareja",
+      "Anthony Godfather",
+      "Raul Ortiz"
+    ],
+    "description": "Las 5 marcas de Fabrik en una noche (escenarios CODE y NEXUS), 31 artistas, todas las salas tematizadas y pasaje del terror con +100 actores. Sesión matinal el 1 nov. VIP Experience 120 €, Backstage 150 €. Lotes casi agotados.",
+    "status": "ultimas",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/664041"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/664041"
+  },
+  {
+    "title": "Halloween Party en Commo – Espit Chupitos Sol",
+    "date": "2026-10-31",
+    "start": "20:00",
+    "end": null,
+    "venue": "Commo Cocktail Bar",
+    "address": "C/ Espoz y Mina 22, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "fiesta",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 25,
+    "priceMax": 30,
+    "priceText": "Entrada anticipada hasta 00:00 25 € · VIP después 00:00 30 € · promo 2 entradas 30 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Decoración de Halloween, chupitos temáticos toda la noche, DJ sin parar y premios a los mejores disfraces. Cóctel + shisha 50 €; mesas reservadas 200-400 €.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/485699"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/485699"
+  },
+  {
+    "title": "Circus of Terror – Halloween Party",
+    "date": "2026-10-31",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Enbabia",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "fiesta",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 30,
+    "priceText": "Hasta 23:00 20 € · 23:00-00:30 25 € · después 30 € · todas con copa o cóctel",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Fiesta de Halloween temática circo del terror en Enbabia Library, con copa o cóctel incluido en cada tramo de entrada.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/808765"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/808765"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Hood Dogs",
+    "date": "2026-10-31",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Hood Dogs by Planet Club",
+    "address": "C/ Príncipe 20, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 12,
+    "priceMax": 30,
+    "priceText": "Entrada + 1 copa + 1 chupito 12 € · + 2 copas + chupito 20 € / 30 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express a todas las salas sin cola y promociones en chupitos y cócteles. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257640"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257640"
+  },
+  {
+    "title": "Halloween Party en Ella Sky Bar",
+    "date": "2026-10-31",
+    "start": "21:00",
+    "end": "01:00",
+    "venue": "Ella Sky Bar",
+    "address": "Gran Vía 42 (planta 10), 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "fiesta",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada 20 € con 1 copa o 2 refrescos (sin entradas disponibles)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Fiesta de Halloween con DJ en la azotea del hotel SmartRental Gran Vía Centric. Agotado en Fever; apúntate a la lista de aviso.",
+    "status": "agotado",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/254404"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/254404"
+  },
+  {
+    "title": "Scary Halloween: ruta de bares + fiesta privada",
+    "date": "2026-10-31",
+    "start": "21:30",
+    "end": "05:00",
+    "venue": "Puerta del Sol (Vodafone)",
+    "address": "Puerta del Sol 13, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 35,
+    "priceMax": 35,
+    "priceText": "Entrada 35 €: 2-3 bares con chupito de bienvenida + fiesta privada final con 1 copa",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Pub crawl de Halloween con concurso de disfraces, accesorios y sorpresas; termina en una fiesta privada con copa incluida. En español e inglés.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/757491"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/757491"
+  },
+  {
+    "title": "Madrid Pub Crawl: 4 bares, chupitos y entrada VIP a discoteca",
+    "date": "2026-10-31",
+    "start": "22:00",
+    "end": "03:00",
+    "venue": "The Pubcrawl Company (Núñez de Arce)",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 10,
+    "priceMax": 10,
+    "priceText": "Entrada 10 €: 4 locales, chupito en cada bar y entrada VIP a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Ruta diaria de 4 locales con guía local, chupito por bar, descuentos en bebidas, reportaje fotográfico y entrada sin cola a la discoteca de la noche.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/114458"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/114458"
+  },
+  {
+    "title": "PubCrawl Madlife: ruta de bares + entrada a discoteca",
+    "date": "2026-10-31",
+    "start": "22:30",
+    "end": "05:00",
+    "venue": "Puerta del Sol (Vodafone)",
+    "address": "Puerta del Sol 13, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 12,
+    "priceMax": 12,
+    "priceText": "Entrada 12 €: 3-4 bares con chupito de bienvenida + entrada a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Viernes y sábados. Ruta por bares de Sol (Enbabia, Planet, Commo, The Room, Manama, Samsara, Moondance) y final en discoteca con entrada incluida.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/124925"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/124925"
+  },
+  {
+    "title": "Halloween Evil Circus Pub Crawl",
+    "date": "2026-10-31",
+    "start": "23:00",
+    "end": null,
+    "venue": "2060 The Newton Hostel",
+    "address": "C/ Cabeza 11, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 15,
+    "priceMax": 15,
+    "priceText": "Entrada 15 €: 3 bares con chupito + entrada gratis a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Ruta de 3 bares del centro con chupito de bienvenida, descuentos 'Wolfpack' y entrada a una discoteca que varía por noche (Calle 365, Teresa, Shoko, Gunilla, Icon...).",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/250827"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/250827"
+  },
+  {
+    "title": "Sesión Teatro Kapital – Noche de Halloween",
+    "date": "2026-10-31",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Teatro Kapital",
+    "address": "C/ Atocha 125, 28012 Madrid",
+    "zone": "Atocha",
+    "type": "club",
+    "music": [
+      "house",
+      "comercial",
+      "reggaeton",
+      "urban"
+    ],
+    "priceMin": 35,
+    "priceMax": 35,
+    "priceText": "Entrada 35 € con 2 copas antes de la 1:00 (1 después)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Discoteca de varias plantas: Main Room house con show, 'The Party' comercial, 4ª planta 'El Cielo' house, 5ª planta reggaeton/urban. 2 copas si entras antes de la 1:00, 1 copa después. Mesas VIP desde 200 €.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/121772"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/121772"
+  },
+  {
+    "title": "PubCrawl por la noche de Madrid (Lovo)",
+    "date": "2026-10-31",
+    "start": "23:30",
+    "end": null,
+    "venue": "Lovo Cocktail Bar / Commo",
+    "address": "C/ Echegaray 20, 28014 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 15,
+    "priceMax": 15,
+    "priceText": "Entrada 15 €: 3 bares, 3 chupitos (dom-mié: 1 cerveza/sangría + 2 chupitos) + entrada a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Todos los días con ruta distinta: guía local, 3 bares y entrada gratis a una discoteca top de Madrid.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/254626"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/254626"
+  },
+  {
+    "title": "Wicked Fridays w/ Badadan",
+    "date": "2026-10-31",
+    "start": "23:59",
+    "end": "06:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "fiesta",
+    "music": [
+      "dancehall",
+      "otros"
+    ],
+    "priceMin": 16,
+    "priceMax": 16,
+    "priceText": "Entrada + copa 16 € (acceso preferente antes de la 1:30)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Luv Messenger",
+      "Unity Sound",
+      "AI-D Selectress",
+      "DJ Kennah"
+    ],
+    "description": "Noche de dancehall y reggae con actuaciones en directo y DJ sets. Hay que llevar DNI.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/778696"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/778696"
+  },
+  {
+    "title": "Domingos de Bonanza: Tardeo y Salsa",
+    "date": "2026-11-01",
+    "start": "18:00",
+    "end": "22:00",
+    "venue": "Calle 365",
+    "address": "C/ Echegaray 18, 28014 Madrid",
+    "zone": "Centro / Sol",
+    "type": "tardeo",
+    "music": [
+      "salsa",
+      "latino"
+    ],
+    "priceMin": 18,
+    "priceMax": 18,
+    "priceText": "Entrada 18 € con 1 cóctel/copa + 1 Paloma frozen + chupito de bienvenida",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Tardeo de salsa en directo con temática puertorriqueña/caribeña en un speakeasy escondido tras una botellería; entrada con contraseña. Cada domingo.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/808314"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/808314"
+  },
+  {
+    "title": "KINYXX pres: Fet!sh Edition",
+    "date": "2026-11-01",
+    "start": "23:00",
+    "end": null,
+    "venue": "Sala Strong",
+    "address": "C/ Trujillos 7, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "house",
+      "techno",
+      "electronica"
+    ],
+    "priceMin": 17,
+    "priceMax": 30,
+    "priceText": "1st Release 17 € · 2nd 22 € · 3rd 26 € · Final 30 €",
+    "free": false,
+    "dressCode": "Atrevido / fetish",
+    "ageMin": null,
+    "lineup": [],
+    "description": "Noche queer-fetish de electrónica (del house al techno) centrada en la identidad y la libertad; pista como espacio seguro.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/504135"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/504135"
+  },
+  {
+    "title": "Cloaca",
+    "date": "2026-11-01",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "club",
+    "music": [
+      "techno",
+      "electronica"
+    ],
+    "priceMin": 14,
+    "priceMax": 16,
+    "priceText": "Early promo con copa 14 € · Entrada 16 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Laspalas",
+      "Huma Humo",
+      "Kamboya"
+    ],
+    "description": "Electrónica oscura (techno, new wave, electro) en la víspera de Todos los Santos en la zona club de Siroco.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/828428"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/828428"
+  },
+  {
+    "title": "Discoscuro",
+    "date": "2026-11-01",
+    "start": "23:00",
+    "end": "05:30",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "club",
+    "music": [
+      "techno",
+      "electronica"
+    ],
+    "priceMin": 14,
+    "priceMax": 16,
+    "priceText": "Early promo con copa 14 € · Entrada 16 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Wize",
+      "Giggy Devy",
+      "LKTA",
+      "Estrella Or"
+    ],
+    "description": "Noche de electro, techno y new wave con cuatro artistas.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/828413"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/828413"
+  },
+  {
+    "title": "Reggaeton Old School",
+    "date": "2026-11-04",
+    "start": "20:00",
+    "end": null,
+    "venue": "Enbabia",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "fiesta",
+    "music": [
+      "reggaeton"
+    ],
+    "priceMin": 12,
+    "priceMax": 14,
+    "priceText": "2 cervezas 12 € (hasta 00:00) · 2 cócteles/copas 14 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Miércoles de reggaeton old school (Daddy Yankee, Don Omar...) con DJ en directo en Enbabia Library.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/602883"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/602883"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Commo Cocktail Bar",
+    "date": "2026-11-05",
+    "start": "20:00",
+    "end": null,
+    "venue": "Commo Cocktail Bar",
+    "address": "C/ Espoz y Mina 22, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas, chupitos, cócteles y shisha con promociones. Calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257747"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257747"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Enbabia Library",
+    "date": "2026-11-05",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Enbabia",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas (si la sala no está llena) y cócteles de autor de la carta Booktails. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/256114"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/256114"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Hood Dogs",
+    "date": "2026-11-05",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Hood Dogs by Planet Club",
+    "address": "C/ Príncipe 20, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 12,
+    "priceMax": 30,
+    "priceText": "Entrada + 1 copa + 1 chupito 12 € · + 2 copas + chupito 20 € / 30 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express a todas las salas sin cola y promociones en chupitos y cócteles. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257640"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257640"
+  },
+  {
+    "title": "Fiesta en La Reserva Club",
+    "date": "2026-11-05",
+    "start": "20:00",
+    "end": null,
+    "venue": "La Reserva Club",
+    "address": "C/ Príncipe 12, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "comercial",
+      "latino"
+    ],
+    "priceMin": 14,
+    "priceMax": 20,
+    "priceText": "Gold 14 € (sin cola hasta 00:30 + chupito) · Platinum 20 € (2 copas + chupito)",
+    "free": false,
+    "dressCode": "Smart casual, no chándal ni gorras",
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Fiesta con DJs en directo, éxitos actuales, clásicos y latino; varios ambientes. Reservado VIP 150 €. Calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/291511"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/291511"
+  },
+  {
+    "title": "Noche de chicas en La Xida",
+    "date": "2026-11-05",
+    "start": "20:00",
+    "end": "22:00",
+    "venue": "La Xida",
+    "address": "C/ López de Hoyos 11, 28006 Madrid",
+    "zone": "Salamanca",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 35,
+    "priceMax": 35,
+    "priceText": "Entrada 35 € con barra libre y tapas",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Cada jueves: barra libre de 2 h con selección de bebidas y dos raciones de tapas para compartir. Hay que confirmar la reserva por email tras la compra.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/300281"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/300281"
+  },
+  {
+    "title": "Sesión Teatro Kapital (jueves)",
+    "date": "2026-11-05",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Teatro Kapital",
+    "address": "C/ Atocha 125, 28012 Madrid",
+    "zone": "Atocha",
+    "type": "club",
+    "music": [
+      "house",
+      "comercial",
+      "reggaeton",
+      "urban"
+    ],
+    "priceMin": 21,
+    "priceMax": null,
+    "priceText": "Desde 21 € con 2 copas antes de la 1:00 (1 después)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Discoteca de varias plantas: Main Room house con show, 'The Party' comercial, 4ª planta 'El Cielo' house, 5ª planta reggaeton/urban. 2 copas si entras antes de la 1:00, 1 copa después. Mesas VIP desde 200 €. Calendario de noviembre no visible en Fever: precio orientativo.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/121772"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/121772"
+  },
+  {
+    "title": "Danze Afrika Club",
+    "date": "2026-11-05",
+    "start": "23:45",
+    "end": "05:30",
+    "venue": "Café Berlín",
+    "address": "Costanilla de los Ángeles 20, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "fiesta",
+    "music": [
+      "afro",
+      "hiphop",
+      "dancehall",
+      "rnb"
+    ],
+    "priceMin": 10.31,
+    "priceMax": 15.48,
+    "priceText": "Entrada sin copa 10,31 € · con copa 15,48 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "DJ MBA"
+    ],
+    "description": "DJ set que celebra el folclore africano y la música negra: percusión africana, amapiano, afrohouse, afrobeats, hip hop, dancehall y R&B.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/828434"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/828434"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Commo Cocktail Bar",
+    "date": "2026-11-06",
+    "start": "20:00",
+    "end": null,
+    "venue": "Commo Cocktail Bar",
+    "address": "C/ Espoz y Mina 22, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas, chupitos, cócteles y shisha con promociones. Calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257747"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257747"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Enbabia Library",
+    "date": "2026-11-06",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Enbabia",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas (si la sala no está llena) y cócteles de autor de la carta Booktails. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/256114"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/256114"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Hood Dogs",
+    "date": "2026-11-06",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Hood Dogs by Planet Club",
+    "address": "C/ Príncipe 20, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 12,
+    "priceMax": 30,
+    "priceText": "Entrada + 1 copa + 1 chupito 12 € · + 2 copas + chupito 20 € / 30 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express a todas las salas sin cola y promociones en chupitos y cócteles. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257640"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257640"
+  },
+  {
+    "title": "Fiesta en La Reserva Club",
+    "date": "2026-11-06",
+    "start": "20:00",
+    "end": null,
+    "venue": "La Reserva Club",
+    "address": "C/ Príncipe 12, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "comercial",
+      "latino"
+    ],
+    "priceMin": 14,
+    "priceMax": 20,
+    "priceText": "Gold 14 € (sin cola hasta 00:30 + chupito) · Platinum 20 € (2 copas + chupito)",
+    "free": false,
+    "dressCode": "Smart casual, no chándal ni gorras",
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Fiesta con DJs en directo, éxitos actuales, clásicos y latino; varios ambientes. Reservado VIP 150 €. Calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/291511"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/291511"
+  },
+  {
+    "title": "Producto + Espíritu Escalera",
+    "date": "2026-11-06",
+    "start": "21:00",
+    "end": "01:00",
+    "venue": "Wurlitzer Ballroom",
+    "address": "C/ Tres Cruces 12, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "electronica",
+      "rock"
+    ],
+    "priceMin": 10,
+    "priceMax": 10,
+    "priceText": "Entrada general 10 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Producto",
+      "Espíritu Escalera"
+    ],
+    "description": "Primer concierto de Producto en Madrid presentando 'Elegancia y decadencia' (synthpunk, minimal wave); abre Espíritu Escalera con coldwave/darkwave/post-punk.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/828702"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/828702"
+  },
+  {
+    "title": "PubCrawl Madlife: ruta de bares + entrada a discoteca",
+    "date": "2026-11-06",
+    "start": "22:30",
+    "end": "05:00",
+    "venue": "Puerta del Sol (Vodafone)",
+    "address": "Puerta del Sol 13, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 12,
+    "priceMax": 12,
+    "priceText": "Entrada 12 €: 3-4 bares con chupito de bienvenida + entrada a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Viernes y sábados. Ruta por bares de Sol (Enbabia, Planet, Commo, The Room, Manama, Samsara, Moondance) y final en discoteca con entrada incluida.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/124925"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/124925"
+  },
+  {
+    "title": "Sesión Teatro Kapital (viernes)",
+    "date": "2026-11-06",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Teatro Kapital",
+    "address": "C/ Atocha 125, 28012 Madrid",
+    "zone": "Atocha",
+    "type": "club",
+    "music": [
+      "house",
+      "comercial",
+      "reggaeton",
+      "urban"
+    ],
+    "priceMin": 21,
+    "priceMax": null,
+    "priceText": "Desde 21 € con 2 copas antes de la 1:00 (1 después)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Discoteca de varias plantas: Main Room house con show, 'The Party' comercial, 4ª planta 'El Cielo' house, 5ª planta reggaeton/urban. 2 copas si entras antes de la 1:00, 1 copa después. Mesas VIP desde 200 €. Calendario de noviembre no visible en Fever: precio orientativo.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/121772"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/121772"
+  },
+  {
+    "title": "Sound of Fashion: The Masquerade Ball",
+    "date": "2026-11-06",
+    "start": "23:45",
+    "end": "03:45",
+    "venue": "Café Berlín",
+    "address": "Costanilla de los Ángeles 20, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "fiesta",
+    "music": [
+      "house",
+      "electronica",
+      "pop"
+    ],
+    "priceMin": 10.31,
+    "priceMax": 17.7,
+    "priceText": "Entrada sin copa 10,31 € · con copa 17,70 € · máscara incluida",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Baile de máscaras que une la escena musical y de moda de Madrid y Londres: DJ sets (bloghouse, hyperpop, electroclash), música en directo y showroom de diseñadores independientes.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/828693"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/828693"
+  },
+  {
+    "title": "Pogo: Fameless + Touching Ice + Pogo DJs",
+    "date": "2026-11-06",
+    "start": "23:59",
+    "end": "06:00",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "fiesta",
+    "music": [
+      "electronica",
+      "pop",
+      "indie"
+    ],
+    "priceMin": 17.97,
+    "priceMax": 20.21,
+    "priceText": "Promo entrada + copa 17,97 € · General + copa 20,21 € (gastos incluidos)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Fameless",
+      "Touching Ice",
+      "Pogo DJs"
+    ],
+    "description": "Fiesta Pogo con directos de Fameless (Río de Janeiro, electroclash) y Touching Ice (Los Ángeles, electrónica experimental/industrial pop) más DJs: hyperpop, bloghouse, EDM.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/828696"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/828696"
+  },
+  {
+    "title": "Presión: Amoryodio (live) + Perla Preciosa",
+    "date": "2026-11-06",
+    "start": "23:59",
+    "end": "06:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "fiesta",
+    "music": [
+      "reggaeton",
+      "urban",
+      "electronica"
+    ],
+    "priceMin": 15,
+    "priceMax": 20,
+    "priceText": "Entrada + copa 15 € · + 2 copas 20 € (acceso preferente antes de la 1:30)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Amoryodio",
+      "Perla Preciosa",
+      "Pablo Diablo",
+      "Net Bby",
+      "RXDRIGUEZZ",
+      "YABIWASABI",
+      "anagm",
+      "Solveig"
+    ],
+    "description": "Reggaeton romántico y urbano en el sótano con showcase en directo de Amoryodio; urbano y electrónica arriba en el ático.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/805596"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/805596"
+  },
+  {
+    "title": "Murder on the Floor: Kiki Ball – Edición Halloween",
+    "date": "2026-11-07",
+    "start": "17:00",
+    "end": null,
+    "venue": "Ya'sta Club",
+    "address": "C/ Valverde 10, 28004 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "fiesta",
+    "music": [
+      "urban",
+      "otros"
+    ],
+    "priceMin": 15,
+    "priceMax": 15,
+    "priceText": "Entrada general 15 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Loubna 007",
+      "Father Papi Laveaux"
+    ],
+    "description": "Competición de ballroom temática Halloween con categorías inspiradas en cine de terror. Solo adultos; sin asientos.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/749966"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/749966"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Commo Cocktail Bar",
+    "date": "2026-11-07",
+    "start": "20:00",
+    "end": null,
+    "venue": "Commo Cocktail Bar",
+    "address": "C/ Espoz y Mina 22, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas, chupitos, cócteles y shisha con promociones. Calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257747"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257747"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Enbabia Library",
+    "date": "2026-11-07",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Enbabia",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas (si la sala no está llena) y cócteles de autor de la carta Booktails. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/256114"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/256114"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Hood Dogs",
+    "date": "2026-11-07",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Hood Dogs by Planet Club",
+    "address": "C/ Príncipe 20, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 12,
+    "priceMax": 30,
+    "priceText": "Entrada + 1 copa + 1 chupito 12 € · + 2 copas + chupito 20 € / 30 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express a todas las salas sin cola y promociones en chupitos y cócteles. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257640"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257640"
+  },
+  {
+    "title": "Fiesta en La Reserva Club",
+    "date": "2026-11-07",
+    "start": "20:00",
+    "end": null,
+    "venue": "La Reserva Club",
+    "address": "C/ Príncipe 12, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "comercial",
+      "latino"
+    ],
+    "priceMin": 14,
+    "priceMax": 20,
+    "priceText": "Gold 14 € (sin cola hasta 00:30 + chupito) · Platinum 20 € (2 copas + chupito)",
+    "free": false,
+    "dressCode": "Smart casual, no chándal ni gorras",
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Fiesta con DJs en directo, éxitos actuales, clásicos y latino; varios ambientes. Reservado VIP 150 €. Calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/291511"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/291511"
+  },
+  {
+    "title": "PubCrawl Madlife: ruta de bares + entrada a discoteca",
+    "date": "2026-11-07",
+    "start": "22:30",
+    "end": "05:00",
+    "venue": "Puerta del Sol (Vodafone)",
+    "address": "Puerta del Sol 13, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 12,
+    "priceMax": 12,
+    "priceText": "Entrada 12 €: 3-4 bares con chupito de bienvenida + entrada a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Viernes y sábados. Ruta por bares de Sol (Enbabia, Planet, Commo, The Room, Manama, Samsara, Moondance) y final en discoteca con entrada incluida.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/124925"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/124925"
+  },
+  {
+    "title": "Sesión Teatro Kapital (sábado)",
+    "date": "2026-11-07",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Teatro Kapital",
+    "address": "C/ Atocha 125, 28012 Madrid",
+    "zone": "Atocha",
+    "type": "club",
+    "music": [
+      "house",
+      "comercial",
+      "reggaeton",
+      "urban"
+    ],
+    "priceMin": 21,
+    "priceMax": null,
+    "priceText": "Desde 21 € con 2 copas antes de la 1:00 (1 después)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Discoteca de varias plantas: Main Room house con show, 'The Party' comercial, 4ª planta 'El Cielo' house, 5ª planta reggaeton/urban. 2 copas si entras antes de la 1:00, 1 copa después. Mesas VIP desde 200 €. Calendario de noviembre no visible en Fever: precio orientativo.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/121772"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/121772"
+  },
+  {
+    "title": "Túmbala",
+    "date": "2026-11-07",
+    "start": "23:59",
+    "end": "06:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "club",
+    "music": [
+      "reggaeton",
+      "techno",
+      "electronica",
+      "urban"
+    ],
+    "priceMin": 16,
+    "priceMax": 16,
+    "priceText": "Entrada + copa 16 € (acceso preferente antes de la 1:30)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Sany Delitos",
+      "LostMyBike",
+      "Sexy Noodle"
+    ],
+    "description": "Dos plantas con urbano y electrónica: perreo, techno y BPMs rápidos. Última fiesta Túmbala del año.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/796893"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/796893"
+  },
+  {
+    "title": "Domingos de Bonanza: Tardeo y Salsa",
+    "date": "2026-11-08",
+    "start": "18:00",
+    "end": "22:00",
+    "venue": "Calle 365",
+    "address": "C/ Echegaray 18, 28014 Madrid",
+    "zone": "Centro / Sol",
+    "type": "tardeo",
+    "music": [
+      "salsa",
+      "latino"
+    ],
+    "priceMin": 18,
+    "priceMax": 18,
+    "priceText": "Entrada 18 € con 1 cóctel/copa + 1 Paloma frozen + chupito de bienvenida",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Tardeo de salsa en directo con temática puertorriqueña/caribeña en un speakeasy escondido tras una botellería; entrada con contraseña. Cada domingo.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/808314"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/808314"
+  },
+  {
+    "title": "Fan Club",
+    "date": "2026-11-08",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "club",
+    "music": [
+      "techno",
+      "house",
+      "electronica"
+    ],
+    "priceMin": 12,
+    "priceMax": 20,
+    "priceText": "Entrada + copa 12 € · + 2 copas 20 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "K[alma]",
+      "DobleJ",
+      "Ikary"
+    ],
+    "description": "Sesión club de domingo con tech house, minimal y groove; cumpleaños de Ikary. Copas: vino de Gredos, kalimotxo, vino con limón.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/828497"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/828497"
+  },
+  {
+    "title": "Abyss Techno Club",
+    "date": "2026-11-08",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "club",
+    "music": [
+      "techno",
+      "electronica"
+    ],
+    "priceMin": 12,
+    "priceMax": 20,
+    "priceText": "Entrada + copa 12 € · + 2 copas 20 €",
+    "free": false,
+    "dressCode": "Sin dress code",
+    "ageMin": 18,
+    "lineup": [
+      "Antonio Fuentes",
+      "Jobo",
+      "Trasto"
+    ],
+    "description": "Sesión de techno underground oscuro e hipnótico en el Abyss de Siroco, domingo noche.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/828338"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/828338"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Commo Cocktail Bar",
+    "date": "2026-11-12",
+    "start": "20:00",
+    "end": null,
+    "venue": "Commo Cocktail Bar",
+    "address": "C/ Espoz y Mina 22, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas, chupitos, cócteles y shisha con promociones. Calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257747"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257747"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Enbabia Library",
+    "date": "2026-11-12",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Enbabia",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas (si la sala no está llena) y cócteles de autor de la carta Booktails. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/256114"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/256114"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Hood Dogs",
+    "date": "2026-11-12",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Hood Dogs by Planet Club",
+    "address": "C/ Príncipe 20, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 12,
+    "priceMax": 30,
+    "priceText": "Entrada + 1 copa + 1 chupito 12 € · + 2 copas + chupito 20 € / 30 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express a todas las salas sin cola y promociones en chupitos y cócteles. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257640"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257640"
+  },
+  {
+    "title": "Fiesta en La Reserva Club",
+    "date": "2026-11-12",
+    "start": "20:00",
+    "end": null,
+    "venue": "La Reserva Club",
+    "address": "C/ Príncipe 12, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "comercial",
+      "latino"
+    ],
+    "priceMin": 14,
+    "priceMax": 20,
+    "priceText": "Gold 14 € (sin cola hasta 00:30 + chupito) · Platinum 20 € (2 copas + chupito)",
+    "free": false,
+    "dressCode": "Smart casual, no chándal ni gorras",
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Fiesta con DJs en directo, éxitos actuales, clásicos y latino; varios ambientes. Reservado VIP 150 €. Calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/291511"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/291511"
+  },
+  {
+    "title": "Noche de chicas en La Xida",
+    "date": "2026-11-12",
+    "start": "20:00",
+    "end": "22:00",
+    "venue": "La Xida",
+    "address": "C/ López de Hoyos 11, 28006 Madrid",
+    "zone": "Salamanca",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 35,
+    "priceMax": 35,
+    "priceText": "Entrada 35 € con barra libre y tapas",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Cada jueves: barra libre de 2 h con selección de bebidas y dos raciones de tapas para compartir. Hay que confirmar la reserva por email tras la compra.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/300281"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/300281"
+  },
+  {
+    "title": "Sesión Teatro Kapital (jueves)",
+    "date": "2026-11-12",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Teatro Kapital",
+    "address": "C/ Atocha 125, 28012 Madrid",
+    "zone": "Atocha",
+    "type": "club",
+    "music": [
+      "house",
+      "comercial",
+      "reggaeton",
+      "urban"
+    ],
+    "priceMin": 21,
+    "priceMax": null,
+    "priceText": "Desde 21 € con 2 copas antes de la 1:00 (1 después)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Discoteca de varias plantas: Main Room house con show, 'The Party' comercial, 4ª planta 'El Cielo' house, 5ª planta reggaeton/urban. 2 copas si entras antes de la 1:00, 1 copa después. Mesas VIP desde 200 €. Calendario de noviembre no visible en Fever: precio orientativo.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/121772"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/121772"
+  },
+  {
+    "title": "Raw #16",
+    "date": "2026-11-12",
+    "start": "23:59",
+    "end": "05:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "club",
+    "music": [
+      "techno",
+      "hardtechno",
+      "electronica"
+    ],
+    "priceMin": 0,
+    "priceMax": 10,
+    "priceText": "Entrada gratis sin consumición antes de la 1:30 · Entrada + 2 cervezas/refrescos 10 €",
+    "free": true,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "DEVS",
+      "Maga Knaup",
+      "Jav Jav",
+      "Vandiaz",
+      "Wize"
+    ],
+    "description": "16ª edición del showcase de techno RAW: melodic, acid, neo-rave y hard techno hasta el cierre.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/828704"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/828704"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Commo Cocktail Bar",
+    "date": "2026-11-13",
+    "start": "20:00",
+    "end": null,
+    "venue": "Commo Cocktail Bar",
+    "address": "C/ Espoz y Mina 22, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas, chupitos, cócteles y shisha con promociones. Calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257747"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257747"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Enbabia Library",
+    "date": "2026-11-13",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Enbabia",
+    "address": "C/ Núñez de Arce 9, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada VIP + cóctel + chupito 20 € (2 personas 40 €)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express sin esperas (si la sala no está llena) y cócteles de autor de la carta Booktails. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/256114"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/256114"
+  },
+  {
+    "title": "Fiesta VIP sin esperas en Hood Dogs",
+    "date": "2026-11-13",
+    "start": "20:00",
+    "end": "03:30",
+    "venue": "Hood Dogs by Planet Club",
+    "address": "C/ Príncipe 20, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "bar",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": 12,
+    "priceMax": 30,
+    "priceText": "Entrada + 1 copa + 1 chupito 12 € · + 2 copas + chupito 20 € / 30 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Acceso VIP express a todas las salas sin cola y promociones en chupitos y cócteles. Abierto 365 días; calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/257640"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/257640"
+  },
+  {
+    "title": "Fiesta en La Reserva Club",
+    "date": "2026-11-13",
+    "start": "20:00",
+    "end": null,
+    "venue": "La Reserva Club",
+    "address": "C/ Príncipe 12, 28012 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "comercial",
+      "latino"
+    ],
+    "priceMin": 14,
+    "priceMax": 20,
+    "priceText": "Gold 14 € (sin cola hasta 00:30 + chupito) · Platinum 20 € (2 copas + chupito)",
+    "free": false,
+    "dressCode": "Smart casual, no chándal ni gorras",
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Fiesta con DJs en directo, éxitos actuales, clásicos y latino; varios ambientes. Reservado VIP 150 €. Calendario no visible, se listan jueves-sábado.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/291511"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/291511"
+  },
+  {
+    "title": "Gilipojazz – Progresa Adecuadamente World Tour",
+    "date": "2026-11-13",
+    "start": "21:00",
+    "end": null,
+    "venue": "Joy Eslava",
+    "address": "C/ Arenal 11, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "rock",
+      "otros"
+    ],
+    "priceMin": 21,
+    "priceMax": 21,
+    "priceText": "Entrada general 21 € · puertas 20:00",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Gilipojazz"
+    ],
+    "description": "Último concierto de la gira del trío punk-jazz Gilipojazz en Teatro Eslava. Menores de 16 acompañados. Válido con Bono Cultural Joven.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/498805"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/498805"
+  },
+  {
+    "title": "PubCrawl Madlife: ruta de bares + entrada a discoteca",
+    "date": "2026-11-13",
+    "start": "22:30",
+    "end": "05:00",
+    "venue": "Puerta del Sol (Vodafone)",
+    "address": "Puerta del Sol 13, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "otro",
+    "music": [],
+    "priceMin": 12,
+    "priceMax": 12,
+    "priceText": "Entrada 12 €: 3-4 bares con chupito de bienvenida + entrada a discoteca",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Viernes y sábados. Ruta por bares de Sol (Enbabia, Planet, Commo, The Room, Manama, Samsara, Moondance) y final en discoteca con entrada incluida.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/124925"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/124925"
+  },
+  {
+    "title": "VINTAGE con Sebastian Gamboa",
+    "date": "2026-11-13",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Teatro Kapital",
+    "address": "C/ Atocha 125, 28012 Madrid",
+    "zone": "Atocha",
+    "type": "club",
+    "music": [
+      "house"
+    ],
+    "priceMin": 27,
+    "priceMax": 27,
+    "priceText": "Entrada 27 € (First Release) con 2 copas antes de la 1:00 (1 después)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Sebastian Gamboa"
+    ],
+    "description": "Fiesta VINTAGE con Sebastián Gamboa, DJ de house referente de Ibiza, en la Main Room de Kapital. Resto de plantas con su música habitual.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/813146"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/813146"
+  },
+  {
+    "title": "Southway 2nd Anniversary",
+    "date": "2026-11-13",
+    "start": "23:59",
+    "end": "06:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "club",
+    "music": [
+      "techno",
+      "house",
+      "electronica"
+    ],
+    "priceMin": 16,
+    "priceMax": 16,
+    "priceText": "Entrada + copa 16 € (acceso preferente antes de la 1:30)",
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [
+      "Gisele South",
+      "Dystopik",
+      "Brody",
+      "Shenko",
+      "Pan"
+    ],
+    "description": "Segundo aniversario del colectivo Southway: techno y house toda la noche.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Fever",
+        "url": "https://feverup.com/m/828747"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/828747"
+  }
+]

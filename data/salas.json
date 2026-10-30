@@ -1,0 +1,3617 @@
+[
+  {
+    "title": "D.E.P Pringa Studio",
+    "date": "2026-10-29",
+    "start": "00:00",
+    "end": "04:30",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "D.E.P Pringa Studio"
+    ],
+    "description": "Sala: Espacio Artlab.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/X14cdcae5679"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/X14cdcae5679"
+  },
+  {
+    "title": "D.E.P Pringa Studio: Fukcnormal + Klandestina + Xandiyei",
+    "date": "2026-10-29",
+    "start": "00:00",
+    "end": "05:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Fukcnormal",
+      "Klandestina",
+      "Xandiyei"
+    ],
+    "description": "Sala: Espacio Club.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/X14cdcae5679"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/X14cdcae5679"
+  },
+  {
+    "title": "LET THEM COOK · Halloween Edition",
+    "date": "2026-10-29",
+    "start": "21:00",
+    "end": "00:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "concierto",
+    "music": [
+      "otros"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Lucía Fernandez"
+    ],
+    "description": "Sala: Espacio Artlab. Primera edición de un nuevo formato de experiencia en directo.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://ticketfever.es/events/let-them-cook-first-edition-lucia-fernandez-thenomadzone"
+      }
+    ],
+    "ticketUrl": "https://ticketfever.es/events/let-them-cook-first-edition-lucia-fernandez-thenomadzone"
+  },
+  {
+    "title": "Santa Ana y la Santabanda",
+    "date": "2026-10-29",
+    "start": "21:00",
+    "end": "00:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "concierto",
+    "music": [
+      "variado"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Santa Ana y la Santabanda"
+    ],
+    "description": "Sala: Espacio Club. Presentación del disco debut 'Vagío del 62'.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/k97041051325"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/k97041051325"
+  },
+  {
+    "title": "Pogo crew",
+    "date": "2026-10-30",
+    "start": "00:00",
+    "end": "05:30",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Pogo DJs"
+    ],
+    "description": "Sala: Espacio Artlab. Pogo DJs all night long.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/jfdf67f8a038"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/jfdf67f8a038"
+  },
+  {
+    "title": "Pogo Halloween: Julietta Ferrari + Montenegro + Pogo DJs",
+    "date": "2026-10-30",
+    "start": "00:30",
+    "end": "06:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Julietta Ferrari",
+      "Montenegro",
+      "Pogo DJs"
+    ],
+    "description": "Sala: Espacio Club.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/jfdf67f8a038"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/jfdf67f8a038"
+  },
+  {
+    "title": "Radar Joven presenta: Supercremalleras",
+    "date": "2026-10-30",
+    "start": "21:00",
+    "end": "00:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "concierto",
+    "music": [
+      "indie"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Supercremalleras"
+    ],
+    "description": "Sala: Espacio Club. Ciclo Radar Joven 2026 de talento emergente.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://www.eventim-light.com/es/a/686bb556934af8607c4f4a34/e/6a9c632f7361bbff7dfd8aec"
+      }
+    ],
+    "ticketUrl": "https://www.eventim-light.com/es/a/686bb556934af8607c4f4a34/e/6a9c632f7361bbff7dfd8aec"
+  },
+  {
+    "title": "Spooky Bounce | Neo Rave Halloween",
+    "date": "2026-10-30",
+    "start": "21:00",
+    "end": "00:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Triøva",
+      "Mauro Cremisini"
+    ],
+    "description": "Sala: Espacio Artlab. Neo rave, groove y bounce. Cierre B2B especial con Mauro Cremisini.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://siroco.es/agenda/"
+      }
+    ],
+    "ticketUrl": "https://siroco.es/agenda/"
+  },
+  {
+    "title": "Notorious session: DJ Zeten + DJ Taker + Hazhe",
+    "date": "2026-10-31",
+    "start": "00:00",
+    "end": "05:30",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "DJ Zeten",
+      "DJ Taker",
+      "Hazhe"
+    ],
+    "description": "Sala: Espacio Artlab.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/Z5cd4e86bdac"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/Z5cd4e86bdac"
+  },
+  {
+    "title": "Wicked Fridays w/ Badadan: Unity Sound & Luv Messenger + AI-D Selectress x DJ Kennah",
+    "date": "2026-10-31",
+    "start": "00:30",
+    "end": "06:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Unity Sound",
+      "Luv Messenger",
+      "AI-D Selectress",
+      "DJ Kennah"
+    ],
+    "description": "Sala: Espacio Club.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://siroco.es/agenda/"
+      }
+    ],
+    "ticketUrl": "https://siroco.es/agenda/"
+  },
+  {
+    "title": "Días Alternos presenta: Halloween Rock Night",
+    "date": "2026-10-31",
+    "start": "21:00",
+    "end": "00:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "fiesta",
+    "music": [
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Días Alternos"
+    ],
+    "description": "Sala: Espacio Club. Nu metal, emo, punk rock y clásicos góticos. La entrada incluye una cerveza o refresco.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/h62345040121"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/h62345040121"
+  },
+  {
+    "title": "Halloween en Siroco: Andrés Sánchez & Keener (DJ party)",
+    "date": "2026-10-31",
+    "start": "21:00",
+    "end": "00:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "disco",
+      "house"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Andrés Sánchez",
+      "Keener"
+    ],
+    "description": "Sala: Espacio Artlab. Disco, house y grooves.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://siroco.es/agenda/"
+      }
+    ],
+    "ticketUrl": "https://siroco.es/agenda/"
+  },
+  {
+    "title": "Discoscuro: Giggy Devy + LKTA + Estrella Or + Wize",
+    "date": "2026-11-01",
+    "start": "23:00",
+    "end": "05:30",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Giggy Devy",
+      "LKTA",
+      "Estrella Or",
+      "Wize"
+    ],
+    "description": "Sala: Espacio Artlab.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/E98069679033"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/E98069679033"
+  },
+  {
+    "title": "Lu Jr",
+    "date": "2026-11-01",
+    "start": "20:00",
+    "end": null,
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "concierto",
+    "music": [
+      "otros"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Lu Jr"
+    ],
+    "description": "Sala: Espacio Club. Primera gira.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://siroco.es/agenda/"
+      }
+    ],
+    "ticketUrl": "https://siroco.es/agenda/"
+  },
+  {
+    "title": "Cloaca: Laspalas + Huma Humo + Kamboya",
+    "date": "2026-11-01",
+    "start": "23:00",
+    "end": "06:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Laspalas",
+      "Huma Humo",
+      "Kamboya"
+    ],
+    "description": "Sala: Espacio Club.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/d32f2f522300"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/d32f2f522300"
+  },
+  {
+    "title": "Lu Jr",
+    "date": "2026-11-02",
+    "start": "21:00",
+    "end": "00:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "concierto",
+    "music": [
+      "otros"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Lu Jr"
+    ],
+    "description": "Sala: Espacio Club. Primera gira.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/U245e06f8452"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/U245e06f8452"
+  },
+  {
+    "title": "Wistimber",
+    "date": "2026-11-04",
+    "start": "20:30",
+    "end": null,
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "concierto",
+    "music": [
+      "otros"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Wistimber"
+    ],
+    "description": "Sala: Espacio Club.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://siroco.es/agenda/"
+      }
+    ],
+    "ticketUrl": "https://siroco.es/agenda/"
+  },
+  {
+    "title": "Fer Xplosion",
+    "date": "2026-11-05",
+    "start": "00:00",
+    "end": "04:30",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Fer Xplosion"
+    ],
+    "description": "Sala: Espacio Artlab.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://siroco.es/agenda/"
+      }
+    ],
+    "ticketUrl": "https://siroco.es/agenda/"
+  },
+  {
+    "title": "Gavarnie",
+    "date": "2026-11-05",
+    "start": "21:00",
+    "end": "00:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "concierto",
+    "music": [
+      "indie",
+      "pop"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Gavarnie"
+    ],
+    "description": "Sala: Espacio Club. Dúo madrileño de indie pop alternativo en castellano.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/E531727f53fa"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/E531727f53fa"
+  },
+  {
+    "title": "From Disco to Disco: DJ Palo + Eme DJ + K[alma]",
+    "date": "2026-11-05",
+    "start": "00:30",
+    "end": "05:00",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "disco"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "DJ Palo",
+      "Eme DJ",
+      "K[alma]"
+    ],
+    "description": "Sala: Espacio Club.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://link.dice.fm/d32f2f522300"
+      }
+    ],
+    "ticketUrl": "https://link.dice.fm/d32f2f522300"
+  },
+  {
+    "title": "Presión: RXDRIGUEZZ + YABIWASABI + anagm + Solveig",
+    "date": "2026-11-06",
+    "start": "00:00",
+    "end": "05:30",
+    "venue": "Siroco",
+    "address": "C/ San Dimas 3, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "RXDRIGUEZZ",
+      "YABIWASABI",
+      "anagm",
+      "Solveig"
+    ],
+    "description": "Sala: Espacio Artlab.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Siroco",
+        "url": "https://siroco.es/eventos/presion-rxdriguezz-yabiwasabi-anagm-solveig/"
+      }
+    ],
+    "ticketUrl": "https://siroco.es/eventos/presion-rxdriguezz-yabiwasabi-anagm-solveig/"
+  },
+  {
+    "title": "Mondo Disko: Papa Nugs / Gerardo Niva / doccudder",
+    "date": "2026-10-29",
+    "start": "23:59",
+    "end": "05:30",
+    "venue": "Sala But",
+    "address": "C/ Barceló 11, 28004 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "club",
+    "music": [
+      "techno",
+      "house"
+    ],
+    "priceMin": 20,
+    "priceMax": 20,
+    "priceText": "Entrada 20 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Papa Nugs",
+      "Gerardo Niva",
+      "doccudder"
+    ],
+    "description": "Mondo Disko en Sala But. Reservados pista (5 pax) 150 € con 1 botella.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Mondo Disko",
+        "url": "https://www.mondodisko.es/eventos/1178"
+      }
+    ],
+    "ticketUrl": "https://www.mondodisko.es/eventos/1178"
+  },
+  {
+    "title": "Mondo Krystal Halloween: Jeff Mills / The Hacker / Ruiz OSC1 / DJ Swisherman",
+    "date": "2026-10-31",
+    "start": "15:00",
+    "end": null,
+    "venue": "Terraza Jowke",
+    "address": null,
+    "zone": "Otros",
+    "type": "festival",
+    "music": [
+      "techno"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Jeff Mills",
+      "The Hacker",
+      "RUIZ OSC1",
+      "DJ Swisherman"
+    ],
+    "description": "Fiesta de Halloween diurna de Mondo Disko en Terraza Jowke.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Mondo Disko",
+        "url": "https://www.mondodisko.es/eventos/1168"
+      }
+    ],
+    "ticketUrl": "https://www.mondodisko.es/eventos/1168"
+  },
+  {
+    "title": "Mondo Disko Afterparty: The Hacker / Gerardo Niva / RUIZ OSC1 / DJ Swisherman",
+    "date": "2026-10-31",
+    "start": "23:59",
+    "end": "06:00",
+    "venue": "Sala But",
+    "address": "C/ Barceló 11, 28004 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "club",
+    "music": [
+      "techno"
+    ],
+    "priceMin": 50,
+    "priceMax": 50,
+    "priceText": "Entrada 50 € · Consumición extra +12 € · Bono 3 consumiciones +33 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "The Hacker",
+      "Gerardo Niva",
+      "RUIZ OSC1",
+      "DJ Swisherman"
+    ],
+    "description": "Afterparty de Halloween de Mondo Disko en Sala But. Reservado Palco 7P (5 pax) 350 € con 1 botella.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Mondo Disko",
+        "url": "https://www.mondodisko.es/eventos/1169"
+      }
+    ],
+    "ticketUrl": "https://www.mondodisko.es/eventos/1169"
+  },
+  {
+    "title": "Mondo Disko EXTENDED: Benwal B2B Olive Anguz / Gerardo Niva / DJ Swisherman B2B doccudder / Luca v/d Hombergh",
+    "date": "2026-11-01",
+    "start": "23:00",
+    "end": "08:00",
+    "venue": "Mondo Disko",
+    "address": "Club Cocó, C/ Alcalá 20, 28014 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "techno",
+      "house"
+    ],
+    "priceMin": 25,
+    "priceMax": 25,
+    "priceText": "Entrada 25 € · Consumición extra +12 € · Bono 3 consumiciones +33 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Benwal",
+      "Olive Anguz",
+      "Gerardo Niva",
+      "DJ Swisherman",
+      "doccudder",
+      "Luca v/d Hombergh"
+    ],
+    "description": "Horario extendido hasta las 8:00h. Mondo Disko, electronic music nightclub since '99. Consumición extra +12 €, bono 3 consumiciones +33 €.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Mondo Disko",
+        "url": "https://www.mondodisko.es/eventos/1171"
+      }
+    ],
+    "ticketUrl": "https://www.mondodisko.es/eventos/1171"
+  },
+  {
+    "title": "Mondo Disko: Bushbaby / Gerardo Niva / doccudder",
+    "date": "2026-11-05",
+    "start": "23:59",
+    "end": "05:30",
+    "venue": "Mondo Disko",
+    "address": "Club Cocó, C/ Alcalá 20, 28014 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "techno",
+      "house"
+    ],
+    "priceMin": 20,
+    "priceMax": 29,
+    "priceText": "Entrada 20 € · Entrada con 2 consumiciones hasta la 1:00 29 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Bushbaby",
+      "Gerardo Niva",
+      "doccudder"
+    ],
+    "description": "Mondo Disko, electronic music nightclub since '99. Consumición extra +12 €, bono 3 consumiciones +33 €.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Mondo Disko",
+        "url": "https://www.mondodisko.es/eventos/1181"
+      }
+    ],
+    "ticketUrl": "https://www.mondodisko.es/eventos/1181"
+  },
+  {
+    "title": "Mondo Disko: Skin On Skin / Gerardo Niva",
+    "date": "2026-11-07",
+    "start": "23:59",
+    "end": "06:00",
+    "venue": "Mondo Disko",
+    "address": "Club Cocó, C/ Alcalá 20, 28014 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "techno",
+      "house"
+    ],
+    "priceMin": 23,
+    "priceMax": 32,
+    "priceText": "Entrada 23 € · Entrada con 2 consumiciones hasta la 1:00 32 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Skin On Skin",
+      "Gerardo Niva"
+    ],
+    "description": "Mondo Disko, electronic music nightclub since '99. Consumición extra +12 €, bono 3 consumiciones +33 €.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Mondo Disko",
+        "url": "https://www.mondodisko.es/eventos/1182"
+      }
+    ],
+    "ticketUrl": "https://www.mondodisko.es/eventos/1182"
+  },
+  {
+    "title": "Mondo Disko EXTENDED x Hot Meal Records: Mischluft / Mija B2B Ollie Lishman / Gerardo Niva",
+    "date": "2026-11-08",
+    "start": "23:59",
+    "end": "08:00",
+    "venue": "Mondo Disko",
+    "address": "Club Cocó, C/ Alcalá 20, 28014 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "techno",
+      "house"
+    ],
+    "priceMin": 23,
+    "priceMax": 32,
+    "priceText": "Entrada 23 € · Entrada con 2 consumiciones hasta la 1:00 32 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Mischluft",
+      "Mija",
+      "Ollie Lishman",
+      "Gerardo Niva"
+    ],
+    "description": "Horario extendido hasta las 8:00h. Mondo Disko, electronic music nightclub since '99. Consumición extra +12 €, bono 3 consumiciones +33 €.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Mondo Disko",
+        "url": "https://www.mondodisko.es/eventos/1183"
+      }
+    ],
+    "ticketUrl": "https://www.mondodisko.es/eventos/1183"
+  },
+  {
+    "title": "Mondo Disko: Relajadita / Pavvvvvvlo",
+    "date": "2026-11-12",
+    "start": "23:59",
+    "end": "05:30",
+    "venue": "Mondo Disko",
+    "address": "Club Cocó, C/ Alcalá 20, 28014 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "techno",
+      "house"
+    ],
+    "priceMin": 20,
+    "priceMax": 29,
+    "priceText": "Entrada 20 € · Entrada con 2 consumiciones hasta la 1:00 29 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Relajadita",
+      "Pavvvvvvlo"
+    ],
+    "description": "Mondo Disko, electronic music nightclub since '99. Consumición extra +12 €, bono 3 consumiciones +33 €.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Mondo Disko",
+        "url": "https://www.mondodisko.es/eventos/1184"
+      }
+    ],
+    "ticketUrl": "https://www.mondodisko.es/eventos/1184"
+  },
+  {
+    "title": "Mathame",
+    "date": "2026-10-30",
+    "start": "23:55",
+    "end": null,
+    "venue": "LAB theCLUB",
+    "address": "Ático de la Estación de Chamartín, C/ Agustín de Foxá 40, 28036 Madrid",
+    "zone": "Chamartín",
+    "type": "club",
+    "music": [
+      "techno",
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Mathame"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "LAB theCLUB",
+        "url": "https://www.labtheclub.com/agenda/"
+      }
+    ],
+    "ticketUrl": "https://es.ra.co/events/2496534"
+  },
+  {
+    "title": "La Malquerida pres. Roger Sanchez",
+    "date": "2026-11-01",
+    "start": "23:55",
+    "end": null,
+    "venue": "LAB theCLUB",
+    "address": "Ático de la Estación de Chamartín, C/ Agustín de Foxá 40, 28036 Madrid",
+    "zone": "Chamartín",
+    "type": "club",
+    "music": [
+      "house"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Roger Sanchez"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "LAB theCLUB",
+        "url": "https://www.labtheclub.com/agenda/"
+      }
+    ],
+    "ticketUrl": "https://es.ra.co/events/2545754"
+  },
+  {
+    "title": "Pendulum DJ Set + SOTA",
+    "date": "2026-11-06",
+    "start": "23:55",
+    "end": null,
+    "venue": "LAB theCLUB",
+    "address": "Ático de la Estación de Chamartín, C/ Agustín de Foxá 40, 28036 Madrid",
+    "zone": "Chamartín",
+    "type": "club",
+    "music": [
+      "dnb",
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Pendulum (DJ set)",
+      "SOTA"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "LAB theCLUB",
+        "url": "https://www.labtheclub.com/agenda/"
+      }
+    ],
+    "ticketUrl": "https://es.ra.co/events/2462882"
+  },
+  {
+    "title": "Claptone",
+    "date": "2026-11-07",
+    "start": "23:55",
+    "end": null,
+    "venue": "LAB theCLUB",
+    "address": "Ático de la Estación de Chamartín, C/ Agustín de Foxá 40, 28036 Madrid",
+    "zone": "Chamartín",
+    "type": "club",
+    "music": [
+      "house"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Claptone"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "LAB theCLUB",
+        "url": "https://www.labtheclub.com/agenda/"
+      }
+    ],
+    "ticketUrl": "https://nft.spaceofsound.com/event-tickets?event=0686628c-a5f6-11f1-8ba8-06323fd093d1&format=1"
+  },
+  {
+    "title": "Joris Voorn pres. A Trip To Galaxy",
+    "date": "2026-11-13",
+    "start": "23:55",
+    "end": null,
+    "venue": "LAB theCLUB",
+    "address": "Ático de la Estación de Chamartín, C/ Agustín de Foxá 40, 28036 Madrid",
+    "zone": "Chamartín",
+    "type": "club",
+    "music": [
+      "techno",
+      "house"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Joris Voorn"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "LAB theCLUB",
+        "url": "https://www.labtheclub.com/agenda/"
+      }
+    ],
+    "ticketUrl": "https://es.ra.co/events/2534425"
+  },
+  {
+    "title": "Tardeo La Ruta del Bacalao",
+    "date": "2026-10-31",
+    "start": "17:00",
+    "end": "23:30",
+    "venue": "Independance Club",
+    "address": "C/ Bernardino Obregón 18, 28012 Madrid",
+    "zone": "Atocha",
+    "type": "tardeo",
+    "music": [
+      "remember",
+      "electronica"
+    ],
+    "priceMin": 11,
+    "priceMax": 11,
+    "priceText": "Entrada 11 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Independance Club",
+        "url": "https://independanceclub.com/en/products/tardeo-la-ruta-del-bacalao-sabado-31-de-octubre-de-17h-a-23-30h"
+      }
+    ],
+    "ticketUrl": "https://independanceclub.com/en/products/tardeo-la-ruta-del-bacalao-sabado-31-de-octubre-de-17h-a-23-30h"
+  },
+  {
+    "title": "TORO",
+    "date": "2026-11-06",
+    "start": "20:00",
+    "end": null,
+    "venue": "Independance Club",
+    "address": "C/ Bernardino Obregón 18, 28012 Madrid",
+    "zone": "Atocha",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": 11,
+    "priceMax": 11,
+    "priceText": "Entrada 11 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Toro"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Independance Club",
+        "url": "https://independanceclub.com/en/products/toro-viernes-06-noviembre-a-las-20h"
+      }
+    ],
+    "ticketUrl": "https://independanceclub.com/en/products/toro-viernes-06-noviembre-a-las-20h"
+  },
+  {
+    "title": "Tardeo Grunge + Nirvana concierto tributo",
+    "date": "2026-11-13",
+    "start": "18:00",
+    "end": "23:30",
+    "venue": "Independance Club",
+    "address": "C/ Bernardino Obregón 18, 28012 Madrid",
+    "zone": "Atocha",
+    "type": "tardeo",
+    "music": [
+      "rock"
+    ],
+    "priceMin": 10,
+    "priceMax": 10,
+    "priceText": "Entrada 10 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Tributo a Nirvana"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Independance Club",
+        "url": "https://independanceclub.com/en/products/tardeo-grunge-nirvana-concierto-tributo-viernes-13-noviembre-de-18h-a-23-30h"
+      }
+    ],
+    "ticketUrl": "https://independanceclub.com/en/products/tardeo-grunge-nirvana-concierto-tributo-viernes-13-noviembre-de-18h-a-23-30h"
+  },
+  {
+    "title": "Swag City",
+    "date": "2026-10-29",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "hiphop",
+      "rnb",
+      "reggaeton"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Gabryels Mini Mini"
+    ],
+    "description": "Jueves Swag City: reggaeton, hip hop y R&B. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/swag-city-thursday-29-10-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/swag-city-thursday-29-10-2026"
+  },
+  {
+    "title": "The Room",
+    "date": "2026-10-30",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "hiphop",
+      "rnb",
+      "reggaeton"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Viernes The Room: reggaeton, hip hop y RnB. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/the-room-friday-30-10-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/the-room-friday-30-10-2026"
+  },
+  {
+    "title": "Halloween - Pure Shôko",
+    "date": "2026-10-31",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "trap",
+      "rnb",
+      "hiphop",
+      "reggaeton",
+      "afro"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Sábado Pure Shôko: trap, UK drill, RnB, hip hop, reggaeton y afrobeats. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/pure-shoko-saturday-31-10-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/pure-shoko-saturday-31-10-2026"
+  },
+  {
+    "title": "Tardeo La Tropi",
+    "date": "2026-10-31",
+    "start": null,
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "tardeo",
+    "music": [
+      "latino",
+      "reggaeton"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Tardeo de sábado en Shôko.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/tardeo-la-tropi-saturday-31-10-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/tardeo-la-tropi-saturday-31-10-2026"
+  },
+  {
+    "title": "La Residencia",
+    "date": "2026-11-01",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "reggaeton",
+      "trap"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Domingo La Residencia: reggaeton, trap y dembow. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/la-residencia-sunday-1-11-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/la-residencia-sunday-1-11-2026"
+  },
+  {
+    "title": "Fucking Monday",
+    "date": "2026-11-02",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "hiphop",
+      "reggaeton",
+      "rnb",
+      "comercial"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Fucking Monday: hip hop, reggaeton, R&B y top hits para público joven e internacional. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/fucking-monday-monday-2-11-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/fucking-monday-monday-2-11-2026"
+  },
+  {
+    "title": "Crazy",
+    "date": "2026-11-04",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "hiphop",
+      "rnb",
+      "reggaeton",
+      "dancehall"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Miércoles Crazy: hip hop, R&B, reggaeton y dancehall con shows y performances. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/crazy-wednesday-4-11-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/crazy-wednesday-4-11-2026"
+  },
+  {
+    "title": "Swag City",
+    "date": "2026-11-05",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "hiphop",
+      "rnb",
+      "reggaeton"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Jueves Swag City: reggaeton, hip hop y R&B. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/swag-city-thursday-5-11-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/swag-city-thursday-5-11-2026"
+  },
+  {
+    "title": "The Room",
+    "date": "2026-11-06",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "hiphop",
+      "rnb",
+      "reggaeton"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Viernes The Room: reggaeton, hip hop y RnB. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/the-room-friday-6-11-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/the-room-friday-6-11-2026"
+  },
+  {
+    "title": "Pure Shôko",
+    "date": "2026-11-07",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "trap",
+      "rnb",
+      "hiphop",
+      "reggaeton",
+      "afro"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Sábado Pure Shôko: trap, UK drill, RnB, hip hop, reggaeton y afrobeats. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/pure-shoko-saturday-31-10-2027"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/pure-shoko-saturday-31-10-2027"
+  },
+  {
+    "title": "Tardeo La Tropi",
+    "date": "2026-11-07",
+    "start": null,
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "tardeo",
+    "music": [
+      "latino",
+      "reggaeton"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Tardeo de sábado en Shôko.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/tardeo-la-tropi-saturday-7-11-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/tardeo-la-tropi-saturday-7-11-2026"
+  },
+  {
+    "title": "Hanzel La H - La Residencia",
+    "date": "2026-11-08",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "reggaeton",
+      "trap"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Hanzel La H"
+    ],
+    "description": "Domingo La Residencia: reggaeton, trap y dembow. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/la-residencia-sunday-8-11-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/la-residencia-sunday-8-11-2026"
+  },
+  {
+    "title": "Fucking Monday",
+    "date": "2026-11-09",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "hiphop",
+      "reggaeton",
+      "rnb",
+      "comercial"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Fucking Monday: hip hop, reggaeton, R&B y top hits para público joven e internacional. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/fucking-monday-monday-9-11-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/fucking-monday-monday-9-11-2026"
+  },
+  {
+    "title": "Crazy",
+    "date": "2026-11-11",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "hiphop",
+      "rnb",
+      "reggaeton",
+      "dancehall"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Miércoles Crazy: hip hop, R&B, reggaeton y dancehall con shows y performances. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/crazy-wednesday-11-11-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/crazy-wednesday-11-11-2026"
+  },
+  {
+    "title": "3ROBI - Pop That Party",
+    "date": "2026-11-12",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "hiphop",
+      "rnb",
+      "reggaeton"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "3robi"
+    ],
+    "description": "Jueves Swag City: reggaeton, hip hop y R&B. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/swag-city-thursday-12-11-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/swag-city-thursday-12-11-2026"
+  },
+  {
+    "title": "The Room",
+    "date": "2026-11-13",
+    "start": "23:45",
+    "end": null,
+    "venue": "Shoko",
+    "address": "C/ Toledo 86, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "club",
+    "music": [
+      "hiphop",
+      "rnb",
+      "reggaeton"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Viernes The Room: reggaeton, hip hop y RnB. Mesas VIP disponibles.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Shoko",
+        "url": "https://shokomadrid.com/products/the-room-friday-13-11-2026"
+      }
+    ],
+    "ticketUrl": "https://shokomadrid.com/products/the-room-friday-13-11-2026"
+  },
+  {
+    "title": "Black Fusion B2B Kambalache · Halloween en Berlín Club",
+    "date": "2026-11-01",
+    "start": "23:59",
+    "end": null,
+    "venue": "Café Berlín",
+    "address": "Costanilla de los Ángeles 20, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "latino"
+    ],
+    "priceMin": 12,
+    "priceMax": null,
+    "priceText": "Desde 12 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Black Fusion",
+      "Kambalache"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Café Berlín",
+        "url": "https://berlincafe.es/programa/black-fusion-b2b-kambalache-%c2%b7-halloween-en-berlin-club/"
+      }
+    ],
+    "ticketUrl": "https://berlincafe.es/programa/black-fusion-b2b-kambalache-%c2%b7-halloween-en-berlin-club/"
+  },
+  {
+    "title": "Girando la Tarde · After Siesta",
+    "date": "2026-11-07",
+    "start": "19:00",
+    "end": null,
+    "venue": "Café Berlín",
+    "address": "Costanilla de los Ángeles 20, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "tardeo",
+    "music": [],
+    "priceMin": 12,
+    "priceMax": null,
+    "priceText": "Desde 12 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Café Berlín",
+        "url": "https://berlincafe.es/programa/girando-la-tarde-%c2%b7-after-siesta/"
+      }
+    ],
+    "ticketUrl": "https://berlincafe.es/programa/girando-la-tarde-%c2%b7-after-siesta/"
+  },
+  {
+    "title": "Teleparthy · Mar Bravo + Nina Prica + Sazky",
+    "date": "2026-11-08",
+    "start": "23:59",
+    "end": null,
+    "venue": "Café Berlín",
+    "address": "Costanilla de los Ángeles 20, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [],
+    "priceMin": 12,
+    "priceMax": null,
+    "priceText": "Desde 12 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Mar Bravo",
+      "Nina Prica",
+      "Sazky"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Café Berlín",
+        "url": "https://berlincafe.es/programa/teleparthy-%c2%b7-mar-bravo-nina-prica-sazky-en-berlin-club-madrid/"
+      }
+    ],
+    "ticketUrl": "https://berlincafe.es/programa/teleparthy-%c2%b7-mar-bravo-nina-prica-sazky-en-berlin-club-madrid/"
+  },
+  {
+    "title": "Gazzi & Friends",
+    "date": "2026-11-13",
+    "start": "23:59",
+    "end": null,
+    "venue": "Café Berlín",
+    "address": "Costanilla de los Ángeles 20, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [],
+    "priceMin": 12,
+    "priceMax": null,
+    "priceText": "Desde 12 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Gazzi"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Café Berlín",
+        "url": "https://berlincafe.es/programa/gazzi-friends/"
+      }
+    ],
+    "ticketUrl": "https://berlincafe.es/programa/gazzi-friends/"
+  },
+  {
+    "title": "Vikxie",
+    "date": "2026-10-29",
+    "start": "21:00",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "concierto",
+    "music": [
+      "pop"
+    ],
+    "priceMin": 15,
+    "priceMax": null,
+    "priceText": "Anticipada 15 € · Taquilla por confirmar",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Vikxie"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/vikxie29octubre2026.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/vikxie29octubre2026.php"
+  },
+  {
+    "title": "Radar Joven presenta Comic Sans",
+    "date": "2026-10-30",
+    "start": "21:00",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "concierto",
+    "music": [
+      "indie",
+      "rock"
+    ],
+    "priceMin": 3.5,
+    "priceMax": 7,
+    "priceText": "3,50 € con Carnet Joven · 7 € sin carnet · Promo 2x1 5 € · Taquilla por confirmar",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Comic Sans"
+    ],
+    "description": "Midwest emo. Ciclo Radar Joven.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/comicsans30octubre2026.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/comicsans30octubre2026.php"
+  },
+  {
+    "title": "Moby Clubbing presenta Hugo Thiel",
+    "date": "2026-10-30",
+    "start": "23:00",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "club",
+    "music": [
+      "indie",
+      "rock",
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Hugo Thiel"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/programacion.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/programacion.php"
+  },
+  {
+    "title": "Monster presenta Gran Fiesta de Halloween con The Exploding Boys",
+    "date": "2026-10-31",
+    "start": "20:30",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": 17,
+    "priceMax": 20,
+    "priceText": "Anticipada 17 € · Taquilla 20 € · Entrada libre a partir de las 22:30",
+    "free": true,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "The Exploding Boys"
+    ],
+    "description": "Tributo a The Cure, Placebo y Depeche Mode, seguido de DJ sets.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/halloween31octubre2026.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/halloween31octubre2026.php"
+  },
+  {
+    "title": "Moby Clubbing presenta Rojonesta + Kerman",
+    "date": "2026-10-31",
+    "start": "23:00",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "club",
+    "music": [
+      "indie",
+      "electronica",
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Rojonesta",
+      "Kerman"
+    ],
+    "description": "DJ sets de indie, electro y rock/dance.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/programacion.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/programacion.php"
+  },
+  {
+    "title": "Magenta",
+    "date": "2026-11-01",
+    "start": "21:00",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": 8,
+    "priceMax": null,
+    "priceText": "Anticipada 8 € · Taquilla por confirmar",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Magenta"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/magenta1noviembre2026.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/magenta1noviembre2026.php"
+  },
+  {
+    "title": "Poison Ruïn + Mörkt",
+    "date": "2026-11-03",
+    "start": "21:00",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": 18,
+    "priceMax": null,
+    "priceText": "Anticipada 18 € · Taquilla por confirmar",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Poison Ruïn",
+      "Mörkt"
+    ],
+    "description": "Anarcopunk/crust, post-punk, NWOBHM y dungeon synth.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/poisonruin3noviembre2026.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/poisonruin3noviembre2026.php"
+  },
+  {
+    "title": "Rockin'1000 Jam Session. Rock Legends Never Die",
+    "date": "2026-11-04",
+    "start": "20:00",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": 0,
+    "priceMax": 0,
+    "priceText": "Entrada libre hasta completar aforo",
+    "free": true,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Jam session de versiones de clásicos del rock.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/rockin1000jam4noviembre2026.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/rockin1000jam4noviembre2026.php"
+  },
+  {
+    "title": "Rosci Neuence",
+    "date": "2026-11-05",
+    "start": "21:00",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "concierto",
+    "music": [
+      "pop"
+    ],
+    "priceMin": 10,
+    "priceMax": 15,
+    "priceText": "Anticipada 10 € · Taquilla 15 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Rosci Neuence"
+    ],
+    "description": "Pop con toques de folk, country, blues y jazz.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/roscineuence5noviembre2026.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/roscineuence5noviembre2026.php"
+  },
+  {
+    "title": "Multielásticos",
+    "date": "2026-11-06",
+    "start": "21:00",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": 8,
+    "priceMax": null,
+    "priceText": "Desde 8 € · Taquilla por confirmar",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Multielásticos"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/multielasticos6noviembre2026.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/multielasticos6noviembre2026.php"
+  },
+  {
+    "title": "Mescalina presenta Raíz Latina: Tributo a Maná, Los Rodríguez y Jarabe de Palo",
+    "date": "2026-11-08",
+    "start": "20:00",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "concierto",
+    "music": [
+      "rock",
+      "latino"
+    ],
+    "priceMin": 17.5,
+    "priceMax": 25,
+    "priceText": "Anticipada 17,50 € · Taquilla 25 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Mescalina"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/raizlatina8noviembre2026.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/raizlatina8noviembre2026.php"
+  },
+  {
+    "title": "The Nowhere Plan, Tributo a The Beatles",
+    "date": "2026-11-12",
+    "start": "20:30",
+    "end": null,
+    "venue": "Moby Dick",
+    "address": "Av. de Brasil 5, 28020 Madrid",
+    "zone": "Tetuán / Azca",
+    "type": "concierto",
+    "music": [
+      "pop",
+      "rock"
+    ],
+    "priceMin": 18,
+    "priceMax": 22,
+    "priceText": "Anticipada 18 € · Taquilla 22 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "The Nowhere Plan"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Moby Dick",
+        "url": "https://www.mobydickclub.com/thenowhereplan12noviembre2026.php"
+      }
+    ],
+    "ticketUrl": "https://www.mobydickclub.com/thenowhereplan12noviembre2026.php"
+  },
+  {
+    "title": "Sandré + Comunión [Mazo]",
+    "date": "2026-10-30",
+    "start": "21:00",
+    "end": "23:30",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "indie"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Sandré",
+      "Comunión"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/sandre-comunion-mazo/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/sandre-comunion-mazo/"
+  },
+  {
+    "title": "Mazo Club – Noche de los muertos",
+    "date": "2026-10-30",
+    "start": "23:59",
+    "end": "06:00",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "indie",
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/mazo-club-noche-de-los-muertos/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/mazo-club-noche-de-los-muertos/"
+  },
+  {
+    "title": "Candorroween: Dromedarios + Corte! + Catenaccio + Helicóptero Boom",
+    "date": "2026-10-31",
+    "start": "20:15",
+    "end": "23:30",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "indie",
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Dromedarios",
+      "Corte!",
+      "Catenaccio",
+      "Helicóptero Boom"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/candorroween-dromedarios-corte-catenaccio-helicoptero-boom/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/candorroween-dromedarios-corte-catenaccio-helicoptero-boom/"
+  },
+  {
+    "title": "Yelo: Halloween",
+    "date": "2026-10-31",
+    "start": "23:59",
+    "end": "06:00",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "urban",
+      "reggaeton",
+      "trap"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Sesión de música urbana con DJs y showcase de un artista de internet.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/yelo-halloween/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/yelo-halloween/"
+  },
+  {
+    "title": "Radar Joven: Nuevos Vicios + Wet Iguanas",
+    "date": "2026-11-01",
+    "start": "20:30",
+    "end": "23:30",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "indie",
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Nuevos Vicios",
+      "Wet Iguanas"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/radar-joven-nuevos-vicios-wet-iguanas/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/radar-joven-nuevos-vicios-wet-iguanas/"
+  },
+  {
+    "title": "Pyramidiacs",
+    "date": "2026-11-02",
+    "start": "20:30",
+    "end": "23:30",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "pop",
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Pyramidiacs"
+    ],
+    "description": "Power-pop.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/pyramidiacs/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/pyramidiacs/"
+  },
+  {
+    "title": "Dirty Sound Magnet",
+    "date": "2026-11-04",
+    "start": "21:00",
+    "end": null,
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Dirty Sound Magnet"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/dirty-sound-magnet/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/dirty-sound-magnet/"
+  },
+  {
+    "title": "Elements Cave",
+    "date": "2026-11-04",
+    "start": "23:59",
+    "end": null,
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "indie",
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/elements-cave-76/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/elements-cave-76/"
+  },
+  {
+    "title": "DenisDenis",
+    "date": "2026-11-05",
+    "start": "20:30",
+    "end": "23:00",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "indie",
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "DenisDenis"
+    ],
+    "description": "Concierto fin de gira con artistas invitados.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/denisdenis/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/denisdenis/"
+  },
+  {
+    "title": "Casapalma [Mazo]",
+    "date": "2026-11-06",
+    "start": "21:00",
+    "end": "23:30",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "indie"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Casapalma"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/casapalma-mazo/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/casapalma-mazo/"
+  },
+  {
+    "title": "Rata",
+    "date": "2026-11-07",
+    "start": "20:30",
+    "end": "23:30",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Rata"
+    ],
+    "description": null,
+    "status": "agotado",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/rata-sold-out/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/rata-sold-out/"
+  },
+  {
+    "title": "Ochoymedio Club: Niña Polaca DJ set",
+    "date": "2026-11-07",
+    "start": "23:59",
+    "end": "06:00",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "pop",
+      "indie"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Niña Polaca (DJ set)",
+      "Los DJs del Ocho"
+    ],
+    "description": "Club pop de Ochoymedio en Sala El Sol. Entradas en Dice: https://dice.fm/event/k67gnl-ochoymedio-club-7th-nov-el-sol-madrid-tickets",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/ochoymedio-club-4/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/ochoymedio-club-4/"
+  },
+  {
+    "title": "Rata",
+    "date": "2026-11-08",
+    "start": "20:30",
+    "end": "23:30",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Rata"
+    ],
+    "description": null,
+    "status": "agotado",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/rata-sold-out-2/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/rata-sold-out-2/"
+  },
+  {
+    "title": "Elements Cave",
+    "date": "2026-11-11",
+    "start": "23:59",
+    "end": null,
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "indie",
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/elements-cave-77/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/elements-cave-77/"
+  },
+  {
+    "title": "MaiteQuiero [Mazo]",
+    "date": "2026-11-12",
+    "start": "21:00",
+    "end": "23:30",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "indie"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "MaiteQuiero"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/maitequiero-mazo/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/maitequiero-mazo/"
+  },
+  {
+    "title": "The Del Fuegos",
+    "date": "2026-11-13",
+    "start": "20:00",
+    "end": "22:30",
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "The Del Fuegos"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/the-del-fuegos/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/the-del-fuegos/"
+  },
+  {
+    "title": "Pogo: Mietze Conte + Secret Guest + Pogo DJs",
+    "date": "2026-11-13",
+    "start": "23:59",
+    "end": null,
+    "venue": "Sala Sol",
+    "address": "C/ Jardines 3, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Mietze Conte",
+      "Pogo DJs"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Sala El Sol",
+        "url": "https://salaelsol.com/eventos/elements-cave-69/"
+      }
+    ],
+    "ticketUrl": "https://salaelsol.com/eventos/elements-cave-69/"
+  },
+  {
+    "title": "Halloween Ochoymedio: Soy Una Pringada DJ set + Los DJs del Ocho",
+    "date": "2026-10-31",
+    "start": "18:00",
+    "end": null,
+    "venue": "Sala But",
+    "address": "C/ Barceló 11, 28004 Madrid",
+    "zone": "Malasaña / Chueca",
+    "type": "fiesta",
+    "music": [
+      "pop"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Soy Una Pringada (DJ set)",
+      "Los DJs del Ocho"
+    ],
+    "description": "Fiesta de Halloween de Ochoymedio Club en Sala But.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Ochoymedio",
+        "url": "https://ochoymedioclub.com/entradas-club/"
+      }
+    ],
+    "ticketUrl": "https://tickets.oneboxtds.com/thecrazyholeparty/events/60979"
+  },
+  {
+    "title": "Ibrahim Maalouf & The Trumpets of Michel-Ange",
+    "date": "2026-10-29",
+    "start": "20:30",
+    "end": null,
+    "venue": "La Riviera",
+    "address": "Paseo Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "concierto",
+    "music": [
+      "otros"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Ibrahim Maalouf"
+    ],
+    "description": "Apertura de puertas 19:30.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "La Riviera",
+        "url": "https://salariviera.com/conciertossalariviera/"
+      }
+    ],
+    "ticketUrl": "https://www.notikumi.com/channel/villanos-de-la-cultura/2026/10/29/ibrahim-maalouf-the-trumpets-of-michel-ange-vol-2"
+  },
+  {
+    "title": "Carlangas",
+    "date": "2026-10-30",
+    "start": "21:00",
+    "end": null,
+    "venue": "La Riviera",
+    "address": "Paseo Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "concierto",
+    "music": [
+      "indie",
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Carlangas"
+    ],
+    "description": "Apertura de puertas 19:30.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "La Riviera",
+        "url": "https://salariviera.com/conciertossalariviera/"
+      }
+    ],
+    "ticketUrl": "https://inverfest.com/events/carlangas/"
+  },
+  {
+    "title": "Alex Ubago",
+    "date": "2026-11-04",
+    "start": "21:00",
+    "end": null,
+    "venue": "La Riviera",
+    "address": "Paseo Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "concierto",
+    "music": [
+      "pop"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Alex Ubago"
+    ],
+    "description": "Apertura de puertas 19:30.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "La Riviera",
+        "url": "https://salariviera.com/conciertossalariviera/"
+      }
+    ],
+    "ticketUrl": "https://www.ticketmaster.es/event/alex-ubago-entradas/1276240660"
+  },
+  {
+    "title": "Juicy Bae",
+    "date": "2026-11-05",
+    "start": "21:00",
+    "end": null,
+    "venue": "La Riviera",
+    "address": "Paseo Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "concierto",
+    "music": [
+      "urban",
+      "trap"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Juicy Bae"
+    ],
+    "description": "Apertura de puertas 19:30.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "La Riviera",
+        "url": "https://salariviera.com/conciertossalariviera/"
+      }
+    ],
+    "ticketUrl": "https://dice.fm/event/92r85n-juicy-bae-en-mazo-5th-nov-la-riviera-madrid-tickets"
+  },
+  {
+    "title": "Fillas de Cassandra",
+    "date": "2026-11-06",
+    "start": "21:00",
+    "end": null,
+    "venue": "La Riviera",
+    "address": "Paseo Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "concierto",
+    "music": [
+      "indie",
+      "pop"
+    ],
+    "priceMin": 26.4,
+    "priceMax": 26.4,
+    "priceText": "Entrada 26,40 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Fillas de Cassandra"
+    ],
+    "description": "Apertura de puertas 19:30.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "La Riviera",
+        "url": "https://salariviera.com/conciertossalariviera/"
+      }
+    ],
+    "ticketUrl": "https://ochoymedioclub.com/conciertos/fillas-de-cassandra/"
+  },
+  {
+    "title": "Melón Diesel: La gira de Mr. Bond",
+    "date": "2026-11-07",
+    "start": "20:30",
+    "end": null,
+    "venue": "La Riviera",
+    "address": "Paseo Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "concierto",
+    "music": [
+      "rock",
+      "pop"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Melón Diesel"
+    ],
+    "description": "Apertura de puertas 19:00.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "La Riviera",
+        "url": "https://salariviera.com/conciertossalariviera/"
+      }
+    ],
+    "ticketUrl": "https://www.entradas.com/event/melon-diesel-la-gira-de-mr-bond-sala-la-riviera-21572751/?Affiliate=RIV"
+  },
+  {
+    "title": "Max Cooper",
+    "date": "2026-11-08",
+    "start": "20:00",
+    "end": null,
+    "venue": "La Riviera",
+    "address": "Paseo Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "concierto",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Max Cooper"
+    ],
+    "description": "Apertura de puertas 19:00.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "La Riviera",
+        "url": "https://salariviera.com/conciertossalariviera/"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/648921"
+  },
+  {
+    "title": "The Pretty Reckless",
+    "date": "2026-11-09",
+    "start": "21:00",
+    "end": null,
+    "venue": "La Riviera",
+    "address": "Paseo Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "The Pretty Reckless"
+    ],
+    "description": "Apertura de puertas 19:30.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "La Riviera",
+        "url": "https://salariviera.com/conciertossalariviera/"
+      }
+    ],
+    "ticketUrl": "https://www.resurrectionfest.es/route/the-pretty-reckless-tour-2026/"
+  },
+  {
+    "title": "Arlo Parks",
+    "date": "2026-11-10",
+    "start": "21:00",
+    "end": null,
+    "venue": "La Riviera",
+    "address": "Paseo Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "concierto",
+    "music": [
+      "indie",
+      "pop"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Arlo Parks"
+    ],
+    "description": "Apertura de puertas 19:30.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "La Riviera",
+        "url": "https://salariviera.com/conciertossalariviera/"
+      }
+    ],
+    "ticketUrl": "https://www.ticketmaster.es/event/arlo-parks-desire-tour-entradas/872769576?language=en-us"
+  },
+  {
+    "title": "Las Pastillas del Abuelo",
+    "date": "2026-11-11",
+    "start": "20:30",
+    "end": null,
+    "venue": "La Riviera",
+    "address": "Paseo Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Las Pastillas del Abuelo"
+    ],
+    "description": "Apertura de puertas 19:30.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "La Riviera",
+        "url": "https://salariviera.com/conciertossalariviera/"
+      }
+    ],
+    "ticketUrl": "https://www.entradas.com/artist/las-pastillas-del-abuelo/?Affiliate=RIV"
+  },
+  {
+    "title": "Santero y Los Muchachos",
+    "date": "2026-11-13",
+    "start": "21:00",
+    "end": null,
+    "venue": "La Riviera",
+    "address": "Paseo Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+    "zone": "La Latina",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Santero y Los Muchachos"
+    ],
+    "description": "Apertura de puertas 19:30.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "La Riviera",
+        "url": "https://salariviera.com/conciertossalariviera/"
+      }
+    ],
+    "ticketUrl": "https://mutick.com/e/entradas-santero-y-los-muchachos-madrid"
+  },
+  {
+    "title": "Eli Paperboy Reed",
+    "date": "2026-10-30",
+    "start": "20:30",
+    "end": null,
+    "venue": "Changó",
+    "address": "C/ Covarrubias 42, 28010 Madrid",
+    "zone": "Chamberí",
+    "type": "concierto",
+    "music": [
+      "otros"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Eli Paperboy Reed"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Changó",
+        "url": "https://salachango.es/eventos/eli-paperboy-reed-30-octubre-2026"
+      }
+    ],
+    "ticketUrl": "https://dice.fm/event/v3lw3g-eli-paperboy-reed-en-madrid-30th-oct-sala-chang-madrid-tickets"
+  },
+  {
+    "title": "This Is Drag – La Familia Drag",
+    "date": "2026-10-31",
+    "start": null,
+    "end": null,
+    "venue": "Changó",
+    "address": "C/ Covarrubias 42, 28010 Madrid",
+    "zone": "Chamberí",
+    "type": "fiesta",
+    "music": [
+      "pop"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "La Familia Drag"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Changó",
+        "url": "https://salachango.es/eventos/this-is-drag-la-familia-drag-31-octubre-2026"
+      }
+    ],
+    "ticketUrl": "https://www.fourvenues.com/chicle-by-chango/WUQI"
+  },
+  {
+    "title": "Chicle Halloween",
+    "date": "2026-10-31",
+    "start": "23:59",
+    "end": "06:00",
+    "venue": "Changó",
+    "address": "C/ Covarrubias 42, 28010 Madrid",
+    "zone": "Chamberí",
+    "type": "club",
+    "music": [
+      "comercial",
+      "reggaeton"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "After · Halloween Takeover Iberdrola. Sesión Chicle de los sábados en Changó.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Changó",
+        "url": "https://salachango.es/eventos/chicle-halloween-31-octubre-2026"
+      }
+    ],
+    "ticketUrl": "https://www.fourvenues.com/chicle-by-chango/CR5C"
+  },
+  {
+    "title": "Javiera Mena",
+    "date": "2026-11-03",
+    "start": "20:00",
+    "end": null,
+    "venue": "Changó",
+    "address": "C/ Covarrubias 42, 28010 Madrid",
+    "zone": "Chamberí",
+    "type": "concierto",
+    "music": [
+      "pop",
+      "electronica"
+    ],
+    "priceMin": 33,
+    "priceMax": 33,
+    "priceText": "Entrada 33 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Javiera Mena"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Changó",
+        "url": "https://salachango.es/eventos/javiera-mena-3-noviembre-2026"
+      }
+    ],
+    "ticketUrl": "https://dice.fm/event/v3n9o7-javiera-mena-3rd-nov-sala-chang-madrid-tickets"
+  },
+  {
+    "title": "Joe Crepúsculo",
+    "date": "2026-11-06",
+    "start": "20:00",
+    "end": null,
+    "venue": "Changó",
+    "address": "C/ Covarrubias 42, 28010 Madrid",
+    "zone": "Chamberí",
+    "type": "concierto",
+    "music": [
+      "pop",
+      "electronica"
+    ],
+    "priceMin": 22,
+    "priceMax": 22,
+    "priceText": "Entrada 22 €",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Joe Crepúsculo"
+    ],
+    "description": null,
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Changó",
+        "url": "https://salachango.es/eventos/joe-crepusculo-6-noviembre-2026"
+      }
+    ],
+    "ticketUrl": "https://ochoymedioclub.com/conciertos/joe-crepusculo/"
+  },
+  {
+    "title": "B12 - Fiesta Halloween 2026",
+    "date": "2026-10-31",
+    "start": "23:55",
+    "end": null,
+    "venue": "B12",
+    "address": null,
+    "zone": "Otros",
+    "type": "club",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": 18,
+    "lineup": [],
+    "description": "Apertura de puertas 00:00; entrada válida hasta la 01:00 (después se pierde una copa). Disfraz recomendado. Suplemento 20 € por llegada tardía en reservados.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "B12",
+        "url": "https://www.b12madrid.com/entradas-b12-madrid/entradas-fiesta-halloween"
+      }
+    ],
+    "ticketUrl": "https://www.b12madrid.com/entradas-b12-madrid/entradas-fiesta-halloween"
+  },
+  {
+    "title": "BDE - Fiesta Halloween 2026",
+    "date": "2026-10-31",
+    "start": "23:00",
+    "end": "03:30",
+    "venue": "Bodeguita de Enmedio",
+    "address": "C/ Fernández de la Hoz 76, 28003 Madrid",
+    "zone": "Chamberí",
+    "type": "fiesta",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": "Fiesta de Halloween con ofertas especiales en entradas anticipadas. Elige tu disfraz.",
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "Bodeguita de Enmedio",
+        "url": "https://web.bodeguitadeenmedio.es/entradas-bodeguita-madrid/entradas-fiesta-halloween"
+      }
+    ],
+    "ticketUrl": "https://web.bodeguitadeenmedio.es/entradas-bodeguita-madrid/entradas-fiesta-halloween"
+  },
+  {
+    "title": "Morat en Los40 Básico",
+    "date": "2026-11-01",
+    "start": "20:30",
+    "end": null,
+    "venue": "Teatro Eslava",
+    "address": "C/ Arenal 11, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "pop"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": "Entradas solo por sorteo",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Morat"
+    ],
+    "description": "Apertura de puertas 19:30. No hay venta de entradas: se consiguen por sorteo (plazo cerrado el 22 de octubre).",
+    "status": "agotado",
+    "sources": [
+      {
+        "name": "Teatro Eslava",
+        "url": "https://teatroeslava.com/conciertos/morat-en-los40-basico/"
+      }
+    ],
+    "ticketUrl": "https://cloud.news.alcampo.es/sorteoentradasmorat"
+  },
+  {
+    "title": "Gilipojazz",
+    "date": "2026-11-13",
+    "start": "21:00",
+    "end": null,
+    "venue": "Teatro Eslava",
+    "address": "C/ Arenal 11, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "concierto",
+    "music": [
+      "otros"
+    ],
+    "priceMin": 21,
+    "priceMax": 21,
+    "priceText": "Entrada general 21 € + gastos de gestión",
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Gilipojazz"
+    ],
+    "description": "Apertura de puertas 20:00.",
+    "status": "disponible",
+    "sources": [
+      {
+        "name": "Teatro Eslava",
+        "url": "https://teatroeslava.com/conciertos/gilipojazz/"
+      }
+    ],
+    "ticketUrl": "https://feverup.com/m/498805"
+  },
+  {
+    "title": "Spook ft. Gitano del Futuro + Quka + Biondo",
+    "date": "2026-10-29",
+    "start": "23:00",
+    "end": null,
+    "venue": "Boite",
+    "address": "C/ Tetuán 27, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Gitano del Futuro",
+      "Quka",
+      "Biondo"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "SalirMadrid",
+        "url": "https://salirmadrid.es/party/gitano-del-futuro-quka-biondo-29-october-madrid"
+      }
+    ],
+    "ticketUrl": "https://salirmadrid.es/party/gitano-del-futuro-quka-biondo-29-october-madrid"
+  },
+  {
+    "title": "Elena Barker b2b Beltranz y Nachine",
+    "date": "2026-10-30",
+    "start": "23:00",
+    "end": null,
+    "venue": "Boite",
+    "address": "C/ Tetuán 27, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "club",
+    "music": [
+      "electronica"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Elena Barker",
+      "Beltranz",
+      "Nachine"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "SalirMadrid",
+        "url": "https://salirmadrid.es/party/elena-barker-beltranz-nachine-30-october-madrid"
+      }
+    ],
+    "ticketUrl": "https://salirmadrid.es/party/elena-barker-beltranz-nachine-30-october-madrid"
+  },
+  {
+    "title": "Whell: Halloween Party",
+    "date": "2026-10-31",
+    "start": "23:00",
+    "end": null,
+    "venue": "Boite",
+    "address": "C/ Tetuán 27, 28013 Madrid",
+    "zone": "Centro / Sol",
+    "type": "fiesta",
+    "music": [
+      "comercial"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "SalirMadrid",
+        "url": "https://salirmadrid.es/party/whell-halloween-party-31-october-madrid"
+      }
+    ],
+    "ticketUrl": "https://xceed.me/es/madrid/event/whell-halloween-party/246708"
+  },
+  {
+    "title": "MESSA",
+    "date": "2026-10-29",
+    "start": "20:00",
+    "end": null,
+    "venue": "Sala Copérnico",
+    "address": "C/ Fernández de los Ríos 67, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Messa"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "SalirMadrid",
+        "url": "https://salirmadrid.es/live-music/messa-29-october-madrid"
+      }
+    ],
+    "ticketUrl": "https://salirmadrid.es/live-music/messa-29-october-madrid"
+  },
+  {
+    "title": "Victorias: fin de gira",
+    "date": "2026-10-30",
+    "start": "20:00",
+    "end": null,
+    "venue": "Sala Copérnico",
+    "address": "C/ Fernández de los Ríos 67, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "concierto",
+    "music": [
+      "indie",
+      "pop"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Victorias"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "SalirMadrid",
+        "url": "https://salirmadrid.es/live-music/victorias-fin-de-gira-30-october-madrid"
+      }
+    ],
+    "ticketUrl": "https://salirmadrid.es/live-music/victorias-fin-de-gira-30-october-madrid"
+  },
+  {
+    "title": "Pimp Flaco & Kinder Malo",
+    "date": "2026-10-31",
+    "start": "20:00",
+    "end": null,
+    "venue": "Sala Copérnico",
+    "address": "C/ Fernández de los Ríos 67, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "concierto",
+    "music": [
+      "trap",
+      "hiphop"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Pimp Flaco",
+      "Kinder Malo"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "SalirMadrid",
+        "url": "https://salirmadrid.es/live-music/pimp-flaco-kinder-malo-31-october-madrid"
+      }
+    ],
+    "ticketUrl": "https://salirmadrid.es/live-music/pimp-flaco-kinder-malo-31-october-madrid"
+  },
+  {
+    "title": "Kitai",
+    "date": "2026-11-13",
+    "start": "21:00",
+    "end": null,
+    "venue": "Sala Copérnico",
+    "address": "C/ Fernández de los Ríos 67, 28015 Madrid",
+    "zone": "Argüelles / Moncloa",
+    "type": "concierto",
+    "music": [
+      "rock"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "priceText": null,
+    "free": false,
+    "dressCode": null,
+    "ageMin": null,
+    "lineup": [
+      "Kitai"
+    ],
+    "description": null,
+    "status": "desconocido",
+    "sources": [
+      {
+        "name": "SalirMadrid",
+        "url": "https://salirmadrid.es/live-music/kitai-13-november-madrid"
+      }
+    ],
+    "ticketUrl": "https://salirmadrid.es/live-music/kitai-13-november-madrid"
+  }
+]
