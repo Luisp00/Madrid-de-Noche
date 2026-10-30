@@ -646,14 +646,14 @@
    "Panthera Madrid",
    "PANTHERA"
   ],
-  "kind": "discoteca",
+  "kind": "bar",
   "address": "C/ Miguel Ángel 21, 28010 Madrid",
   "postcode": "28010",
   "city": "Madrid",
   "zone": "Chamberí",
   "verified": true,
   "source": "https://app.whan.es/club/panthera",
-  "note": "restaurante-club; 'Villa Panthera' es su club de verano en el Hipódromo de la Zarzuela (Av. Padre Huidobro s/n, 28023), pero las fiestas de temporada son en C/ Miguel Ángel 21. SPEC lo ponía en Chamartín"
+  "note": "Pub / restaurante con copas (corregido por el usuario, 30 oct: no es discoteca); 'Villa Panthera' es su club de verano en el Hipódromo, pero las fiestas de temporada son en C/ Miguel Ángel 21."
  },
  {
   "name": "Istar",
