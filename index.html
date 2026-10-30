@@ -36,6 +36,7 @@ a{color:inherit}
 .iconbtn{width:38px;height:38px;border-radius:12px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;color:var(--text);position:relative;flex:none}
 .iconbtn.on{color:var(--accent);border-color:rgba(255,61,138,.5)}
 .iconbtn svg{width:19px;height:19px}
+.iconbtn.lang{font-weight:800;font-size:12px;letter-spacing:.4px}
 .iconbtn .dot{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;padding:0 5px}
 .iconbtn.spin svg{animation:spin 1.2s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -163,16 +164,17 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
     <div class="brand">
       <div>
         <h1>Madrid de Noche</h1>
-        <div class="sub" id="status" aria-live="polite">Cargando eventos…</div>
+        <div class="sub" id="status" aria-live="polite" data-i18n="loading">Cargando eventos…</div>
       </div>
       <div class="actions">
-        <button class="iconbtn hidden" id="refreshBtn" title="Actualizar los eventos ahora" aria-label="Actualizar los eventos ahora">
+        <button class="iconbtn hidden" id="refreshBtn" data-i18n-title="refreshTitle" title="Actualizar los eventos ahora" aria-label="Actualizar los eventos ahora">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg>
         </button>
-        <button class="iconbtn" id="favBtn" title="Solo favoritos" aria-label="Solo favoritos" aria-pressed="false">
+        <button class="iconbtn" id="favBtn" data-i18n-title="onlyFav" title="Solo favoritos" aria-label="Solo favoritos" aria-pressed="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.3-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.5 1.2 5.1 3 1.6-1.8 3.1-3 5.1-3 3.7 0 5.9 3.8 4.2 7.4C19 16.4 12 21 12 21z"/></svg>
         </button>
-        <button class="iconbtn" id="filterBtn" title="Filtros" aria-label="Filtros" aria-haspopup="dialog">
+        <button class="iconbtn lang" id="langBtn" title="English" aria-label="English">EN</button>
+        <button class="iconbtn" id="filterBtn" data-i18n-title="filters" title="Filtros" aria-label="Filtros" aria-haspopup="dialog">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
           <span class="dot hidden" id="filterCount">0</span>
         </button>
@@ -180,9 +182,9 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
     </div>
     <div class="search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="Buscar sala, fiesta, DJ, barrio…" autocomplete="off" aria-label="Buscar">
+      <input id="q" type="search" data-i18n-ph="searchPh" data-i18n-aria="search" placeholder="Buscar sala, fiesta, DJ, barrio…" autocomplete="off" aria-label="Buscar">
     </div>
-    <div class="chips" id="dateChips" role="tablist" aria-label="Fecha"></div>
+    <div class="chips" id="dateChips" role="tablist" data-i18n-aria="dateAria" aria-label="Fecha"></div>
   </div>
 </header>
 
@@ -191,44 +193,44 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
 <div class="overlay" id="overlay"></div>
 
 <!-- Filtros -->
-<div class="sheet" id="filterSheet" role="dialog" aria-modal="true" aria-label="Filtros">
+<div class="sheet" id="filterSheet" role="dialog" aria-modal="true" data-i18n-aria="filters" aria-label="Filtros">
   <div class="grab"></div>
-  <div class="hd"><h2>Filtros</h2><div><button class="link" id="clearFilters">Limpiar</button> <button class="link" id="closeFilters">Cerrar</button></div></div>
+  <div class="hd"><h2 data-i18n="filters">Filtros</h2><div><button class="link" id="clearFilters" data-i18n="clear">Limpiar</button> <button class="link" id="closeFilters" data-i18n="close">Cerrar</button></div></div>
   <div class="bd">
-    <div class="fsec"><h4>Precio máximo</h4><div class="wrap" id="fPrice"></div></div>
-    <div class="fsec"><h4>Música <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fMusic"></div></div>
-    <div class="fsec"><h4>Zona <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fZone"></div></div>
-    <div class="fsec"><h4>Local <small>· discoteca, sala, bar… · toca dos veces para excluir</small></h4><div class="wrap" id="fKind"></div></div>
-    <div class="fsec"><h4>Tipo de evento <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fType"></div></div>
-    <div class="fsec"><h4>Dress code</h4><div class="wrap" id="fDress"></div></div>
-    <div class="fsec"><h4>Edad · solo donde me dejan entrar</h4><div class="wrap" id="fAge"></div></div>
-    <div class="fsec"><h4>Fuente <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fSource"></div></div>
+    <div class="fsec"><h4 data-i18n="fPrice">Precio máximo</h4><div class="wrap" id="fPrice"></div></div>
+    <div class="fsec"><h4><span data-i18n="fMusic">Música</span> <small data-i18n="twice">· toca dos veces para excluir</small></h4><div class="wrap" id="fMusic"></div></div>
+    <div class="fsec"><h4><span data-i18n="fZone">Zona</span> <small data-i18n="twice">· toca dos veces para excluir</small></h4><div class="wrap" id="fZone"></div></div>
+    <div class="fsec"><h4><span data-i18n="fKind">Local</span> <small data-i18n="fKindHint">· discoteca, sala, bar… · toca dos veces para excluir</small></h4><div class="wrap" id="fKind"></div></div>
+    <div class="fsec"><h4><span data-i18n="fType">Tipo de evento</span> <small data-i18n="twice">· toca dos veces para excluir</small></h4><div class="wrap" id="fType"></div></div>
+    <div class="fsec"><h4 data-i18n="fDress">Dress code</h4><div class="wrap" id="fDress"></div></div>
+    <div class="fsec"><h4 data-i18n="fAge">Edad · solo donde me dejan entrar</h4><div class="wrap" id="fAge"></div></div>
+    <div class="fsec"><h4><span data-i18n="fSource">Fuente</span> <small data-i18n="twice">· toca dos veces para excluir</small></h4><div class="wrap" id="fSource"></div></div>
     <div class="fsec" style="margin-top:20px">
-      <div class="toggle"><span id="lblSold">Ocultar agotados</span><button class="sw" id="swSold" role="switch" aria-checked="false" aria-labelledby="lblSold"></button></div>
-      <div class="toggle"><span id="lblFree">Solo con entrada gratis o lista</span><button class="sw" id="swFree" role="switch" aria-checked="false" aria-labelledby="lblFree"></button></div>
-      <div class="toggle"><span id="lblFav">Solo favoritos</span><button class="sw" id="swFav" role="switch" aria-checked="false" aria-labelledby="lblFav"></button></div>
+      <div class="toggle"><span id="lblSold" data-i18n="hideSold">Ocultar agotados</span><button class="sw" id="swSold" role="switch" aria-checked="false" aria-labelledby="lblSold"></button></div>
+      <div class="toggle"><span id="lblFree" data-i18n="onlyFree">Solo con entrada gratis o lista</span><button class="sw" id="swFree" role="switch" aria-checked="false" aria-labelledby="lblFree"></button></div>
+      <div class="toggle"><span id="lblFav" data-i18n="onlyFav">Solo favoritos</span><button class="sw" id="swFav" role="switch" aria-checked="false" aria-labelledby="lblFav"></button></div>
     </div>
   </div>
-  <button class="apply" id="applyBtn">Ver resultados</button>
+  <button class="apply" id="applyBtn" data-i18n="apply">Ver resultados</button>
 </div>
 
 <!-- Calendario -->
-<div class="sheet" id="dateSheet" role="dialog" aria-modal="true" aria-label="Elegir fecha">
+<div class="sheet" id="dateSheet" role="dialog" aria-modal="true" data-i18n-aria="pickDate" aria-label="Elegir fecha">
   <div class="grab"></div>
-  <div class="hd"><h2>Elige una noche</h2><div><button class="link" id="clearDate">Quitar fecha</button> <button class="link" id="closeDate">Cerrar</button></div></div>
+  <div class="hd"><h2 data-i18n="pickNight">Elige una noche</h2><div><button class="link" id="clearDate" data-i18n="clearDate">Quitar fecha</button> <button class="link" id="closeDate" data-i18n="close">Cerrar</button></div></div>
   <div class="bd">
-    <div class="calnav"><button type="button" id="calPrev" aria-label="Mes anterior">‹</button><h3 id="calTitle"></h3><button type="button" id="calNext" aria-label="Mes siguiente">›</button></div>
+    <div class="calnav"><button type="button" id="calPrev" data-i18n-aria="prevMonth" aria-label="Mes anterior">‹</button><h3 id="calTitle"></h3><button type="button" id="calNext" data-i18n-aria="nextMonth" aria-label="Mes siguiente">›</button></div>
     <div class="calgrid" id="calGrid"></div>
     <div class="calsum" id="calSum"></div>
-    <div class="calhint">Toca una noche para verla; toca otra posterior para ver varias noches seguidas. El número pequeño es cuántos eventos hay esa noche.</div>
+    <div class="calhint" data-i18n="calHint">Toca una noche para verla; toca otra posterior para ver varias noches seguidas. El número pequeño es cuántos eventos hay esa noche.</div>
   </div>
-  <button class="apply" id="applyDate">Ver resultados</button>
+  <button class="apply" id="applyDate" data-i18n="apply">Ver resultados</button>
 </div>
 
 <!-- Ficha -->
-<div class="sheet detail" id="detailSheet" role="dialog" aria-modal="true" aria-label="Detalle del evento">
+<div class="sheet detail" id="detailSheet" role="dialog" aria-modal="true" data-i18n-aria="detailAria" aria-label="Detalle del evento">
   <div class="grab"></div>
-  <div class="hd"><span></span><button class="link" id="closeDetail">Cerrar</button></div>
+  <div class="hd"><span></span><button class="link" id="closeDetail" data-i18n="close">Cerrar</button></div>
   <div class="bd" id="detailBody"></div>
 </div>
 
@@ -253,9 +255,73 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
 const MUSIC_LABELS = {reggaeton:"Reggaetón",latino:"Latino",comercial:"Comercial",pop:"Pop",techno:"Techno",house:"House",electronica:"Electrónica",hiphop:"Hip-hop",trap:"Trap",rnb:"R&B",afro:"Afro",dancehall:"Dancehall",indie:"Indie",rock:"Rock",dnb:"Drum & Bass",hardtechno:"Hard techno",disco:"Disco/Funk",salsa:"Salsa/Bachata",flamenco:"Flamenco",remember:"Remember",urban:"Urbano",variado:"Variado",otros:"Otros"};
 const TYPE_LABELS = {club:"Club",concierto:"Concierto",fiesta:"Fiesta",after:"After",bar:"Bar / DJ",tardeo:"Tardeo",festival:"Festival",otro:"Otro"};
 const KIND_LABELS = {discoteca:"Discoteca",sala:"Sala de conciertos",bar:"Bar / pub",recinto:"Recinto grande",rooftop:"Rooftop",pubcrawl:"Pub crawl",otro:"Otro local"};
-const PRICE_OPTS = [{v:0,l:"Gratis"},{v:10,l:"≤ 10 €"},{v:15,l:"≤ 15 €"},{v:20,l:"≤ 20 €"},{v:30,l:"≤ 30 €"},{v:null,l:"Cualquiera"}];
-const DRESS_OPTS = [{v:"any",l:"Cualquiera"},{v:"none",l:"Sin dress code"},{v:"smart",l:"Elegante / arreglado"}];
-const AGE_OPTS = [{v:null,l:"Cualquiera"},{v:18,l:"Tengo 18–19"},{v:20,l:"Tengo 20"},{v:21,l:"Tengo 21–24"},{v:25,l:"Tengo 25 o más"}];
+const PRICE_OPTS = [{v:0,l:"free"},{v:10,l:"≤ 10 €"},{v:15,l:"≤ 15 €"},{v:20,l:"≤ 20 €"},{v:30,l:"≤ 30 €"},{v:null,l:"any"}];
+const DRESS_OPTS = [{v:"any",l:"any"},{v:"none",l:"dressNone"},{v:"smart",l:"dressSmart"}];
+const AGE_OPTS = [{v:null,l:"any"},{v:18,l:"age18"},{v:20,l:"age20"},{v:21,l:"age21"},{v:25,l:"age25"}];
+
+/* ---------- idioma (es / en): los datos (títulos, salas, barrios) se muestran tal cual; la interfaz y las etiquetas se traducen ---------- */
+const I18N = {
+ es:{loading:"Cargando eventos…",refreshTitle:"Actualizar los eventos ahora",onlyFav:"Solo favoritos",filters:"Filtros",searchPh:"Buscar sala, fiesta, DJ, barrio…",search:"Buscar",dateAria:"Fecha",
+  clear:"Limpiar",close:"Cerrar",fPrice:"Precio máximo",fMusic:"Música",fZone:"Zona",fKind:"Local",fKindHint:"· discoteca, sala, bar… · toca dos veces para excluir",twice:"· toca dos veces para excluir",
+  fType:"Tipo de evento",fDress:"Dress code",fAge:"Edad · solo donde me dejan entrar",fSource:"Fuente",hideSold:"Ocultar agotados",onlyFree:"Solo con entrada gratis o lista",apply:"Ver resultados",
+  pickNight:"Elige una noche",clearDate:"Quitar fecha",prevMonth:"Mes anterior",nextMonth:"Mes siguiente",calHint:"Toca una noche para verla; toca otra posterior para ver varias noches seguidas. El número pequeño es cuántos eventos hay esa noche.",
+  detailAria:"Detalle del evento",dows:["L","M","X","J","V","S","D"],today:"Hoy",tomorrow:"Mañana",all:"Todo",weekend:"Finde",thisWeekend:"Este finde",week:"7 días",pickDate:"Elegir fecha…",noNight:"Ninguna noche elegida.",
+  event:"evento",events:"eventos",free:"Gratis",any:"Cualquiera",dressNone:"Sin dress code",dressSmart:"Elegante / arreglado",age18:"Tengo 18–19",age20:"Tengo 20",age21:"Tengo 21–24",age25:"Tengo 25 o más",
+  upTo:"hasta",noPrice:"Precio no publicado",soldOut:"Agotado",lastTickets:"Últimas entradas",excluded:"Excluido",noData:"Sin datos todavía",
+  noAccessH:"No se puede acceder a los datos",noAccessB:"Inicia sesión en claude.ai y recarga la página.",partial:"No se han podido cargar todos los eventos. Recarga la página en unos segundos.",lastErr:"La última actualización automática falló: ",
+  emptyH:"Nada con estos filtros",emptyB:"Prueba otra fecha o quita algún filtro.",noneYetH:"Todavía no hay eventos",noneYetB:"La primera carga de datos está en marcha. Vuelve en unos minutos.",
+  noAccessS:"Sin acceso a los datos",updating:"Actualizando eventos…",noneLoaded:"Aún no hay eventos cargados",of:"de",updatingNow:"actualizando ahora…",updated:"actualizado",refreshRunning:"Actualización en curso",
+  viewCard:"Ver ficha",favAdd:"Añadir a favoritos",favRemove:"Quitar de favoritos",agoMin:n=>`hace ${n} min`,agoH:n=>`hace ${n} h`,
+  kDate:"Fecha",kVenue:"Sala",kPrice:"Precio",kMusic:"Música",kDress:"Dress code",notSpecified:"No especificado",kAge:"Edad",ageNS:"No especificada (normalmente +18)",kType:"Tipo",kTickets:"Entradas",
+  soldOutF:"Agotadas",available:"Disponibles",soldSee:"Agotado · ver en",ticketsInfo:"Entradas / info",seeOn:"Ver en",directions:"Cómo llegar",
+  note:d=>`Datos recogidos automáticamente de la web de la fuente${d?" el "+d:""}. Confirma precio y condiciones en el enlace antes de ir.`,
+  favSaved:"Guardado en favoritos",favRemoved:"Quitado de favoritos",onlyFavOn:"Mostrando solo favoritos",showAll:"Mostrando todo",running:"Ya hay una actualización en marcha",
+  launchQ:"Lanzar la actualización ahora (tarda 1–2 h y consume tokens)",launch:"Lanzar",no:"No",launched:"Actualización lanzada. Los eventos irán cambiando cuando termine.",
+  noPerm:"No tienes permiso para lanzar la actualización desde aquí",launchFail:"No se pudo lanzar la actualización",loadFail:"No se pudieron cargar los eventos",langBtn:"EN",langTitle:"Switch to English",
+  music:{},type:{},kind:{},zone:{}},
+ en:{loading:"Loading events…",refreshTitle:"Update events now",onlyFav:"Favourites only",filters:"Filters",searchPh:"Search venue, party, DJ, area…",search:"Search",dateAria:"Date",
+  clear:"Clear",close:"Close",fPrice:"Max price",fMusic:"Music",fZone:"Area",fKind:"Venue type",fKindHint:"· club, live venue, bar… · tap twice to exclude",twice:"· tap twice to exclude",
+  fType:"Event type",fDress:"Dress code",fAge:"Age · only where I can get in",fSource:"Source",hideSold:"Hide sold out",onlyFree:"Free entry or guest list only",apply:"Show results",
+  pickNight:"Pick a night",clearDate:"Clear date",prevMonth:"Previous month",nextMonth:"Next month",calHint:"Tap a night to see it; tap a later one to see several nights in a row. The small number is how many events that night has.",
+  detailAria:"Event details",dows:["M","T","W","T","F","S","S"],today:"Today",tomorrow:"Tomorrow",all:"All",weekend:"Weekend",thisWeekend:"This weekend",week:"7 days",pickDate:"Pick a date…",noNight:"No night selected.",
+  event:"event",events:"events",free:"Free",any:"Any",dressNone:"No dress code",dressSmart:"Smart / dressed up",age18:"I'm 18–19",age20:"I'm 20",age21:"I'm 21–24",age25:"I'm 25 or older",
+  upTo:"up to",noPrice:"Price not published",soldOut:"Sold out",lastTickets:"Last tickets",excluded:"Excluded",noData:"No data yet",
+  noAccessH:"Can't access the data",noAccessB:"Sign in at claude.ai and reload the page.",partial:"Not all events could be loaded. Reload the page in a few seconds.",lastErr:"The last automatic update failed: ",
+  emptyH:"Nothing matches these filters",emptyB:"Try another date or remove a filter.",noneYetH:"No events yet",noneYetB:"The first data load is running. Come back in a few minutes.",
+  noAccessS:"No access to the data",updating:"Updating events…",noneLoaded:"No events loaded yet",of:"of",updatingNow:"updating now…",updated:"updated",refreshRunning:"Update in progress",
+  viewCard:"View details",favAdd:"Add to favourites",favRemove:"Remove from favourites",agoMin:n=>`${n} min ago`,agoH:n=>`${n} h ago`,
+  kDate:"Date",kVenue:"Venue",kPrice:"Price",kMusic:"Music",kDress:"Dress code",notSpecified:"Not specified",kAge:"Age",ageNS:"Not specified (usually 18+)",kType:"Type",kTickets:"Tickets",
+  soldOutF:"Sold out",available:"Available",soldSee:"Sold out · see on",ticketsInfo:"Tickets / info",seeOn:"See on",directions:"Directions",
+  note:d=>`Collected automatically from the source website${d?" on "+d:""}. Check the price and conditions at the link before you go.`,
+  favSaved:"Saved to favourites",favRemoved:"Removed from favourites",onlyFavOn:"Showing favourites only",showAll:"Showing everything",running:"An update is already running",
+  launchQ:"Run the update now (takes 1–2 h and uses tokens)",launch:"Run",no:"No",launched:"Update launched. Events will change when it finishes.",
+  noPerm:"You don't have permission to launch the update from here",launchFail:"Couldn't launch the update",loadFail:"Couldn't load the events",langBtn:"ES",langTitle:"Cambiar a español",
+  music:{reggaeton:"Reggaeton",comercial:"Mainstream",electronica:"Electronic",urban:"Urban",variado:"Mixed",otros:"Other",salsa:"Salsa/Bachata",remember:"90s/00s remember"},
+  type:{club:"Club night",concierto:"Concert",fiesta:"Party",after:"Afterparty",bar:"Bar / DJ",tardeo:"Day party",festival:"Festival",otro:"Other"},
+  kind:{discoteca:"Nightclub",sala:"Live music venue",bar:"Bar / pub",recinto:"Arena / big venue",rooftop:"Rooftop",pubcrawl:"Pub crawl",otro:"Other venue"},
+  zone:{"Otros":"Other","Otros norte":"Other (north)","Otros sur":"Other (south)","Humanes (Fabrik)":"Humanes (Fabrik)"}}
+};
+let LANG = (()=>{ const v=safeLS("mdn_lang"); if(v==="es"||v==="en") return v; return /^es/i.test(navigator.language||"es") ? "es" : "en"; })();
+const tr = k => { const v=I18N[LANG][k]; return v===undefined ? (I18N.es[k]??k) : v; };
+const LOC = () => LANG==="en" ? "en-GB" : "es-ES";
+const ML = m => (LANG!=="es" && I18N[LANG].music[m]) || MUSIC_LABELS[m] || m;
+const TL = x => (LANG!=="es" && I18N[LANG].type[x]) || TYPE_LABELS[x] || x;
+const KL = k => (LANG!=="es" && I18N[LANG].kind[k]) || KIND_LABELS[k] || k;
+const ZL = z => (LANG!=="es" && I18N[LANG].zone[z]) || z;
+const nEvents = n => `${n} ${n===1?tr("event"):tr("events")}`;
+function applyI18n(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent=tr(el.dataset.i18n); });
+  document.querySelectorAll("[data-i18n-title]").forEach(el=>{ el.title=tr(el.dataset.i18nTitle); el.setAttribute("aria-label",tr(el.dataset.i18nTitle)); });
+  document.querySelectorAll("[data-i18n-aria]").forEach(el=>{ el.setAttribute("aria-label",tr(el.dataset.i18nAria)); });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{ el.placeholder=tr(el.dataset.i18nPh); });
+  const lb=document.getElementById("langBtn"); if(lb){ lb.textContent=tr("langBtn"); lb.title=tr("langTitle"); lb.setAttribute("aria-label",tr("langTitle")); }
+}
+function setLang(l){
+  LANG=l; safeLS("mdn_lang",l); applyI18n(); closeSheets();
+  for (const e of state.events) delete e._hay;   // el texto de búsqueda incluye etiquetas traducidas
+  renderDateChips(); renderFilters(); render();
+}
 const TRIGGER_ID = "trig_01Vfxn2eyLAwrGVNHx7wYBfW";   // tarea programada de actualización diaria (dispara la sesión de ejecución; solo el propietario puede lanzarla)
 
 const state = {
@@ -278,8 +344,8 @@ function addDays(s,n){ const d=new Date(s+"T12:00:00"); d.setDate(d.getDate()+n)
 function dow(s){ return new Date(s+"T12:00:00").getDay(); } // 0 dom
 function fmtDay(s){
   const d=new Date(s+"T12:00:00"); const t=todayStr();
-  let base = d.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"}); base = base.charAt(0).toUpperCase()+base.slice(1);
-  if (s===t) return "Hoy · "+base; if (s===addDays(t,1)) return "Mañana · "+base; return base;
+  let base = d.toLocaleDateString(LOC(),{weekday:"long",day:"numeric",month:"long"}); base = base.charAt(0).toUpperCase()+base.slice(1);
+  if (s===t) return I18N[LANG].today+" · "+base; if (s===addDays(t,1)) return I18N[LANG].tomorrow+" · "+base; return base;
 }
 function nightMin(start){ // minutos desde las 06:00: lo de madrugada (00:00–05:59) cuenta como final de la noche anterior
   const m=/^(\d{1,2}):(\d{2})/.exec(start||""); if(!m) return 9999;
@@ -288,14 +354,14 @@ function nightMin(start){ // minutos desde las 06:00: lo de madrugada (00:00–0
 function safeLS(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){return null} }
 function toast(m, action){
   const t=$("#toast"); clearTimeout(toast._t); t.classList.remove("action");
-  if (action){ t.innerHTML=`<span>${esc(m)}</span><button type="button" id="toastAct">${esc(action.label)}</button><button type="button" id="toastNo">No</button>`; t.classList.add("action","show");
+  if (action){ t.innerHTML=`<span>${esc(m)}</span><button type="button" id="toastAct">${esc(action.label)}</button><button type="button" id="toastNo">${esc(tr("no"))}</button>`; t.classList.add("action","show");
     $("#toastAct").onclick=()=>{ t.classList.remove("show","action"); action.fn(); }; $("#toastNo").onclick=()=>t.classList.remove("show","action"); toast._t=setTimeout(()=>t.classList.remove("show","action"),12000); return; }
   t.textContent=m; t.classList.add("show"); toast._t=setTimeout(()=>t.classList.remove("show"),2200);
 }
 function priceLabel(e){
   const isFree = e.free || e.priceMin===0;
-  if (e.priceMin==null && e.priceMax==null) return isFree ? {n:"Gratis",free:true,l:short(e.priceText||"")} : {n:e.priceText?"":"—",free:false,l:short(e.priceText||"Precio no publicado")};
-  if (isFree) return {n:"Gratis", free:true, l:short((e.priceMax?`hasta ${e.priceMax} €`:"")+(e.priceText?(e.priceMax?" · ":"")+e.priceText:""))};
+  if (e.priceMin==null && e.priceMax==null) return isFree ? {n:tr("free"),free:true,l:short(e.priceText||"")} : {n:e.priceText?"":"—",free:false,l:short(e.priceText||tr("noPrice"))};
+  if (isFree) return {n:tr("free"), free:true, l:short((e.priceMax?`${tr("upTo")} ${e.priceMax} €`:"")+(e.priceText?(e.priceMax?" · ":"")+e.priceText:""))};
   if (e.priceMin!=null && e.priceMax!=null && e.priceMax!==e.priceMin) return {n:`${e.priceMin}–${e.priceMax} €`,free:false,l:short(e.priceText||"")};
   return {n:`${e.priceMin??e.priceMax} €`,free:false,l:short(e.priceText||"")};
 }
@@ -306,8 +372,8 @@ function dressClass(e){
   return "smart";
 }
 function statusTag(e){
-  if (e.status==="agotado") return '<span class="tag bad">Agotado</span>';
-  if (e.status==="ultimas") return '<span class="tag warn">Últimas entradas</span>';
+  if (e.status==="agotado") return '<span class="tag bad">'+esc(tr("soldOut"))+'</span>';
+  if (e.status==="ultimas") return '<span class="tag warn">'+esc(tr("lastTickets"))+'</span>';
   return "";
 }
 function hostOf(u){ try{ return new URL(u).hostname.replace(/^www\./,""); }catch(e){ return ""; } }
@@ -321,11 +387,11 @@ function weekendRange(){
 }
 function dateOptions(){
   const d=dow(todayStr());
-  const opts=[{k:"todo",l:"Todo"},{k:"hoy",l:"Hoy"},{k:"manana",l:"Mañana"}];
-  opts.push({k:"finde",l:(d>=5||d===0)?"Finde":"Este finde"});
-  opts.push({k:"semana",l:"7 días"});
-  const fmtS=d=>new Date(d+"T12:00").toLocaleDateString("es-ES",{day:"numeric",month:"short"});
-  opts.push({k:"fecha",l: state.customDate? (state.customDateTo && state.customDateTo!==state.customDate ? fmtS(state.customDate)+" – "+fmtS(state.customDateTo) : new Date(state.customDate+"T12:00").toLocaleDateString("es-ES",{weekday:"short",day:"numeric",month:"short"})) : "Elegir fecha…"});
+  const opts=[{k:"todo",l:tr("all")},{k:"hoy",l:tr("today")},{k:"manana",l:tr("tomorrow")}];
+  opts.push({k:"finde",l:(d>=5||d===0)?tr("weekend"):tr("thisWeekend")});
+  opts.push({k:"semana",l:tr("week")});
+  const fmtS=d=>new Date(d+"T12:00").toLocaleDateString(LOC(),{day:"numeric",month:"short"});
+  opts.push({k:"fecha",l: state.customDate? (state.customDateTo && state.customDateTo!==state.customDate ? fmtS(state.customDate)+" – "+fmtS(state.customDateTo) : new Date(state.customDate+"T12:00").toLocaleDateString(LOC(),{weekday:"short",day:"numeric",month:"short"})) : tr("pickDate")});
   return opts;
 }
 function inDateRange(e){
@@ -358,12 +424,12 @@ function renderCalendar(){
   const t=todayStr(); const counts=new Map(); let maxDate=t;
   for (const e of state.events){ if(!e.date || e.date<t) continue; counts.set(e.date,(counts.get(e.date)||0)+1); if(e.date>maxDate) maxDate=e.date; }
   const [y,m]=state.calMonth.split("-").map(Number);
-  const first=new Date(y,m-1,1); const title=first.toLocaleDateString("es-ES",{month:"long",year:"numeric"});
+  const first=new Date(y,m-1,1); const title=first.toLocaleDateString(LOC(),{month:"long",year:"numeric"});
   $("#calTitle").textContent=title.charAt(0).toUpperCase()+title.slice(1);
   $("#calPrev").disabled = state.calMonth <= monthKey(t);
   $("#calNext").disabled = state.calMonth >= monthKey(maxDate);
   const g=$("#calGrid"); g.innerHTML="";
-  for (const d of ["L","M","X","J","V","S","D"]){ const h=document.createElement("div"); h.className="dow"; h.textContent=d; g.appendChild(h); }
+  for (const d of tr("dows")){ const h=document.createElement("div"); h.className="dow"; h.textContent=d; g.appendChild(h); }
   const pad=(first.getDay()+6)%7;
   for (let i=0;i<pad;i++){ const c=document.createElement("div"); c.className="day pad"; g.appendChild(c); }
   const days=new Date(y,m,0).getDate(); const from=state.customDate, to=state.customDateTo||state.customDate;
@@ -374,13 +440,13 @@ function renderCalendar(){
     if (iso<t || iso>maxDate) b.disabled=true;
     if (iso===t) b.classList.add("today");
     if (from && iso>=from && iso<=to) b.classList.add(iso===from||iso===to?"sel":"inrange");
-    b.setAttribute("aria-label",`${fmtDay(iso)}, ${n} eventos`);
+    b.setAttribute("aria-label",`${fmtDay(iso)}, ${nEvents(n)}`);
     b.onclick=()=>pickDay(iso);
     g.appendChild(b);
   }
   const sum=$("#calSum");
-  if (!from) sum.textContent="Ninguna noche elegida.";
-  else { let tot=0; for (const [k,v] of counts) if (k>=from && k<=to) tot+=v; sum.innerHTML = (from===to? `<b>${esc(fmtDay(from))}</b>` : `<b>${esc(fmtDay(from))}</b> → <b>${esc(fmtDay(to))}</b>`) + ` · ${tot} evento${tot!==1?"s":""}`; }
+  if (!from) sum.textContent=tr("noNight");
+  else { let tot=0; for (const [k,v] of counts) if (k>=from && k<=to) tot+=v; sum.innerHTML = (from===to? `<b>${esc(fmtDay(from))}</b>` : `<b>${esc(fmtDay(from))}</b> → <b>${esc(fmtDay(to))}</b>`) + ` · ${nEvents(tot)}`; }
 }
 const pad2=n=>String(n).padStart(2,"0");
 function pickDay(iso){
@@ -396,7 +462,7 @@ function activeFilterCount(){
   return n;
 }
 function haystack(e){
-  if (!e._hay) e._hay = fold([e.title,e.venue,e.zone,e.address,e.description,(e.lineup||[]).join(" "),(e.music||[]).map(m=>MUSIC_LABELS[m]||m).join(" "),(e.sources||[]).map(s=>s.name).join(" "),KIND_LABELS[e.venueKind]||""].join(" "));
+  if (!e._hay) e._hay = fold([e.title,e.venue,e.zone,e.address,e.description,(e.lineup||[]).join(" "),(e.music||[]).map(ML).join(" "),(e.sources||[]).map(s=>s.name).join(" "),e.venueKind?KL(e.venueKind):"",e.zone?ZL(e.zone):""].join(" "));
   return e._hay;
 }
 function passes(e){
@@ -427,7 +493,7 @@ function chipGroup(el, opts, get, set){
   for (const o of opts){
     const st=get(o.v); const b=document.createElement("button"); b.type="button";
     b.className="chip small"+(st==="off"?" off":st?" on":""); b.textContent=(st==="off"?"✕ ":"")+o.l;
-    b.setAttribute("aria-pressed",st==="off"?"mixed":!!st); if(st==="off") b.title="Excluido";
+    b.setAttribute("aria-pressed",st==="off"?"mixed":!!st); if(st==="off") b.title=tr("excluded");
     b.onclick=()=>{ set(o.v); chipGroup(el,opts,get,set); };
     el.appendChild(b);
   }
@@ -444,16 +510,17 @@ function uniqueValues(key){
 }
 function renderFilters(){
   const f=state.f;
-  chipGroup($("#fPrice"), PRICE_OPTS, v=>f.price===v, v=>{f.price=v;});
-  chipGroup($("#fMusic"), uniqueValues("music").map(o=>({v:o.v,l:(MUSIC_LABELS[o.v]||o.v)+" · "+o.n})), ...tri(f.music,f.musicNot));
-  chipGroup($("#fZone"), uniqueValues("zone").map(o=>({v:o.v,l:o.v+" · "+o.n})), ...tri(f.zone,f.zoneNot));
-  chipGroup($("#fKind"), uniqueValues("venueKind").map(o=>({v:o.v,l:(KIND_LABELS[o.v]||o.v)+" · "+o.n})), ...tri(f.kind,f.kindNot));
-  chipGroup($("#fType"), uniqueValues("type").map(o=>({v:o.v,l:(TYPE_LABELS[o.v]||o.v)+" · "+o.n})), ...tri(f.type,f.typeNot));
-  chipGroup($("#fDress"), DRESS_OPTS, v=>f.dress===v, v=>{f.dress=v});
-  chipGroup($("#fAge"), AGE_OPTS, v=>f.age===v, v=>{f.age=v});
+  const tl=o=>({v:o.v,l:tr(o.l)});
+  chipGroup($("#fPrice"), PRICE_OPTS.map(tl), v=>f.price===v, v=>{f.price=v;});
+  chipGroup($("#fMusic"), uniqueValues("music").map(o=>({v:o.v,l:ML(o.v)+" · "+o.n})), ...tri(f.music,f.musicNot));
+  chipGroup($("#fZone"), uniqueValues("zone").map(o=>({v:o.v,l:ZL(o.v)+" · "+o.n})), ...tri(f.zone,f.zoneNot));
+  chipGroup($("#fKind"), uniqueValues("venueKind").map(o=>({v:o.v,l:KL(o.v)+" · "+o.n})), ...tri(f.kind,f.kindNot));
+  chipGroup($("#fType"), uniqueValues("type").map(o=>({v:o.v,l:TL(o.v)+" · "+o.n})), ...tri(f.type,f.typeNot));
+  chipGroup($("#fDress"), DRESS_OPTS.map(tl), v=>f.dress===v, v=>{f.dress=v});
+  chipGroup($("#fAge"), AGE_OPTS.map(tl), v=>f.age===v, v=>{f.age=v});
   chipGroup($("#fSource"), uniqueValues("source").map(o=>({v:o.v,l:o.v+" · "+o.n})), ...tri(f.source,f.sourceNot));
   for (const [id,on] of [["#swSold",f.hideSold],["#swFree",f.onlyFree],["#swFav",f.onlyFav]]){ const el=$(id); el.classList.toggle("on",on); el.setAttribute("aria-checked",on); }
-  if(!$("#fMusic").children.length) $("#fMusic").innerHTML='<span class="src">Sin datos todavía</span>';
+  if(!$("#fMusic").children.length) $("#fMusic").innerHTML='<span class="src">'+esc(tr("noData"))+'</span>';
 }
 function clearFilters(){ state.f={price:null,music:new Set(),zone:new Set(),type:new Set(),dress:"any",age:null,source:new Set(),musicNot:new Set(),zoneNot:new Set(),typeNot:new Set(),sourceNot:new Set(),kind:new Set(),kindNot:new Set(),hideSold:false,onlyFree:false,onlyFav:false}; renderFilters(); }
 
@@ -463,19 +530,19 @@ function render(){
   $("#favBtn").classList.toggle("on",state.f.onlyFav); $("#favBtn").setAttribute("aria-pressed",state.f.onlyFav);
   renderStatus();
   if (!state.loaded){ main.innerHTML='<div class="grid" style="margin-top:16px">'+'<div class="skel"></div>'.repeat(4)+'</div>'; return; }
-  if (state.dbMissing){ main.innerHTML='<div class="empty"><h3>No se puede acceder a los datos</h3>Inicia sesión en claude.ai y recarga la página.</div>'; return; }
+  if (state.dbMissing){ main.innerHTML=`<div class="empty"><h3>${esc(tr("noAccessH"))}</h3>${esc(tr("noAccessB"))}</div>`; return; }
   const list = state.events.filter(passes).sort((a,b)=> a.date.localeCompare(b.date) || (nightMin(a.start)-nightMin(b.start)) || (a.title||"").localeCompare(b.title||""));
   let html="";
-  if (state.partial) html+='<div class="notice">No se han podido cargar todos los eventos. Recarga la página en unos segundos.</div>';
-  if (state.meta?.lastError && !isRunning()) html+=`<div class="notice">La última actualización automática falló: ${esc(String(state.meta.lastError).slice(0,200))}</div>`;
+  if (state.partial) html+=`<div class="notice">${esc(tr("partial"))}</div>`;
+  if (state.meta?.lastError && !isRunning()) html+=`<div class="notice">${esc(tr("lastErr"))}${esc(String(state.meta.lastError).slice(0,200))}</div>`;
   if (!list.length){
-    main.innerHTML = html + (state.events.length ? '<div class="empty"><h3>Nada con estos filtros</h3>Prueba otra fecha o quita algún filtro.</div>'
-      : '<div class="empty"><h3>Todavía no hay eventos</h3>La primera carga de datos está en marcha. Vuelve en unos minutos.</div>');
+    main.innerHTML = html + (state.events.length ? `<div class="empty"><h3>${esc(tr("emptyH"))}</h3>${esc(tr("emptyB"))}</div>`
+      : `<div class="empty"><h3>${esc(tr("noneYetH"))}</h3>${esc(tr("noneYetB"))}</div>`);
     return;
   }
   const groups=new Map(); for(const e of list){ if(!groups.has(e.date)) groups.set(e.date,[]); groups.get(e.date).push(e); }
   for (const [date, evs] of groups){
-    html+=`<section class="daygroup" aria-label="${esc(fmtDay(date))}"><div class="dayhead"><h2>${esc(fmtDay(date))}</h2><span>${evs.length} evento${evs.length!==1?"s":""}</span></div><div class="grid">`;
+    html+=`<section class="daygroup" aria-label="${esc(fmtDay(date))}"><div class="dayhead"><h2>${esc(fmtDay(date))}</h2><span>${nEvents(evs.length)}</span></div><div class="grid">`;
     for (const e of evs) html+=card(e);
     html+="</div></section>";
   }
@@ -483,14 +550,14 @@ function render(){
 }
 function renderStatus(){
   const st=$("#status"); const t=todayStr();
-  if (!state.loaded){ st.textContent="Cargando eventos…"; return; }
-  if (state.dbMissing){ st.textContent="Sin acceso a los datos"; return; }
+  if (!state.loaded){ st.textContent=tr("loading"); return; }
+  if (state.dbMissing){ st.textContent=tr("noAccessS"); return; }
   const upcoming = state.events.filter(e=>e.date>=t).length;
   const shown = state.events.filter(passes).length;
   const running = isRunning();
-  if (!state.events.length){ st.textContent = running ? "Actualizando eventos…" : "Aún no hay eventos cargados"; return; }
-  st.innerHTML=`<b>${shown}</b> de ${upcoming} eventos · ${running? '<span class="live">actualizando ahora…</span>' : "actualizado "+fmtUpdated()}`;
-  const rb=$("#refreshBtn"); rb.classList.toggle("spin",running); rb.disabled=running; rb.title = running ? "Actualización en curso" : "Actualizar los eventos ahora";
+  if (!state.events.length){ st.textContent = running ? tr("updating") : tr("noneLoaded"); return; }
+  st.innerHTML=`<b>${shown}</b> ${tr("of")} ${upcoming} ${tr("events")} · ${running? '<span class="live">'+esc(tr("updatingNow"))+'</span>' : esc(tr("updated"))+" "+fmtUpdated()}`;
+  const rb=$("#refreshBtn"); rb.classList.toggle("spin",running); rb.disabled=running; rb.title = running ? tr("refreshRunning") : tr("refreshTitle");
 }
 function isRunning(){
   const m=state.meta; if(!m?.running) return false;
@@ -499,26 +566,26 @@ function isRunning(){
 }
 function card(e){
   const p=priceLabel(e); const fav=state.favs.has(e.id);
-  const music=(e.music||[]).slice(0,3).map(m=>`<span class="tag music">${esc(MUSIC_LABELS[m]||m)}</span>`).join("");
+  const music=(e.music||[]).slice(0,3).map(m=>`<span class="tag music">${esc(ML(m))}</span>`).join("");
   const time = e.start? `<span class="tag time">${esc(e.start)}${e.end?"–"+esc(e.end):""}</span>`:"";
   const dress = e.dressCode && dressClass(e)==="smart" ? `<span class="tag dress" title="${esc(e.dressCode)}">👔 ${esc(short(e.dressCode))}</span>` : "";
   const age = e.ageMin && e.ageMin>18 ? `<span class="tag age">+${e.ageMin}</span>` : "";
-  const type = e.type && e.type!=="club" ? `<span class="tag">${esc(TYPE_LABELS[e.type]||e.type)}</span>`:"";
-  const kind = e.venueKind && e.venueKind!=="otro" ? `<span class="tag kind">${esc(KIND_LABELS[e.venueKind]||e.venueKind)}</span>` : "";
-  const srcs=(e.sources||[]).slice(0,4).map(s=>`<span class="src">${esc(s.name)}</span>`).join("");
-  return `<article class="card ${e.status==="agotado"?"soldout":""}" data-id="${esc(e.id)}" tabindex="0" role="button" aria-label="${esc(e.title)}, ${esc(e.venue||"")}. Ver ficha">
-    <div class="row"><div><h3>${esc(e.title)}</h3><div class="venue"><b>${esc(e.venue||"")}</b>${e.zone?" · "+esc(e.zone):""}</div></div>
+  const type = e.type && e.type!=="club" ? `<span class="tag">${esc(TL(e.type))}</span>`:"";
+  const kind = e.venueKind && e.venueKind!=="otro" ? `<span class="tag kind">${esc(KL(e.venueKind))}</span>` : "";
+  const srcs=[...new Set((e.sources||[]).map(s=>s.name))].slice(0,4).map(n=>`<span class="src">${esc(n)}</span>`).join("");   // un nombre por fuente aunque tenga varios enlaces
+  return `<article class="card ${e.status==="agotado"?"soldout":""}" data-id="${esc(e.id)}" tabindex="0" role="button" aria-label="${esc(e.title)}, ${esc(e.venue||"")}. ${esc(tr("viewCard"))}">
+    <div class="row"><div><h3>${esc(e.title)}</h3><div class="venue"><b>${esc(e.venue||"")}</b>${e.zone?" · "+esc(ZL(e.zone)):""}</div></div>
       <div class="price"><span class="n ${p.free?"free":""}">${esc(p.n)}</span>${p.l?`<span class="l">${esc(p.l)}</span>`:""}</div></div>
     <div class="meta">${time}${kind}${music}${type}${dress}${age}${statusTag(e)}</div>
     <div class="foot"><div class="srcs">${srcs}</div>
-      <button type="button" class="fav ${fav?"on":""}" data-fav="${esc(e.id)}" aria-label="${fav?"Quitar de favoritos":"Añadir a favoritos"}" aria-pressed="${fav}"><svg viewBox="0 0 24 24" fill="${fav?"currentColor":"none"}" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.6-9.3-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.5 1.2 5.1 3 1.6-1.8 3.1-3 5.1-3 3.7 0 5.9 3.8 4.2 7.4C19 16.4 12 21 12 21z"/></svg></button></div>
+      <button type="button" class="fav ${fav?"on":""}" data-fav="${esc(e.id)}" aria-label="${esc(fav?tr("favRemove"):tr("favAdd"))}" aria-pressed="${fav}"><svg viewBox="0 0 24 24" fill="${fav?"currentColor":"none"}" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.6-9.3-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.5 1.2 5.1 3 1.6-1.8 3.1-3 5.1-3 3.7 0 5.9 3.8 4.2 7.4C19 16.4 12 21 12 21z"/></svg></button></div>
   </article>`;
 }
 function fmtUpdated(){
   const t=state.meta?.lastUpdated; if(!t) return "—";
   const d=new Date(t); const diff=(Date.now()-d)/60000;
-  if (diff<60) return `hace ${Math.max(1,Math.round(diff))} min`; if (diff<60*36) return `hace ${Math.round(diff/60)} h`;
-  return d.toLocaleDateString("es-ES",{day:"numeric",month:"short"});
+  if (diff<60) return I18N[LANG].agoMin(Math.max(1,Math.round(diff))); if (diff<60*36) return I18N[LANG].agoH(Math.round(diff/60));
+  return d.toLocaleDateString(LOC(),{day:"numeric",month:"short"});
 }
 
 /* ---------- ficha ---------- */
@@ -526,26 +593,26 @@ function openDetail(id){
   const e=state.events.find(x=>x.id===id); if(!e) return;
   const p=priceLabel(e);
   const kv=[];
-  kv.push(["Fecha", esc(fmtDay(e.date))+(e.start?` · ${esc(e.start)}${e.end?"–"+esc(e.end):""}`:"")]);
-  if (e.venue) kv.push(["Sala", esc(e.venue)+(e.address?`<br><small>${esc(e.address)}</small>`:"")]);
-  kv.push(["Precio", `<b style="color:${p.free?"var(--ok)":"inherit"}">${esc(p.n||"—")}</b>${e.priceText?`<br><small>${esc(e.priceText)}</small>`:""}${e.priceNote?`<br><small style="color:var(--ok)">${esc(e.priceNote)}</small>`:""}`]);
-  if (e.music?.length) kv.push(["Música", e.music.map(m=>esc(MUSIC_LABELS[m]||m)).join(", ")]);
+  kv.push([tr("kDate"), esc(fmtDay(e.date))+(e.start?` · ${esc(e.start)}${e.end?"–"+esc(e.end):""}`:"")]);
+  if (e.venue) kv.push([tr("kVenue"), esc(e.venue)+(e.address?`<br><small>${esc(e.address)}</small>`:"")]);
+  kv.push([tr("kPrice"), `<b style="color:${p.free?"var(--ok)":"inherit"}">${esc(p.n||"—")}</b>${e.priceText?`<br><small>${esc(e.priceText)}</small>`:""}${e.priceNote?`<br><small style="color:var(--ok)">${esc(e.priceNote)}</small>`:""}`]);
+  if (e.music?.length) kv.push([tr("kMusic"), e.music.map(m=>esc(ML(m))).join(", ")]);
   if (e.lineup?.length) kv.push(["Line-up", e.lineup.map(esc).join(", ")]);
-  kv.push(["Dress code", e.dressCode? esc(e.dressCode) : '<small>No especificado</small>']);
-  kv.push(["Edad", e.ageMin? `+${e.ageMin}` : '<small>No especificada (normalmente +18)</small>']);
-  if (e.type) kv.push(["Tipo", esc(TYPE_LABELS[e.type]||e.type)+(e.venueKind?` · ${esc(KIND_LABELS[e.venueKind]||e.venueKind)}`:"")]);
-  if (e.status && e.status!=="desconocido") kv.push(["Entradas", e.status==="agotado"?'<span style="color:var(--bad)">Agotadas</span>':e.status==="ultimas"?'<span style="color:var(--warn)">Últimas entradas</span>':"Disponibles"]);
+  kv.push([tr("kDress"), e.dressCode? esc(e.dressCode) : '<small>'+esc(tr("notSpecified"))+'</small>']);
+  kv.push([tr("kAge"), e.ageMin? `+${e.ageMin}` : '<small>'+esc(tr("ageNS"))+'</small>']);
+  if (e.type) kv.push([tr("kType"), esc(TL(e.type))+(e.venueKind?` · ${esc(KL(e.venueKind))}`:"")]);
+  if (e.status && e.status!=="desconocido") kv.push([tr("kTickets"), e.status==="agotado"?'<span style="color:var(--bad)">'+esc(tr("soldOutF"))+'</span>':e.status==="ultimas"?'<span style="color:var(--warn)">'+esc(tr("lastTickets"))+'</span>':esc(tr("available"))]);
   // botón principal: el enlace de compra más barato (ticketUrl); después, el resto de fuentes
   const srcs=e.sources||[]; const ticket=e.ticketUrl||srcs[0]?.url; const buttons=[];
-  if (ticket){ const s=srcs.find(x=>x.url===ticket); buttons.push(`<a class="btn primary" href="${esc(ticket)}" target="_blank" rel="noopener"><span>${e.status==="agotado"?"Agotado · ver en":"Entradas / info"} · ${esc(s?s.name:hostOf(ticket))}</span><span class="s">↗</span></a>`); }
+  if (ticket){ const s=srcs.find(x=>x.url===ticket); buttons.push(`<a class="btn primary" href="${esc(ticket)}" target="_blank" rel="noopener"><span>${esc(e.status==="agotado"?tr("soldSee"):tr("ticketsInfo"))} · ${esc(s?s.name:hostOf(ticket))}</span><span class="s">↗</span></a>`); }
   const seenNames=new Set([srcs.find(x=>x.url===ticket)?.name].filter(Boolean));
-  for (const s of srcs){ if (s.url===ticket || seenNames.has(s.name)) continue; seenNames.add(s.name); buttons.push(`<a class="btn" href="${esc(s.url)}" target="_blank" rel="noopener"><span>Ver en ${esc(s.name)}</span><span class="s">↗</span></a>`); }
-  if (e.address || e.venue) buttons.push(`<a class="btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((e.venue?e.venue+", ":"")+(e.address||"Madrid"))}" target="_blank" rel="noopener"><span>Cómo llegar</span><span class="s">Maps ↗</span></a>`);
-  $("#detailBody").innerHTML=`<h2>${esc(e.title)}</h2><div class="lead"><b>${esc(e.venue||"")}</b>${e.zone?" · "+esc(e.zone):""}</div>
+  for (const s of srcs){ if (s.url===ticket || seenNames.has(s.name)) continue; seenNames.add(s.name); buttons.push(`<a class="btn" href="${esc(s.url)}" target="_blank" rel="noopener"><span>${esc(tr("seeOn"))} ${esc(s.name)}</span><span class="s">↗</span></a>`); }
+  if (e.address || e.venue) buttons.push(`<a class="btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((e.venue?e.venue+", ":"")+(e.address||"Madrid"))}" target="_blank" rel="noopener"><span>${esc(tr("directions"))}</span><span class="s">Maps ↗</span></a>`);
+  $("#detailBody").innerHTML=`<h2>${esc(e.title)}</h2><div class="lead"><b>${esc(e.venue||"")}</b>${e.zone?" · "+esc(ZL(e.zone)):""}</div>
     <div class="kv">${kv.map(([k,v])=>`<div class="k">${k}</div><div class="v">${v}</div>`).join("")}</div>
     ${e.description?`<div class="desc">${esc(e.description)}</div>`:""}
     <div class="btns">${buttons.join("")}</div>
-    <div class="note">Datos recogidos automáticamente de la web de la fuente${e.updatedAt?` el ${new Date(e.updatedAt).toLocaleString("es-ES",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}`:""}. Confirma precio y condiciones en el enlace antes de ir.</div>`;
+    <div class="note">${esc(I18N[LANG].note(e.updatedAt? new Date(e.updatedAt).toLocaleString(LOC(),{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}) : ""))}</div>`;
   openSheet("#detailSheet","#closeDetail");
 }
 function openSheet(sel, focusSel){
@@ -569,23 +636,23 @@ function saveFavs(){
 }
 function toggleFav(id){
   const on=!state.favs.has(id); on?state.favs.add(id):state.favs.delete(id); saveFavs(); render();
-  toast(on?"Guardado en favoritos":"Quitado de favoritos");
+  toast(on?tr("favSaved"):tr("favRemoved"));
 }
 
 /* ---------- actualizar ahora (solo propietario) ---------- */
 async function requestRefresh(){
   if (!state.mcp) return;
-  if (isRunning()){ toast("Ya hay una actualización en marcha"); return; }
-  toast("Lanzar la actualización ahora (tarda 1–2 h y consume tokens)", {label:"Lanzar", fn: async ()=>{
+  if (isRunning()){ toast(tr("running")); return; }
+  toast(tr("launchQ"), {label:tr("launch"), fn: async ()=>{
     try{
       $("#refreshBtn").classList.add("spin");
       await state.mcp.callTool("Claude Code Remote","fire_trigger",{trigger_id:TRIGGER_ID, text:"Lanzada a mano desde la app Madrid de Noche."});
-      toast("Actualización lanzada. Los eventos irán cambiando cuando termine.");
+      toast(tr("launched"));
       state.meta={...(state.meta||{}), running:true, runStartedAt:new Date().toISOString()}; renderStatus();
     }catch(err){
       $("#refreshBtn").classList.remove("spin");
       const code=err?.code||""; console.error(err);
-      toast(code==="not_granted"||code==="server_not_connected" ? "No tienes permiso para lanzar la actualización desde aquí" : "No se pudo lanzar la actualización ("+(code||"error")+")");
+      toast(code==="not_granted"||code==="server_not_connected" ? tr("noPerm") : tr("launchFail")+" ("+(code||"error")+")");
     }
   }});
 }
@@ -593,7 +660,8 @@ async function requestRefresh(){
 /* ---------- eventos UI ---------- */
 $("#q").addEventListener("input",e=>{ state.q=e.target.value.trim(); render(); });
 $("#filterBtn").onclick=()=>{ renderFilters(); openSheet("#filterSheet","#closeFilters"); };
-$("#favBtn").onclick=()=>{ state.f.onlyFav=!state.f.onlyFav; render(); toast(state.f.onlyFav?"Mostrando solo favoritos":"Mostrando todo"); };
+$("#favBtn").onclick=()=>{ state.f.onlyFav=!state.f.onlyFav; render(); toast(state.f.onlyFav?tr("onlyFavOn"):tr("showAll")); };
+$("#langBtn").onclick=()=>setLang(LANG==="es"?"en":"es");
 $("#refreshBtn").onclick=requestRefresh;
 $("#applyBtn").onclick=closeSheets;
 $("#closeFilters").onclick=closeSheets;
@@ -620,7 +688,7 @@ document.addEventListener("keydown",e=>{ if(e.key==="Escape" && document.querySe
 try{ new ResizeObserver(en=>{ for(const x of en) document.documentElement.style.setProperty("--top-h", Math.round(x.target.getBoundingClientRect().height)+"px"); }).observe($("#top")); }catch(e){}
 
 /* ---------- datos ---------- */
-loadFavs(); renderDateChips(); render();
+applyI18n(); loadFavs(); renderDateChips(); render();
 function setEvents(list){ const t=addDays(todayStr(),-1); state.events=list.filter(e=>e && e.date && e.date>=t); state.loaded=true; render(); }
 async function loadStatic(){
   // Versión web estática (GitHub Pages): los datos están en data/events.json y data/status.json
@@ -642,7 +710,7 @@ async function loadStatic(){
       const all=new Map(); for (const c of docs) for (const e of (c.events||[])) if (e && e.id) all.set(e.id,e);
       state.partial = docs.length>0 && docs.some(c=>c.n && c.n>docs.length);
       setEvents([...all.values()]);
-    }, err=>{ console.error(err); state.loaded=true; state.partial=true; render(); toast("No se pudieron cargar los eventos"); });
+    }, err=>{ console.error(err); state.loaded=true; state.partial=true; render(); toast(tr("loadFail")); });
     db.doc("meta/status").onSnapshot(s=>{ state.meta=s.exists?s.data():null; render(); }, ()=>{});
     setTimeout(()=>{ if(!state.loaded){ state.loaded=true; state.partial=true; render(); } }, 12000);
   } catch(e){ console.error(e); state.loaded=true; render(); }
