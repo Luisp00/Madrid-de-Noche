@@ -365,7 +365,13 @@ def titles_match(TA, TB, venue_names, vtoks):
 def is_match(m, e):
     if m["date"]!=e["date"]:
         # mismo enlace de compra con fechas vecinas: una fuente puso la fecha natural de una sesión de madrugada
-        if abs((datetime.date.fromisoformat(m["date"])-datetime.date.fromisoformat(e["date"])).days)==1 and ticket_keys(m)&ticket_keys(e): return True
+        # Solo si una de las dos horas es de madrugada (00:00-06:59) y la otra de noche o desconocida: un plan recurrente
+        # (feverup.com/m/<id> cada noche, pub crawls, Kapital) comparte enlace todas las noches y NO debe fundirse entre días
+        if abs((datetime.date.fromisoformat(m["date"])-datetime.date.fromisoformat(e["date"])).days)==1 and ticket_keys(m)&ticket_keys(e):
+            ta, tb = tmin(m.get("start")), tmin(e.get("start"))
+            early = lambda t: t is not None and t < 7*60
+            late = lambda t: t is None or t >= 20*60
+            if (early(ta) and late(tb)) or (early(tb) and late(ta)): return True
         return False
     if ticket_keys(m)&ticket_keys(e): return True
     ta, tb = tmin(m.get("start")), tmin(e.get("start"))
@@ -590,6 +596,7 @@ def main(data_dir, existing_path, out_dir, today=None):
     by_date={}
     for xid,xd in existing.items(): by_date.setdefault(xd.get("date"),[]).append((xid,xd))
     today_by_date={}   # fecha -> [(id, evento de hoy con _titles)] para fundir existentes no vistos que son duplicados
+    kept_by_date={}    # fecha -> [(id, existente conservado)] para no conservar dos copias del mismo evento
     for e in merged:
         titles=e.get("_titles") or [e["title"]]
         eid=make_id(e)
@@ -653,6 +660,17 @@ def main(data_dir, existing_path, out_dir, today=None):
         elif d >= today and last <= stale_limit and (last <= hard_limit or any(s.get("name") in sources_today for s in xd.get("sources",[]))):
             counts["quitadosCancelados"]+=1; warn(f"quitado (no visto desde {last}): {d} {xd.get('venue')} «{str(xd.get('title'))[:60]}»")
         else:
+            # dos existentes no vistos que son el mismo evento (p. ej. la ficha en español de una extracción anterior y la
+            # inglesa de otra, con el mismo enlace de compra): se quedan en uno
+            xm=dict(xd, venue=canon_venue(xd.get("venue")))
+            twin=next((kid for kid,kd in kept_by_date.get(d,[]) if is_match(kd,xm)), None)
+            if twin:
+                kd=final[twin]
+                for k in list(STABLE_FIELDS)+["priceMin","priceMax","priceText"]:
+                    if kd.get(k) in (None,[],"") and xd.get(k) not in (None,[],""): kd[k]=xd[k]
+                kd["sources"]=dedupe_sources(list(kd.get("sources") or [])+[s0 for s0 in xs if s0.get("url") not in {x.get("url") for x in kd.get("sources") or []}])
+                warn(f"fundido con otro no visto: {d} {xd.get('venue')} «{str(xd.get('title'))[:50]}» -> «{kd.get('title','')[:50]}»")
+                counts["quitadosDuplicados"]+=1; continue
             counts["conservadosNoVistos"]+=1
             xd=dict(xd); ent=venue_entry(xd.get("venue"))
             if ent:
@@ -663,6 +681,7 @@ def main(data_dir, existing_path, out_dir, today=None):
             elif not xd.get("venueKind"): xd["venueKind"]=guess_kind(xd.get("venue"))
             xd["venueKind"]=event_kind(xd["venueKind"], xd.get("title"), xd.get("venue"))
             final[xid]=xd
+            kept_by_date.setdefault(d,[]).append((xid, dict(xd, _titles=[xd.get("title")])))
     # salida
     for e in merged: e.pop("_titles",None)
     os.makedirs(os.path.join(out_dir,"chunks"),exist_ok=True)

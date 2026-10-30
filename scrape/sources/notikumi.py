@@ -1,4 +1,6 @@
-"""Notikumi (notikumi.com): listado /place/Madrid paginado por offset (12 por página) y fichas con JSON-LD Event."""
+"""Notikumi (notikumi.com): listado /place/Madrid paginado por offset (12 por página) y fichas con JSON-LD Event.
+Precio y estado: la API pública del checkout (api2.notikumi.com): /current/session/<slug> da la venta (sale) y
+/current/sell-session/<sale>/channel/1/catalog los tipos de entrada con precio final y si están agotados (canal 1 = web de Notikumi)."""
 import re, time
 from scrape.common import get, soup, ld_json, event, parse_date, parse_time, parse_price, in_window, music_tags, clean_text, night_date, plain, log
 
@@ -10,6 +12,43 @@ MAX_DETAIL = 60
 THEATRE_OK = re.compile(r"kapital|barcel|magno|eslava", re.I)
 BAD_VENUE = re.compile(r"\bteatro\b|auditorio|ateneo|c[ií]rculo de bellas|palacio de congresos|cine\b|museo|centro cultural", re.I)
 BAD_TITLE = re.compile(r"this is \w+ en madrid|tributo|tribute|monolog|stand ?up|comedia|musical\b|candlelight|karaoke|clase |taller|workshop|infantil|ballet|opera|[oó]pera|cena|magia|circo|espect[aá]culo para", re.I)
+API = "https://api2.notikumi.com/current"
+JSON_H = {"Accept": "application/json"}   # sin esta cabecera la API responde en XML
+TABLE = re.compile(r"\bmesa|\bvip\b|reservado|table|botella|bottle", re.I)
+
+def _n(x):
+    x = round(float(x), 2)
+    return int(x) if x == int(x) else x
+
+def price_info(slug):
+    """-> dict(priceMin, priceMax, priceText, free, status) desde la API del checkout; {} si no hay entradas publicadas."""
+    try:
+        ses = get(f"{API}/session/{slug}", json_=True, headers=JSON_H)
+        sale = ses.get("sale")
+        if not sale: return {}
+        cat = get(f"{API}/sell-session/{sale}/channel/1/catalog?checkoutType=2", json_=True, headers=JSON_H)
+    except Exception as ex:
+        log(NAME, "api", slug, str(ex)[:100]); return {}
+    tks = []
+    for p in cat.get("products") or []:
+        tt = p.get("ticketType") or {}; pr = p.get("prices") or {}
+        names = tt.get("names") or {}
+        name = clean_text(names.get("es") or names.get("en") or next(iter(names.values()), "") or tt.get("name") or "Entrada")
+        if TABLE.search(name) or not isinstance(pr.get("totalPrice"), (int, float)): continue
+        tks.append((name, float(pr["totalPrice"]), bool(tt.get("soldout"))))
+    if not tks: return {}
+    avail = [t for t in tks if not t[2]]
+    pool = avail or tks
+    prices = sorted({t[1] for t in pool})
+    free = prices[0] == 0
+    pmin = _n(prices[0]); pmax = _n(prices[-1]) if len(prices) > 1 else None
+    parts = []
+    for name, price, sold in pool:
+        lab = f"{name} {_n(price)} €" if price else name
+        if lab not in parts: parts.append(lab)
+    return {"priceMin": pmin, "priceMax": pmax, "priceText": " · ".join(parts)[:120], "free": free,
+            "status": "disponible" if avail else "agotado"}
+
 NIGHT_TAGS = re.compile(r"\b(club|clubs|clubbing|discoteca|discotecas|fiesta|fiestas|party|tardeo|after|dj|techno|reggaeton|electr[oó]nica)\b", re.I)
 
 def _listing(today, end):
@@ -76,7 +115,10 @@ def scrape(today, end):
             price_txt = clean_text(desc)[:120]
         elif re.search(r"\b(entrada|acceso)\s+(gratis|gratuit[ao]|libre)|\bgratis\b", desc, re.I):
             pmin, free, price_txt = 0, True, "Gratis"
+        px = price_info(href.strip("/")); time.sleep(0.3)
+        if px.get("priceMin") is not None: pmin, pmax, price_txt, free = px["priceMin"], px["priceMax"], px["priceText"], px["free"]
         out.append(event(title=title, date=night_date(date, start), start=start, venue=venue, address=address, type=typ,
                          music=music_tags(title + " " + tagtxt) or (["otros"] if re.search(r"jazz|blues|swing", plain(title + " " + tagtxt)) else []), priceMin=pmin, priceMax=pmax, priceText=price_txt, free=free,
+                         status=px.get("status") or "desconocido",
                          description=desc[:400] or None, sources=[{"name": NAME, "url": url}], ticketUrl=url))
     return [e for e in out if in_window(e["date"], today, end)]

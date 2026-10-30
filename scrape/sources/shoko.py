@@ -1,6 +1,7 @@
 """Shoko (shokomadrid.com, Shopify): los eventos son productos de la colección "eventos-shoko-madrid" (products.json).
 Fecha del título ("THE ROOM - friday, 30.10.2026"); hora de la ficha del producto ("Éxitos del hip hop y el R&B | A partir de las 23:45")
-o del body ("From 6:00 PM to 11:00 PM" en los tardeos). La venta va por un widget de Notikumi y el producto vale 0 €: precio null."""
+o del body ("From 6:00 PM to 11:00 PM" en los tardeos). El producto de Shopify vale 0 €: el precio real, el estado y el dress code
+vienen del widget de PATT que incrusta la ficha (iframe events.patt.club/embed/event/<id>), leído con la misma API que usa nightlifemadrid.py."""
 import re, time, datetime
 from scrape.common import get, soup, event, in_window, clean_text, plain, night_date, music_tags, log
 
@@ -30,11 +31,21 @@ def _range(txt):
 def _detail(url):
     """(subtítulo de la cabecera, descripción 'Meet the artist') de la ficha del producto."""
     try: html = get(url)
-    except Exception as ex: log(NAME, "ficha", url, ex); return "", ""
+    except Exception as ex: log(NAME, "ficha", url, ex); return "", "", None
     s = soup(html)
     sub = s.select_one(".text_position_abs > p")
     desc = s.select_one(".contentsl .metafield-rich_text_field")
-    return (clean_text(sub.get_text(" ")) if sub else ""), (clean_text(desc.get_text(" ")) if desc else "")
+    m = re.search(r"events\.patt\.club/embed/event/([0-9a-f]{24})", html)
+    return (clean_text(sub.get_text(" ")) if sub else ""), (clean_text(desc.get_text(" ")) if desc else ""), (m.group(1) if m else None)
+
+def _patt(eid):
+    """Precio, estado, dress code y edad de la sesión en PATT (la ticketera del widget). {} si no hay entradas."""
+    if not eid: return {}
+    try:
+        from scrape.sources import nightlifemadrid as nm
+        return nm.price_info(nm.detail(eid)) or {}
+    except Exception as ex:
+        log(NAME, "patt", eid, ex); return {}
 
 def scrape(today, end):
     try: prods = get(FEED, json_=True).get("products", [])
@@ -53,9 +64,10 @@ def scrape(today, end):
         title = re.sub(r"\s*-\s*$", "", title)
         body = clean_text(soup(p.get("body_html") or "").get_text(" "))
         url = f"{BASE}/products/{p['handle']}"
-        sub, desc = "", ""
+        sub, desc, eid = "", "", None
         if n < MAX_DETAIL:
-            n += 1; sub, desc = _detail(url); time.sleep(0.4)
+            n += 1; sub, desc, eid = _detail(url); time.sleep(0.4)
+        px = _patt(eid)
         start, endt = _range(body)
         if not start:
             mt = re.search(r"(?:a partir de las|desde las|from)\s+(\d{1,2})[:.](\d{2})", sub + " " + body, re.I)
@@ -67,5 +79,7 @@ def scrape(today, end):
         text = " ".join(x for x in [sub, desc or body] if x)
         out.append(event(title=title, date=d, start=start, end=endt, venue=VENUE, address=ADDRESS, zone=ZONE, type=typ,
                          music=music_tags(title + " " + text) or ["comercial", "latino"], description=(text[:400] or None),
+                         priceMin=px.get("priceMin"), priceMax=px.get("priceMax"), priceText=px.get("priceText"), free=bool(px.get("free")),
+                         status=px.get("status") or "desconocido", dressCode=px.get("dressCode"), ageMin=px.get("ageMin"),
                          sources=[{"name": NAME, "url": url}], ticketUrl=url))
     return out
