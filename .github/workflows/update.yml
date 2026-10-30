@@ -1,0 +1,79 @@
+name: Actualizar eventos y publicar la web
+
+on:
+  schedule:
+    - cron: "20 21 * * *"   # 22:20 Europe/Madrid en horario de invierno (21:20 UTC); 23:20 en verano
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-gh-pages
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - name: Código (main)
+        uses: actions/checkout@v4
+        with:
+          path: code
+      - name: Web actual (gh-pages)
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: site
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Dependencias
+        working-directory: code
+        run: |
+          pip install -q requests beautifulsoup4 lxml
+          npm install -s playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Extraer (parsers Python)
+        working-directory: code
+        run: |
+          mkdir -p run/data run/out
+          timeout 1500 python3 scrape.py --out run/data || true
+          python3 -c "import json; r=json.load(open('run/data/_scrape_report.json')); print('failed:', r['failed']); print({k: v.get('events') for k, v in r['sources'].items()})"
+      - name: Enriquecer precios
+        working-directory: code
+        run: timeout 900 python3 enrich.py run/data || true
+      - name: Quitar enlaces de compra muertos
+        working-directory: code
+        run: timeout 600 python3 prune_links.py run/data || true
+      - name: Fusionar con los datos publicados
+        working-directory: code
+        run: |
+          python3 -I merge.py run/data ../site/data/events.json run/out
+          python3 - <<'PY'
+          import json
+          s = json.load(open('run/out/summary.json'))
+          print(json.dumps({k: s[k] for k in ('unicos', 'eventosTotales', 'nuevos', 'actualizados', 'quitadosCancelados')}))
+          assert s['unicos'] >= 300, f"solo {s['unicos']} eventos únicos: extracción fallida, no se publica"
+          st = json.load(open('run/out/status.json'))
+          r = json.load(open('run/data/_scrape_report.json'))
+          st['failedSources'] = [r['sources'][k].get('source', k) for k in r['failed']]
+          st['publisher'] = 'github-actions'
+          json.dump(st, open('run/out/status.json', 'w'), ensure_ascii=False, indent=1)
+          PY
+      - name: Construir la web
+        working-directory: code
+        run: python3 -I build_site.py run/out ../site
+      - name: Publicar en gh-pages
+        working-directory: site
+        run: |
+          git config user.name "madrid-de-noche-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "sin cambios"; exit 0; fi
+          git commit -m "Datos $(date -u +%F) (GitHub Actions)"
+          git push
