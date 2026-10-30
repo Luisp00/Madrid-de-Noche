@@ -1,6 +1,6 @@
 {
- "lastUpdated": "2026-10-30T09:46:42+00:00",
- "eventCount": 1526,
+ "lastUpdated": "2026-10-30T10:02:24+00:00",
+ "eventCount": 1525,
  "chunks": 9,
  "sources": {
   "Madrid en Vivo": 397,
@@ -30,10 +30,10 @@
  },
  "run": {
   "date": "2026-10-30",
-  "new": 32,
-  "updated": 1200,
-  "removed": 160,
-  "unchanged": 0,
+  "new": 8,
+  "updated": 43,
+  "removed": 9,
+  "unchanged": 1181,
   "files": [
    "_enrich_report.json",
    "_links_report.json",
