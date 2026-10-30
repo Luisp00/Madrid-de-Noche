@@ -4,14 +4,15 @@ Agregador personal de **todos los eventos nocturnos de Madrid** (clubs, fiestas,
 
 - **Web pública:** https://luisp00.github.io/Madrid-de-Noche/ (GitHub Pages, rama `gh-pages`). Sin cuenta de Claude, instalable en el móvil; favoritos solo en el navegador.
 - **App en claude.ai (artifact):** https://claude.ai/artifact/N1LKQtKKWsz2K2xYH1Uc4V (slug `aa1bd110-8301-4d75-8ffa-b7f5e5264d2e`). Misma app leyendo la base de datos del artifact; favoritos sincronizados entre dispositivos y botón ⟳ para que el propietario lance la actualización a mano. Privada hasta que se comparta desde su menú "Compartir".
-- **Datos:** 25 parsers en Python (`scrape/sources/`) leen las webs cada noche; los agentes de Claude solo entran como respaldo cuando un parser falla y, dos veces por semana, para la cola larga de salas sin parser. Fusión y deduplicación en `merge.py`. Regla de precios: si varias webs discrepan, se muestra el más barato, el botón principal de la ficha va a esa web y la ficha indica qué web lo tenía más caro.
-- **Actualización diaria:** tarea programada `trig_01GikgephvtpzwEE5KEfSYiX` (22:00 Europe/Madrid, Sonnet 5.5, esfuerzo high en los agentes) que despierta la sesión de ejecución `session_01JqbzdECTVzMVd3MhM3bLR2` (entorno cloud "Madrid de Noche", clon de `gh-pages`, modo `auto`); esa sesión clona el código, ejecuta `RUNBOOK.md`, escribe la BD del artifact y publica la web. La tarea antigua con 7 agentes Opus (`trig_01AYNgQ8ve5WaF1Z4Km75cAV`) está desactivada.
+- **Datos:** 25 parsers en Python (`scrape/sources/`) leen las webs cada noche y `enrich.py` visita la página de compra de los eventos que quedan sin precio; los agentes de Claude solo entran como respaldo cuando un parser falla y, dos veces por semana, para la cola larga de salas sin parser. Fusión y deduplicación en `merge.py`. Regla de precios: la página propia de la ticketera manda sobre los agregadores; entre ticketeras, el más barato gana, el botón principal de la ficha va a esa web y la ficha indica qué web lo tenía más caro. Las fuentes se nombran por la ticketera del enlace (Fourvenues, Xceed, DICE, Fever, WHAN…).
+- **Actualización diaria del artifact:** tarea programada `trig_01Vfxn2eyLAwrGVNHx7wYBfW` (22:00 Europe/Madrid, aviso push, Sonnet 5.5 con esfuerzo high en los agentes; Opus 5.5 high si hay que reparar un parser) que arranca una sesión nueva en el entorno cloud "Madrid de Noche", clona `main`, ejecuta `RUNBOOK.md` y escribe la BD del artifact. Esa sesión no puede hacer push al repo (comprobado: 403 del proxy git, sin `add_repo` ni `create_session`), así que **la web pública la publica GitHub Actions** (`.github/workflows/update.yml`, mismo pipeline, 22:20 Madrid). La tarea antigua con 7 agentes Opus (`trig_01AYNgQ8ve5WaF1Z4Km75cAV`) está desactivada y se puede borrar.
 
 ## Archivos
 
 | Archivo | Qué es |
 |---|---|
 | `index.html` | La app (HTML/CSS/JS autocontenido, sin `<html>/<head>`: el publicador del artifact añade el esqueleto y `build_site.py` el de la web estática). Con `claude` disponible lee la colección `chunks` con `claude.use("db")`, los favoritos con `claude.use("user")` y lanza la actualización con `claude.use("mcp")` (conector "Claude Code Remote", `fire_trigger`); sin `claude`, lee `data/events.json` y `data/status.json`. |
+| `enrich.py` | `python3 enrich.py run/data [--max 150]`: para los eventos sin precio cuyo enlace es de una ticketera con página pública (Xceed, DICE, WHAN, Fever, Taquilla, PATT…) visita la página y rellena precio, estado y, si faltan, hora/dirección/edad. Escribe `_enrich_report.json`. |
 | `scrape.py` | Ejecuta todos los parsers de `scrape/sources/` en paralelo, valida la salida y deja `data/<fuente>.json` y `data/_scrape_report.json` con la lista `failed` (parsers con error o por debajo de su `MIN_EVENTS`). |
 | `scrape/common.py` | Biblioteca de los parsers: `get` (requests con proxy, reintentos y caché de 1 h), `browser` (Chromium headless vía `tools/fetch.js`), JSON-LD, fechas/horas/precios en español, `event()` con el esquema de SPEC.md, `validate()`. |
 | `scrape/CONTRATO.md` | Lo que debe cumplir cada parser. |
@@ -21,7 +22,8 @@ Agregador personal de **todos los eventos nocturnos de Madrid** (clubs, fiestas,
 | `build_site.py` | Genera la web estática: `python3 -I build_site.py out/ site/`. |
 | `tools/fetch.js` | Descarga una página con Chromium headless (proxy del entorno): texto visible + enlaces, o `--raw`. Lo usan los parsers que lo necesitan y los agentes cuando WebFetch no está o la web lo bloquea. |
 | `SPEC.md` | Esquema de cada evento, etiquetas de música, zonas, salas conocidas, exclusiones y normas. Lo leen los agentes de respaldo. |
-| `RUNBOOK.md` | Procedimiento diario (v2): código fresco → estado de la BD → `scrape.py` → respaldo/cola larga con agentes → `merge.py` → escrituras en el artifact → `meta/status` → web en `gh-pages`. Incluye los prompts de los agentes por fuente. |
+| `RUNBOOK.md` | Procedimiento diario (v2): código fresco → estado de la BD → `scrape.py` → `enrich.py` → respaldo/cola larga con agentes → `merge.py` → escrituras en el artifact → `meta/status`. Incluye los prompts de los agentes por fuente. |
+| `.github/workflows/update.yml` | Workflow nocturno de GitHub Actions: mismo pipeline (scrape → enrich → merge contra `gh-pages/data/events.json` → build_site) y push a `gh-pages`. También se puede lanzar a mano desde la pestaña Actions. |
 | `FUENTES.md` | Evaluación de fuentes nuevas (30 oct 2026): qué hay, cómo se accede, volumen, prioridad. |
 | `test.js` | Prueba de la app con Playwright: 17 comprobaciones. `node test.js` o `node test.js <events.json>`. |
 | `data/*.json`, `out/merged.json` | Extracciones y fusión de la carga inicial (29 oct), útiles para probar `merge.py`. |
@@ -29,28 +31,28 @@ Agregador personal de **todos los eventos nocturnos de Madrid** (clubs, fiestas,
 
 Copias de `SPEC.md`, `RUNBOOK.md`, `merge.py`, `build_site.py` y `tools/fetch.js` están publicadas dentro del artifact (`spec.md`, `runbook.md`, `merge.py.txt`, `build_site.py.txt`, `fetch.js.txt`) por compatibilidad; la sesión diaria usa las del repo.
 
-## Estado (30 oct 2026, 09:45)
+## Estado (30 oct 2026, 11:20)
 
-- **BD y web:** 1663 eventos (1571 de hoy en adelante, 29 oct → 13 nov) de 25 fuentes, en 9 chunks. Cobertura: 74 % con precio, 96 % con hora, 39 % con edad, 27 % con dress code, 31 % con estado de entradas.
-- **Pipeline Python:** los 25 parsers pasan (`failed: []`) en unos 5 minutos; la primera ejecución completa dio 1295 eventos únicos. El coste por ejecución es el de la coordinación de la sesión (Sonnet), no el de leer webs con modelos.
-- **Ejecución de la tarea:** la sesión de ejecución ha verificado el entorno (repo, dependencias, Playwright, lectura de la BD). A las 09:40 se lanzó a mano una ejecución de prueba completa; la primera nocturna es hoy a las 22:00.
-- **Comparativa de coste:** la extracción con 7 agentes Opus de esta mañana consumió ~1,7 M tokens de subagentes en 22 min (muy por debajo de los 25–40 M estimados para la carga inicial, pero aun así ~50 veces más que el pipeline Python).
+- **BD y web:** 1580 eventos (29 oct → 13 nov) de 24 fuentes, en 9 chunks. Cobertura: 80 % con precio (antes 74 %), 96 % con hora, 37 % con estado de entradas, 41 % con edad, 28 % con dress code.
+- **Pipeline Python:** 25 parsers pasan (`failed: []`) en unos 5 minutos; `enrich.py` recuperó 135 precios en 150 páginas (Xceed, DICE, WHAN sobre todo). Las ejecuciones de prueba de la tarea programada (09:41 y 09:51) hicieron todo el recorrido salvo el push a la web.
+- **App:** filtros con modo excluir (tres estados por chip), calendario propio con rangos de noches, botón "Ver resultados" accesible, paneles más altos en escritorio, un botón por fuente en la ficha.
+- **Fuentes nuevas incorporadas hoy:** WHAN, Xceed, Techno Airlines, DICE por páginas de ciudad, feeds de Siroco / El Sol / La Riviera, Wurlitzer, Galileo. Madrid Lux eliminada a petición del usuario. Resident Advisor apartado (su API exige saltarse el anti-bot).
 
 ## Avisos
 
 - **Bloqueos:** ra.co (403), shotgun.live (429), Fourvenues directo (403), Atrápalo (challenge). Bynova limita a veces las páginas de club (429), por eso su dirección y dress code salen incompletos.
-- **Permisos de la sesión de ejecución (modo `auto`):** puede escribir en la BD y hacer push a su propia rama `gh-pages`; no puede hacer push a otras ramas. Por eso trabaja sobre `gh-pages` y clona el código aparte. En modo `acceptEdits` ocurre lo contrario (push sí, `ArtifactData` pide permiso).
+- **Permisos de las sesiones programadas:** una sesión lanzada por tarea puede usar Python, Chromium, `WebFetch` y `ArtifactData`, pero no tiene el repo entre sus fuentes y el proxy git le niega el push (403); tampoco tiene `add_repo` ni `create_session`. Una tarea con `persistent_session_id` no entregó en la sesión indicada sino en una nueva. Por eso la web la publica GitHub Actions.
 - **Red:** el entorno cloud "Madrid de Noche" tiene la red abierta desde el 30 oct. Una sesión abierta antes del cambio no recupera `WebFetch`; `curl`, `requests` y Chromium sí funcionan a través del proxy.
 - **Correcciones manuales** en la BD duran hasta la siguiente extracción; lo permanente se arregla en los parsers, `SPEC.md` o `merge.py`.
-- **Rama de código:** la sesión diaria clona `main` y, si allí no está `scrape.py`, la rama `ccr-7f46cbaa-sonpg4`. Al fusionar a `main`, nada que cambiar.
+- **Rama de código:** `main` está al día con la rama de trabajo `ccr-7f46cbaa-sonpg4`; la tarea diaria y GitHub Actions clonan `main`.
 
 ## Pendiente
 
-1. Revisar el informe de la ejecución de prueba de las 09:40 y el de la nocturna de las 22:00 (`meta/status.run` y la sesión de ejecución).
-2. Fusionar la rama `ccr-7f46cbaa-sonpg4` en `main` cuando te parezca.
-3. Borrar la colección antigua `events` (981 documentos; exige leerlos por páginas). No molesta.
-4. Calidad: zona "Otros" en 275 eventos (salas sin dirección; ampliar `VENUE_ZONE` en `merge.py` con las que más se repitan), precios en Techno Airlines/Technoparty/Discotech (no los publican), direcciones de WHAN.
-5. Fuentes nuevas de prioridad media en `FUENTES.md` (Wegow, Clubs In Madrid…) y los agentes de cola larga para las salas sin parser.
+1. Revisar la primera ejecución nocturna (22:00) en `meta/status.run` y el aviso push de la tarea, y la primera ejecución del workflow de GitHub Actions (22:20) en la pestaña Actions.
+2. Borrar la colección antigua `events` (981 documentos; exige leerlos por páginas) y los documentos `meta/selftest*` de las pruebas. No molestan.
+3. Precios que siguen faltando (319): Conciertos.club, Notikumi, Technoparty y Techno Airlines no los publican; Fourvenues (403) y RA (vetada) no se pueden visitar. `enrich.py` llega a su tope de 150 páginas: subirlo si hace falta.
+4. Zona "Otros" en ~270 eventos (salas sin dirección): ampliar `VENUE_ZONE` en `merge.py` con las que más se repitan.
+5. Fuentes de prioridad media en `FUENTES.md` (Wegow, Clubs In Madrid…) y los agentes de cola larga para las salas sin parser.
 
 ## Cómo trabajar desde Claude Code
 
