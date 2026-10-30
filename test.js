@@ -72,9 +72,31 @@ const fs=require('fs'); const path=require('path');
       const after=await p.$$eval('.card',e=>e.length);
       check(after<before, `cerrar filtros tocando fuera aplica el filtro (${before} → ${after})`);
       check(await p.$eval('#filterCount',e=>e.textContent==='1'), 'contador de filtros = 1');
+      // excluir: dos toques en un chip de música lo pone en modo excluido
+      await p.click('#filterBtn'); await p.waitForTimeout(300); await p.click('#clearFilters'); await p.click('#applyBtn'); await p.waitForTimeout(300);
+      const allN=await p.$$eval('.card',e=>e.length);
+      await p.click('#filterBtn'); await p.waitForTimeout(300);
+      await p.click('#fMusic .chip'); await p.click('#fMusic .chip'); await p.waitForTimeout(100);
+      check(await p.$eval('#fMusic .chip',c=>c.classList.contains('off')), 'segundo toque marca el chip como excluido');
+      await p.click('#applyBtn'); await p.waitForTimeout(300);
+      const exN=await p.$$eval('.card',e=>e.length);
+      check(exN<allN && exN>0, `excluir música reduce la lista (${allN} → ${exN})`);
+      await p.click('#filterBtn'); await p.waitForTimeout(200); await p.click('#clearFilters'); await p.click('#applyBtn'); await p.waitForTimeout(300);
       // cabecera de día pegajosa justo bajo la cabecera
       const topH=await p.$eval('#top',e=>e.getBoundingClientRect().height); const dh=await p.$eval('.dayhead',e=>parseFloat(getComputedStyle(e).top));
       check(Math.abs(dh-(topH-1))<2, `dayhead top (${dh}) = cabecera (${topH}) - 1`);
+      // calendario: elegir una noche y luego un rango
+      await p.click('text=Elegir fecha…'); await p.waitForTimeout(350);
+      check(await p.$eval('#dateSheet',s=>s.classList.contains('show')), 'el chip de fecha abre el calendario');
+      const nEn=await p.locator('#calGrid button.day:not([disabled])').count(); check(nEn>=2, 'calendario con días disponibles: '+nEn);
+      await p.locator('#calGrid button.day:not([disabled])').nth(0).click(); await p.waitForTimeout(150);
+      check(await p.$eval('#calGrid .day.sel',e=>!!e), 'día seleccionado marcado');
+      await p.locator('#calGrid button.day:not([disabled])').nth(1).click(); await p.waitForTimeout(150);
+      check((await p.$$eval('#calGrid .day.inrange, #calGrid .day.sel',e=>e.length))>=2, 'segundo toque crea un rango');
+      await p.click('#applyDate'); await p.waitForTimeout(300);
+      check(!(await p.$eval('#dateSheet',s=>s.classList.contains('show'))), 'Ver resultados cierra el calendario');
+      check((await p.$eval('#dateChips .chip.on',e=>e.textContent)).includes('–'), 'el chip muestra el rango: '+(await p.$eval('#dateChips .chip.on',e=>e.textContent)));
+      await p.click('text=7 días'); await p.waitForTimeout(200);
       // actualizar ahora
       await p.click('#refreshBtn'); await p.waitForTimeout(200); await p.click('#toastAct'); await p.waitForTimeout(200);
       check(await p.evaluate(()=>window.__fired.length===1 && window.__fired[0][1]==='fire_trigger'), 'botón actualizar llama a fire_trigger');

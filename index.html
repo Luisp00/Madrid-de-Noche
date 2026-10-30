@@ -48,6 +48,8 @@ a{color:inherit}
 .chip{flex:none;padding:7px 13px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;transition:.15s}
 .chip.on{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;font-weight:600}
 .chip.small{padding:6px 11px;font-size:12.5px}
+.chip.off{background:rgba(255,92,92,.12);border-color:rgba(255,92,92,.55);color:#ffb3b3;text-decoration:line-through;text-decoration-thickness:1.5px}
+.fsec h4 small{text-transform:none;letter-spacing:0;font-weight:500;color:var(--dim);margin-left:6px}
 
 /* content */
 main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl);padding-right:var(--gr)}
@@ -132,6 +134,23 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
 .btn.primary span.s{color:rgba(255,255,255,.8)}
 .note{font-size:12px;color:var(--dim);margin-top:14px}
 
+/* calendario */
+.calnav{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.calnav h3{font-size:16px}
+.calnav button{width:36px;height:36px;border-radius:10px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:18px}
+.calnav button:disabled{opacity:.3}
+.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:10px}
+.calgrid .dow{text-align:center;font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;padding:4px 0}
+.calgrid .day{aspect-ratio:1;border-radius:12px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;position:relative;min-width:0}
+.calgrid .day small{font-size:10px;font-weight:500;color:var(--muted)}
+.calgrid .day.today{border-color:var(--accent2)}
+.calgrid .day:disabled{opacity:.28;cursor:default}
+.calgrid .day.inrange{background:rgba(138,92,255,.18);border-color:rgba(138,92,255,.4)}
+.calgrid .day.sel{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
+.calgrid .day.sel small{color:rgba(255,255,255,.85)}
+.calgrid .day.pad{visibility:hidden}
+.calhint{font-size:12.5px;color:var(--dim);margin-top:12px}
+.calsum{margin-top:12px;font-size:14px;color:var(--text)}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--card2);border:1px solid var(--line);padding:10px 16px;border-radius:12px;font-size:13px;opacity:0;transition:.2s;z-index:60;pointer-events:none;max-width:calc(100vw - 32px);text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.action{pointer-events:auto;display:flex;gap:12px;align-items:center}
@@ -176,12 +195,12 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
   <div class="hd"><h2>Filtros</h2><div><button class="link" id="clearFilters">Limpiar</button> <button class="link" id="closeFilters">Cerrar</button></div></div>
   <div class="bd">
     <div class="fsec"><h4>Precio máximo</h4><div class="wrap" id="fPrice"></div></div>
-    <div class="fsec"><h4>Música</h4><div class="wrap" id="fMusic"></div></div>
-    <div class="fsec"><h4>Zona</h4><div class="wrap" id="fZone"></div></div>
-    <div class="fsec"><h4>Tipo</h4><div class="wrap" id="fType"></div></div>
+    <div class="fsec"><h4>Música <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fMusic"></div></div>
+    <div class="fsec"><h4>Zona <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fZone"></div></div>
+    <div class="fsec"><h4>Tipo <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fType"></div></div>
     <div class="fsec"><h4>Dress code</h4><div class="wrap" id="fDress"></div></div>
     <div class="fsec"><h4>Edad · solo donde me dejan entrar</h4><div class="wrap" id="fAge"></div></div>
-    <div class="fsec"><h4>Fuente</h4><div class="wrap" id="fSource"></div></div>
+    <div class="fsec"><h4>Fuente <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fSource"></div></div>
     <div class="fsec" style="margin-top:20px">
       <div class="toggle"><span id="lblSold">Ocultar agotados</span><button class="sw" id="swSold" role="switch" aria-checked="false" aria-labelledby="lblSold"></button></div>
       <div class="toggle"><span id="lblFree">Solo con entrada gratis o lista</span><button class="sw" id="swFree" role="switch" aria-checked="false" aria-labelledby="lblFree"></button></div>
@@ -189,6 +208,19 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
     </div>
   </div>
   <button class="apply" id="applyBtn">Ver resultados</button>
+</div>
+
+<!-- Calendario -->
+<div class="sheet" id="dateSheet" role="dialog" aria-modal="true" aria-label="Elegir fecha">
+  <div class="grab"></div>
+  <div class="hd"><h2>Elige una noche</h2><div><button class="link" id="clearDate">Quitar fecha</button> <button class="link" id="closeDate">Cerrar</button></div></div>
+  <div class="bd">
+    <div class="calnav"><button type="button" id="calPrev" aria-label="Mes anterior">‹</button><h3 id="calTitle"></h3><button type="button" id="calNext" aria-label="Mes siguiente">›</button></div>
+    <div class="calgrid" id="calGrid"></div>
+    <div class="calsum" id="calSum"></div>
+    <div class="calhint">Toca una noche para verla; toca otra posterior para ver varias noches seguidas. El número pequeño es cuántos eventos hay esa noche.</div>
+  </div>
+  <button class="apply" id="applyDate">Ver resultados</button>
 </div>
 
 <!-- Ficha -->
@@ -224,8 +256,8 @@ const TRIGGER_ID = "trig_01GikgephvtpzwEE5KEfSYiX";   // tarea programada de act
 
 const state = {
   events: [], meta: null, loaded:false, dbMissing:false, partial:false,
-  q:"", dateMode:"semana", customDate:null,
-  f:{ price:null, music:new Set(), zone:new Set(), type:new Set(), dress:"any", age:null, source:new Set(), hideSold:false, onlyFree:false, onlyFav:false },
+  q:"", dateMode:"semana", customDate:null, customDateTo:null, calMonth:null,
+  f:{ price:null, music:new Set(), zone:new Set(), type:new Set(), dress:"any", age:null, source:new Set(), musicNot:new Set(), zoneNot:new Set(), typeNot:new Set(), sourceNot:new Set(), hideSold:false, onlyFree:false, onlyFav:false },
   favs: new Set(), favDoc:null, isOwner:false, mcp:null, lastFocus:null
 };
 
@@ -288,7 +320,8 @@ function dateOptions(){
   const opts=[{k:"todo",l:"Todo"},{k:"hoy",l:"Hoy"},{k:"manana",l:"Mañana"}];
   opts.push({k:"finde",l:(d>=5||d===0)?"Finde":"Este finde"});
   opts.push({k:"semana",l:"7 días"});
-  opts.push({k:"fecha",l: state.customDate? new Date(state.customDate+"T12:00").toLocaleDateString("es-ES",{weekday:"short",day:"numeric",month:"short"}) : "Elegir fecha…"});
+  const fmtS=d=>new Date(d+"T12:00").toLocaleDateString("es-ES",{day:"numeric",month:"short"});
+  opts.push({k:"fecha",l: state.customDate? (state.customDateTo && state.customDateTo!==state.customDate ? fmtS(state.customDate)+" – "+fmtS(state.customDateTo) : new Date(state.customDate+"T12:00").toLocaleDateString("es-ES",{weekday:"short",day:"numeric",month:"short"})) : "Elegir fecha…"});
   return opts;
 }
 function inDateRange(e){
@@ -299,7 +332,7 @@ function inDateRange(e){
     case "manana": return d===addDays(t,1);
     case "finde": { const [from,sun]=weekendRange(); return d>=from && d<=sun; }
     case "semana": return d<=addDays(t,7);
-    case "fecha": return state.customDate? d===state.customDate : true;
+    case "fecha": return state.customDate? (d>=state.customDate && d<=(state.customDateTo||state.customDate)) : true;
     default: return true;
   }
 }
@@ -307,22 +340,55 @@ function renderDateChips(){
   const c=$("#dateChips"); c.innerHTML="";
   for (const o of dateOptions()){
     const b=document.createElement("button"); b.type="button"; b.className="chip"+(state.dateMode===o.k?" on":""); b.textContent=o.l; b.setAttribute("role","tab"); b.setAttribute("aria-selected",state.dateMode===o.k);
-    b.onclick=()=>{ if(o.k==="fecha"){ pickDate(); return;} state.dateMode=o.k; renderDateChips(); render(); };
+    b.onclick=()=>{ if(o.k==="fecha"){ openCalendar(); return;} state.dateMode=o.k; renderDateChips(); render(); };
     c.appendChild(b);
   }
 }
-function pickDate(){
-  let inp=$("#hiddenDate");
-  if(!inp){ inp=document.createElement("input"); inp.type="date"; inp.id="hiddenDate"; inp.setAttribute("aria-label","Elegir fecha"); inp.style.cssText="position:fixed;opacity:0;pointer-events:none;top:60px;left:16px;width:1px;height:1px"; document.body.appendChild(inp);
-    inp.onchange=()=>{ if(inp.value){ state.customDate=inp.value; state.dateMode="fecha"; renderDateChips(); render(); } }; }
-  inp.min=todayStr(); inp.value=state.customDate||todayStr();
-  if (inp.showPicker) { try{inp.showPicker();return;}catch(e){} } inp.click();
+/* ---------- calendario ---------- */
+function monthKey(s){ return s.slice(0,7); }
+function openCalendar(){
+  state.calMonth = monthKey(state.customDate || todayStr());
+  renderCalendar(); openSheet("#dateSheet","#closeDate");
+}
+function renderCalendar(){
+  const t=todayStr(); const counts=new Map(); let maxDate=t;
+  for (const e of state.events){ if(!e.date || e.date<t) continue; counts.set(e.date,(counts.get(e.date)||0)+1); if(e.date>maxDate) maxDate=e.date; }
+  const [y,m]=state.calMonth.split("-").map(Number);
+  const first=new Date(y,m-1,1); const title=first.toLocaleDateString("es-ES",{month:"long",year:"numeric"});
+  $("#calTitle").textContent=title.charAt(0).toUpperCase()+title.slice(1);
+  $("#calPrev").disabled = state.calMonth <= monthKey(t);
+  $("#calNext").disabled = state.calMonth >= monthKey(maxDate);
+  const g=$("#calGrid"); g.innerHTML="";
+  for (const d of ["L","M","X","J","V","S","D"]){ const h=document.createElement("div"); h.className="dow"; h.textContent=d; g.appendChild(h); }
+  const pad=(first.getDay()+6)%7;
+  for (let i=0;i<pad;i++){ const c=document.createElement("div"); c.className="day pad"; g.appendChild(c); }
+  const days=new Date(y,m,0).getDate(); const from=state.customDate, to=state.customDateTo||state.customDate;
+  for (let d=1; d<=days; d++){
+    const iso=`${y}-${pad2(m)}-${pad2(d)}`; const n=counts.get(iso)||0;
+    const b=document.createElement("button"); b.type="button"; b.className="day"; b.dataset.date=iso;
+    b.innerHTML=`<span>${d}</span>${n?`<small>${n}</small>`:'<small>&nbsp;</small>'}`;
+    if (iso<t || iso>maxDate) b.disabled=true;
+    if (iso===t) b.classList.add("today");
+    if (from && iso>=from && iso<=to) b.classList.add(iso===from||iso===to?"sel":"inrange");
+    b.setAttribute("aria-label",`${fmtDay(iso)}, ${n} eventos`);
+    b.onclick=()=>pickDay(iso);
+    g.appendChild(b);
+  }
+  const sum=$("#calSum");
+  if (!from) sum.textContent="Ninguna noche elegida.";
+  else { let tot=0; for (const [k,v] of counts) if (k>=from && k<=to) tot+=v; sum.innerHTML = (from===to? `<b>${esc(fmtDay(from))}</b>` : `<b>${esc(fmtDay(from))}</b> → <b>${esc(fmtDay(to))}</b>`) + ` · ${tot} evento${tot!==1?"s":""}`; }
+}
+const pad2=n=>String(n).padStart(2,"0");
+function pickDay(iso){
+  if (state.customDate && !state.customDateTo && iso>state.customDate) state.customDateTo=iso;   // segundo toque: rango
+  else { state.customDate=iso; state.customDateTo=null; }
+  state.dateMode="fecha"; renderCalendar(); renderDateChips(); render();
 }
 
 /* ---------- filtros ---------- */
 function activeFilterCount(){
   const f=state.f; let n=0;
-  if(f.price!==null)n++; n+=f.music.size?1:0; n+=f.zone.size?1:0; n+=f.type.size?1:0; if(f.dress!=="any")n++; if(f.age!==null)n++; n+=f.source.size?1:0; if(f.hideSold)n++; if(f.onlyFree)n++; if(f.onlyFav)n++;
+  if(f.price!==null)n++; n+=(f.music.size||f.musicNot.size)?1:0; n+=(f.zone.size||f.zoneNot.size)?1:0; n+=(f.type.size||f.typeNot.size)?1:0; if(f.dress!=="any")n++; if(f.age!==null)n++; n+=(f.source.size||f.sourceNot.size)?1:0; if(f.hideSold)n++; if(f.onlyFree)n++; if(f.onlyFav)n++;
   return n;
 }
 function haystack(e){
@@ -335,23 +401,35 @@ function passes(e){
   if (state.q){ const terms=fold(state.q).split(/\s+/).filter(Boolean); const hay=haystack(e); if(!terms.every(t=>hay.includes(t))) return false; }
   if (f.price!==null){ const p = e.free||e.priceMin===0 ? 0 : (e.priceMin ?? e.priceMax); if (p==null) return false; if (p>f.price) return false; }
   if (f.music.size){ if(!(e.music||[]).some(m=>f.music.has(m))) return false; }
+  if (f.musicNot.size && (e.music||[]).some(m=>f.musicNot.has(m))) return false;
   if (f.zone.size && !f.zone.has(e.zone||"Otros")) return false;
+  if (f.zoneNot.size && f.zoneNot.has(e.zone||"Otros")) return false;
   if (f.type.size && !f.type.has(e.type||"otro")) return false;
+  if (f.typeNot.size && f.typeNot.has(e.type||"otro")) return false;
   if (f.dress!=="any" && dressClass(e)!==f.dress) return false;
   if (f.age!==null){ if ((e.ageMin||18) > f.age) return false; }
   if (f.source.size && !(e.sources||[]).some(s=>f.source.has(s.name))) return false;
+  if (f.sourceNot.size && (e.sources||[]).some(s=>f.sourceNot.has(s.name))) return false;
   if (f.hideSold && e.status==="agotado") return false;
   if (f.onlyFree && !(e.free || e.priceMin===0)) return false;
   if (f.onlyFav && !state.favs.has(e.id)) return false;
   return true;
 }
 function chipGroup(el, opts, get, set){
+  // get(v) devuelve true/"on" (incluido), "off" (excluido) o false; set(v) avanza el estado
   el.innerHTML="";
   for (const o of opts){
-    const b=document.createElement("button"); b.type="button"; b.className="chip small"+(get(o.v)?" on":""); b.textContent=o.l; b.setAttribute("aria-pressed",!!get(o.v));
+    const st=get(o.v); const b=document.createElement("button"); b.type="button";
+    b.className="chip small"+(st==="off"?" off":st?" on":""); b.textContent=(st==="off"?"✕ ":"")+o.l;
+    b.setAttribute("aria-pressed",st==="off"?"mixed":!!st); if(st==="off") b.title="Excluido";
     b.onclick=()=>{ set(o.v); chipGroup(el,opts,get,set); };
     el.appendChild(b);
   }
+}
+// grupos con tres estados: nada → incluir → excluir → nada
+function tri(inc, exc){
+  return [v=> inc.has(v)?"on": exc.has(v)?"off": false,
+          v=>{ if(inc.has(v)){ inc.delete(v); exc.add(v); } else if(exc.has(v)){ exc.delete(v); } else { inc.add(v); } }];
 }
 function uniqueValues(key){
   const m=new Map(); const t=todayStr();
@@ -361,16 +439,16 @@ function uniqueValues(key){
 function renderFilters(){
   const f=state.f;
   chipGroup($("#fPrice"), PRICE_OPTS, v=>f.price===v, v=>{f.price=v;});
-  chipGroup($("#fMusic"), uniqueValues("music").map(o=>({v:o.v,l:(MUSIC_LABELS[o.v]||o.v)+" · "+o.n})), v=>f.music.has(v), v=>{f.music.has(v)?f.music.delete(v):f.music.add(v)});
-  chipGroup($("#fZone"), uniqueValues("zone").map(o=>({v:o.v,l:o.v+" · "+o.n})), v=>f.zone.has(v), v=>{f.zone.has(v)?f.zone.delete(v):f.zone.add(v)});
-  chipGroup($("#fType"), uniqueValues("type").map(o=>({v:o.v,l:(TYPE_LABELS[o.v]||o.v)+" · "+o.n})), v=>f.type.has(v), v=>{f.type.has(v)?f.type.delete(v):f.type.add(v)});
+  chipGroup($("#fMusic"), uniqueValues("music").map(o=>({v:o.v,l:(MUSIC_LABELS[o.v]||o.v)+" · "+o.n})), ...tri(f.music,f.musicNot));
+  chipGroup($("#fZone"), uniqueValues("zone").map(o=>({v:o.v,l:o.v+" · "+o.n})), ...tri(f.zone,f.zoneNot));
+  chipGroup($("#fType"), uniqueValues("type").map(o=>({v:o.v,l:(TYPE_LABELS[o.v]||o.v)+" · "+o.n})), ...tri(f.type,f.typeNot));
   chipGroup($("#fDress"), DRESS_OPTS, v=>f.dress===v, v=>{f.dress=v});
   chipGroup($("#fAge"), AGE_OPTS, v=>f.age===v, v=>{f.age=v});
-  chipGroup($("#fSource"), uniqueValues("source").map(o=>({v:o.v,l:o.v+" · "+o.n})), v=>f.source.has(v), v=>{f.source.has(v)?f.source.delete(v):f.source.add(v)});
+  chipGroup($("#fSource"), uniqueValues("source").map(o=>({v:o.v,l:o.v+" · "+o.n})), ...tri(f.source,f.sourceNot));
   for (const [id,on] of [["#swSold",f.hideSold],["#swFree",f.onlyFree],["#swFav",f.onlyFav]]){ const el=$(id); el.classList.toggle("on",on); el.setAttribute("aria-checked",on); }
   if(!$("#fMusic").children.length) $("#fMusic").innerHTML='<span class="src">Sin datos todavía</span>';
 }
-function clearFilters(){ state.f={price:null,music:new Set(),zone:new Set(),type:new Set(),dress:"any",age:null,source:new Set(),hideSold:false,onlyFree:false,onlyFav:false}; renderFilters(); }
+function clearFilters(){ state.f={price:null,music:new Set(),zone:new Set(),type:new Set(),dress:"any",age:null,source:new Set(),musicNot:new Set(),zoneNot:new Set(),typeNot:new Set(),sourceNot:new Set(),hideSold:false,onlyFree:false,onlyFav:false}; renderFilters(); }
 
 /* ---------- lista ---------- */
 function render(){
@@ -513,6 +591,10 @@ $("#applyBtn").onclick=closeSheets;
 $("#closeFilters").onclick=closeSheets;
 $("#clearFilters").onclick=()=>{ clearFilters(); render(); };
 $("#closeDetail").onclick=closeSheets; $("#overlay").onclick=closeSheets;
+$("#closeDate").onclick=closeSheets; $("#applyDate").onclick=closeSheets;
+$("#clearDate").onclick=()=>{ state.customDate=null; state.customDateTo=null; if(state.dateMode==="fecha") state.dateMode="semana"; renderCalendar(); renderDateChips(); render(); };
+$("#calPrev").onclick=()=>{ const [y,m]=state.calMonth.split("-").map(Number); const d=new Date(y,m-2,1); state.calMonth=`${d.getFullYear()}-${pad2(d.getMonth()+1)}`; renderCalendar(); };
+$("#calNext").onclick=()=>{ const [y,m]=state.calMonth.split("-").map(Number); const d=new Date(y,m,1); state.calMonth=`${d.getFullYear()}-${pad2(d.getMonth()+1)}`; renderCalendar(); };
 $("#swSold").onclick=()=>{state.f.hideSold=!state.f.hideSold; renderFilters();};
 $("#swFree").onclick=()=>{state.f.onlyFree=!state.f.onlyFree; renderFilters();};
 $("#swFav").onclick=()=>{state.f.onlyFav=!state.f.onlyFav; renderFilters();};
