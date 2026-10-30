@@ -32,7 +32,7 @@ const fs=require('fs'); const path=require('path');
   const b=await chromium.launch(); const errs=[]; const fails=[];
   const check=(ok,msg)=>{ if(!ok) fails.push(msg); console.log((ok?'OK  ':'FAIL')+' '+msg); };
   for (const vp of [{width:390,height:844},{width:1200,height:900}]){
-    const p=await b.newPage({viewport:vp}); p.on('pageerror',e=>errs.push(e.message)); p.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
+    const p=await b.newPage({viewport:vp, locale:'es-ES'}); p.on('pageerror',e=>errs.push(e.message)); p.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
     await p.setContent(html,{waitUntil:'networkidle'}); await p.waitForTimeout(600);
     check(await p.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1), `${vp.width}px: sin scroll horizontal`);
     if (vp.width===390){
@@ -103,6 +103,14 @@ const fs=require('fs'); const path=require('path');
       check((await p.$$eval('#calGrid .day.inrange, #calGrid .day.sel',e=>e.length))>=2, 'el calendario reabre con el rango marcado');
       await p.click('#applyDate'); await p.waitForTimeout(200);
       await p.click('text=7 días'); await p.waitForTimeout(200);
+      // idioma: el botón EN traduce la interfaz y las etiquetas; ES la devuelve
+      await p.click('#langBtn'); await p.waitForTimeout(250);
+      check((await p.$eval('#dateChips .chip.on',e=>e.textContent))==='7 days', 'EN: el chip de fecha se traduce');
+      check((await p.$eval('#applyBtn',e=>e.textContent))==='Show results', 'EN: el botón de filtros se traduce');
+      check((await p.$eval('#langBtn',e=>e.textContent))==='ES', 'EN: el botón de idioma ofrece volver a español');
+      check(/Today|Tomorrow|day,/.test(await p.$eval('.dayhead h2',e=>e.textContent)), 'EN: las cabeceras de día salen en inglés: '+(await p.$eval('.dayhead h2',e=>e.textContent)));
+      await p.click('#langBtn'); await p.waitForTimeout(250);
+      check((await p.$eval('#applyBtn',e=>e.textContent))==='Ver resultados', 'ES: vuelve al español');
       // actualizar ahora
       await p.click('#refreshBtn'); await p.waitForTimeout(200); await p.click('#toastAct'); await p.waitForTimeout(200);
       check(await p.evaluate(()=>window.__fired.length===1 && window.__fired[0][1]==='fire_trigger'), 'botón actualizar llama a fire_trigger');
@@ -112,7 +120,7 @@ const fs=require('fs'); const path=require('path');
   }
   // modo web estática (sin window.claude): los datos vienen de data/events.json
   {
-    const p=await b.newPage({viewport:{width:390,height:844}}); p.on('pageerror',e=>errs.push(e.message)); p.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
+    const p=await b.newPage({viewport:{width:390,height:844}, locale:'es-ES'}); p.on('pageerror',e=>errs.push(e.message)); p.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
     await p.route('**/data/events.json',r=>r.fulfill({contentType:'application/json',body:JSON.stringify(sample.map(x=>({id:x.id,...x.d})))}));
     await p.route('**/data/status.json',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({lastUpdated:new Date().toISOString(),eventCount:sample.length})}));
     await p.route('https://mdn.test/index.html',r=>r.fulfill({contentType:'text/html',body:html.replace(mock,'')}));
