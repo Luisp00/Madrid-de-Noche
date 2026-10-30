@@ -1,0 +1,578 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0a0a0f"><meta name="description" content="Todos los eventos nocturnos de Madrid con precio, música, dress code y entradas, actualizados cada día."><link rel="manifest" href='data:application/manifest+json,{"name":"Madrid de Noche","short_name":"MdN","start_url":".","display":"standalone","background_color":"%230a0a0f","theme_color":"%230a0a0f"}'><style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Madrid de Noche</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Diseño deliberadamente nocturno (un solo tema oscuro). Tokens: */
+:root{
+  --bg:#0a0a0f; --bg2:#12121a; --card:#16161f; --card2:#1d1d29; --line:#272738;
+  --text:#f2f1f7; --muted:#a3a1b5; --dim:#8b89a3;
+  --accent:#ff3d8a; --accent2:#8a5cff; --ok:#39d98a; --warn:#ffb547; --bad:#ff5c5c;
+  --radius:16px; --top-h:150px;
+  --gl:max(16px, env(safe-area-inset-left, 0px)); --gr:max(16px, env(safe-area-inset-right, 0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.4}
+body{padding-block:0;padding-left:0;padding-right:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;margin:0;text-wrap:balance}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+a{color:inherit}
+.hidden{display:none!important}
+:focus-visible{outline:2px solid var(--accent2);outline-offset:2px;border-radius:8px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:linear-gradient(180deg,rgba(10,10,15,.98),rgba(10,10,15,.93));backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top-inner{max-width:900px;margin:0 auto;padding-block:12px 8px;padding-left:var(--gl);padding-right:var(--gr)}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand>div:first-child{min-width:0}
+.brand h1{font-size:21px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(90deg,#fff 0%,#ffb0d0 60%,#b49bff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand .sub{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.3}
+.brand .sub b{color:var(--text);font-weight:600}
+.brand .sub .live{color:var(--warn)}
+.actions{display:flex;gap:8px;flex:none}
+.iconbtn{width:38px;height:38px;border-radius:12px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;color:var(--text);position:relative;flex:none}
+.iconbtn.on{color:var(--accent);border-color:rgba(255,61,138,.5)}
+.iconbtn svg{width:19px;height:19px}
+.iconbtn .dot{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;padding:0 5px}
+.iconbtn.spin svg{animation:spin 1.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.search{margin-top:10px;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 12px;height:40px}
+.search input{flex:1;background:none;border:0;outline:0;color:var(--text);font:inherit;min-width:0}
+.search input::placeholder{color:var(--dim)}
+.search svg{width:17px;height:17px;color:var(--dim);flex:none}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none;-ms-overflow-style:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 13px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:500;white-space:nowrap;transition:.15s}
+.chip.on{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;font-weight:600}
+.chip.small{padding:6px 11px;font-size:12.5px}
+
+/* content */
+main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl);padding-right:var(--gr)}
+.daygroup{margin-top:18px}
+.dayhead{position:sticky;top:calc(var(--top-h) + env(safe-area-inset-top,0px) - 1px);z-index:5;display:flex;align-items:baseline;gap:10px;padding:8px 0 10px;background:linear-gradient(180deg,var(--bg) 70%,rgba(10,10,15,0))}
+.dayhead h2{font-size:15px;font-weight:700}
+.dayhead span{font-size:12px;color:var(--dim)}
+.grid{display:grid;gap:10px}
+@media(min-width:680px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 12px;display:flex;flex-direction:column;gap:8px;position:relative;transition:transform .1s,border-color .15s;min-width:0}
+.card:active{transform:scale(.99)}
+.card:hover{border-color:#3a3a50}
+.card.soldout{opacity:.6}
+.card .row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.card .row>div:first-child{min-width:0;flex:1}
+.card h3{font-size:16px;font-weight:700;letter-spacing:-.01em;line-height:1.25;overflow-wrap:anywhere}
+.venue{font-size:13px;color:var(--muted);margin-top:3px;overflow-wrap:anywhere}
+.venue b{color:var(--text);font-weight:600}
+.price{flex:none;text-align:right;max-width:42%;min-width:0}
+.price .n{font-family:Sora,sans-serif;font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price .n.free{color:var(--ok)}
+.price .l{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:11px;color:var(--dim);margin-top:1px;line-height:1.3}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tag{font-size:11.5px;padding:3px 8px;border-radius:7px;background:var(--card2);color:var(--muted);border:1px solid var(--line);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tag.music{color:#d9c7ff;border-color:rgba(138,92,255,.35);background:rgba(138,92,255,.12)}
+.tag.time{color:var(--text);font-variant-numeric:tabular-nums}
+.tag.dress{color:#ffd1a3;border-color:rgba(255,181,71,.3);background:rgba(255,181,71,.1)}
+.tag.age{color:var(--muted)}
+.tag.bad{color:#ffb3b3;border-color:rgba(255,92,92,.35);background:rgba(255,92,92,.12)}
+.tag.ok{color:#a8f0c8;border-color:rgba(57,217,138,.3);background:rgba(57,217,138,.1)}
+.tag.warn{color:#ffe0a3;border-color:rgba(255,181,71,.4);background:rgba(255,181,71,.12)}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:2px}
+.srcs{display:flex;gap:6px;flex-wrap:wrap;min-width:0}
+.src{font-size:11px;color:var(--dim)}
+.fav{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:var(--dim);flex:none}
+.fav.on{color:var(--accent)}
+.fav svg{width:17px;height:17px}
+
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty h3{font-size:18px;margin-bottom:8px;color:var(--text)}
+.skel{height:120px;border-radius:var(--radius);background:linear-gradient(90deg,var(--card),var(--card2),var(--card));background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.notice{margin-top:14px;padding:10px 14px;border-radius:12px;background:rgba(255,181,71,.1);border:1px solid rgba(255,181,71,.3);color:#ffe0a3;font-size:13px}
+
+/* sheet */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40;opacity:0;pointer-events:none;transition:.2s}
+.overlay.show{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--bg2);border-radius:22px 22px 0 0;border-top:1px solid var(--line);max-height:88vh;display:flex;flex-direction:column;transform:translateY(105%);transition:transform .25s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom,0px);visibility:hidden}
+.sheet.show{transform:translateY(0);visibility:visible}
+@media(min-width:680px){.sheet{max-width:620px;margin:0 auto}}
+.sheet .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:14px 8px;padding-left:calc(var(--gl) + 4px);padding-right:calc(var(--gr) + 4px)}
+.sheet .hd h2{font-size:17px}
+.sheet .hd .link{color:var(--accent);font-size:13px;font-weight:600;padding:6px 4px}
+.sheet .bd{overflow:auto;padding-block:4px 18px;padding-left:calc(var(--gl) + 4px);padding-right:calc(var(--gr) + 4px);overscroll-behavior:contain}
+.grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:10px auto 0}
+.fsec{margin-top:16px}
+.fsec h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);font-weight:600}
+.wrap{display:flex;flex-wrap:wrap;gap:7px}
+.toggle{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--line);font-size:14px}
+.sw{width:44px;height:26px;border-radius:13px;background:var(--line);position:relative;transition:.2s;flex:none}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.sw.on{background:var(--accent)}
+.sw.on::after{left:21px}
+.apply{margin:12px auto 16px;width:calc(100% - var(--gl) - var(--gr) - 8px);height:48px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:700;font-size:15px}
+
+/* detail */
+.detail h2{font-size:21px;line-height:1.2;letter-spacing:-.02em;overflow-wrap:anywhere}
+.detail .lead{color:var(--muted);margin-top:6px;font-size:14px}
+.detail .lead b{color:var(--text)}
+.kv{display:grid;grid-template-columns:100px minmax(0,1fr);gap:10px 12px;margin-top:16px;font-size:14px}
+.kv .k{color:var(--dim);font-size:12.5px;padding-top:2px}
+.kv .v{color:var(--text);min-width:0;overflow-wrap:anywhere}
+.kv .v small{color:var(--muted);font-size:13px}
+.desc{margin-top:14px;color:var(--muted);font-size:14px;white-space:pre-line}
+.btns{display:flex;flex-direction:column;gap:8px;margin-top:18px}
+.btn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;border-radius:13px;background:var(--card);border:1px solid var(--line);text-decoration:none;font-weight:600;font-size:14px;min-width:0}
+.btn>span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
+.btn span.s{font-size:12px;color:var(--dim);font-weight:500;flex:none}
+.btn.primary span.s{color:rgba(255,255,255,.8)}
+.note{font-size:12px;color:var(--dim);margin-top:14px}
+
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--card2);border:1px solid var(--line);padding:10px 16px;border-radius:12px;font-size:13px;opacity:0;transition:.2s;z-index:60;pointer-events:none;max-width:calc(100vw - 32px);text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.action{pointer-events:auto;display:flex;gap:12px;align-items:center}
+.toast.action button{color:var(--accent);font-weight:700}
+</style>
+
+<header class="top" id="top">
+  <div class="top-inner">
+    <div class="brand">
+      <div>
+        <h1>Madrid de Noche</h1>
+        <div class="sub" id="status" aria-live="polite">Cargando eventos…</div>
+      </div>
+      <div class="actions">
+        <button class="iconbtn hidden" id="refreshBtn" title="Actualizar los eventos ahora" aria-label="Actualizar los eventos ahora">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg>
+        </button>
+        <button class="iconbtn" id="favBtn" title="Solo favoritos" aria-label="Solo favoritos" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.3-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.5 1.2 5.1 3 1.6-1.8 3.1-3 5.1-3 3.7 0 5.9 3.8 4.2 7.4C19 16.4 12 21 12 21z"/></svg>
+        </button>
+        <button class="iconbtn" id="filterBtn" title="Filtros" aria-label="Filtros" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+          <span class="dot hidden" id="filterCount">0</span>
+        </button>
+      </div>
+    </div>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Buscar sala, fiesta, DJ, barrio…" autocomplete="off" aria-label="Buscar">
+    </div>
+    <div class="chips" id="dateChips" role="tablist" aria-label="Fecha"></div>
+  </div>
+</header>
+
+<main id="main"></main>
+
+<div class="overlay" id="overlay"></div>
+
+<!-- Filtros -->
+<div class="sheet" id="filterSheet" role="dialog" aria-modal="true" aria-label="Filtros">
+  <div class="grab"></div>
+  <div class="hd"><h2>Filtros</h2><div><button class="link" id="clearFilters">Limpiar</button> <button class="link" id="closeFilters">Cerrar</button></div></div>
+  <div class="bd">
+    <div class="fsec"><h4>Precio máximo</h4><div class="wrap" id="fPrice"></div></div>
+    <div class="fsec"><h4>Música</h4><div class="wrap" id="fMusic"></div></div>
+    <div class="fsec"><h4>Zona</h4><div class="wrap" id="fZone"></div></div>
+    <div class="fsec"><h4>Tipo</h4><div class="wrap" id="fType"></div></div>
+    <div class="fsec"><h4>Dress code</h4><div class="wrap" id="fDress"></div></div>
+    <div class="fsec"><h4>Edad · solo donde me dejan entrar</h4><div class="wrap" id="fAge"></div></div>
+    <div class="fsec"><h4>Fuente</h4><div class="wrap" id="fSource"></div></div>
+    <div class="fsec" style="margin-top:20px">
+      <div class="toggle"><span id="lblSold">Ocultar agotados</span><button class="sw" id="swSold" role="switch" aria-checked="false" aria-labelledby="lblSold"></button></div>
+      <div class="toggle"><span id="lblFree">Solo con entrada gratis o lista</span><button class="sw" id="swFree" role="switch" aria-checked="false" aria-labelledby="lblFree"></button></div>
+      <div class="toggle"><span id="lblFav">Solo favoritos</span><button class="sw" id="swFav" role="switch" aria-checked="false" aria-labelledby="lblFav"></button></div>
+    </div>
+  </div>
+  <button class="apply" id="applyBtn">Ver resultados</button>
+</div>
+
+<!-- Ficha -->
+<div class="sheet detail" id="detailSheet" role="dialog" aria-modal="true" aria-label="Detalle del evento">
+  <div class="grab"></div>
+  <div class="hd"><span></span><button class="link" id="closeDetail">Cerrar</button></div>
+  <div class="bd" id="detailBody"></div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ===================== Datos / esquema =====================
+ Colección "chunks": pocos documentos grandes {i, n, count, updatedAt, events:[…]} (≤150 KB cada uno).
+ Cada evento (id = YYYY-MM-DD-<hash>):
+ { id, title, date:"YYYY-MM-DD" (noche en que empieza), start:"23:30", end:"06:00",
+   venue, address, zone, type: club|concierto|fiesta|after|bar|tardeo|festival|otro,
+   music:["reggaeton","techno",...], priceMin, priceMax, priceText, priceNote, free:bool,
+   dressCode:string|null, ageMin:number|null, lineup:[...], description,
+   status: disponible|ultimas|agotado|desconocido,
+   sources:[{name,url}], ticketUrl, updatedAt, lastSeen }
+ Documento "meta/status": { lastUpdated, eventCount, chunks, sources:{nombre:n}, running, runStartedAt, failedSources, lastError, note }
+ Versión estática (GitHub Pages): sin `claude`, lee data/events.json y data/status.json.
+ Documento "data/users/<id>/prefs": { favs:[ids] }  (favoritos del usuario, además de localStorage)
+============================================================= */
+
+const MUSIC_LABELS = {reggaeton:"Reggaetón",latino:"Latino",comercial:"Comercial",pop:"Pop",techno:"Techno",house:"House",electronica:"Electrónica",hiphop:"Hip-hop",trap:"Trap",rnb:"R&B",afro:"Afro",dancehall:"Dancehall",indie:"Indie",rock:"Rock",dnb:"Drum & Bass",hardtechno:"Hard techno",disco:"Disco/Funk",salsa:"Salsa/Bachata",flamenco:"Flamenco",remember:"Remember",urban:"Urbano",variado:"Variado",otros:"Otros"};
+const TYPE_LABELS = {club:"Club",concierto:"Concierto",fiesta:"Fiesta",after:"After",bar:"Bar / DJ",tardeo:"Tardeo",festival:"Festival",otro:"Otro"};
+const PRICE_OPTS = [{v:0,l:"Gratis"},{v:10,l:"≤ 10 €"},{v:15,l:"≤ 15 €"},{v:20,l:"≤ 20 €"},{v:30,l:"≤ 30 €"},{v:null,l:"Cualquiera"}];
+const DRESS_OPTS = [{v:"any",l:"Cualquiera"},{v:"none",l:"Sin dress code"},{v:"smart",l:"Elegante / arreglado"}];
+const AGE_OPTS = [{v:null,l:"Cualquiera"},{v:18,l:"Tengo 18–19"},{v:20,l:"Tengo 20"},{v:21,l:"Tengo 21–24"},{v:25,l:"Tengo 25 o más"}];
+const TRIGGER_ID = "trig_01AYNgQ8ve5WaF1Z4Km75cAV";   // tarea programada de actualización (solo el propietario puede lanzarla)
+
+const state = {
+  events: [], meta: null, loaded:false, dbMissing:false, partial:false,
+  q:"", dateMode:"semana", customDate:null,
+  f:{ price:null, music:new Set(), zone:new Set(), type:new Set(), dress:"any", age:null, source:new Set(), hideSold:false, onlyFree:false, onlyFav:false },
+  favs: new Set(), favDoc:null, isOwner:false, mcp:null, lastFocus:null
+};
+
+/* ---------- utilidades ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad = n => String(n).padStart(2,"0");
+const fold = s => String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+function todayStr(){ // la "noche" dura hasta las 6:00 del día siguiente
+  const d = new Date(); if (d.getHours() < 6) d.setDate(d.getDate()-1);
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+}
+function addDays(s,n){ const d=new Date(s+"T12:00:00"); d.setDate(d.getDate()+n); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+function dow(s){ return new Date(s+"T12:00:00").getDay(); } // 0 dom
+function fmtDay(s){
+  const d=new Date(s+"T12:00:00"); const t=todayStr();
+  let base = d.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"}); base = base.charAt(0).toUpperCase()+base.slice(1);
+  if (s===t) return "Hoy · "+base; if (s===addDays(t,1)) return "Mañana · "+base; return base;
+}
+function nightMin(start){ // minutos desde las 06:00: lo de madrugada (00:00–05:59) cuenta como final de la noche anterior
+  const m=/^(\d{1,2}):(\d{2})/.exec(start||""); if(!m) return 9999;
+  let h=+m[1]; if (h<6) h+=24; return h*60+ +m[2];
+}
+function safeLS(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){return null} }
+function toast(m, action){
+  const t=$("#toast"); clearTimeout(toast._t); t.classList.remove("action");
+  if (action){ t.innerHTML=`<span>${esc(m)}</span><button type="button" id="toastAct">${esc(action.label)}</button><button type="button" id="toastNo">No</button>`; t.classList.add("action","show");
+    $("#toastAct").onclick=()=>{ t.classList.remove("show","action"); action.fn(); }; $("#toastNo").onclick=()=>t.classList.remove("show","action"); toast._t=setTimeout(()=>t.classList.remove("show","action"),12000); return; }
+  t.textContent=m; t.classList.add("show"); toast._t=setTimeout(()=>t.classList.remove("show"),2200);
+}
+function priceLabel(e){
+  const isFree = e.free || e.priceMin===0;
+  if (e.priceMin==null && e.priceMax==null) return isFree ? {n:"Gratis",free:true,l:short(e.priceText||"")} : {n:e.priceText?"":"—",free:false,l:short(e.priceText||"Precio no publicado")};
+  if (isFree) return {n:"Gratis", free:true, l:short((e.priceMax?`hasta ${e.priceMax} €`:"")+(e.priceText?(e.priceMax?" · ":"")+e.priceText:""))};
+  if (e.priceMin!=null && e.priceMax!=null && e.priceMax!==e.priceMin) return {n:`${e.priceMin}–${e.priceMax} €`,free:false,l:short(e.priceText||"")};
+  return {n:`${e.priceMin??e.priceMax} €`,free:false,l:short(e.priceText||"")};
+}
+function short(s){ s=String(s||""); return s.length>44? s.slice(0,42)+"…": s; }
+function dressClass(e){
+  const d=fold(e.dressCode);
+  if (!d || /sin dress|no hay dress|libre|casual|informal|no dress|cualquiera|ninguno|none/.test(d)) return "none";
+  return "smart";
+}
+function statusTag(e){
+  if (e.status==="agotado") return '<span class="tag bad">Agotado</span>';
+  if (e.status==="ultimas") return '<span class="tag warn">Últimas entradas</span>';
+  return "";
+}
+function hostOf(u){ try{ return new URL(u).hostname.replace(/^www\./,""); }catch(e){ return ""; } }
+
+/* ---------- chips de fecha ---------- */
+function weekendRange(){
+  const t=todayStr(); const w=dow(t);
+  let fri = w===6 ? addDays(t,-1) : w===0 ? addDays(t,-2) : addDays(t,(5-w+7)%7);
+  const sun=addDays(fri,2); const from = fri>t ? fri : t;
+  return [from,sun];
+}
+function dateOptions(){
+  const d=dow(todayStr());
+  const opts=[{k:"todo",l:"Todo"},{k:"hoy",l:"Hoy"},{k:"manana",l:"Mañana"}];
+  opts.push({k:"finde",l:(d>=5||d===0)?"Finde":"Este finde"});
+  opts.push({k:"semana",l:"7 días"});
+  opts.push({k:"fecha",l: state.customDate? new Date(state.customDate+"T12:00").toLocaleDateString("es-ES",{weekday:"short",day:"numeric",month:"short"}) : "Elegir fecha…"});
+  return opts;
+}
+function inDateRange(e){
+  const t=todayStr(); const d=e.date; if(!d) return false;
+  if (d < t) return false;
+  switch(state.dateMode){
+    case "hoy": return d===t;
+    case "manana": return d===addDays(t,1);
+    case "finde": { const [from,sun]=weekendRange(); return d>=from && d<=sun; }
+    case "semana": return d<=addDays(t,7);
+    case "fecha": return state.customDate? d===state.customDate : true;
+    default: return true;
+  }
+}
+function renderDateChips(){
+  const c=$("#dateChips"); c.innerHTML="";
+  for (const o of dateOptions()){
+    const b=document.createElement("button"); b.type="button"; b.className="chip"+(state.dateMode===o.k?" on":""); b.textContent=o.l; b.setAttribute("role","tab"); b.setAttribute("aria-selected",state.dateMode===o.k);
+    b.onclick=()=>{ if(o.k==="fecha"){ pickDate(); return;} state.dateMode=o.k; renderDateChips(); render(); };
+    c.appendChild(b);
+  }
+}
+function pickDate(){
+  let inp=$("#hiddenDate");
+  if(!inp){ inp=document.createElement("input"); inp.type="date"; inp.id="hiddenDate"; inp.setAttribute("aria-label","Elegir fecha"); inp.style.cssText="position:fixed;opacity:0;pointer-events:none;top:60px;left:16px;width:1px;height:1px"; document.body.appendChild(inp);
+    inp.onchange=()=>{ if(inp.value){ state.customDate=inp.value; state.dateMode="fecha"; renderDateChips(); render(); } }; }
+  inp.min=todayStr(); inp.value=state.customDate||todayStr();
+  if (inp.showPicker) { try{inp.showPicker();return;}catch(e){} } inp.click();
+}
+
+/* ---------- filtros ---------- */
+function activeFilterCount(){
+  const f=state.f; let n=0;
+  if(f.price!==null)n++; n+=f.music.size?1:0; n+=f.zone.size?1:0; n+=f.type.size?1:0; if(f.dress!=="any")n++; if(f.age!==null)n++; n+=f.source.size?1:0; if(f.hideSold)n++; if(f.onlyFree)n++; if(f.onlyFav)n++;
+  return n;
+}
+function haystack(e){
+  if (!e._hay) e._hay = fold([e.title,e.venue,e.zone,e.address,e.description,(e.lineup||[]).join(" "),(e.music||[]).map(m=>MUSIC_LABELS[m]||m).join(" "),(e.sources||[]).map(s=>s.name).join(" ")].join(" "));
+  return e._hay;
+}
+function passes(e){
+  const f=state.f;
+  if (!inDateRange(e)) return false;
+  if (state.q){ const terms=fold(state.q).split(/\s+/).filter(Boolean); const hay=haystack(e); if(!terms.every(t=>hay.includes(t))) return false; }
+  if (f.price!==null){ const p = e.free||e.priceMin===0 ? 0 : (e.priceMin ?? e.priceMax); if (p==null) return false; if (p>f.price) return false; }
+  if (f.music.size){ if(!(e.music||[]).some(m=>f.music.has(m))) return false; }
+  if (f.zone.size && !f.zone.has(e.zone||"Otros")) return false;
+  if (f.type.size && !f.type.has(e.type||"otro")) return false;
+  if (f.dress!=="any" && dressClass(e)!==f.dress) return false;
+  if (f.age!==null){ if ((e.ageMin||18) > f.age) return false; }
+  if (f.source.size && !(e.sources||[]).some(s=>f.source.has(s.name))) return false;
+  if (f.hideSold && e.status==="agotado") return false;
+  if (f.onlyFree && !(e.free || e.priceMin===0)) return false;
+  if (f.onlyFav && !state.favs.has(e.id)) return false;
+  return true;
+}
+function chipGroup(el, opts, get, set){
+  el.innerHTML="";
+  for (const o of opts){
+    const b=document.createElement("button"); b.type="button"; b.className="chip small"+(get(o.v)?" on":""); b.textContent=o.l; b.setAttribute("aria-pressed",!!get(o.v));
+    b.onclick=()=>{ set(o.v); chipGroup(el,opts,get,set); };
+    el.appendChild(b);
+  }
+}
+function uniqueValues(key){
+  const m=new Map(); const t=todayStr();
+  for (const e of state.events){ if (e.date<t) continue; const vals = key==="music"? (e.music||[]) : key==="source" ? (e.sources||[]).map(s=>s.name) : [e[key]||(key==="zone"?"Otros":"otro")]; for(const v of vals) m.set(v,(m.get(v)||0)+1); }
+  return [...m.entries()].sort((a,b)=>b[1]-a[1]).map(([v,n])=>({v,n}));
+}
+function renderFilters(){
+  const f=state.f;
+  chipGroup($("#fPrice"), PRICE_OPTS, v=>f.price===v, v=>{f.price=v;});
+  chipGroup($("#fMusic"), uniqueValues("music").map(o=>({v:o.v,l:(MUSIC_LABELS[o.v]||o.v)+" · "+o.n})), v=>f.music.has(v), v=>{f.music.has(v)?f.music.delete(v):f.music.add(v)});
+  chipGroup($("#fZone"), uniqueValues("zone").map(o=>({v:o.v,l:o.v+" · "+o.n})), v=>f.zone.has(v), v=>{f.zone.has(v)?f.zone.delete(v):f.zone.add(v)});
+  chipGroup($("#fType"), uniqueValues("type").map(o=>({v:o.v,l:(TYPE_LABELS[o.v]||o.v)+" · "+o.n})), v=>f.type.has(v), v=>{f.type.has(v)?f.type.delete(v):f.type.add(v)});
+  chipGroup($("#fDress"), DRESS_OPTS, v=>f.dress===v, v=>{f.dress=v});
+  chipGroup($("#fAge"), AGE_OPTS, v=>f.age===v, v=>{f.age=v});
+  chipGroup($("#fSource"), uniqueValues("source").map(o=>({v:o.v,l:o.v+" · "+o.n})), v=>f.source.has(v), v=>{f.source.has(v)?f.source.delete(v):f.source.add(v)});
+  for (const [id,on] of [["#swSold",f.hideSold],["#swFree",f.onlyFree],["#swFav",f.onlyFav]]){ const el=$(id); el.classList.toggle("on",on); el.setAttribute("aria-checked",on); }
+  if(!$("#fMusic").children.length) $("#fMusic").innerHTML='<span class="src">Sin datos todavía</span>';
+}
+function clearFilters(){ state.f={price:null,music:new Set(),zone:new Set(),type:new Set(),dress:"any",age:null,source:new Set(),hideSold:false,onlyFree:false,onlyFav:false}; renderFilters(); }
+
+/* ---------- lista ---------- */
+function render(){
+  const main=$("#main"); const n=activeFilterCount(); const fc=$("#filterCount"); fc.textContent=n; fc.classList.toggle("hidden",n===0);
+  $("#favBtn").classList.toggle("on",state.f.onlyFav); $("#favBtn").setAttribute("aria-pressed",state.f.onlyFav);
+  renderStatus();
+  if (!state.loaded){ main.innerHTML='<div class="grid" style="margin-top:16px">'+'<div class="skel"></div>'.repeat(4)+'</div>'; return; }
+  if (state.dbMissing){ main.innerHTML='<div class="empty"><h3>No se puede acceder a los datos</h3>Inicia sesión en claude.ai y recarga la página.</div>'; return; }
+  const list = state.events.filter(passes).sort((a,b)=> a.date.localeCompare(b.date) || (nightMin(a.start)-nightMin(b.start)) || (a.title||"").localeCompare(b.title||""));
+  let html="";
+  if (state.partial) html+='<div class="notice">No se han podido cargar todos los eventos. Recarga la página en unos segundos.</div>';
+  if (state.meta?.lastError && !isRunning()) html+=`<div class="notice">La última actualización automática falló: ${esc(String(state.meta.lastError).slice(0,200))}</div>`;
+  if (!list.length){
+    main.innerHTML = html + (state.events.length ? '<div class="empty"><h3>Nada con estos filtros</h3>Prueba otra fecha o quita algún filtro.</div>'
+      : '<div class="empty"><h3>Todavía no hay eventos</h3>La primera carga de datos está en marcha. Vuelve en unos minutos.</div>');
+    return;
+  }
+  const groups=new Map(); for(const e of list){ if(!groups.has(e.date)) groups.set(e.date,[]); groups.get(e.date).push(e); }
+  for (const [date, evs] of groups){
+    html+=`<section class="daygroup" aria-label="${esc(fmtDay(date))}"><div class="dayhead"><h2>${esc(fmtDay(date))}</h2><span>${evs.length} evento${evs.length!==1?"s":""}</span></div><div class="grid">`;
+    for (const e of evs) html+=card(e);
+    html+="</div></section>";
+  }
+  main.innerHTML=html;
+}
+function renderStatus(){
+  const st=$("#status"); const t=todayStr();
+  if (!state.loaded){ st.textContent="Cargando eventos…"; return; }
+  if (state.dbMissing){ st.textContent="Sin acceso a los datos"; return; }
+  const upcoming = state.events.filter(e=>e.date>=t).length;
+  const shown = state.events.filter(passes).length;
+  const running = isRunning();
+  if (!state.events.length){ st.textContent = running ? "Actualizando eventos…" : "Aún no hay eventos cargados"; return; }
+  st.innerHTML=`<b>${shown}</b> de ${upcoming} eventos · ${running? '<span class="live">actualizando ahora…</span>' : "actualizado "+fmtUpdated()}`;
+  const rb=$("#refreshBtn"); rb.classList.toggle("spin",running); rb.disabled=running; rb.title = running ? "Actualización en curso" : "Actualizar los eventos ahora";
+}
+function isRunning(){
+  const m=state.meta; if(!m?.running) return false;
+  const started=m.runStartedAt? new Date(m.runStartedAt).getTime() : 0;
+  return !started || (Date.now()-started) < 3*3600*1000;   // una ejecución colgada no bloquea para siempre
+}
+function card(e){
+  const p=priceLabel(e); const fav=state.favs.has(e.id);
+  const music=(e.music||[]).slice(0,3).map(m=>`<span class="tag music">${esc(MUSIC_LABELS[m]||m)}</span>`).join("");
+  const time = e.start? `<span class="tag time">${esc(e.start)}${e.end?"–"+esc(e.end):""}</span>`:"";
+  const dress = e.dressCode && dressClass(e)==="smart" ? `<span class="tag dress" title="${esc(e.dressCode)}">👔 ${esc(short(e.dressCode))}</span>` : "";
+  const age = e.ageMin && e.ageMin>18 ? `<span class="tag age">+${e.ageMin}</span>` : "";
+  const type = e.type && e.type!=="club" ? `<span class="tag">${esc(TYPE_LABELS[e.type]||e.type)}</span>`:"";
+  const srcs=(e.sources||[]).slice(0,4).map(s=>`<span class="src">${esc(s.name)}</span>`).join("");
+  return `<article class="card ${e.status==="agotado"?"soldout":""}" data-id="${esc(e.id)}" tabindex="0" role="button" aria-label="${esc(e.title)}, ${esc(e.venue||"")}. Ver ficha">
+    <div class="row"><div><h3>${esc(e.title)}</h3><div class="venue"><b>${esc(e.venue||"")}</b>${e.zone?" · "+esc(e.zone):""}</div></div>
+      <div class="price"><span class="n ${p.free?"free":""}">${esc(p.n)}</span>${p.l?`<span class="l">${esc(p.l)}</span>`:""}</div></div>
+    <div class="meta">${time}${music}${type}${dress}${age}${statusTag(e)}</div>
+    <div class="foot"><div class="srcs">${srcs}</div>
+      <button type="button" class="fav ${fav?"on":""}" data-fav="${esc(e.id)}" aria-label="${fav?"Quitar de favoritos":"Añadir a favoritos"}" aria-pressed="${fav}"><svg viewBox="0 0 24 24" fill="${fav?"currentColor":"none"}" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.6-9.3-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.5 1.2 5.1 3 1.6-1.8 3.1-3 5.1-3 3.7 0 5.9 3.8 4.2 7.4C19 16.4 12 21 12 21z"/></svg></button></div>
+  </article>`;
+}
+function fmtUpdated(){
+  const t=state.meta?.lastUpdated; if(!t) return "—";
+  const d=new Date(t); const diff=(Date.now()-d)/60000;
+  if (diff<60) return `hace ${Math.max(1,Math.round(diff))} min`; if (diff<60*36) return `hace ${Math.round(diff/60)} h`;
+  return d.toLocaleDateString("es-ES",{day:"numeric",month:"short"});
+}
+
+/* ---------- ficha ---------- */
+function openDetail(id){
+  const e=state.events.find(x=>x.id===id); if(!e) return;
+  const p=priceLabel(e);
+  const kv=[];
+  kv.push(["Fecha", esc(fmtDay(e.date))+(e.start?` · ${esc(e.start)}${e.end?"–"+esc(e.end):""}`:"")]);
+  if (e.venue) kv.push(["Sala", esc(e.venue)+(e.address?`<br><small>${esc(e.address)}</small>`:"")]);
+  kv.push(["Precio", `<b style="color:${p.free?"var(--ok)":"inherit"}">${esc(p.n||"—")}</b>${e.priceText?`<br><small>${esc(e.priceText)}</small>`:""}${e.priceNote?`<br><small style="color:var(--ok)">${esc(e.priceNote)}</small>`:""}`]);
+  if (e.music?.length) kv.push(["Música", e.music.map(m=>esc(MUSIC_LABELS[m]||m)).join(", ")]);
+  if (e.lineup?.length) kv.push(["Line-up", e.lineup.map(esc).join(", ")]);
+  kv.push(["Dress code", e.dressCode? esc(e.dressCode) : '<small>No especificado</small>']);
+  kv.push(["Edad", e.ageMin? `+${e.ageMin}` : '<small>No especificada (normalmente +18)</small>']);
+  if (e.type) kv.push(["Tipo", esc(TYPE_LABELS[e.type]||e.type)]);
+  if (e.status && e.status!=="desconocido") kv.push(["Entradas", e.status==="agotado"?'<span style="color:var(--bad)">Agotadas</span>':e.status==="ultimas"?'<span style="color:var(--warn)">Últimas entradas</span>':"Disponibles"]);
+  // botón principal: el enlace de compra más barato (ticketUrl); después, el resto de fuentes
+  const srcs=e.sources||[]; const ticket=e.ticketUrl||srcs[0]?.url; const buttons=[];
+  if (ticket){ const s=srcs.find(x=>x.url===ticket); buttons.push(`<a class="btn primary" href="${esc(ticket)}" target="_blank" rel="noopener"><span>${e.status==="agotado"?"Agotado · ver en":"Entradas / info"} · ${esc(s?s.name:hostOf(ticket))}</span><span class="s">↗</span></a>`); }
+  for (const s of srcs){ if (s.url===ticket) continue; buttons.push(`<a class="btn" href="${esc(s.url)}" target="_blank" rel="noopener"><span>Ver en ${esc(s.name)}</span><span class="s">↗</span></a>`); }
+  if (e.address || e.venue) buttons.push(`<a class="btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((e.venue?e.venue+", ":"")+(e.address||"Madrid"))}" target="_blank" rel="noopener"><span>Cómo llegar</span><span class="s">Maps ↗</span></a>`);
+  $("#detailBody").innerHTML=`<h2>${esc(e.title)}</h2><div class="lead"><b>${esc(e.venue||"")}</b>${e.zone?" · "+esc(e.zone):""}</div>
+    <div class="kv">${kv.map(([k,v])=>`<div class="k">${k}</div><div class="v">${v}</div>`).join("")}</div>
+    ${e.description?`<div class="desc">${esc(e.description)}</div>`:""}
+    <div class="btns">${buttons.join("")}</div>
+    <div class="note">Datos recogidos automáticamente de la web de la fuente${e.updatedAt?` el ${new Date(e.updatedAt).toLocaleString("es-ES",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}`:""}. Confirma precio y condiciones en el enlace antes de ir.</div>`;
+  openSheet("#detailSheet","#closeDetail");
+}
+function openSheet(sel, focusSel){
+  state.lastFocus=document.activeElement;
+  $("#overlay").classList.add("show"); const sh=$(sel); sh.classList.add("show");
+  setTimeout(()=>{ const f=focusSel? $(focusSel) : sh.querySelector("button,a,input"); if(f) f.focus({preventScroll:true}); },60);
+}
+function closeSheets(){
+  const wasOpen=document.querySelector(".sheet.show");
+  $("#overlay").classList.remove("show"); document.querySelectorAll(".sheet").forEach(s=>s.classList.remove("show"));
+  if (wasOpen && wasOpen.id==="filterSheet") render();   // los filtros se aplican también al cerrar tocando fuera
+  if (state.lastFocus && document.contains(state.lastFocus)) { try{ state.lastFocus.focus({preventScroll:true}); }catch(e){} }
+  state.lastFocus=null;
+}
+
+/* ---------- favoritos (localStorage + documento privado del usuario en la BD) ---------- */
+function loadFavs(){ try{ const v=safeLS("mdn_favs"); if(v) state.favs=new Set(JSON.parse(v)); }catch(e){} }
+function saveFavs(){
+  safeLS("mdn_favs",JSON.stringify([...state.favs]));
+  if (state.favDoc){ state.favDoc.set({favs:[...state.favs], updatedAt:new Date().toISOString()}).catch(()=>{}); }
+}
+function toggleFav(id){
+  const on=!state.favs.has(id); on?state.favs.add(id):state.favs.delete(id); saveFavs(); render();
+  toast(on?"Guardado en favoritos":"Quitado de favoritos");
+}
+
+/* ---------- actualizar ahora (solo propietario) ---------- */
+async function requestRefresh(){
+  if (!state.mcp) return;
+  if (isRunning()){ toast("Ya hay una actualización en marcha"); return; }
+  toast("Lanzar la actualización ahora (tarda 1–2 h y consume tokens)", {label:"Lanzar", fn: async ()=>{
+    try{
+      $("#refreshBtn").classList.add("spin");
+      await state.mcp.callTool("Claude Code Remote","fire_trigger",{trigger_id:TRIGGER_ID, text:"Lanzada a mano desde la app Madrid de Noche."});
+      toast("Actualización lanzada. Los eventos irán cambiando cuando termine.");
+      state.meta={...(state.meta||{}), running:true, runStartedAt:new Date().toISOString()}; renderStatus();
+    }catch(err){
+      $("#refreshBtn").classList.remove("spin");
+      const code=err?.code||""; console.error(err);
+      toast(code==="not_granted"||code==="server_not_connected" ? "No tienes permiso para lanzar la actualización desde aquí" : "No se pudo lanzar la actualización ("+(code||"error")+")");
+    }
+  }});
+}
+
+/* ---------- eventos UI ---------- */
+$("#q").addEventListener("input",e=>{ state.q=e.target.value.trim(); render(); });
+$("#filterBtn").onclick=()=>{ renderFilters(); openSheet("#filterSheet","#closeFilters"); };
+$("#favBtn").onclick=()=>{ state.f.onlyFav=!state.f.onlyFav; render(); toast(state.f.onlyFav?"Mostrando solo favoritos":"Mostrando todo"); };
+$("#refreshBtn").onclick=requestRefresh;
+$("#applyBtn").onclick=closeSheets;
+$("#closeFilters").onclick=closeSheets;
+$("#clearFilters").onclick=()=>{ clearFilters(); render(); };
+$("#closeDetail").onclick=closeSheets; $("#overlay").onclick=closeSheets;
+$("#swSold").onclick=()=>{state.f.hideSold=!state.f.hideSold; renderFilters();};
+$("#swFree").onclick=()=>{state.f.onlyFree=!state.f.onlyFree; renderFilters();};
+$("#swFav").onclick=()=>{state.f.onlyFav=!state.f.onlyFav; renderFilters();};
+$("#main").addEventListener("click",ev=>{
+  const f=ev.target.closest("[data-fav]"); if(f){ ev.stopPropagation(); toggleFav(f.dataset.fav); return; }
+  const c=ev.target.closest(".card"); if(c) openDetail(c.dataset.id);
+});
+$("#main").addEventListener("keydown",ev=>{
+  if (ev.key!=="Enter" && ev.key!==" ") return;
+  if (ev.target.closest("[data-fav]")) return;   // el botón de favorito ya responde solo
+  const c=ev.target.closest(".card"); if(c){ ev.preventDefault(); openDetail(c.dataset.id); }
+});
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && document.querySelector(".sheet.show")) closeSheets(); });
+// altura real de la cabecera → las cabeceras de día se pegan justo debajo
+try{ new ResizeObserver(en=>{ for(const x of en) document.documentElement.style.setProperty("--top-h", Math.round(x.target.getBoundingClientRect().height)+"px"); }).observe($("#top")); }catch(e){}
+
+/* ---------- datos ---------- */
+loadFavs(); renderDateChips(); render();
+function setEvents(list){ const t=addDays(todayStr(),-1); state.events=list.filter(e=>e && e.date && e.date>=t); state.loaded=true; render(); }
+async function loadStatic(){
+  // Versión web estática (GitHub Pages): los datos están en data/events.json y data/status.json
+  try {
+    const [ev, st] = await Promise.all([fetch("data/events.json",{cache:"no-cache"}), fetch("data/status.json",{cache:"no-cache"}).catch(()=>null)]);
+    if (!ev.ok) throw new Error("events.json "+ev.status);
+    const list = await ev.json(); state.meta = st && st.ok ? await st.json() : null; setEvents(list);
+  } catch(e){ console.error(e); state.loaded=true; state.partial=true; render(); }
+}
+(async()=>{
+  if (typeof claude==="undefined" || !claude || typeof claude.use!=="function"){ loadStatic(); return; }
+  let db=null;
+  try { db = await claude.use("db"); } catch(e){ db=null; }
+  if (!db){ state.loaded=true; state.dbMissing=true; render(); return; }
+  // Los eventos están en la colección "chunks": pocos documentos grandes ({i, n, count, events:[…]})
+  try {
+    db.collection("chunks").onSnapshot(snap=>{
+      const docs=snap.docs.map(d=>d.data()).sort((a,b)=>(a.i||0)-(b.i||0));
+      const all=new Map(); for (const c of docs) for (const e of (c.events||[])) if (e && e.id) all.set(e.id,e);
+      state.partial = docs.length>0 && docs.some(c=>c.n && c.n>docs.length);
+      setEvents([...all.values()]);
+    }, err=>{ console.error(err); state.loaded=true; state.partial=true; render(); toast("No se pudieron cargar los eventos"); });
+    db.doc("meta/status").onSnapshot(s=>{ state.meta=s.exists?s.data():null; render(); }, ()=>{});
+    setTimeout(()=>{ if(!state.loaded){ state.loaded=true; state.partial=true; render(); } }, 12000);
+  } catch(e){ console.error(e); state.loaded=true; render(); }
+  // favoritos del usuario (documento privado) y botón de actualización para el propietario
+  try {
+    const user = await claude.use("user");
+    if (user){
+      const uid = await user.id();
+      if (uid){
+        state.favDoc = db.doc("data/users/"+uid+"/prefs");
+        const snap = await state.favDoc.get().catch(()=>null);
+        const remote = snap && snap.exists ? (snap.data().favs||[]) : [];
+        const before=state.favs.size; for (const id of remote) state.favs.add(id);
+        if (state.favs.size!==before) { safeLS("mdn_favs",JSON.stringify([...state.favs])); render(); }
+        if (!snap || !snap.exists || remote.length!==state.favs.size) saveFavs();
+      }
+      state.isOwner = await user.isOwner();
+      if (state.isOwner){
+        state.mcp = await claude.use("mcp");
+        if (state.mcp) { $("#refreshBtn").classList.remove("hidden"); renderStatus(); }
+      }
+    }
+  } catch(e){ console.warn(e); }
+})();
+</script>
+</body></html>
