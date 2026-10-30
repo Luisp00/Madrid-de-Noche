@@ -12,7 +12,7 @@ Agregador personal de **todos los eventos nocturnos de Madrid** (clubs, fiestas,
 | Archivo | Qué es |
 |---|---|
 | `index.html` | La app (HTML/CSS/JS autocontenido, sin `<html>/<head>`: el publicador del artifact añade el esqueleto y `build_site.py` el de la web estática). Con `claude` disponible lee la colección `chunks` con `claude.use("db")`, los favoritos con `claude.use("user")` y lanza la actualización con `claude.use("mcp")` (conector "Claude Code Remote", `fire_trigger`); sin `claude`, lee `data/events.json` y `data/status.json`. |
-| `enrich.py` | `python3 enrich.py run/data [--max 150]`: para los eventos sin precio cuyo enlace es de una ticketera con página pública (Xceed, DICE, WHAN, Fever, Taquilla, PATT…) visita la página y rellena precio, estado y, si faltan, hora/dirección/edad. Escribe `_enrich_report.json`. |
+| `enrich.py` | `python3 enrich.py run/data [--max 250]`: para los eventos sin precio cuyo enlace es de una ticketera con página pública (Xceed, DICE, WHAN, Fever, Taquilla, PATT…) visita la página y rellena precio, estado y, si faltan, hora/dirección/edad. Escribe `_enrich_report.json`. |
 | `scrape.py` | Ejecuta todos los parsers de `scrape/sources/` en paralelo, valida la salida y deja `data/<fuente>.json` y `data/_scrape_report.json` con la lista `failed` (parsers con error o por debajo de su `MIN_EVENTS`). |
 | `scrape/common.py` | Biblioteca de los parsers: `get` (requests con proxy, reintentos y caché de 1 h), `browser` (Chromium headless vía `tools/fetch.js`), JSON-LD, fechas/horas/precios en español, `event()` con el esquema de SPEC.md, `validate()`. |
 | `scrape/CONTRATO.md` | Lo que debe cumplir cada parser. |

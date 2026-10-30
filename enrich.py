@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Rellena el precio de los eventos que los parsers dejan sin él, visitando la página de compra del evento en la ticketera.
 
-Uso: python3 enrich.py run/data [--max 150] [--today YYYY-MM-DD] [--days 14]
+Uso: python3 enrich.py run/data [--max 250] [--today YYYY-MM-DD] [--days 14]
 
 Recorre run/data/*.json (salida de scrape.py), toma los eventos sin precio (priceMin y priceMax nulos) cuyo ticketUrl o alguna
 url de `sources` es la ficha de un evento en una ticketera con página pública, la descarga con scrape.common.get (caché de 1 h,
@@ -176,6 +176,34 @@ def h_madridenvivo(url, ev, ctx):
     if out.get("priceMin") is not None: out["canonical"] = buy
     return out
 
+# Techno Airlines y Fulltechno no están: sus fichas enlazan casi siempre a RA (vetada) y gastan presupuesto sin resultado
+FOLLOW_HOSTS = {"conciertos.club": r"/conciertos/", "laganzua.net": r"/conciertos/"}
+def h_follow(url, ev, ctx):
+    """Ficha de un agregador (Conciertos.club, Techno Airlines, Fulltechno, La Ganzúa) -> primer enlace de compra a una ticketera
+    conocida (desenvuelve los enlaces de afiliado fever.pxf.io?u=...) -> su manejador."""
+    from urllib.parse import urlparse, parse_qs, unquote
+    from scrape.common import soup
+    s = soup(get(url))
+    seen = set()
+    for a in s.select("a[href]"):
+        href = a.get("href", "").strip()
+        if not href.startswith("http"): continue
+        if "pxf.io" in href or "u=" in href:
+            q = parse_qs(urlparse(href).query).get("u")
+            if q: href = unquote(q[0])
+        if href in seen: continue
+        seen.add(href)
+        fn = handler_for(href)
+        if not fn or fn in (h_follow, h_madridenvivo): continue
+        time.sleep(0.4); ctx["pages"] += 1
+        try: out = fn(href, ev, ctx)
+        except FetchError: continue
+        if out.get("priceMin") is not None or out.get("priceMax") is not None:
+            out["canonical"] = href
+            return out
+        if ctx["pages"] >= ctx.get("maxPages", 10**9): break
+    return {}
+
 def label_of(host):
     for k, v in (("eventbrite", "Eventbrite"), ("entradium", "Entradium"), ("wegow", "Wegow"), ("geeticket", "Geeticket"), ("onebox", "Onebox"),
                  ("tomaticket", "Tomaticket"), ("woutick", "Woutick"), ("enterticket", "Enterticket"), ("conciertos.club", "Conciertos.club"),
@@ -194,6 +222,8 @@ def handler_for(u):
     if h == "tickets.nightlifemadrid.com" and "/pass/" in u: return h_patt
     if any(g in h for g in GENERIC_HOSTS) and re.search(r"/(e|event|events|evento|eventos|entrada|entradas|es/events)/|/rest/entrada/", u): return h_generic
     if h == "madridenvivo.com" and "/evento/" in u: return h_madridenvivo
+    for fh, pat in FOLLOW_HOSTS.items():
+        if h.endswith(fh) and re.search(pat, u): return h_follow
     return None
 
 def apply(ev, info):
@@ -230,7 +260,7 @@ def main():
     opt = lambda k, d: args[args.index(k) + 1] if k in args else d
     pos = [a for i, a in enumerate(args) if not a.startswith("--") and (i == 0 or not args[i - 1].startswith("--"))]
     data_dir = pos[0] if pos else "run/data"
-    maxp = int(opt("--max", "150"))
+    maxp = int(opt("--max", "250"))
     rep0 = {}
     try: rep0 = json.load(open(os.path.join(data_dir, "_scrape_report.json")))
     except Exception: pass
