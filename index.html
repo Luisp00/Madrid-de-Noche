@@ -452,7 +452,8 @@ function openDetail(id){
   // botón principal: el enlace de compra más barato (ticketUrl); después, el resto de fuentes
   const srcs=e.sources||[]; const ticket=e.ticketUrl||srcs[0]?.url; const buttons=[];
   if (ticket){ const s=srcs.find(x=>x.url===ticket); buttons.push(`<a class="btn primary" href="${esc(ticket)}" target="_blank" rel="noopener"><span>${e.status==="agotado"?"Agotado · ver en":"Entradas / info"} · ${esc(s?s.name:hostOf(ticket))}</span><span class="s">↗</span></a>`); }
-  for (const s of srcs){ if (s.url===ticket) continue; buttons.push(`<a class="btn" href="${esc(s.url)}" target="_blank" rel="noopener"><span>Ver en ${esc(s.name)}</span><span class="s">↗</span></a>`); }
+  const seenNames=new Set([srcs.find(x=>x.url===ticket)?.name].filter(Boolean));
+  for (const s of srcs){ if (s.url===ticket || seenNames.has(s.name)) continue; seenNames.add(s.name); buttons.push(`<a class="btn" href="${esc(s.url)}" target="_blank" rel="noopener"><span>Ver en ${esc(s.name)}</span><span class="s">↗</span></a>`); }
   if (e.address || e.venue) buttons.push(`<a class="btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((e.venue?e.venue+", ":"")+(e.address||"Madrid"))}" target="_blank" rel="noopener"><span>Cómo llegar</span><span class="s">Maps ↗</span></a>`);
   $("#detailBody").innerHTML=`<h2>${esc(e.title)}</h2><div class="lead"><b>${esc(e.venue||"")}</b>${e.zone?" · "+esc(e.zone):""}</div>
     <div class="kv">${kv.map(([k,v])=>`<div class="k">${k}</div><div class="v">${v}</div>`).join("")}</div>
