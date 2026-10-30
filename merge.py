@@ -248,6 +248,24 @@ def addr_key(a):
         if w.isdigit() and i>0 and not toks[i-1].isdigit(): return toks[i-1]+" "+w
     return None
 
+SELLER_HOSTS = ("xceed.me","dice.fm","feverup.com","app.whan.es","site.fourvenues.com","fourvenues.com","ra.co","shotgun.live","taquilla.com","eventbrite","entradium.com","wegow.com","tickets.nightlifemadrid.com","geeticket","oneboxtds","tomaticket","woutick","enterticket","discotech.me")
+def ticket_key(u):
+    """Clave de comparación de un enlace de compra: host + ruta sin parámetros ni barra final, en minúsculas. None si no es una ticketera conocida."""
+    if not u: return None
+    u=str(u).strip().lower()
+    m=re.match(r"https?://([^/?#]+)([^?#]*)", u)
+    if not m: return None
+    host=m.group(1).replace("www.",""); path=m.group(2).rstrip("/")
+    if not any(h in host for h in SELLER_HOSTS): return None
+    path=re.sub(r"/(es|en)(/|$)", "/", path)          # xceed.me/es/... y /en/... son la misma página
+    if not path or path in ("/","/events","/event"): return None
+    return host+path
+
+def ticket_keys(e):
+    ks={ticket_key(e.get("ticketUrl"))}
+    for s in e.get("sources") or []: ks.add(ticket_key(s.get("url")))
+    ks.discard(None); return ks
+
 def same_place(m, e):
     if m.get("venue") and e.get("venue") and strip(m["venue"])==strip(e["venue"]): return True
     ka, kb = addr_key(m.get("address")), addr_key(e.get("address"))
@@ -264,7 +282,11 @@ def titles_match(TA, TB, venue_names, vtoks):
     return False
 
 def is_match(m, e):
-    if m["date"]!=e["date"]: return False
+    if m["date"]!=e["date"]:
+        # mismo enlace de compra con fechas vecinas: una fuente puso la fecha natural de una sesión de madrugada
+        if abs((datetime.date.fromisoformat(m["date"])-datetime.date.fromisoformat(e["date"])).days)==1 and ticket_keys(m)&ticket_keys(e): return True
+        return False
+    if ticket_keys(m)&ticket_keys(e): return True
     ta, tb = tmin(m.get("start")), tmin(e.get("start"))
     if ta is not None and tb is not None and abs(ta-tb)>60: return False   # nunca fusionar si las horas difieren >60 min
     TA, TB = m.get("_titles") or [m["title"]], e.get("_titles") or [e["title"]]
