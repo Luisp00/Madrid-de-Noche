@@ -3,3 +3,5 @@ node_modules/
 merge.py.txt
 __pycache__/
 build_site.py.txt
+fetch.js.txt
+run/

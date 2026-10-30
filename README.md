@@ -21,6 +21,7 @@ Agregador personal de **todos los eventos nocturnos de Madrid** (clubs, fiestas,
 | `out/merged.json` | Resultado fusionado de la carga inicial. |
 | `QA.md` | Auditoría de datos de la carga inicial (estructura + 20 eventos contrastados con sus webs). |
 | `REVIEW.md` | Revisión del proyecto del 30 oct 2026 (segunda pasada): qué se encontró, qué se arregló y qué queda. |
+| `tools/fetch.js` | `node tools/fetch.js URL [--max N] [--links N] [--raw] [--wait ms]`: descarga una página con Chromium headless (proxy del entorno), cierra avisos de cookies, hace scroll y devuelve texto visible + enlaces. Sustituto de WebFetch para los agentes extractores cuando WebFetch no está o la web lo bloquea. |
 | `test.js` | Prueba de la app con Playwright: 17 comprobaciones (finde, orden, búsqueda sin tildes, desbordes, foco, teclado, filtros, botón actualizar, modo estático). `node test.js` con datos de ejemplo o `node test.js <events.json>` con datos reales. |
 
 Copias de `SPEC.md`, `RUNBOOK.md` (como `runbook.md`), `merge.py` (como `merge.py.txt`) y `build_site.py` (como `build_site.py.txt`) están publicadas dentro del artifact para que la tarea diaria las lea con la herramienta `Artifact` (action `read` + `path`). **Tras cambiar cualquiera de ellos hay que volver a publicarlos.**
@@ -33,7 +34,7 @@ Copias de `SPEC.md`, `RUNBOOK.md` (como `runbook.md`), `merge.py` (como `merge.p
 
 ## Avisos importantes
 
-- **Red del entorno cloud.** El entorno "Madrid de Noche" de Claude Code (anthropic_cloud, `env_011iohJDNuqisdiyXfRcwZbg`) tiene la red limitada: desde él ni `WebFetch` ni `curl` llegan a ra.co, feverup.com, conciertos.club, etc. La tarea diaria no corre ahí (su autotest del 29 oct dio `webfetchOk: true`), pero **cualquier sesión de Claude Code que quiera extraer eventos desde ese entorno fallará** hasta que en Ajustes del entorno → Network access se amplíe el acceso o se añadan los dominios de `RUNBOOK.md`.
+- **Red del entorno cloud.** El entorno "Madrid de Noche" de Claude Code (`env_011iohJDNuqisdiyXfRcwZbg`) tenía la red limitada; el 30 oct se abrió. Una sesión ya abierta no recoge el cambio para `WebFetch` (sigue sin resolver dominios), pero `curl`/Node a través del proxy sí; las sesiones nuevas deberían tener `WebFetch`. Para extraer desde una sesión sin `WebFetch` está `tools/fetch.js` (Chromium headless a través del proxy; devuelve texto visible y enlaces). ra.co y shotgun.live bloquean a cualquier navegador de centro de datos (403/429).
 - Las correcciones manuales en la BD (como las de `QA.md`) duran hasta la siguiente extracción: si la web sigue mostrando el dato erróneo, vuelve. Lo permanente se arregla en `SPEC.md`/`merge.py`.
 - La herramienta de BD guarda los documentos en archivos pero no sus versiones; la tarea apunta las 4–8 versiones de los chunks en `db/versions.txt` (las escrituras sobre documentos existentes exigen `if_version`).
 - La web pública se actualiza con una sesión hija (paso 6 del runbook) que corre en el entorno cloud "Madrid de Noche" porque es el que tiene acceso al repo; si ese paso falla, el artifact sigue al día y la web se queda con los datos del día anterior.

@@ -9,7 +9,7 @@ Herramientas (comprobadas desde una sesión programada el 30-oct-2026):
 - `ArtifactData` → acciones `get`, `query`, `set`, `update`, `delete`, siempre con `url`. `query` admite `out_dir` (guarda cada documento en `<out_dir>/<colección>/<id>.json`) y `set` admite `file_path` (el archivo JSON se envía como documento); funciona. Toda escritura sobre un documento existente exige `if_version` = la versión que imprimió la última lectura.
 - Si en lugar de esas existen `mcp__claude-artifacts__read_file / db_query / db_get / db_write` (cárgalas con ToolSearch), son equivalentes.
 - Extracción: agentes `Agent` (tipo `general-purpose`, `model: "opus"`, `effort: "high"`) con WebFetch/WebSearch. El usuario quiere que el trabajo lo haga Opus 5.5 en high y que la sesión principal solo coordine.
-- Python 3.11 y Bash están disponibles; `/home/claude/madrid-noche` es escribible. **Nada de curl/python contra webs externas** (está bloqueado); las webs solo con WebFetch/WebSearch.
+- Python 3.11 y Bash están disponibles; `/home/claude/madrid-noche` es escribible. **Nada de curl/python contra webs externas**; las webs solo con WebFetch/WebSearch. Excepción: si la sesión tiene Node con Playwright y Chromium (comprueba con `node -e "require('playwright')"`), los agentes pueden usar `node fetch.js URL` (archivo `fetch.js.txt` del artifact, cópialo a `/home/claude/madrid-noche/fetch.js`) como sustituto de WebFetch para las webs que lo bloqueen; ra.co y shotgun.live bloquean a todos los navegadores de centro de datos.
 
 ## 0. Preparación
 1. `mkdir -p /home/claude/madrid-noche/data /home/claude/madrid-noche/db /home/claude/madrid-noche/out /home/claude/madrid-noche/site` y borra cualquier contenido antiguo de `data/`, `db/`, `out/` y `site/`.
