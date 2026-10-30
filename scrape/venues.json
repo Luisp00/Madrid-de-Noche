@@ -1,0 +1,3218 @@
+[
+ {
+  "name": "Siroco",
+  "aliases": [
+   "Sala Siroco"
+  ],
+  "kind": "discoteca",
+  "address": "C/ San Dimas 3, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/siroco",
+  "note": "club con conciertos a primera hora; zona Malasaña por excepción de SPEC"
+ },
+ {
+  "name": "Café Berlín",
+  "aliases": [
+   "Sala Berlín Café",
+   "Berlín Café",
+   "Berlin Club"
+  ],
+  "kind": "sala",
+  "address": "Costanilla de los Ángeles 20, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://conciertos.club/madrid/locales/cafe-berlin"
+ },
+ {
+  "name": "Sala El Sol",
+  "aliases": [
+   "El Sol",
+   "Sala Sol"
+  ],
+  "kind": "sala",
+  "address": "C/ Jardines 3, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/node/68250"
+ },
+ {
+  "name": "Intruso Bar",
+  "aliases": [
+   "El Intruso",
+   "Intruso"
+  ],
+  "kind": "sala",
+  "address": "C/ Augusto Figueroa 3, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://conciertos.club/madrid/locales/intruso-bar",
+  "note": "bar con sala de conciertos"
+ },
+ {
+  "name": "Honky Tonk",
+  "aliases": [
+   "Honky Tonk Bar",
+   "Honky Tonk Bar Room"
+  ],
+  "kind": "sala",
+  "address": "C/ Covarrubias 24, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://w3.esmadrid.com/en/node/2216",
+  "note": "bar de música en directo (rock/blues)"
+ },
+ {
+  "name": "Nazca",
+  "aliases": [
+   "Sala Nazca",
+   "Nazca Club",
+   "Nazca Events Club",
+   "Sala Nazca Live"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Orense 24, 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://conciertos.club/madrid/locales/sala-nazca",
+  "note": "discoteca que también funciona como sala de conciertos (Sala Nazca)"
+ },
+ {
+  "name": "Rincón del Arte Nuevo",
+  "aliases": [
+   "El Rincón del Arte Nuevo"
+  ],
+  "kind": "bar",
+  "address": "C/ Segovia 17, 28005 Madrid",
+  "postcode": "28005",
+  "city": "Madrid",
+  "zone": "La Latina",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/rincon-del-arte-nuevo",
+  "note": "café cantante con música en directo diaria"
+ },
+ {
+  "name": "Café Central Ateneo",
+  "aliases": [
+   "Café Central",
+   "Café Central - Ateneo",
+   "La Cátedra del Ateneo"
+  ],
+  "kind": "sala",
+  "address": "C/ Prado 21, 28014 Madrid",
+  "postcode": "28014",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.esmadrid.com/it/vita-notturna/cafe-central",
+  "note": "club de jazz; desde abril 2026 en el Ateneo (antes Pl. del Ángel 10)"
+ },
+ {
+  "name": "Sala Copérnico",
+  "aliases": [
+   "Copérnico",
+   "Copérnico The Club",
+   "Copernico"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Fernández de los Ríos 67, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/nightlife/copernico-club",
+  "note": "club jue-sáb; resto de la semana sala de conciertos"
+ },
+ {
+  "name": "Cadavra",
+  "aliases": [
+   "Cadavra Club",
+   "Sala Cadavra"
+  ],
+  "kind": "sala",
+  "address": "C/ Caballero de Gracia 10, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/locales-de-noche/cadavra-club",
+  "note": "dos salas: conciertos y club (antigua Sala Costello)"
+ },
+ {
+  "name": "Manamá",
+  "aliases": [
+   "Manama",
+   "Manama Disco"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Barcelona 14, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://intravel.net/es/madrid/nightlife/manama-disco",
+  "note": "dirección coincide en Fourvenues/Bynova/Nightlife Madrid e Intravel"
+ },
+ {
+  "name": "Shoko",
+  "aliases": [
+   "Shoko Madrid",
+   "Shôko",
+   "Sala Shoko"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Toledo 86, 28005 Madrid",
+  "postcode": "28005",
+  "city": "Madrid",
+  "zone": "La Latina",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/shoko"
+ },
+ {
+  "name": "Enbabia",
+  "aliases": [
+   "Enbabia Bar",
+   "Enbabia Infused",
+   "Enbabia Library",
+   "En Babia"
+  ],
+  "kind": "bar",
+  "address": "C/ Núñez de Arce 9, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.taquilla.com/madrid/enbabia-bar-madrid",
+  "note": "coctelería con fiestas; punto de pub crawls"
+ },
+ {
+  "name": "Jazzville",
+  "aliases": [
+   "Jazzville Café",
+   "Jazzville Bar",
+   "Sala Jazzville"
+  ],
+  "kind": "sala",
+  "address": "C/ Jesús Aprendiz 19, 28007 Madrid",
+  "postcode": "28007",
+  "city": "Madrid",
+  "zone": "Retiro",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/jazzville-cafe",
+  "note": "club de jazz (Pacífico)"
+ },
+ {
+  "name": "Icon Madrid",
+  "aliases": [
+   "Icon",
+   "Icon Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Doctor Cortezo 1, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://nox-agency.com/es/madrid/icon-club"
+ },
+ {
+  "name": "Tiffany's The Club",
+  "aliases": [
+   "Tiffany's",
+   "Tiffanys",
+   "Tiffany s"
+  ],
+  "kind": "discoteca",
+  "address": "Av. Doctor Arce 10, 28002 Madrid",
+  "postcode": "28002",
+  "city": "Madrid",
+  "zone": "Chamartín",
+  "verified": true,
+  "source": "https://xceed.me/es/madrid/club/tiffany-s"
+ },
+ {
+  "name": "Thundercat Club",
+  "aliases": [
+   "Thundercat",
+   "ThunderCat Club",
+   "Thunder Cat Club"
+  ],
+  "kind": "sala",
+  "address": "C/ Campoamor 11, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/node/75587",
+  "note": "club de rock con conciertos y DJs (Alonso Martínez)"
+ },
+ {
+  "name": "Sala Villanos",
+  "aliases": [
+   "Villanos",
+   "Sala Caracol",
+   "Caracol"
+  ],
+  "kind": "sala",
+  "address": "C/ Bernardino Obregón 18, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Atocha",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/sala-villanos",
+  "note": "antigua Sala Caracol (mismo local, renombrada en 2024); conciertos y club"
+ },
+ {
+  "name": "Teatro Eslava",
+  "aliases": [
+   "Joy Eslava",
+   "Joy",
+   "Teatro Joy Eslava"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Arenal 11, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://teatroeslava.com/?p=3875",
+  "note": "antigua Joy Eslava, reabierta como Teatro Eslava en 2022 (conciertos y club)"
+ },
+ {
+  "name": "Fitz Club",
+  "aliases": [
+   "Fitz",
+   "Fitz Club Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Princesa 1, 28008 Madrid",
+  "postcode": "28008",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/fitz-club-madrid",
+  "note": "antigua Sala Arena/Heineken; zona Argüelles por SPEC"
+ },
+ {
+  "name": "Sala Mon",
+  "aliases": [
+   "Mon",
+   "Mon Madrid",
+   "Sala Mon Live",
+   "Mon Live"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Hilarión Eslava 36, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/mon-madrid",
+  "note": "antigua Sala Penélope; también conciertos"
+ },
+ {
+  "name": "Vandido",
+  "aliases": [
+   "Vandido Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Goya 79, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/nightlife/vandido-club"
+ },
+ {
+  "name": "La Coquette",
+  "aliases": [
+   "La Coquette Blues Bar",
+   "Coquette"
+  ],
+  "kind": "bar",
+  "address": "C/ Hileras 14, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/coquette",
+  "note": "bar de blues en sótano con directos"
+ },
+ {
+  "name": "Bonded Club",
+  "aliases": [
+   "Bonded"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Miguel Ángel 9, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://www.clubbable.com/es-ES/Madrid/Bonded"
+ },
+ {
+  "name": "La Riviera",
+  "aliases": [
+   "Sala La Riviera",
+   "Sala Riviera",
+   "Riviera"
+  ],
+  "kind": "sala",
+  "address": "P.º Bajo de la Virgen del Puerto s/n, 28005 Madrid",
+  "postcode": "28005",
+  "city": "Madrid",
+  "zone": "La Latina",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/la-riviera",
+  "note": "junto al Puente de Segovia (Madrid Río); conciertos y club"
+ },
+ {
+  "name": "Café La Palma",
+  "aliases": [
+   "Cafe La Palma",
+   "Café-Bar La Palma",
+   "La Palma"
+  ],
+  "kind": "sala",
+  "address": "C/ Palma 62, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/cafe-la-palma",
+  "note": "en Malasaña aunque el CP es 28015 (como Siroco); una fuente daba CP 28004"
+ },
+ {
+  "name": "Movistar Arena",
+  "aliases": [
+   "WiZink Center",
+   "Palacio de los Deportes",
+   "Palacio de Deportes de la Comunidad de Madrid"
+  ],
+  "kind": "recinto",
+  "address": "Av. Felipe II s/n, 28009 Madrid",
+  "postcode": "28009",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://www.comunidad.madrid/centros/wizink-center-palacio-deportes"
+ },
+ {
+  "name": "La Sala del Movistar Arena",
+  "aliases": [
+   "La Sala Movistar Arena",
+   "La Sala del WiZink Center",
+   "LA SALA del Movistar Arena"
+  ],
+  "kind": "sala",
+  "address": "Av. Felipe II s/n, 28009 Madrid",
+  "postcode": "28009",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://conciertos.club/madrid/locales/la-sala-del-movistar-arena",
+  "note": "sala de 800 personas dentro del Movistar Arena, acceso por C/ Goya esq. Fuente del Berro (puerta 36)"
+ },
+ {
+  "name": "Changó",
+  "aliases": [
+   "Sala Changó",
+   "Changó Club",
+   "Chango",
+   "Sala Chango",
+   "Changó Live"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Covarrubias 42, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://www.taquilla.com/madrid/sala-chango-madrid",
+  "note": "club y sala de conciertos en antiguo teatro"
+ },
+ {
+  "name": "Teatro Magno",
+  "aliases": [
+   "Club Magno",
+   "Magno"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Cedaceros 7, 28014 Madrid",
+  "postcode": "28014",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.esmadrid.com/pt/noite/teatro-magno",
+  "note": "antiguos Cines Bogart; mismo edificio que Babylon Club"
+ },
+ {
+  "name": "Babylon Club Madrid",
+  "aliases": [
+   "Babylon Jazz Club",
+   "Babylon",
+   "Babylon Madrid"
+  ],
+  "kind": "sala",
+  "address": "C/ Cedaceros 7, 28014 Madrid",
+  "postcode": "28014",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/noticias/abre-un-nuevo-club-de-jazz-en-madrid-fue-hogar-de-los-historicos-cines-bogart-y-esta-a-un-paso-del-paseo-del-prado-121125",
+  "note": "club de jazz/soul abierto dic-2025 en el edificio de los antiguos Cines Bogart, misma dirección que Teatro Magno"
+ },
+ {
+  "name": "Hood Dogs Planet",
+  "aliases": [
+   "Hood Dogs",
+   "Hood Dogs by Planet Club",
+   "Planet Club",
+   "Hood Dogs Planet Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Príncipe 20, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://feverup.com/en/madrid/venue/planet-club",
+  "note": "club de Planet Club (trap/reggaeton), abre 20:00-3:30"
+ },
+ {
+  "name": "Sala Clamores",
+  "aliases": [
+   "Clamores",
+   "Clamores Dance Club"
+  ],
+  "kind": "sala",
+  "address": "C/ Alburquerque 14, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/musica/clamores",
+  "note": "sala de conciertos; club vie-sáb (Clamores Dance Club)"
+ },
+ {
+  "name": "Moby Dick Club",
+  "aliases": [
+   "Moby Dick"
+  ],
+  "kind": "sala",
+  "address": "Av. Brasil 5, 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://songkick.com/venues/101172-moby-dick-club",
+  "note": "CP 28020 → Tetuán / Azca; SPEC/merge.py lo ponían en Chamartín"
+ },
+ {
+  "name": "Sala B",
+  "aliases": [
+   "Sala B Madrid"
+  ],
+  "kind": "sala",
+  "address": "C/ Trafalgar 6, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://songkick.com/venues/4605735-sala-b",
+  "note": "sala de conciertos de Chamberí (ciclo MAZO); no confundir con otras 'Sala B'. merge.py la tenía en Atocha"
+ },
+ {
+  "name": "Moe Club",
+  "aliases": [
+   "Moe",
+   "Sala MOE Club",
+   "MOE"
+  ],
+  "kind": "sala",
+  "address": "Av. Alberto Alcocer 32, 28036 Madrid",
+  "postcode": "28036",
+  "city": "Madrid",
+  "zone": "Chamartín",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/jazz-clubs-madrid",
+  "note": "club de jazz/funk con sesiones; merge.py lo tenía en Chamberí"
+ },
+ {
+  "name": "Samsara",
+  "aliases": [
+   "Samsara Club",
+   "Samsara Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Cruz 7, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/samsara"
+ },
+ {
+  "name": "Los Amantes",
+  "aliases": [
+   "LOS AMANTES"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Serrano 43, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://app.whan.es/club/los-amantes",
+  "note": "club del complejo Serrano 41-43"
+ },
+ {
+  "name": "La Reserva Club",
+  "aliases": [
+   "La Reserva"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Príncipe 12, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.taquilla.com/madrid/la-reserva-club-madrid"
+ },
+ {
+  "name": "Todos Santos",
+  "aliases": [
+   "Todos Santos Club",
+   "Todos los Santos",
+   "Todos los Santos Club",
+   "TODOS SANTOS"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Génova 28, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://app.whan.es/club/todos-santos",
+  "note": "junto a Colón"
+ },
+ {
+  "name": "Mitty Cats",
+  "aliases": [
+   "Mitty",
+   "Cats",
+   "Mitty Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Julián Romea 4, 28003 Madrid",
+  "postcode": "28003",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://w3.esmadrid.com/en/nightlife/cats",
+  "note": "antigua Cats; merge.py lo tenía en Centro / Sol"
+ },
+ {
+  "name": "Cristo Social Club",
+  "aliases": [
+   "Crysto Social Club",
+   "Cristo"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Juan Bravo 35, 28006 Madrid",
+  "postcode": "28006",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://venuu.com/es/en/venues/cristo-social-club"
+ },
+ {
+  "name": "Panthera",
+  "aliases": [
+   "Villa Panthera",
+   "Panthera Madrid",
+   "PANTHERA"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Miguel Ángel 21, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://app.whan.es/club/panthera",
+  "note": "restaurante-club; 'Villa Panthera' es su club de verano en el Hipódromo de la Zarzuela (Av. Padre Huidobro s/n, 28023), pero las fiestas de temporada son en C/ Miguel Ángel 21. SPEC lo ponía en Chamartín"
+ },
+ {
+  "name": "Istar",
+  "aliases": [
+   "IŠTAR",
+   "Istar Club",
+   "Ištar"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Serrano 41, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://xceed.me/es/MADRID/venue/istar",
+  "note": "SPEC/merge.py lo ponían en Centro / Sol: está en Salamanca (complejo Serrano 41)"
+ },
+ {
+  "name": "Victoria",
+  "aliases": [
+   "VICTORIA",
+   "Victoria Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Serrano 43, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://app.whan.es/club/victoria",
+  "note": "WHAN da Serrano 43; clubsinmadrid da Serrano 45 (complejo Serrano 41-45). No confundir con otros 'Victoria'"
+ },
+ {
+  "name": "Liberty Supper Club",
+  "aliases": [
+   "Liberty",
+   "Liberty Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Juan Bravo 31, 28006 Madrid",
+  "postcode": "28006",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/liberty-super-club",
+  "note": "cena-club; merge.py lo tenía en Chamberí: está en Salamanca"
+ },
+ {
+  "name": "Houdinni",
+  "aliases": [
+   "Houdinni Club",
+   "Houdini"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Serrano 41, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://www.infobae.com/espana/2025/10/25/la-discoteca-dentro-de-un-vagon-de-metro-e-inspirada-en-nueva-york-que-esta-de-moda-en-madrid/",
+  "note": "club con vagón de metro (grupo Mandala); merge.py lo tenía en Centro / Sol"
+ },
+ {
+  "name": "Makáá Social Club",
+  "aliases": [
+   "Makáá",
+   "Makaa",
+   "MAKÁÁ SOCIAL CLUB"
+  ],
+  "kind": "rooftop",
+  "address": "Pl. del Carmen s/n (azotea Hotel Thompson), 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/makaa",
+  "note": "restaurante-azotea con tardeos (Grupo Lamucca)"
+ },
+ {
+  "name": "La Flaca",
+  "aliases": [
+   "La Flaca Tardeo",
+   "LA FLACA | TARDEO"
+  ],
+  "kind": "bar",
+  "address": "C/ Serrano 45, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://app.whan.es/club/la-flaca-tardeo",
+  "note": "restaurante-bar de tardeo; Salir.com tiene una dirección antigua (C/ Velázquez 94)"
+ },
+ {
+  "name": "Dopamina",
+  "aliases": [
+   "DOPAMINA",
+   "Truhán Dopamina"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Fernández de la Hoz 27, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://app.whan.es/club/truhan-dopamina",
+  "note": "solo verificado en la ficha de WHAN (local Truhán)"
+ },
+ {
+  "name": "Nômâda",
+  "aliases": [
+   "Nomada",
+   "Nómada",
+   "NÔMÂDA"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Serrano 41, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://app.whan.es/club/nomada",
+  "note": "solo verificado en la ficha de WHAN; mismo complejo que Istar/Houdinni"
+ },
+ {
+  "name": "Lula Club",
+  "aliases": [
+   "Lula",
+   "LuLa Club"
+  ],
+  "kind": "discoteca",
+  "address": "Gran Vía 54, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/lula-club"
+ },
+ {
+  "name": "Cadillac Solitario",
+  "aliases": [
+   "Sala Cadillac Solitario"
+  ],
+  "kind": "sala",
+  "address": "C/ Fermín Caballero 6, local C, 28034 Madrid",
+  "postcode": "28034",
+  "city": "Madrid",
+  "zone": "Otros norte",
+  "verified": true,
+  "source": "https://w3.esmadrid.com/en/node/2286",
+  "note": "entrada por la parte trasera; tras los conciertos funciona como discoteca"
+ },
+ {
+  "name": "Fun House",
+  "aliases": [
+   "Fun House Music Bar",
+   "Sala Fun House",
+   "Fun House Rock Bar"
+  ],
+  "kind": "sala",
+  "address": "C/ Palafox 8, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/fun-house-music-bar",
+  "note": "bar-sala de conciertos de rock"
+ },
+ {
+  "name": "Wurlitzer Ballroom",
+  "aliases": [
+   "WURLITZER BALLROOM",
+   "Wurlitzer"
+  ],
+  "kind": "sala",
+  "address": "C/ Tres Cruces 12, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/nightlife/wurlitzer-ballroom"
+ },
+ {
+  "name": "Sala But",
+  "aliases": [
+   "But",
+   "Sala But Madrid",
+   "Mondo Disko @ Sala But",
+   "Sala But (Mondo)",
+   "Ochoymedio Club Sala But"
+  ],
+  "kind": "sala",
+  "address": "C/ Barceló 11, local B, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/la-paqui-esoteric-music-club",
+  "note": "conciertos entre semana; vie-sáb club Ochoymedio. Mondo Disko hace algunas noches aquí. SPEC (lista de salas) la ponía en Argüelles: está en Malasaña"
+ },
+ {
+  "name": "Saint Club",
+  "aliases": [
+   "Saint"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Velázquez 64, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://xceed.me/en/madrid/event/live-music-en-saint-club-clandestino-disco/249028"
+ },
+ {
+  "name": "Rubicón",
+  "aliases": [
+   "Rubicon",
+   "Rubicon Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Cid 7, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://app.whan.es/club/rubicon"
+ },
+ {
+  "name": "Sala Rockville",
+  "aliases": [
+   "Rockville",
+   "Rockville Madrid",
+   "Sala Rockvillle"
+  ],
+  "kind": "sala",
+  "address": "Av. Brasil 3 (esq. C/ Orense 32), 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://feverup.com/en/madrid/venue/sala-rockville",
+  "note": "merge.py la tenía en Centro / Sol: está en Tetuán / Azca"
+ },
+ {
+  "name": "El Despertar Café",
+  "aliases": [
+   "El Despertar",
+   "Café El Despertar",
+   "El Despertar Cafe"
+  ],
+  "kind": "bar",
+  "address": "C/ Torrecilla del Leal 18, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Atocha",
+  "verified": true,
+  "source": "https://www.esmadrid.com/locales-jazz-madrid",
+  "note": "café-club de jazz en Lavapiés desde 1981"
+ },
+ {
+  "name": "El Perro de la Parte de Atrás del Coche",
+  "aliases": [
+   "El Perro Club",
+   "El Perro",
+   "El Perro de la Parte de Atrás"
+  ],
+  "kind": "sala",
+  "address": "C/ Puebla 15, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/el-perro-de-la-parte-de-atras-del-coche",
+  "note": "conciertos y sesiones de club"
+ },
+ {
+  "name": "Sala Vesta",
+  "aliases": [
+   "Vesta"
+  ],
+  "kind": "sala",
+  "address": "C/ Barquillo 29, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/node/95134",
+  "note": "antiguo Bogui Jazz"
+ },
+ {
+  "name": "El Sótano",
+  "aliases": [
+   "El Sotano",
+   "EL SÓTANO",
+   "Sala El Sótano",
+   "El Sótano La Latina"
+  ],
+  "kind": "sala",
+  "address": "C/ Maldonadas 6, 28005 Madrid",
+  "postcode": "28005",
+  "city": "Madrid",
+  "zone": "La Latina",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/nightlife/sotano",
+  "note": "sótano con conciertos y club desde medianoche; CP 28005 → La Latina (merge.py lo tenía en Centro / Sol)"
+ },
+ {
+  "name": "Etnia Club",
+  "aliases": [
+   "Etnia"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Orense 14, 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://xceed.me/en/madrid/event/el-tardeo-electronico-etnia-club-c-orense-14/190429"
+ },
+ {
+  "name": "Marabú",
+  "aliases": [
+   "Marabú Ponzano",
+   "Marabu",
+   "Marabú Restaurante"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Ponzano 37, 28003 Madrid",
+  "postcode": "28003",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/restaurantes/marabu",
+  "note": "restaurante con show que se convierte en club; acceso por el bar Tapadera"
+ },
+ {
+  "name": "Sala Uni",
+  "aliases": [
+   "Sala UNI Madrid",
+   "Uni"
+  ],
+  "kind": "sala",
+  "address": "C/ Cea Bermúdez 21, 28003 Madrid",
+  "postcode": "28003",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/sala-uni-madrid"
+ },
+ {
+  "name": "Maravillas Club",
+  "aliases": [
+   "Maravillas",
+   "Sala Maravillas"
+  ],
+  "kind": "sala",
+  "address": "C/ San Vicente Ferrer 33, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.songkick.com/venues/94504-maravillas-club",
+  "note": "conciertos y fiestas (antiguo Nasti)"
+ },
+ {
+  "name": "Big Mama Ballroom",
+  "aliases": [
+   "Big Mama",
+   "Big Mama Swing"
+  ],
+  "kind": "sala",
+  "address": "C/ Bernardino Obregón 3, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Atocha",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/big-mama-ballroom",
+  "note": "sala de swing/jazz (Embajadores); merge.py la tenía en Argüelles por su antigua sede (C/ Galileo 100)"
+ },
+ {
+  "name": "Blue Club",
+  "aliases": [
+   "Blue",
+   "Blue Club Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Orense 12, 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/blue-club-domingo-2026-11-01/"
+ },
+ {
+  "name": "Jade Club",
+  "aliases": [
+   "Jade"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Santa Engracia 17, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://xceed.me/en/madrid/venue/jade-club"
+ },
+ {
+  "name": "Dime Que Me Quieres",
+  "aliases": [
+   "Dime que me Quieres",
+   "Sala Dime Que Me Quieres"
+  ],
+  "kind": "bar",
+  "address": "Av. Pablo Iglesias 6, 28003 Madrid",
+  "postcode": "28003",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://conciertos.club/madrid/locales/dime-que-me-quieres",
+  "note": "bar-club temático (90s/2000s) con pequeños conciertos"
+ },
+ {
+  "name": "Barracudas Rock Bar",
+  "aliases": [
+   "Sala Barracudas Rock Bar",
+   "Barracudas",
+   "Sala Barracudas"
+  ],
+  "kind": "bar",
+  "address": "C/ Brescia 19, 28028 Madrid",
+  "postcode": "28028",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/barracudas",
+  "note": "bar de rock con conciertos (Guindalera)"
+ },
+ {
+  "name": "La Cartuja",
+  "aliases": [
+   "La Cartuja Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Cruz 10, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/la-cartuja-2026-10-30/"
+ },
+ {
+  "name": "Blackhaus",
+  "aliases": [
+   "Blackhaus Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "Ctra. de La Coruña km 8,700, 28023 Madrid",
+  "postcode": "28023",
+  "city": "Madrid",
+  "zone": "Aravaca / Pozuelo",
+  "verified": true,
+  "source": "https://app.discotech.me/articles/best-nightclubs-in-aravaca--madrid",
+  "note": "Aravaca"
+ },
+ {
+  "name": "Green Social Club",
+  "aliases": [
+   "Green",
+   "Green Club"
+  ],
+  "kind": "discoteca",
+  "address": "P.º de la Castellana 40 bis, 28046 Madrid",
+  "postcode": "28046",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://www.schlouk-map.com/es/places/green",
+  "note": "zona Salamanca por excepción de SPEC"
+ },
+ {
+  "name": "Kube",
+  "aliases": [
+   "Kube Madrid",
+   "KUBE MADRID"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Poeta Joan Maragall 38, 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/halloween-kube-2026-10-30/"
+ },
+ {
+  "name": "Club Malasaña",
+  "aliases": [
+   "Club Malasana"
+  ],
+  "kind": "discoteca",
+  "address": "C/ San Vicente Ferrer 23, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://edmdancedirectory.com/venues/club-malasa-a-madrid"
+ },
+ {
+  "name": "B12",
+  "aliases": [
+   "B12 Madrid",
+   "B12. the bar lab",
+   "Marvel",
+   "Discoteca Marvel",
+   "High Club Room",
+   "HIGH CLUB ROOM"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Joaquín Costa 27, 28002 Madrid",
+  "postcode": "28002",
+  "city": "Madrid",
+  "zone": "Chamartín",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/b12",
+  "note": "en C/ Joaquín Costa 27 las fuentes usan B12, Marvel y High Club Room (salas/marcas del mismo local)"
+ },
+ {
+  "name": "Chamán Boiler Club",
+  "aliases": [
+   "Chamán",
+   "Chaman",
+   "Chamán Boiler"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Poeta Joan Maragall 1, 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/chaman-boiler-club-madrid-2026-11-05/",
+  "note": "donde estaban Banloo/Onassis"
+ },
+ {
+  "name": "Graf",
+  "aliases": [
+   "Club Graf"
+  ],
+  "kind": "discoteca",
+  "address": "C/ María de Molina 50, 28006 Madrid",
+  "postcode": "28006",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/graf",
+  "note": "SPEC lo ponía en Centro / Sol: está en Salamanca"
+ },
+ {
+  "name": "Panda Club",
+  "aliases": [
+   "Panda"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Hernani 75, 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://xceed.me/es/madrid/club/panda-club",
+  "note": "CP 28020 → Tetuán / Azca (SPEC: Chamartín)"
+ },
+ {
+  "name": "Posh Club",
+  "aliases": [
+   "Posh",
+   "Posh (Liberata)",
+   "Liberata",
+   "POSH Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Orense 18, 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/posh-club-madrid-2026-10-30/",
+  "note": "antigua Liberata; merge.py tenía Posh (Liberata) en Centro / Sol"
+ },
+ {
+  "name": "Epoka The Club",
+  "aliases": [
+   "Epoka"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Joaquín María López 74, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/epoka-the-club-2026-10-30/"
+ },
+ {
+  "name": "Dekada",
+  "aliases": [
+   "Dekada Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ San Vicente Ferrer 34, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/dekada-madrid-2026-10-30/"
+ },
+ {
+  "name": "Perro Negro",
+  "aliases": [
+   "Perro Negro Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Don Ramón de la Cruz 28, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/perro-negro-2026-11-03/",
+  "note": "CP no indicado por la fuente; 28001 deducido de la calle"
+ },
+ {
+  "name": "Fenómeno",
+  "aliases": [
+   "Fenomeno"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Recoletos 13, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/fenomeno-2026-11-05/"
+ },
+ {
+  "name": "Vennus",
+  "aliases": [
+   "Vennus Madrid",
+   "VENNUS"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Sofía 3, 28232 Las Rozas de Madrid",
+  "postcode": "28232",
+  "city": "Las Rozas de Madrid",
+  "zone": "Las Rozas",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/fridays-vennus-2026-11-06/",
+  "note": "está en Las Rozas; merge.py lo tenía en Malasaña / Chueca"
+ },
+ {
+  "name": "Gunilla",
+  "aliases": [
+   "Gunilla Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "P.º de Recoletos 16, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/gunilla-2026-11-05/"
+ },
+ {
+  "name": "Gruta 77",
+  "aliases": [
+   "Gruta77",
+   "Sala Gruta 77",
+   "Sala Gruta77"
+  ],
+  "kind": "sala",
+  "address": "C/ Cuclillo 6, 28019 Madrid",
+  "postcode": "28019",
+  "city": "Madrid",
+  "zone": "Usera / Carabanchel",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/gruta-77",
+  "note": "cierra en diciembre de 2026 (anunciado por La Ganzúa)"
+ },
+ {
+  "name": "Galileo Galilei",
+  "aliases": [
+   "Sala Galileo Galilei",
+   "Sala Galileo"
+  ],
+  "kind": "sala",
+  "address": "C/ Galileo 100, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": true,
+  "source": "https://www.esmadrid.com/it/vita-notturna/galileo-galilei",
+  "note": "una fuente daba CP 28003 (Time Out); esmadrid y Fever dan 28015"
+ },
+ {
+  "name": "Ditirambo",
+  "aliases": [
+   "Ditirambo Madrid"
+  ],
+  "kind": "bar",
+  "address": "C/ Alfonso X 5, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://feverup.com/m/262020/en",
+  "note": "restaurante-bar con tardeo ('Tardeo en Chamberí')"
+ },
+ {
+  "name": "The Bassement",
+  "aliases": [
+   "The Bassement Club",
+   "Bassement",
+   "Bassement Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Galileo 26, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/bassement-club"
+ },
+ {
+  "name": "Hangar 48",
+  "aliases": [
+   "Hangar48",
+   "Hangar48 Club",
+   "Hangar 48 La Latina"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Bailén 24, 28005 Madrid",
+  "postcode": "28005",
+  "city": "Madrid",
+  "zone": "La Latina",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/hangar-48",
+  "note": "club y sala (antigua Vendetta); SPEC lo ponía en Otros"
+ },
+ {
+  "name": "Barco Sound House",
+  "aliases": [
+   "Barco",
+   "Sala BarCo",
+   "Barco Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Barco 34, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/barco-sound-house",
+  "note": "antigua Sala BarCo, reabierta en otoño 2025"
+ },
+ {
+  "name": "Morocco",
+  "aliases": [
+   "Sala Morocco"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Marqués de Leganés 7, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/morocco",
+  "note": "discoteca clásica de Malasaña con directos"
+ },
+ {
+  "name": "Tempo Audiophile Club",
+  "aliases": [
+   "Tempo Club",
+   "Tempo"
+  ],
+  "kind": "bar",
+  "address": "C/ Duque de Osuna 8, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/nightlife/tempo-club",
+  "note": "club audiófilo con directos y DJs (Conde Duque)"
+ },
+ {
+  "name": "Specka",
+  "aliases": [
+   "Specka Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Orense 26, 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/specka",
+  "note": "club techno desde 1989"
+ },
+ {
+  "name": "Independance Club",
+  "aliases": [
+   "Independance",
+   "Sala Independance Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Atocha 127, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Atocha",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/independance-club",
+  "note": "Time Out da Atocha 125 (mismo edificio que Teatro Kapital)"
+ },
+ {
+  "name": "LAB theCLUB",
+  "aliases": [
+   "Lab the Club",
+   "LAB theClub",
+   "Lab Madrid",
+   "LAB",
+   "Lab the Club Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "Estación de Chamartín-Clara Campoamor, planta alta (C/ Agustín de Foxá s/n), 28036 Madrid",
+  "postcode": "28036",
+  "city": "Madrid",
+  "zone": "Chamartín",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/lab-theclub",
+  "note": "SPEC tenía una nota contradictoria (C/ Marqués de Vadillo, Usera): está en la Estación de Chamartín"
+ },
+ {
+  "name": "Toy Room Madrid",
+  "aliases": [
+   "Toy Room"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Arlabán 7, 28014 Madrid",
+  "postcode": "28014",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/toy-room-madrid",
+  "note": "junto al Four Seasons; merge.py lo tenía en Chamberí"
+ },
+ {
+  "name": "Cien por Cien",
+  "aliases": [
+   "El Cien (Cien por Cien)",
+   "El Cien",
+   "Sala Cien por Cien",
+   "Sala CienxCien"
+  ],
+  "kind": "bar",
+  "address": "C/ Santísima Trinidad 30, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/cien-cien",
+  "note": "bar-sala de pop-rock español con directos"
+ },
+ {
+  "name": "Fulanita de Tal",
+  "aliases": [
+   "Fulanita"
+  ],
+  "kind": "bar",
+  "address": "C/ Regueros 9, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/fulanita-de-tal",
+  "note": "bar LGTBI con DJs y tardeo"
+ },
+ {
+  "name": "Goya Social Club",
+  "aliases": [
+   "Goya Social",
+   "GOYA Social Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Goya 43, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/goya-social-club"
+ },
+ {
+  "name": "Palm Tropic",
+  "aliases": [
+   "La Palm Tropic"
+  ],
+  "kind": "bar",
+  "address": null,
+  "postcode": "28025",
+  "city": "Madrid",
+  "zone": "Usera / Carabanchel",
+  "verified": false,
+  "source": "https://www.taquilla.com/madrid/palm-tropic-madrid",
+  "note": "tardeo en Carabanchel (28025); ninguna fuente publica la calle (Taquilla: 'la dirección válida es la de la entrada')"
+ },
+ {
+  "name": "Core",
+  "aliases": [
+   "Core Club",
+   "Core Madrid",
+   "CORE",
+   "Boite",
+   "Boite Live",
+   "La Boite"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Tetuán 27, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://xceed.me/blog/?p=32891",
+  "note": "CORE es el club que funciona en el antiguo local de Boite (Time Out marca Boite como cerrado); mismo local"
+ },
+ {
+  "name": "Subcero Club",
+  "aliases": [
+   "Subcero",
+   "SUBCERO CLUB"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Ayala 27 (planta -1), 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://www.neo2.com/?p=582876",
+  "note": "club bajo el restaurante Sala Cero"
+ },
+ {
+  "name": "Teresa Club",
+  "aliases": [
+   "Teresa"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Príncipe 11, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": false,
+  "source": "https://www.hoymadrid.app/planes/teresa-thursday-teresa-club-madrid/",
+  "note": "dirección solo en fichas de agregadores (Hoy Madrid/Taquilla); el texto de Hoy Madrid menciona además 'Pomona Club, C/ Serrano 100': sin confirmar"
+ },
+ {
+  "name": "Elefante Blanco",
+  "aliases": [
+   "El Elefante Blanco",
+   "Discoteca Elefante Blanco"
+  ],
+  "kind": "sala",
+  "address": "C/ Santa Hortensia 14, 28002 Madrid",
+  "postcode": "28002",
+  "city": "Madrid",
+  "zone": "Chamartín",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/elefante-blanco",
+  "note": "sala de conciertos y club (antigua La Buena Dicha), Prosperidad; merge.py la tenía en Centro / Sol"
+ },
+ {
+  "name": "Casa Amante",
+  "aliases": [
+   "Casa Amante Club",
+   "Amante"
+  ],
+  "kind": "bar",
+  "address": "C/ Santiago 3, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://xceed.me/es/madrid/event/domingos-de-amante-gavino/236226",
+  "note": "coctelería-club con DJs"
+ },
+ {
+  "name": "Mökai Beach Club",
+  "aliases": [
+   "Mokai Beach Club",
+   "Mokai",
+   "Mökai"
+  ],
+  "kind": "otro",
+  "address": "C/ Ignacio Zuloaga 6, 28522 Rivas-Vaciamadrid",
+  "postcode": "28522",
+  "city": "Rivas-Vaciamadrid",
+  "zone": "Rivas-Vaciamadrid",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/noticias/solarium-camas-balinesas-zona-chill-out-y-musica-en-directo-asi-es-el-nuevo-espacio-para-disfrutar-del-tardeo-en-madrid-070125",
+  "note": "beach club de tardeo al aire libre (piscinas); merge.py lo tenía en Chamberí. CP 28522 deducido del municipio"
+ },
+ {
+  "name": "HiFi Bar",
+  "aliases": [
+   "Flat HiFi Bar",
+   "Hifi Bar"
+  ],
+  "kind": "bar",
+  "address": "C/ Cardenal Cisneros 10b, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": false,
+  "source": "https://fulltechno.club/evento/the-flat-sons-des-filles-29-octubre-hifi-bar-madrid/",
+  "note": "'The Flat' es la fiesta; el local es 'HiFi Bar'. Dirección solo en agregadores techno, no confirmada en web oficial"
+ },
+ {
+  "name": "Araña Club",
+  "aliases": [
+   "Araña",
+   "Arana Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Flor Baja 6, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://edmdancedirectory.com/venues/ara-a-club-miami",
+  "note": "solo confirmado en directorios de eventos (misma dirección en RA/Technoparty)"
+ },
+ {
+  "name": "Skin Club",
+  "aliases": [
+   "Skin"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Aduana 21, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://edmdancedirectory.com/venues/Skin",
+  "note": "club underground; confirmado solo en directorios de eventos"
+ },
+ {
+  "name": "Lasociaciøn",
+  "aliases": [
+   "Lasociación",
+   "La Asociación",
+   "Lasociacion"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Gamonal 5, 28031 Madrid",
+  "postcode": "28031",
+  "city": "Madrid",
+  "zone": "Vallecas",
+  "verified": true,
+  "source": "https://edmdancedirectory.com/events/008-trinchera-xv-pres-meneo-raphael-carrau-madrid-2026-04-17",
+  "note": "club techno en Villa de Vallecas; confirmado solo en directorios de eventos"
+ },
+ {
+  "name": "Studio76",
+  "aliases": [
+   "Studio76 Club",
+   "Studio 76"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Cerámica 68, 28038 Madrid",
+  "postcode": "28038",
+  "city": "Madrid",
+  "zone": "Vallecas",
+  "verified": true,
+  "source": "https://www.esmadrid.com/zh/node/65832",
+  "note": "algunas fuentes dan Cerámica 76; esmadrid da 68. merge.py lo tenía en Chamberí"
+ },
+ {
+  "name": "X Private Club",
+  "aliases": [
+   "X Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Cerámica 68, 28038 Madrid",
+  "postcode": "28038",
+  "city": "Madrid",
+  "zone": "Vallecas",
+  "verified": false,
+  "source": "https://edmdancedirectory.com/venues/x-private-club",
+  "note": "las fuentes dan Cerámica 76 y 68 (mismo bloque que Studio76); sin confirmar"
+ },
+ {
+  "name": "Laboratorio Octogon",
+  "aliases": [
+   "Octogon"
+  ],
+  "kind": "otro",
+  "address": "C/ Cerámica 16, 28038 Madrid",
+  "postcode": "28038",
+  "city": "Madrid",
+  "zone": "Vallecas",
+  "verified": true,
+  "source": "https://feverup.com/en/madrid/venue/laboratorio-octogon",
+  "note": "estudio inmersivo 360º que acoge raves (nave)"
+ },
+ {
+  "name": "ART Madrid Club",
+  "aliases": [
+   "Sala Art",
+   "Art Madrid Club",
+   "ART Madrid",
+   "Sala ART",
+   "Banoi",
+   "Banöi The Club",
+   "Carola Morena"
+  ],
+  "kind": "discoteca",
+  "address": "P.º de la Florida 2, 28008 Madrid",
+  "postcode": "28008",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": true,
+  "source": "https://xceed.me/es/madrid/club/art-madrid-club",
+  "note": "antigua Carola Morena (Príncipe Pío); Banöi es una fiesta que se hace aquí"
+ },
+ {
+  "name": "Madreams Music",
+  "aliases": [
+   "Madreams"
+  ],
+  "kind": "sala",
+  "address": "Av. Pedro Díez 28, 28019 Madrid",
+  "postcode": "28019",
+  "city": "Madrid",
+  "zone": "Usera / Carabanchel",
+  "verified": true,
+  "source": "https://feverup.com/en/madrid/venue/madreams-music",
+  "note": "locales de ensayo con sala multiusos (Carabanchel)"
+ },
+ {
+  "name": "LFO",
+  "aliases": [
+   "LFO Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Santa Ana 9, 28005 Madrid",
+  "postcode": "28005",
+  "city": "Madrid",
+  "zone": "La Latina",
+  "verified": false,
+  "source": "https://www.technoairlines.com/event/r-e-m-continuum-tba-lfo-2026-11-13",
+  "note": "RA lo anuncia como 'TBA - LFO'; dirección solo en agregadores techno, no confirmada"
+ },
+ {
+  "name": "Nômade Temple Madrid",
+  "aliases": [
+   "Nômade Temple",
+   "Nomade Temple"
+  ],
+  "kind": "otro",
+  "address": "Gran Vía 11, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.hospitalitynet.org/announcement/41013974.html",
+  "note": "hotel (abierto 2026) que acoge fiestas de Say No More"
+ },
+ {
+  "name": "Sala Strong",
+  "aliases": [
+   "Strong",
+   "Strong The Club",
+   "Strong Club",
+   "Strong Center",
+   "STRONG Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Trujillos 7, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://feverup.com/en/madrid/venue/strong",
+  "note": "club gay con dark room"
+ },
+ {
+  "name": "Las Ventas",
+  "aliases": [
+   "Live Las Ventas",
+   "Plaza de Toros de Las Ventas"
+  ],
+  "kind": "recinto",
+  "address": "C/ Alcalá 237, 28028 Madrid",
+  "postcode": "28028",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/que-hacer/plaza-de-toros-de-las-ventas",
+  "note": "plaza de toros usada para conciertos"
+ },
+ {
+  "name": "Revi Live",
+  "aliases": [
+   "ReviLive",
+   "Sala Revi Live"
+  ],
+  "kind": "sala",
+  "address": "C/ Los Cavilas 4, 28052 Madrid",
+  "postcode": "28052",
+  "city": "Madrid",
+  "zone": "Otros",
+  "verified": true,
+  "source": "https://feverup.com/en/madrid/venue/revilive",
+  "note": "Vicálvaro; merge.py la tenía en Salamanca"
+ },
+ {
+  "name": "Sala Silikona",
+  "aliases": [
+   "Silikona"
+  ],
+  "kind": "sala",
+  "address": "Pl. del Encuentro 1, 28030 Madrid",
+  "postcode": "28030",
+  "city": "Madrid",
+  "zone": "Vallecas",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/sala-silikona",
+  "note": "Moratalaz; esmadrid la marca 'temporalmente cerrada' pero sigue anunciando conciertos"
+ },
+ {
+  "name": "2060 The Newton Hostel",
+  "aliases": [
+   "2060 The Newton Hostel & Market",
+   "Newton Hostel"
+  ],
+  "kind": "hostel",
+  "address": "C/ Cabeza 11, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Atocha",
+  "verified": true,
+  "source": "https://www.hostelworld.com/hostels/p/282289/2060-the-newton-hostel/",
+  "note": "hostel con rooftop bar (Lavapiés); punto de salida de pub crawls"
+ },
+ {
+  "name": "Sala Pirandello",
+  "aliases": [
+   "Pirandello I - II - III",
+   "Pirandello",
+   "Cuenca Club en Sala Pirandello",
+   "Sala Pirandello 1-2-3",
+   "Cuenca Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Ventura Rodríguez 7, 28008 Madrid",
+  "postcode": "28008",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": true,
+  "source": "https://xceed.me/en/madrid/venue/pirandello-i-ii-iii",
+  "note": "Plaza de los Cubos; esmadrid da C/ Martín de los Heros 14 (mismo bloque). Cuenca Club es la fiesta jue-sáb"
+ },
+ {
+  "name": "Sala Olvido",
+  "aliases": [
+   "Olvido"
+  ],
+  "kind": "sala",
+  "address": "C/ Olvido 15, 28026 Madrid",
+  "postcode": "28026",
+  "city": "Madrid",
+  "zone": "Usera / Carabanchel",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/sala-olvido",
+  "note": "Usera; conciertos de versiones"
+ },
+ {
+  "name": "The Lenovo Garage",
+  "aliases": [
+   "The Lenovo Garage (Autocine)",
+   "Autocine Madrid",
+   "Autocine Madrid RACE",
+   "The Lenovo GARAGE - Autocine Madrid"
+  ],
+  "kind": "sala",
+  "address": "C/ Isla de Java 2, 28034 Madrid",
+  "postcode": "28034",
+  "city": "Madrid",
+  "zone": "Otros norte",
+  "verified": true,
+  "source": "https://www.taquilla.com/madrid/the-lenovo-garage-madrid",
+  "note": "sala de conciertos dentro del Autocine Madrid RACE"
+ },
+ {
+  "name": "Waves",
+  "aliases": [
+   "WAVES",
+   "WAVES Experience"
+  ],
+  "kind": "marca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://tickets.nightlifemadrid.com/en/waves/",
+  "note": "fiesta de los miércoles/domingos vendida por Nightlife Madrid; no es un local y la fuente no indica sala"
+ },
+ {
+  "name": "Utopia",
+  "aliases": [
+   "UTOPIA"
+  ],
+  "kind": "marca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://tickets.nightlifemadrid.com/en/utopia/",
+  "note": "fiesta de los miércoles vendida por Nightlife Madrid; no es un local y la fuente no indica sala"
+ },
+ {
+  "name": "Pabblo Club",
+  "aliases": [
+   "Pabblo",
+   "Larrumba Pabblo"
+  ],
+  "kind": "discoteca",
+  "address": "Pl. Pablo Ruiz Picasso 1 (Torre Picasso), 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/restaurantes/pabblo",
+  "note": "restaurante-espectáculo que funciona como club por la noche"
+ },
+ {
+  "name": "La Xida",
+  "aliases": [
+   "La Xida Madrid"
+  ],
+  "kind": "bar",
+  "address": "C/ López de Hoyos 11, 28006 Madrid",
+  "postcode": "28006",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/restaurants/xida",
+  "note": "restaurante mexicano-asturiano con noches de fiesta"
+ },
+ {
+  "name": "Veneno The Club",
+  "aliases": [
+   "Veneno"
+  ],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": null,
+  "note": "no se ha encontrado dirección verificable (ni en webs ni en las fuentes)"
+ },
+ {
+  "name": "Palacio Vistalegre",
+  "aliases": [
+   "Palacio de Vistalegre",
+   "Vistalegre",
+   "Palacio Vistalegre Arena"
+  ],
+  "kind": "recinto",
+  "address": "C/ Utebo 1, 28025 Madrid",
+  "postcode": "28025",
+  "city": "Madrid",
+  "zone": "Usera / Carabanchel",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/que-hacer/palacio-vistalegre-arena",
+  "note": "las fuentes escribían 'Callle de Utebo' sin CP"
+ },
+ {
+  "name": "Sala Wagon",
+  "aliases": [
+   "Wagon",
+   "Sala Lab/Wagon"
+  ],
+  "kind": "sala",
+  "address": "Estación de Chamartín-Clara Campoamor, planta ático, 28036 Madrid",
+  "postcode": "28036",
+  "city": "Madrid",
+  "zone": "Chamartín",
+  "verified": true,
+  "source": "https://songkick.com/venues/4601714-sala-wagon",
+  "note": "sala de conciertos abierta en 2025 en el mismo edificio que LAB theCLUB; SPEC la ponía en Atocha"
+ },
+ {
+  "name": "Lovo Cocktail Bar",
+  "aliases": [
+   "Lovo",
+   "Lovo Cocktail Bar / Commo",
+   "Lovo Cocktail Bar Madrid",
+   "Lovo Bar"
+  ],
+  "kind": "bar",
+  "address": "C/ Echegaray 20, 28014 Madrid",
+  "postcode": "28014",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/bares-y-pubs/lovo",
+  "note": "coctelería años 20 (Barrio de las Letras)"
+ },
+ {
+  "name": "La Santa",
+  "aliases": [
+   "La Santa Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Miguel Ángel 21, 28010 Madrid",
+  "postcode": "28010",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": true,
+  "source": "https://feverup.com/en/madrid/venue/la-santa",
+  "note": "restaurante-show con música; misma dirección que Panthera (posible mismo local con otra marca)"
+ },
+ {
+  "name": "Stardust",
+  "aliases": [
+   "Stardust Club"
+  ],
+  "kind": "marca",
+  "address": "C/ Isabel la Católica 6, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": false,
+  "source": "https://www.salir.com/stardust-club-madrid-neg-139314.html",
+  "note": "club techno que se celebraba en Sala Cool (Isabel la Católica 6); desde 2020 hace fiestas en otras salas ('in exile'): comprobar la sala de cada evento"
+ },
+ {
+  "name": "La Realidad Club",
+  "aliases": [
+   "La Realidad"
+  ],
+  "kind": "sala",
+  "address": "C/ Echegaray 11, 28014 Madrid",
+  "postcode": "28014",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.jambase.com/venue/la-realidad-club",
+  "note": "sala de conciertos/flamenco; no confundir con el bar La Realidad de Malasaña (Corredera Baja de San Pablo 51). esmadrid tiene La Caverna en Echegaray 11"
+ },
+ {
+  "name": "NEXT Clubbing",
+  "aliases": [
+   "Next Clubbing",
+   "NEXT"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Poeta Joan Maragall 19, 28020 Madrid",
+  "postcode": "28020",
+  "city": "Madrid",
+  "zone": "Tetuán / Azca",
+  "verified": true,
+  "source": "https://app.discotech.me/madrid/next-clubbing",
+  "note": "club techno/hardgroove junto a Cuzco"
+ },
+ {
+  "name": "Sala La Trinchera",
+  "aliases": [
+   "La Trinchera"
+  ],
+  "kind": "sala",
+  "address": "C/ Josefa Díaz 4, 28038 Madrid",
+  "postcode": "28038",
+  "city": "Madrid",
+  "zone": "Vallecas",
+  "verified": true,
+  "source": "https://conciertos.club/madrid/locales/sala-la-trinchera",
+  "note": "no confundir con Sala La Trinchera de Málaga"
+ },
+ {
+  "name": "La Nueva Cubierta de Leganés",
+  "aliases": [
+   "La Nueva Cubierta",
+   "La Cubierta de Leganés",
+   "La Cubierta"
+  ],
+  "kind": "recinto",
+  "address": "C/ Maestro 4, 28914 Leganés",
+  "postcode": "28914",
+  "city": "Leganés",
+  "zone": "Leganés",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/tourist-information/nueva-cubierta-leganes",
+  "note": "antigua plaza de toros cubierta; festivales Blackworks"
+ },
+ {
+  "name": "La Reina Lagarta",
+  "aliases": [
+   "Reina Lagarta"
+  ],
+  "kind": "bar",
+  "address": "C/ Palma 14, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.taquilla.com/entradas/halloween-la-reina-lagarta?t10id=1135",
+  "note": "dirección de la ficha de Taquilla (marcada como orientativa)"
+ },
+ {
+  "name": "ContraClub",
+  "aliases": [
+   "Contraclub",
+   "Sala Contraclub",
+   "Sala ContraClub"
+  ],
+  "kind": "sala",
+  "address": "C/ Bailén 16, 28005 Madrid",
+  "postcode": "28005",
+  "city": "Madrid",
+  "zone": "La Latina",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/musica/contraclub"
+ },
+ {
+  "name": "Sala Groove",
+  "aliases": [
+   "Groove",
+   "Groove Dance Club",
+   "Groove Events"
+  ],
+  "kind": "discoteca",
+  "address": "Camino de San Antón s/n, 28320 Pinto",
+  "postcode": "28320",
+  "city": "Pinto",
+  "zone": "Pinto",
+  "verified": true,
+  "source": "https://www.jambase.com/venue/sala-groove",
+  "note": "una fuente la sitúa en la Ctra. de Andalucía km 20 (misma zona)"
+ },
+ {
+  "name": "Florida Park",
+  "aliases": [
+   "Florida Retiro",
+   "La Cúpula de Florida Park",
+   "Florida Park Retiro"
+  ],
+  "kind": "discoteca",
+  "address": "P.º de Panamá 1 (Parque de El Retiro), 28009 Madrid",
+  "postcode": "28009",
+  "city": "Madrid",
+  "zone": "Retiro",
+  "verified": true,
+  "source": "https://www.esmadrid.com/noche/cupula-florida-park",
+  "note": "complejo de ocio en el Retiro (discoteca La Cúpula); CP 28009 daría Salamanca, se asigna Retiro por estar dentro del parque"
+ },
+ {
+  "name": "Sala Juglar",
+  "aliases": [
+   "El Juglar",
+   "Juglar",
+   "Casa Juglar"
+  ],
+  "kind": "sala",
+  "address": "C/ Lavapiés 37, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Atocha",
+  "verified": true,
+  "source": "https://www.songkick.com/venues/486486-sala-juglar",
+  "note": "Time Out publicó su cierre (oct-2025) pero Songkick/Fever siguen listando eventos en 2026: comprobar"
+ },
+ {
+  "name": "Varvi",
+  "aliases": [
+   "VARVI"
+  ],
+  "kind": "discoteca",
+  "address": "P.º del Pintor Rosales 30, 28008 Madrid",
+  "postcode": "28008",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": false,
+  "source": "https://site.fourvenues.com/es/allmadridnightlife/events/8I4M",
+  "note": "dirección solo en la fuente (Fourvenues); no confirmada"
+ },
+ {
+  "name": "Le Club Somosaguas",
+  "aliases": [
+   "Le Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Doctor Raso 1, 28223 Pozuelo de Alarcón",
+  "postcode": "28223",
+  "city": "Pozuelo de Alarcón",
+  "zone": "Aravaca / Pozuelo",
+  "verified": false,
+  "source": "https://bynovanightlife.com/en/nightclubs-madrid/le-club-somosaguas/",
+  "note": "el club existe (club social nocturno en Somosaguas, reformado en 2023 según premio IADA 2024), pero la calle (de Fourvenues/Bynova) no se ha podido confirmar"
+ },
+ {
+  "name": "Sala Cocó",
+  "aliases": [
+   "Mondo Disko",
+   "Club Cocó",
+   "Sala Cocò",
+   "Mondo",
+   "Mondo Sala Cocó",
+   "Mondo Disko Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Alcalá 20, 28014 Madrid",
+  "postcode": "28014",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/clubs/sala-coco",
+  "note": "local de Mondo Disko (jue/sáb, house/techno) y La Discoteca (vie). Mondo Disko hace algunas noches en Sala But"
+ },
+ {
+  "name": "Sala de Despecho",
+  "aliases": [
+   "De Despecho",
+   "Sala De Despecho",
+   "Martes De Sala De Despecho"
+  ],
+  "kind": "discoteca",
+  "address": "P.º de Recoletos 18, 28001 Madrid",
+  "postcode": "28001",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://discomadrid.com/fiesta/de-despecho-2026-11-02/",
+  "note": "local gestionado por Madrid No Descansa"
+ },
+ {
+  "name": "Calle 365",
+  "aliases": [
+   "Calle 365 Callejón Secreto",
+   "Calle 365 Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Echegaray 18, 28014 Madrid",
+  "postcode": "28014",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://www.timeout.es/madrid/es/bares-y-pubs/calle-365",
+  "note": "bar-club en un callejón oculto (aforo ~300)"
+ },
+ {
+  "name": "Sala Stairway",
+  "aliases": [
+   "Stairway"
+  ],
+  "kind": "bar",
+  "address": "C/ San Bernardino 8, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": true,
+  "source": "https://feverup.com/m/258372/en",
+  "note": "bar-sala con jams (Jam de Cumbia)"
+ },
+ {
+  "name": "Gabana 1800",
+  "aliases": [
+   "Gabana",
+   "Gabana Club",
+   "Gabana Music Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ María de Molina 39, 28006 Madrid",
+  "postcode": "28006",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": true,
+  "source": "https://alotea.com/madrid/nightclubs/gabananightclub",
+  "note": "se trasladó desde C/ Velázquez 6 (dirección antigua aún en Cityzeum/Cvent)"
+ },
+ {
+  "name": "Ya'sta Club",
+  "aliases": [
+   "Ya'sta",
+   "Yasta",
+   "Ya sta Club"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Valverde 10, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/nightlife/yasta",
+  "note": "club desde 1985 (Movida)"
+ },
+ {
+  "name": "The Pubcrawl Company",
+  "aliases": [
+   "The Pubcrawl Company (Núñez de Arce)",
+   "PubCrawl Company"
+  ],
+  "kind": "marca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.civitatis.com/en/madrid/madrid-pub-crawl?aid=11651",
+  "note": "empresa de pub crawls, no un local; punto de encuentro variable (Fever: C/ Núñez de Arce 9 = Enbabia; Civitatis: C/ Cañizares 6)"
+ },
+ {
+  "name": "Madrid No Descansa",
+  "aliases": [
+   "MADRID NO DESCANSA",
+   "511 Events"
+  ],
+  "kind": "marca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://discomadrid.com/fiesta/de-despecho-2026-11-02/",
+  "note": "promotora (511 Events), no un local: usa la sala de cada evento (Sala de Despecho, Perro Negro, Calle 365, Todos Santos, Rubicón...)"
+ },
+ {
+  "name": "Grupo Caprice",
+  "aliases": [
+   "Ubicación secreta (Grupo Caprice)",
+   "Caprice"
+  ],
+  "kind": "marca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://discomadrid.com/fiesta/halloween-project-campus-caprice-2026-10-31/",
+  "note": "promotora de fiestas universitarias en ubicación secreta; no es un local"
+ },
+ {
+  "name": "Teatro Kapital",
+  "aliases": [
+   "Kapital",
+   "Teatro Kapital Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Atocha 125, 28012 Madrid",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Atocha",
+  "verified": true,
+  "source": "https://www.esmadrid.com/node/68204",
+  "note": "7 plantas (5 de discoteca + restaurante y terraza)"
+ },
+ {
+  "name": "Fotomatón Bar",
+  "aliases": [
+   "Fotomatón",
+   "Fotomaton"
+  ],
+  "kind": "bar",
+  "address": "Pl. Conde de Toreno 2, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": true,
+  "source": "https://www.esmadrid.com/en/nightlife/fotomaton-bar",
+  "note": "coctelería con conciertos (Conde Duque)"
+ },
+ {
+  "name": "Fabrik",
+  "aliases": [
+   "Fabrik Madrid"
+  ],
+  "kind": "discoteca",
+  "address": "Av. de la Industria 82, 28970 Humanes de Madrid",
+  "postcode": "28970",
+  "city": "Humanes de Madrid",
+  "zone": "Humanes (Fabrik)",
+  "verified": true,
+  "source": "https://xceed.me/es/madrid/venue/fabrik-madrid",
+  "note": "macroclub (10.000 personas) del Grupo Kapital"
+ },
+ {
+  "name": "Jowke",
+  "aliases": [
+   "Terraza Jowke",
+   "Discoteca Jowke",
+   "Jowke Alcorcón"
+  ],
+  "kind": "discoteca",
+  "address": "Av. San Martín de Valdeiglesias 22, Alcorcón",
+  "postcode": null,
+  "city": "Alcorcón",
+  "zone": "Alcorcón",
+  "verified": true,
+  "source": "https://www.planomato.com/es/alcorcon/v/discoteca-jowke",
+  "note": "discoteca-multiespacio al aire libre en Alcorcón (junto a C.C. Tres Aguas). La fuente (Discoruta) daba Av. Doctor Arce 10 (es la dirección de Tiffany's): incorrecta. CP no confirmado"
+ },
+ {
+  "name": "Global Club",
+  "aliases": [
+   "Global"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Fundadores 7, 28028 Madrid",
+  "postcode": "28028",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": false,
+  "source": "https://site.fourvenues.com/es/allmadridnightlife/events/8PUA",
+  "note": "dirección de la fuente (Fourvenues) y SPEC; sede de las fiestas Bellaqueolab. No confirmada en web oficial"
+ },
+ {
+  "name": "VG Fuenlabrada",
+  "aliases": [
+   "VG",
+   "Vogue Fuenlabrada"
+  ],
+  "kind": "discoteca",
+  "address": "C/ Móstoles 4, 28945 Fuenlabrada",
+  "postcode": "28945",
+  "city": "Fuenlabrada",
+  "zone": "Fuenlabrada",
+  "verified": true,
+  "source": "https://feverup.com/m/597604/en",
+  "note": "un evento de Fever da C/ Móstoles 6"
+ },
+ {
+  "name": "Ubicación secreta",
+  "aliases": [
+   "Ubicación secreta (TBA)",
+   "Secret location",
+   "Powered by Void Acoustics (secret location)",
+   "TBA"
+  ],
+  "kind": "otro",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": null,
+  "note": "no es un local: la fuente no publica la ubicación (se revela al comprar). 'Powered by Void Acoustics' es el equipo de sonido, no una sala"
+ },
+ {
+  "name": "Puerta del Sol (punto de encuentro)",
+  "aliases": [
+   "Vodafone Puerta del Sol",
+   "Puerta del Sol (Vodafone)",
+   "El Oso y el Madroño"
+  ],
+  "kind": "otro",
+  "address": "Puerta del Sol, 28013 Madrid",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": true,
+  "source": "https://feverup.com/m/114458/en",
+  "note": "punto de encuentro de pub crawls, no un local (frente a Vodafone Sol / estatua del Oso y el Madroño)"
+ },
+ {
+  "name": "Sala Godfather",
+  "aliases": [],
+  "kind": "sala",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.hoymadrid.app/planes/blindfold-x-marla-singer-sala-godfather-madrid/"
+ },
+ {
+  "name": "Centro Cultural Conde Duque",
+  "aliases": [],
+  "kind": "recinto",
+  "address": "C. del Conde Duque, 11, Centro, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": false,
+  "source": "https://fulltechno.club/evento/soundset-series-dj-plead-30-octubre-centro-cultural-conde-duque-madrid/",
+  "note": "centro cultural municipal"
+ },
+ {
+  "name": "TBC Bar",
+  "aliases": [],
+  "kind": "bar",
+  "address": "C. de las Huertas, 41, Centro, 28014 Madrid",
+  "postcode": "28014",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": false,
+  "source": "https://www.taquilla.com/entradas/halloween-safico?event=33020241"
+ },
+ {
+  "name": "Espacio Metrópolis (Torrejón de Ardoz)",
+  "aliases": [],
+  "kind": "sala",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://conciertos.club/madrid",
+  "note": "Torrejón de Ardoz; dirección no publicada por la fuente"
+ },
+ {
+  "name": "El Internacional",
+  "aliases": [],
+  "kind": "bar",
+  "address": "Calle de Cedaceros, 11, 28014, Madrid",
+  "postcode": "28014",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": false,
+  "source": "https://ra.co/events/2571353"
+ },
+ {
+  "name": "Blackbird Rock Bar",
+  "aliases": [],
+  "kind": "bar",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://allevents.in/madrid/elena-amores-and-the-wild-boots-en-blackbird-rock-bar/200030913688926"
+ },
+ {
+  "name": "Downtown Madrid",
+  "aliases": [],
+  "kind": "marca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.eventbrite.es/e/pub-crawl-madridbars-welcome-shots-club-entry-tickets-985294621737",
+  "note": "pub crawl (Mad Party Crew), no un local"
+ },
+ {
+  "name": "Mola! Hostel Madrid",
+  "aliases": [],
+  "kind": "hostel",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.eventbrite.es/e/friday-scary-halloweekend-party-pubcarwl-tickets-1048107225927",
+  "note": "punto de salida de pub crawl"
+ },
+ {
+  "name": "Hermès Canalejas (punto de encuentro)",
+  "aliases": [],
+  "kind": "otro",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.eventbrite.es/e/guest-list-madrid-pub-crawl-tonight-3-4-pubs-1-epic-club-tickets-2003912173254",
+  "note": "punto de encuentro de pub crawl (Pl. de Canalejas), no un local"
+ },
+ {
+  "name": "Boris Club",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://tickets.nightlifemadrid.com/pass/6abe978b698e614e8632403c?handle=nightlifemadrid",
+  "note": "la fuente da una dirección de Barcelona (C/ Bori i Fontestà 25): evento fuera de Madrid, probablemente error de la fuente"
+ },
+ {
+  "name": "Leona Bar",
+  "aliases": [],
+  "kind": "bar",
+  "address": "28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": false,
+  "source": "https://allevents.in/madrid/aftershow-party-vioflesh/200030896230806",
+  "note": "la fuente solo da el CP 28004"
+ },
+ {
+  "name": "Muller Bar",
+  "aliases": [],
+  "kind": "bar",
+  "address": "C. de las Huertas, 38, Centro, 28014 Madrid",
+  "postcode": "28014",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": false,
+  "source": "https://ra.co/events/2569968"
+ },
+ {
+  "name": "Mamaø Club",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://site.fourvenues.com/es/allmadridnightlife/events/8PUA"
+ },
+ {
+  "name": "Level Bar (Generator Madrid)",
+  "aliases": [],
+  "kind": "bar",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.hoymadrid.app/planes/live-on-levels-pre-halloween-the-crazy-mirrors-dj-set-level-bar-generator-madrid/",
+  "note": "bar del hostel Generator Madrid"
+ },
+ {
+  "name": "Hipnótico",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.clubbable.com/Madrid/Hipn%C3%B3tico/30-Oct-2026"
+ },
+ {
+  "name": "Misericordia The Club",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.clubbable.com/Madrid/Misericordia-The-Club/30-Oct-2026"
+ },
+ {
+  "name": "Aperitoche Bar",
+  "aliases": [],
+  "kind": "bar",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.hoymadrid.app/planes/el-halloween-mas-rockero-te-espera-en-aperitoche-aperitoche-bar-madrid/"
+ },
+ {
+  "name": "Recinto Iberdrola Music",
+  "aliases": [],
+  "kind": "recinto",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://dondego.es/madrid/event/fiestas-halloween-takeover/",
+  "note": "espacio de festivales en Villaverde; la fuente da 'C/ Laguna Dalga s/n' sin CP"
+ },
+ {
+  "name": "Sala Spacio",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://bclever.ai/eventos/madrid/crazy-tardeo-p-tardeo-halloween"
+ },
+ {
+  "name": "Sala Black Star",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.taquilla.com/entradas/dendera-halloween",
+  "note": "alias probable: Blackstar (blackstarmadrid.es)"
+ },
+ {
+  "name": "Bibo Madrid",
+  "aliases": [],
+  "kind": "bar",
+  "address": "P.º de la Castellana 52, 28046 Madrid",
+  "postcode": "28046",
+  "city": "Madrid",
+  "zone": "Chamartín",
+  "verified": false,
+  "source": "https://site.fourvenues.com/es/allmadridnightlife/events/0FML",
+  "note": "restaurante-bar"
+ },
+ {
+  "name": "Bambú Rivas",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": "Pl. Constitución 2, 28522 Rivas-Vaciamadrid",
+  "postcode": "28522",
+  "city": "Rivas-Vaciamadrid",
+  "zone": "Rivas-Vaciamadrid",
+  "verified": false,
+  "source": "https://ra.co/events/2556730"
+ },
+ {
+  "name": "Isa Restaurant & Cocktail Bar",
+  "aliases": [],
+  "kind": "bar",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.eventbrite.com/e/yokai-halloween-at-isa-tickets-2003011203429"
+ },
+ {
+  "name": "La Última Llamada",
+  "aliases": [],
+  "kind": "bar",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://discomadrid.com/fiesta/la-ultima-llamada-boadilla-2026-10-31/",
+  "note": "Boadilla del Monte; la fuente no da CP. Posible mismo local que 'La Última' (otra dirección)"
+ },
+ {
+  "name": "Espit Chupitos Sol",
+  "aliases": [],
+  "kind": "bar",
+  "address": "C. de Espoz y Mina, 22, Madrid, 28012",
+  "postcode": "28012",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": false,
+  "source": "https://feverup.com/m/485699"
+ },
+ {
+  "name": "Ella Sky Bar",
+  "aliases": [],
+  "kind": "rooftop",
+  "address": "Gran Vía, 42, 28013",
+  "postcode": "28013",
+  "city": "Madrid",
+  "zone": "Centro / Sol",
+  "verified": false,
+  "source": "https://feverup.com/m/254404"
+ },
+ {
+  "name": "Sala Badulaque",
+  "aliases": [],
+  "kind": "sala",
+  "address": "C. de Gaztambide, 26, Chamberí, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": false,
+  "source": "https://www.taquilla.com/entradas/halloween-by-dont-stop?event=32959217"
+ },
+ {
+  "name": "Vega Members Club",
+  "aliases": [],
+  "kind": "bar",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://allevents.in/madrid/masquerade-ball-halloween/100002003572013828",
+  "note": "club privado; la fuente no da CP"
+ },
+ {
+  "name": "Bodeguita de Enmedio",
+  "aliases": [],
+  "kind": "bar",
+  "address": "C/ Fernández de la Hoz 76, 28003 Madrid",
+  "postcode": "28003",
+  "city": "Madrid",
+  "zone": "Chamberí",
+  "verified": false,
+  "source": "https://web.bodeguitadeenmedio.es/entradas-bodeguita-madrid/entradas-fiesta-halloween",
+  "note": "merge.py la tenía en Centro / Sol; la fuente da C/ Fernández de la Hoz 76 (Chamberí): sin verificar"
+ },
+ {
+  "name": "Pizpireta",
+  "aliases": [],
+  "kind": "bar",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://pizpiretabar.com/entradas-pizpireta-madrid/pizpireta-entradas-halloween"
+ },
+ {
+  "name": "Blackstar",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://blackstarmadrid.es/entradas-black-star-madrid/entradas-fiesta-halloween",
+  "note": "alias probable: Sala Black Star"
+ },
+ {
+  "name": "Terminal 55",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://terminal55madrid.com/entradas-terminal-55/entradas-fiesta-halloween"
+ },
+ {
+  "name": "Social Vibes",
+  "aliases": [],
+  "kind": "marca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://site.fourvenues.com/es/allmadridnightlife/events/VM71",
+  "note": "nombre de fiesta en Fourvenues; local no indicado"
+ },
+ {
+  "name": "La Última",
+  "aliases": [],
+  "kind": "bar",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://discomadrid.com/fiesta/after-halloween-la-ultima-2026-10-31/",
+  "note": "Boadilla del Monte; la fuente no da CP"
+ },
+ {
+  "name": "Nuvi",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://discomadrid.com/fiesta/chernuvi-nuvi-2026-10-31/",
+  "note": "la fuente no da CP"
+ },
+ {
+  "name": "Under Bridge Madrid",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://ra.co/events/2565559",
+  "note": "la fuente no da CP"
+ },
+ {
+  "name": "Republik Club",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": "Calle Puebla 6, 28004, Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": false,
+  "source": "https://ra.co/events/2568751"
+ },
+ {
+  "name": "Guss Club",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://site.fourvenues.com/es/guss-club/events/EPBJ"
+ },
+ {
+  "name": "Ventura",
+  "aliases": [],
+  "kind": "marca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://site.fourvenues.com/es/nova-nightlife-madrid/events/FNF2",
+  "note": "fiesta en ubicación secreta (Haunted Night), no un local"
+ },
+ {
+  "name": "El Willy Hifi Bar",
+  "aliases": [],
+  "kind": "bar",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.songkick.com/concerts/43481736-dj-lucho-at-el-willy-hifi-bar",
+  "note": "listening bar (C/ Campoamor 12 según CC Magazine; no verificado)"
+ },
+ {
+  "name": "Casamadre",
+  "aliases": [],
+  "kind": "otro",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.songkick.com/concerts/43473380-la-bruja-de-texcoco-at-casamadre"
+ },
+ {
+  "name": "Leaves",
+  "aliases": [],
+  "kind": "otro",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.songkick.com/concerts/43439570-legado-at-leaves"
+ },
+ {
+  "name": "Aforo Completo",
+  "aliases": [],
+  "kind": "marca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.eventbrite.com/e/entradas-dia-de-muertos-tardeo-especial-2003260784934",
+  "note": "organizador de tardeos en Eventbrite, no un local"
+ },
+ {
+  "name": "Ubicación secreta (Ventura)",
+  "aliases": [],
+  "kind": "otro",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://discomadrid.com/fiesta/haunted-night-vol-ii-ventura-2026-11-01/",
+  "note": "ubicación secreta de la fiesta Ventura"
+ },
+ {
+  "name": "Lazo",
+  "aliases": [],
+  "kind": "otro",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.technoairlines.com/event/coordenada-sonora-%e2%86%821-lazo-2026-11-05"
+ },
+ {
+  "name": "Holgura",
+  "aliases": [],
+  "kind": "otro",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.technoairlines.com/event/festival-real-no-real-day-1-tba-holgura-2026-11-06",
+  "note": "festival Real No Real; ubicación TBA"
+ },
+ {
+  "name": "Minusa Music Club",
+  "aliases": [],
+  "kind": "bar",
+  "address": "Calle de Monteleón, 5, 28004 Madrid",
+  "postcode": "28004",
+  "city": "Madrid",
+  "zone": "Malasaña / Chueca",
+  "verified": false,
+  "source": "https://www.technoairlines.com/event/wax-on-table-minusa-music-club-2026-11-06"
+ },
+ {
+  "name": "Espacio Gaviota",
+  "aliases": [],
+  "kind": "otro",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.technoairlines.com/event/festival-real-no-real-day-2-daytime-espacio-gaviota-2026-11-07",
+  "note": "festival Real No Real"
+ },
+ {
+  "name": "La Finca",
+  "aliases": [],
+  "kind": "otro",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.technoairlines.com/event/jodita-madrid-1er-aniversario-la-finca-tba-la-finca-2026-11-07",
+  "note": "ubicación TBA"
+ },
+ {
+  "name": "Seven",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": "Av. de las Castañeras, 5, 28939 Madrid",
+  "postcode": "28939",
+  "city": "Arroyomolinos",
+  "zone": "Arroyomolinos",
+  "verified": false,
+  "source": "https://xceed.me/es/madrid/event/el-tardeo-de-arroyo-by-enjoy-seven/246183"
+ },
+ {
+  "name": "In Silico",
+  "aliases": [],
+  "kind": "otro",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.technoairlines.com/event/festival-real-no-real-day-2-afternoon-tba-in-silico-2026-11-07",
+  "note": "festival Real No Real; ubicación TBA"
+ },
+ {
+  "name": "Rastro Live Studio",
+  "aliases": [],
+  "kind": "otro",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://www.technoairlines.com/event/steven-weston-unsui-pres-murmur-ep-live-rastro-live-rastro-live-studio-2026-11-07"
+ },
+ {
+  "name": "Cricket Pub",
+  "aliases": [],
+  "kind": "bar",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://conciertos.club/madrid/conciertos/106015-big-band-torrejon",
+  "note": "Torrejón de Ardoz; la fuente no da calle"
+ },
+ {
+  "name": "Ayala 120 Club",
+  "aliases": [],
+  "kind": "discoteca",
+  "address": "Ayala, 28006 Madrid",
+  "postcode": "28006",
+  "city": "Madrid",
+  "zone": "Salamanca",
+  "verified": false,
+  "source": "https://ra.co/events/2293990",
+  "note": "la fuente da solo 'Ayala, 28006'"
+ },
+ {
+  "name": "Say No More",
+  "aliases": [],
+  "kind": "marca",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://luma.com/xe4w02jn",
+  "note": "promotora/colectivo de fiestas (se celebra en Nômade Temple, etc.)"
+ },
+ {
+  "name": "SALA MUV",
+  "aliases": [],
+  "kind": "sala",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://ra.co/events/2552533"
+ },
+ {
+  "name": "Espacio Alma",
+  "aliases": [],
+  "kind": "otro",
+  "address": "C/ Alberto Aguilera 4, 28015 Madrid",
+  "postcode": "28015",
+  "city": "Madrid",
+  "zone": "Argüelles / Moncloa",
+  "verified": false,
+  "source": "https://tickets.oneboxtds.com/espacios-alma/events/55465"
+ },
+ {
+  "name": "Estadio Bernabéu",
+  "aliases": [],
+  "kind": "recinto",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://feverup.com/m/776682",
+  "note": "estadio; el evento (Skywalk) no es ocio nocturno"
+ },
+ {
+  "name": "LA CATORCE SKY LINE GRAN VIA",
+  "aliases": [],
+  "kind": "rooftop",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://xceed.me/es/madrid/event/social-party-la-catorce-sky-bar-1/248475"
+ },
+ {
+  "name": "Babel Torrelodones",
+  "aliases": [],
+  "kind": "bar",
+  "address": null,
+  "postcode": null,
+  "city": null,
+  "zone": "Otros",
+  "verified": false,
+  "source": "https://conciertos.club/madrid/conciertos/129651-nito-serrano-y-lapurasangre",
+  "note": "Torrelodones; la fuente no da calle"
+ }
+]

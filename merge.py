@@ -86,6 +86,17 @@ VENUE_ZONE = {
 }
 ZONES = set(ZONE_BY_CP.values()) | set(VENUE_ZONE.values()) | {"Otros","Otros sur","Barajas","Retiro"}
 
+def guess_kind(venue):
+    p=plain(venue or "")
+    if not p: return "otro"
+    if re.search(r"\b(arena|palacio|estadio|hipodromo|recinto|pabellon|ifema|auditorio|wizink|vistalegre|caja magica|la cubierta)\b", p): return "recinto"
+    if re.search(r"\b(hostel|albergue)\b", p): return "hostel"
+    if re.search(r"\b(rooftop|azotea|sky bar|terraza)\b", p): return "rooftop"
+    if re.search(r"\b(bar|pub|cafe|cafeteria|taberna|tasca|cocktail|coctel|bodega|cerveceria|irish|tavern|lounge|restaurante|bistro)\b", p): return "bar"
+    if re.search(r"\b(sala|teatro|live|club de musica|jazz|auditorio)\b", p): return "sala"
+    if re.search(r"\b(club|disco|discoteca|night|social club)\b", p): return "discoteca"
+    return "otro"
+
 def infer_zone(zone, venue, address):
     if venue in VENUE_ZONE: return VENUE_ZONE[venue]
     if zone and zone.strip() and zone.strip().lower() != "otros":
@@ -136,6 +147,24 @@ SEATED_VENUE = re.compile(r"^(teatro|nuevo teatro|auditorio)\b|^ateneo de madrid
 # campos que se conservan del documento existente si la extracción de hoy no los trae
 STABLE_FIELDS = ["start","end","address","dressCode","ageMin","description","lineup","music"]
 
+# ---------- directorio de salas verificado (scrape/venues.json) ----------
+VENUE_DIR_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "scrape", "venues.json")
+CANON_OVERRIDE = {"Teatro Eslava":"Joy Eslava","Mitty Cats":"Mitty","Chamán Boiler Club":"Chamán"}   # nombre popular por delante del oficial
+VENUE_DIR = {}      # strip(nombre o alias) → entrada
+def _load_venue_dir():
+    try: data=json.load(open(VENUE_DIR_FILE, encoding="utf-8"))
+    except Exception as ex:
+        print("AVISO: sin directorio de salas:", ex, file=sys.stderr); return
+    for v in data:
+        v=dict(v); v["name"]=CANON_OVERRIDE.get(v["name"], v["name"])
+        for n in [v["name"]]+list(v.get("aliases") or []):
+            k=strip(n)
+            if k and k not in VENUE_DIR: VENUE_DIR[k]=v
+
+def venue_entry(name):
+    if not name: return None
+    return VENUE_DIR.get(strip(name))
+
 def strip(s):
     s = unicodedata.normalize("NFKD", s or "").encode("ascii","ignore").decode().lower()
     s = re.sub(r"\b(discoteca|club de|sala de|the club|madrid)\b"," ",s)
@@ -148,6 +177,7 @@ def plain(s):
 def canon_venue(v):
     if not v: return None
     k = strip(v)
+    if k in VENUE_DIR: return VENUE_DIR[k]["name"]
     if k in VENUE_ALIAS: return VENUE_ALIAS[k]
     for a,c in VENUE_ALIAS.items():
         if len(a)>4 and (k.startswith(a+" ") or k.endswith(" "+a)): return c
@@ -206,8 +236,15 @@ def clean(e):
     srcs=dedupe_sources(srcs)
     if not srcs and (e.get("sources") or []): return None   # solo venía de fuentes excluidas
     address = (e.get("address") or None)
-    return {"title":title[:140],"date":date,"start":norm_time(e.get("start")),"end":norm_time(e.get("end")),"venue":venue,"address":address,
-            "zone":infer_zone(e.get("zone"), venue, address),"type":typ,"music":music,"priceMin":pmin,"priceMax":pmax,"priceText":(str(e.get("priceText"))[:160] if e.get("priceText") else None),
+    ent = venue_entry(venue); kind = None; zone_hint = e.get("zone")
+    if ent:
+        kind = ent.get("kind") if ent.get("kind") not in (None,"marca") else "otro"
+        if ent.get("address") and (ent.get("verified") or not address): address = ent["address"]   # la dirección verificada manda
+        if ent.get("zone") and (ent.get("verified") or not zone_hint or zone_hint=="Otros"): zone_hint = ent["zone"]
+    if not kind: kind = guess_kind(venue)
+    zone_final = ent["zone"] if (ent and ent.get("verified") and ent.get("zone") and ent["zone"]!="Otros") else infer_zone(zone_hint, venue, address)
+    return {"title":title[:140],"date":date,"start":norm_time(e.get("start")),"end":norm_time(e.get("end")),"venue":venue,"address":address,"venueKind":kind,
+            "zone":zone_final,"type":typ,"music":music,"priceMin":pmin,"priceMax":pmax,"priceText":(str(e.get("priceText"))[:160] if e.get("priceText") else None),
             "free":free,"dressCode":(str(e.get("dressCode"))[:120] if e.get("dressCode") else None),"ageMin":num(e.get("ageMin")),"lineup":[str(x)[:80] for x in (e.get("lineup") or [])][:12],
             "description":(str(e.get("description"))[:400] if e.get("description") else None),"status":st,"sources":srcs,"ticketUrl":((e.get("ticketUrl") if e.get("ticketUrl") and "madridlux.com" not in str(e.get("ticketUrl")) else None) or (srcs[0]["url"] if srcs else None)),
             "_titles":[title[:140]]}
@@ -404,6 +441,7 @@ def merge(a,b):
     out["music"]=list(dict.fromkeys((a.get("music") or [])+(b.get("music") or [])))
     out["lineup"]=list(dict.fromkeys((a.get("lineup") or [])+(b.get("lineup") or [])))[:12]
     if out.get("zone") in (None,"Otros") and b.get("zone"): out["zone"]=b["zone"]
+    if out.get("venueKind") in (None,"otro") and b.get("venueKind"): out["venueKind"]=b["venueKind"]
     if out.get("type")=="otro" and b.get("type")!="otro": out["type"]=b["type"]
     out["sources"]=list(out.get("sources") or [])
     urls={s["url"] for s in out["sources"]}
@@ -516,6 +554,7 @@ def load_existing(path):
 CHUNK_BYTES=150_000
 
 def main(data_dir, existing_path, out_dir, today=None):
+    _load_venue_dir()
     today=today or madrid_today()
     yesterday=(datetime.date.fromisoformat(today)-datetime.timedelta(days=1)).isoformat()
     stale_limit=(datetime.date.fromisoformat(today)-datetime.timedelta(days=2)).isoformat()   # no visto en 3 extracciones seguidas
@@ -608,7 +647,15 @@ def main(data_dir, existing_path, out_dir, today=None):
         elif d >= today and last <= stale_limit and (last <= hard_limit or any(s.get("name") in sources_today for s in xd.get("sources",[]))):
             counts["quitadosCancelados"]+=1; warn(f"quitado (no visto desde {last}): {d} {xd.get('venue')} «{str(xd.get('title'))[:60]}»")
         else:
-            counts["conservadosNoVistos"]+=1; final[xid]=xd
+            counts["conservadosNoVistos"]+=1
+            xd=dict(xd); ent=venue_entry(xd.get("venue"))
+            if ent:
+                xd["venue"]=ent["name"]
+                if ent.get("address") and (ent.get("verified") or not xd.get("address")): xd["address"]=ent["address"]
+                if ent.get("zone") and (ent.get("verified") or xd.get("zone") in (None,"Otros")): xd["zone"]=ent["zone"]
+                xd["venueKind"]=ent.get("kind") if ent.get("kind") not in (None,"marca") else "otro"
+            elif not xd.get("venueKind"): xd["venueKind"]=guess_kind(xd.get("venue"))
+            final[xid]=xd
     # salida
     for e in merged: e.pop("_titles",None)
     os.makedirs(os.path.join(out_dir,"chunks"),exist_ok=True)
