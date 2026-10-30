@@ -449,7 +449,9 @@ def merge(a,b):
             out["priceNote"]=f"Más barato en {b['sources'][0]['name']} ({b['priceMin']} €); {a['sources'][0]['name'] if a.get('sources') else 'otra fuente'} lo lista a {a['priceMin']} €"
     elif a.get("priceMin") is not None and b.get("priceMin") is not None and b["priceMin"] > a["priceMin"] and b.get("sources") and a.get("sources"):
         out["priceNote"]=f"Más barato en {a['sources'][0]['name']} ({a['priceMin']} €); {b['sources'][0]['name']} lo lista a {b['priceMin']} €"
-    out["free"]=bool(a.get("free") or b.get("free"))
+    # gratis lo decide la fuente cuyo precio se ha elegido (la ticketera): un agregador puede seguir diciendo "lista gratis" cuando ya se agotó
+    out["free"]=bool(ts.get("free")) if ts.get("priceMin") is not None else bool(a.get("free") or b.get("free"))
+    if out["priceMin"]==0: out["free"]=True
     out["music"]=list(dict.fromkeys((a.get("music") or [])+(b.get("music") or [])))
     out["lineup"]=list(dict.fromkeys((a.get("lineup") or [])+(b.get("lineup") or [])))[:12]
     if out.get("zone") in (None,"Otros") and b.get("zone"): out["zone"]=b["zone"]

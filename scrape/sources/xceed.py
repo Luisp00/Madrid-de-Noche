@@ -60,11 +60,14 @@ def _price(offers, free_flag):
     gen = [o for o in offers if isinstance(o.get("price"), (int, float)) and not TABLE.search(o.get("name") or "")]
     if not gen:
         return (0, None, "Gratis", True) if free_flag else (None, None, None, False)
-    prices = sorted(o["price"] for o in gen)
+    av = [o for o in gen if "soldout" not in str(o.get("availability") or "").lower()]
+    pool = av or gen                      # si todo está agotado se informa igualmente del precio
+    prices = sorted(o["price"] for o in pool)
     pmin, pmax = prices[0], prices[-1]
     def n(x): return int(x) if x == int(x) else round(x, 2)
     pmin, pmax = n(pmin), n(pmax)
-    txt = " · ".join(dict.fromkeys(f"{clean_text(o.get('name') or 'Entrada')}" + ("" if re.search(r"\d\s*€", o.get("name") or "") else f" {n(o['price'])} €") for o in gen))
+    txt = " · ".join(dict.fromkeys(f"{clean_text(o.get('name') or 'Entrada')}" + ("" if re.search(r"\d\s*€", o.get("name") or "") else f" {n(o['price'])} €") for o in pool))
+    if av and any(o["price"] == 0 for o in gen if o not in av): txt = "Lista gratis agotada · " + txt   # la lista gratis se acabó: manda lo que queda
     return pmin, (pmax if pmax > pmin else None), txt[:120], pmin == 0
 
 def scrape(today, end):

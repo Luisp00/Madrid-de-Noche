@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Rellena el precio de los eventos que los parsers dejan sin él, visitando la página de compra del evento en la ticketera.
 
-Uso: python3 enrich.py run/data [--max 250] [--today YYYY-MM-DD] [--days 14]
+Uso: python3 enrich.py run/data [--max 300] [--today YYYY-MM-DD] [--days 14]
 
 Recorre run/data/*.json (salida de scrape.py), toma los eventos sin precio (priceMin y priceMax nulos) cuyo ticketUrl o alguna
 url de `sources` es la ficha de un evento en una ticketera con página pública, la descarga con scrape.common.get (caché de 1 h,
@@ -226,6 +226,22 @@ def handler_for(u):
         if h.endswith(fh) and re.search(pat, u): return h_follow
     return None
 
+SELLER_FILES = {"xceed", "whan", "dice", "fever", "taquilla", "nightlifemadrid", "notikumi"}   # sus datos ya vienen de la ticketera
+
+def recheck_free(ev, info):
+    """El agregador decía gratis o lista: si la ticketera ya no ofrece entrada a 0 €, manda la ticketera. True si deja de ser gratis."""
+    if info.get("status") in ("disponible", "ultimas", "agotado"): ev["status"] = info["status"]
+    if info.get("priceMin") is None: return False
+    if info["priceMin"] == 0 or info.get("free"):
+        if info.get("priceText"): ev["priceText"] = info["priceText"][:120]
+        return False
+    ev["priceMin"], ev["priceMax"], ev["free"] = info["priceMin"], info.get("priceMax"), False
+    txt = info.get("priceText") or f"{info['priceMin']:g} €"
+    if not txt.lower().startswith("lista gratis agotada"): txt = "Lista gratis agotada · " + txt
+    ev["priceText"] = txt[:120]
+    if info.get("canonical"): ev["ticketUrl"] = info["canonical"]
+    return True
+
 def apply(ev, info):
     """Copia lo extraído al evento. Devuelve True si gana precio."""
     gained = False
@@ -260,7 +276,7 @@ def main():
     opt = lambda k, d: args[args.index(k) + 1] if k in args else d
     pos = [a for i, a in enumerate(args) if not a.startswith("--") and (i == 0 or not args[i - 1].startswith("--"))]
     data_dir = pos[0] if pos else "run/data"
-    maxp = int(opt("--max", "250"))
+    maxp = int(opt("--max", "300"))
     rep0 = {}
     try: rep0 = json.load(open(os.path.join(data_dir, "_scrape_report.json")))
     except Exception: pass
@@ -283,9 +299,19 @@ def main():
     # candidatos agrupados por url (una página sirve a todos los eventos que enlazan a ella)
     groups, skipped_cov, skipped_none = {}, 0, 0
     for f, evs in files.items():
+        own_seller = os.path.basename(f)[:-5] in SELLER_FILES
         for e in evs:
-            if has_price(e) or not e.get("date") or not (today <= e["date"] <= end): continue
+            if not e.get("date") or not (today <= e["date"] <= end): continue
             us = urls(e)
+            if has_price(e):
+                # "gratis" o "lista" según un agregador: se comprueba en la ticketera si la lista gratis sigue abierta
+                if own_seller or not (e.get("free") or e.get("priceMin") == 0): continue
+                pick = next(((u, fn) for u in us for fn in [handler_for(u)] if fn and fn not in (h_follow, h_madridenvivo)), None)
+                if not pick: continue
+                u, fn = pick
+                key = (u.split("#")[0], e["date"] if fn is h_fever else None, "recheck")
+                groups.setdefault(key, {"fn": fn, "url": u, "events": [], "date": e["date"], "recheck": True})["events"].append(e)
+                continue
             if any(tkey(u) in priced for u in us if tkey(u)): skipped_cov += 1; continue
             pick = next(((u, fn) for u in us for fn in [handler_for(u)] if fn), None)
             if not pick: skipped_none += 1; continue
@@ -293,7 +319,7 @@ def main():
             key = (u.split("#")[0], e["date"] if fn is h_fever else None)
             groups.setdefault(key, {"fn": fn, "url": u, "events": [], "date": e["date"]})["events"].append(e)
     lowp = lambda g: g["fn"] is h_madridenvivo
-    order = sorted(groups.values(), key=lambda g: (lowp(g), g["date"] > week, g["date"], -len(g["events"])))
+    order = sorted(groups.values(), key=lambda g: (bool(g.get("recheck")), lowp(g), g["date"] > week, g["date"], -len(g["events"])))
     ctx = {"today": today, "end": end, "lo": (datetime.date.fromisoformat(today) - datetime.timedelta(days=1)).isoformat(), "pages": 0}
     rep = {"today": today, "end": end, "maxPages": maxp, "candidates": sum(len(g["events"]) for g in groups.values()), "urls": len(groups),
            "skippedAlreadyPricedLink": skipped_cov, "skippedNoTicketPage": skipped_none, "attempted": 0, "gained": 0, "statusSet": 0,
@@ -316,6 +342,10 @@ def main():
             log("enrich:", g["url"][:90], str(ex)[:120]); continue
         for e in g["events"]:
             st0 = e.get("status")
+            if g.get("recheck"):
+                rep["freeRechecked"] = rep.get("freeRechecked", 0) + 1
+                if recheck_free(e, info): rep["freeGone"] = rep.get("freeGone", 0) + 1
+                continue
             if apply(e, info): hr["gained"] += 1; rep["gained"] += 1
             elif e.get("status") != st0: rep["statusSet"] += 1
     rep["pages"] = ctx["pages"]
@@ -323,7 +353,7 @@ def main():
     for f, evs in files.items():
         json.dump(evs, open(f, "w"), ensure_ascii=False, indent=0)
     json.dump(rep, open(os.path.join(data_dir, "_enrich_report.json"), "w"), ensure_ascii=False, indent=1)
-    print(json.dumps({k: rep[k] for k in ("candidates", "urls", "attempted", "gained", "statusSet", "pages", "skippedAlreadyPricedLink", "skippedNoTicketPage")}, ensure_ascii=False))
+    print(json.dumps({k: rep.get(k) for k in ("candidates", "urls", "attempted", "gained", "statusSet", "pages", "skippedAlreadyPricedLink", "skippedNoTicketPage", "freeRechecked", "freeGone")}, ensure_ascii=False))
     print("por host:", json.dumps({h: (v["attempted"], v["gained"]) for h, v in rep["byHost"].items()}, ensure_ascii=False))
 
 if __name__ == "__main__":
