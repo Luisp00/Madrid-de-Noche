@@ -14,7 +14,7 @@ Herramientas:
 Principio: **el script hace el trabajo; los agentes solo entran cuando el script falla.** Un día normal no debería lanzar ningún agente.
 
 ## 0. Preparación
-La sesión de ejecución diaria (creada con el repo como fuente, rama `gh-pages`, modo `auto`) tiene su directorio de trabajo en un clon de `gh-pages` (la web estática) y puede hacer push a esa rama; el código se clona aparte. Si en cambio estás en una sesión normal con el repo de código, trabaja en él y publica la web como dice el paso 6.
+La sesión programada arranca vacía (sin repo): clona el código en `/tmp/code` y trabaja ahí. Si en cambio estás en una sesión normal con el repo de código, trabaja en él.
 1. Código: `rm -rf /tmp/code && git clone -q --depth 1 -b main https://github.com/Luisp00/Madrid-de-Noche.git /tmp/code`. Todo lo que sigue se ejecuta con `cd /tmp/code`.
 2. `pip install -q requests beautifulsoup4 lxml` (un contenedor nuevo no las trae) y comprueba `node -e "require('playwright')"`.
 3. `mkdir -p run/data run/db run/out run/site`.
@@ -50,13 +50,11 @@ Ejecuta cada entrada de `run/out/writes.json` con `ArtifactData`: `set` (collect
 Añade a `run/out/status.json` (con python) `"failedSources": [nombres de las fuentes que no dieron datos hoy]` y, si tocaba cola larga, `"longTailAt"`. Luego `ArtifactData` get `meta/status` (versión) y `set` con `file_path` = `run/out/status.json` e `if_version`.
 
 ## 6. Web pública
-`python3 -I build_site.py run/out run/site` genera `run/site/` (index.html, data/events.json, data/status.json, .nojekyll).
-- **Sesión de ejecución diaria** (tu directorio de trabajo es el clon de `gh-pages`): `cp -r /tmp/code/run/site/. <directorio de trabajo>/ && cd <directorio de trabajo> && git add -A && git -c user.name=mdn-bot -c user.email=bot@madrid-de-noche commit -m "Datos $(date -u +%F)" && git push origin HEAD:gh-pages`. Si el push falla por no estar al día, `git pull --rebase origin gh-pages` y repite.
-- **Sesión normal con el repo de código:**
+`python3 -I build_site.py run/out run/site` genera `run/site/` (index.html, data/events.json, data/status.json, .nojekyll). La publicación en la rama `gh-pages` **no la hace la sesión programada**: una sesión lanzada por tarea no tiene permiso de push al repo (comprobado el 30 oct: 403 del proxy git, sin `add_repo` ni `create_session`). La publica el workflow de GitHub Actions `.github/workflows/update.yml` (ejecuta este mismo pipeline cada noche) o una sesión interactiva de Claude Code con el repo:
 ```
 git fetch origin gh-pages && git worktree add --detach /tmp/ghp origin/gh-pages && cd /tmp/ghp && git checkout -B gh-pages && cp -r <repo>/run/site/. . && git add -A && git -c user.name=mdn-bot -c user.email=bot@madrid-de-noche commit -m "Datos $(date -u +%F)" && git push origin gh-pages; cd - && git worktree remove --force /tmp/ghp
 ```
-Si el push falla, reintenta 3 veces con pausa; si sigue fallando, anótalo en el informe (el artifact ya está al día).
+Si eres la sesión programada, no intentes el push y no lo cuentes como fallo.
 
 ## 7. Informe
 3–5 líneas: eventos únicos y totales, nuevos/actualizados/quitados, fuentes que fallaron en Python y si el respaldo las cubrió, si se hizo la cola larga, y si la web pública se publicó. Si una fuente lleva dos días fallando (compara con `failedSources` del status anterior), dilo.
