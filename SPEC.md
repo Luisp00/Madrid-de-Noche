@@ -21,6 +21,7 @@ Un archivo JSON con un array de objetos. Guárdalo en la ruta que te indiquen. C
   "venue": "Teatro Kapital",       // nombre canónico de la sala (ver lista)
   "address": "C/ Atocha 125, 28012 Madrid",   // o null
   "zone": "Atocha",                // ver tabla de zonas; "Otros" si no se sabe
+  "venueKind": "discoteca",        // lo pone merge.py desde scrape/venues.json: discoteca | sala | bar | recinto | rooftop | hostel | otro. No hace falta rellenarlo
   "type": "club",                  // club | concierto | fiesta | after | bar | tardeo | festival | otro
   "music": ["reggaeton","comercial"],   // etiquetas de la lista cerrada; [] si no se sabe
   "priceMin": 15,                  // precio más bajo de entrada general en €, número; 0 si hay lista/entrada gratis; null si no se publica
@@ -42,6 +43,7 @@ reggaeton, latino, comercial, pop, techno, house, electronica, hiphop, trap, rnb
 - "Urbano/Urban" → urban. "Afrohouse/Afrobeats" → afro. "Tech house / melodic / minimal" → house + techno. "EDM / dance / electrónica" → electronica. "Latin / latino / bachata" → latino (o salsa si es baile latino). "80s/90s/2000s/remember" → remember. "Funky / disco / nu-disco" → disco. "Comercial / mainstream / hits / de todo" → comercial. Si la fuente no indica música pero la sala es claramente de un estilo (ver salas), usa el de la sala.
 
 ## Zonas (por código postal o barrio)
+El directorio `scrape/venues.json` es la referencia definitiva de nombre, dirección, zona y tipo de local: cuando una sala está ahí con `verified: true`, su dirección y zona mandan sobre lo que diga la fuente y sobre las tablas de abajo.
 28004 → Malasaña / Chueca · 28012, 28013, 28014 → Centro / Sol · 28005 → La Latina · 28012 (C/ Atocha, Lavapiés) → Atocha · 28045 → Atocha · 28015, 28008 → Argüelles / Moncloa · 28003, 28010 → Chamberí · 28001, 28006, 28009, 28028 → Salamanca · 28007 → Retiro · 28020 → Tetuán / Azca · 28002, 28016, 28036 → Chamartín · 28018, 28038, 28031 → Vallecas · 28026, 28019, 28025 → Usera / Carabanchel · 28034 (Fuencarral / Barrio del Pilar) → Otros norte · 28042 → Barajas · 28023 → Aravaca / Pozuelo · 28970 → Humanes (Fabrik) · 28942, 28943 → Fuenlabrada · 28922 → Alcorcón · 28100 → Alcobendas · 28220 → Majadahonda · Resto → Otros
 - Si la sala está en la lista de salas conocidas, manda la zona de la lista (aunque el código postal diga otra cosa). Excepciones conocidas al código postal: **Siroco** (C/ San Dimas 3, 28015) → Malasaña / Chueca; **Green Social Club** (P.º de la Castellana 40, 28046) → Salamanca.
 - **Fitz Club** (C/ Princesa 1, 28008) → Argüelles / Moncloa (no Centro / Sol).

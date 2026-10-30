@@ -16,16 +16,17 @@ Agregador personal de **todos los eventos nocturnos de Madrid** (clubs, fiestas,
 | `scrape.py` | Ejecuta todos los parsers de `scrape/sources/` en paralelo, valida la salida y deja `data/<fuente>.json` y `data/_scrape_report.json` con la lista `failed` (parsers con error o por debajo de su `MIN_EVENTS`). |
 | `scrape/common.py` | Biblioteca de los parsers: `get` (requests con proxy, reintentos y caché de 1 h), `browser` (Chromium headless vía `tools/fetch.js`), JSON-LD, fechas/horas/precios en español, `event()` con el esquema de SPEC.md, `validate()`. |
 | `scrape/CONTRATO.md` | Lo que debe cumplir cada parser. |
+| `scrape/venues.json` | Directorio de salas (227; 151 verificadas en su web o en la fuente): nombre canónico, alias, tipo de local (`discoteca`, `sala`, `bar`, `recinto`, `rooftop`, `hostel`, `otro`, `marca` = promotora sin local), dirección, código postal y zona. `merge.py` lo usa para corregir nombre, dirección y zona y para el campo `venueKind` (filtro "Local" de la app). Para arreglar una ubicación o un tipo, se edita aquí. |
 | `scrape/sources/*.py` | Un parser por fuente: Applinkers, All Madrid Nightlife, Bynova, Nightlife Madrid, Fever, Fulltechno, Technoparty, Techno Airlines, DICE, Xceed, WHAN, Taquilla.com, Notikumi, Dondego, Discotech, AllEvents, Conciertos.club, La Ganzúa, Madrid en Vivo, esMadrid, Siroco, Sala El Sol, La Riviera, Wurlitzer Ballroom, Sala Galileo Galilei. Los `_*.py` son helpers compartidos. |
 | `scrape/disabled/ra.py` | Parser de Resident Advisor por su API GraphQL. **Desactivado**: funciona saltándose la protección anti-bot de RA. Techno Airlines replica la mayoría de sus eventos. |
-| `merge.py` | Normaliza, deduplica y fusiona `data/*.json`; lo cruza con lo existente (`db/chunks/`) y genera `out/chunks/chunk-NN.json` (≤150 KB cada uno), `out/writes.json` (escrituras para `ArtifactData`), `out/events.json` y `out/status.json`. Conserva campos estables del evento existente; quita pasados, duplicados y eventos futuros que llevan 3 extracciones sin aparecer; deduce la zona por sala o código postal; une carteles de la misma sala, noche y hora; descarta entradas semanales genéricas cuando hay evento con nombre; excluye Madrid Lux. |
+| `merge.py` | Normaliza, deduplica y fusiona `data/*.json`; lo cruza con lo existente (`db/chunks/`) y genera `out/chunks/chunk-NN.json` (≤150 KB cada uno), `out/writes.json` (escrituras para `ArtifactData`), `out/events.json` y `out/status.json`. Conserva campos estables del evento existente; quita pasados, duplicados y eventos futuros que llevan 3 extracciones sin aparecer; aplica el directorio `scrape/venues.json` (nombre canónico, dirección verificada, zona y tipo de local `venueKind`; si la sala no está, deduce la zona por código postal y el tipo por el nombre); une carteles de la misma sala, noche y hora; descarta entradas semanales genéricas cuando hay evento con nombre; excluye Madrid Lux. |
 | `build_site.py` | Genera la web estática: `python3 -I build_site.py out/ site/`. |
 | `tools/fetch.js` | Descarga una página con Chromium headless (proxy del entorno): texto visible + enlaces, o `--raw`. Lo usan los parsers que lo necesitan y los agentes cuando WebFetch no está o la web lo bloquea. |
 | `SPEC.md` | Esquema de cada evento, etiquetas de música, zonas, salas conocidas, exclusiones y normas. Lo leen los agentes de respaldo. |
 | `RUNBOOK.md` | Procedimiento diario (v2): código fresco → estado de la BD → `scrape.py` → `enrich.py` → respaldo/cola larga con agentes → `merge.py` → escrituras en el artifact → `meta/status`. Incluye los prompts de los agentes por fuente. |
 | `.github/workflows/update.yml` | Workflow nocturno de GitHub Actions: mismo pipeline (scrape → enrich → merge contra `gh-pages/data/events.json` → build_site) y push a `gh-pages`. También se puede lanzar a mano desde la pestaña Actions. |
 | `FUENTES.md` | Evaluación de fuentes nuevas (30 oct 2026): qué hay, cómo se accede, volumen, prioridad. |
-| `test.js` | Prueba de la app con Playwright: 17 comprobaciones. `node test.js` o `node test.js <events.json>`. |
+| `test.js` | Prueba de la app con Playwright: 25 comprobaciones. `node test.js` o `node test.js <events.json>`. |
 | `data/*.json`, `out/merged.json` | Extracciones y fusión de la carga inicial (29 oct), útiles para probar `merge.py`. |
 | `QA.md`, `REVIEW.md` | Auditoría de la carga inicial y revisión del proyecto. |
 
@@ -51,7 +52,7 @@ Copias de `SPEC.md`, `RUNBOOK.md`, `merge.py`, `build_site.py` y `tools/fetch.js
 1. Revisar la primera ejecución nocturna (22:00) en `meta/status.run` y el aviso push de la tarea, y la primera ejecución del workflow de GitHub Actions (22:20) en la pestaña Actions.
 2. Borrar la colección antigua `events` (981 documentos; exige leerlos por páginas) y los documentos `meta/selftest*` de las pruebas. No molestan.
 3. Precios que siguen faltando (319): Conciertos.club, Notikumi, Technoparty y Techno Airlines no los publican; Fourvenues (403) y RA (vetada) no se pueden visitar. `enrich.py` llega a su tope de 150 páginas: subirlo si hace falta.
-4. Zona "Otros" en ~270 eventos (salas sin dirección): ampliar `VENUE_ZONE` en `merge.py` con las que más se repitan.
+4. Zona "Otros" en ~60 eventos y 54 sin dirección: añadir esas salas a `scrape/venues.json` (con `verified: true` si se comprueba en su web).
 5. Fuentes de prioridad media en `FUENTES.md` (Wegow, Clubs In Madrid…) y los agentes de cola larga para las salas sin parser.
 
 ## Cómo trabajar desde Claude Code
