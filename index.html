@@ -76,6 +76,7 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
 .tag{font-size:11.5px;padding:3px 8px;border-radius:7px;background:var(--card2);color:var(--muted);border:1px solid var(--line);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tag.music{color:#d9c7ff;border-color:rgba(138,92,255,.35);background:rgba(138,92,255,.12)}
 .tag.time{color:var(--text);font-variant-numeric:tabular-nums}
+.tag.kind{color:#bfe3ff;border-color:rgba(120,190,255,.35);background:rgba(120,190,255,.1)}
 .tag.dress{color:#ffd1a3;border-color:rgba(255,181,71,.3);background:rgba(255,181,71,.1)}
 .tag.age{color:var(--muted)}
 .tag.bad{color:#ffb3b3;border-color:rgba(255,92,92,.35);background:rgba(255,92,92,.12)}
@@ -197,7 +198,8 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
     <div class="fsec"><h4>Precio máximo</h4><div class="wrap" id="fPrice"></div></div>
     <div class="fsec"><h4>Música <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fMusic"></div></div>
     <div class="fsec"><h4>Zona <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fZone"></div></div>
-    <div class="fsec"><h4>Tipo <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fType"></div></div>
+    <div class="fsec"><h4>Local <small>· discoteca, sala, bar… · toca dos veces para excluir</small></h4><div class="wrap" id="fKind"></div></div>
+    <div class="fsec"><h4>Tipo de evento <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fType"></div></div>
     <div class="fsec"><h4>Dress code</h4><div class="wrap" id="fDress"></div></div>
     <div class="fsec"><h4>Edad · solo donde me dejan entrar</h4><div class="wrap" id="fAge"></div></div>
     <div class="fsec"><h4>Fuente <small>· toca dos veces para excluir</small></h4><div class="wrap" id="fSource"></div></div>
@@ -239,6 +241,7 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
  { id, title, date:"YYYY-MM-DD" (noche en que empieza), start:"23:30", end:"06:00",
    venue, address, zone, type: club|concierto|fiesta|after|bar|tardeo|festival|otro,
    music:["reggaeton","techno",...], priceMin, priceMax, priceText, priceNote, free:bool,
+   venueKind: discoteca|sala|bar|recinto|hostel|rooftop|otro (tipo de local, del directorio scrape/venues.json),
    dressCode:string|null, ageMin:number|null, lineup:[...], description,
    status: disponible|ultimas|agotado|desconocido,
    sources:[{name,url}], ticketUrl, updatedAt, lastSeen }
@@ -249,6 +252,7 @@ main{max-width:900px;margin:0 auto;padding-block:6px 90px;padding-left:var(--gl)
 
 const MUSIC_LABELS = {reggaeton:"Reggaetón",latino:"Latino",comercial:"Comercial",pop:"Pop",techno:"Techno",house:"House",electronica:"Electrónica",hiphop:"Hip-hop",trap:"Trap",rnb:"R&B",afro:"Afro",dancehall:"Dancehall",indie:"Indie",rock:"Rock",dnb:"Drum & Bass",hardtechno:"Hard techno",disco:"Disco/Funk",salsa:"Salsa/Bachata",flamenco:"Flamenco",remember:"Remember",urban:"Urbano",variado:"Variado",otros:"Otros"};
 const TYPE_LABELS = {club:"Club",concierto:"Concierto",fiesta:"Fiesta",after:"After",bar:"Bar / DJ",tardeo:"Tardeo",festival:"Festival",otro:"Otro"};
+const KIND_LABELS = {discoteca:"Discoteca",sala:"Sala de conciertos",bar:"Bar / pub",recinto:"Recinto grande",hostel:"Hostel",rooftop:"Rooftop",otro:"Otro local"};
 const PRICE_OPTS = [{v:0,l:"Gratis"},{v:10,l:"≤ 10 €"},{v:15,l:"≤ 15 €"},{v:20,l:"≤ 20 €"},{v:30,l:"≤ 30 €"},{v:null,l:"Cualquiera"}];
 const DRESS_OPTS = [{v:"any",l:"Cualquiera"},{v:"none",l:"Sin dress code"},{v:"smart",l:"Elegante / arreglado"}];
 const AGE_OPTS = [{v:null,l:"Cualquiera"},{v:18,l:"Tengo 18–19"},{v:20,l:"Tengo 20"},{v:21,l:"Tengo 21–24"},{v:25,l:"Tengo 25 o más"}];
@@ -257,7 +261,7 @@ const TRIGGER_ID = "trig_01Vfxn2eyLAwrGVNHx7wYBfW";   // tarea programada de act
 const state = {
   events: [], meta: null, loaded:false, dbMissing:false, partial:false,
   q:"", dateMode:"semana", customDate:null, customDateTo:null, calMonth:null,
-  f:{ price:null, music:new Set(), zone:new Set(), type:new Set(), dress:"any", age:null, source:new Set(), musicNot:new Set(), zoneNot:new Set(), typeNot:new Set(), sourceNot:new Set(), hideSold:false, onlyFree:false, onlyFav:false },
+  f:{ price:null, music:new Set(), zone:new Set(), type:new Set(), dress:"any", age:null, source:new Set(), musicNot:new Set(), zoneNot:new Set(), typeNot:new Set(), sourceNot:new Set(), kind:new Set(), kindNot:new Set(), hideSold:false, onlyFree:false, onlyFav:false },
   favs: new Set(), favDoc:null, isOwner:false, mcp:null, lastFocus:null
 };
 
@@ -388,11 +392,11 @@ function pickDay(iso){
 /* ---------- filtros ---------- */
 function activeFilterCount(){
   const f=state.f; let n=0;
-  if(f.price!==null)n++; n+=(f.music.size||f.musicNot.size)?1:0; n+=(f.zone.size||f.zoneNot.size)?1:0; n+=(f.type.size||f.typeNot.size)?1:0; if(f.dress!=="any")n++; if(f.age!==null)n++; n+=(f.source.size||f.sourceNot.size)?1:0; if(f.hideSold)n++; if(f.onlyFree)n++; if(f.onlyFav)n++;
+  if(f.price!==null)n++; n+=(f.music.size||f.musicNot.size)?1:0; n+=(f.zone.size||f.zoneNot.size)?1:0; n+=(f.type.size||f.typeNot.size)?1:0; n+=(f.kind.size||f.kindNot.size)?1:0; if(f.dress!=="any")n++; if(f.age!==null)n++; n+=(f.source.size||f.sourceNot.size)?1:0; if(f.hideSold)n++; if(f.onlyFree)n++; if(f.onlyFav)n++;
   return n;
 }
 function haystack(e){
-  if (!e._hay) e._hay = fold([e.title,e.venue,e.zone,e.address,e.description,(e.lineup||[]).join(" "),(e.music||[]).map(m=>MUSIC_LABELS[m]||m).join(" "),(e.sources||[]).map(s=>s.name).join(" ")].join(" "));
+  if (!e._hay) e._hay = fold([e.title,e.venue,e.zone,e.address,e.description,(e.lineup||[]).join(" "),(e.music||[]).map(m=>MUSIC_LABELS[m]||m).join(" "),(e.sources||[]).map(s=>s.name).join(" "),KIND_LABELS[e.venueKind]||""].join(" "));
   return e._hay;
 }
 function passes(e){
@@ -406,6 +410,8 @@ function passes(e){
   if (f.zoneNot.size && f.zoneNot.has(e.zone||"Otros")) return false;
   if (f.type.size && !f.type.has(e.type||"otro")) return false;
   if (f.typeNot.size && f.typeNot.has(e.type||"otro")) return false;
+  if (f.kind.size && !f.kind.has(e.venueKind||"otro")) return false;
+  if (f.kindNot.size && f.kindNot.has(e.venueKind||"otro")) return false;
   if (f.dress!=="any" && dressClass(e)!==f.dress) return false;
   if (f.age!==null){ if ((e.ageMin||18) > f.age) return false; }
   if (f.source.size && !(e.sources||[]).some(s=>f.source.has(s.name))) return false;
@@ -433,7 +439,7 @@ function tri(inc, exc){
 }
 function uniqueValues(key){
   const m=new Map(); const t=todayStr();
-  for (const e of state.events){ if (e.date<t) continue; const vals = key==="music"? (e.music||[]) : key==="source" ? (e.sources||[]).map(s=>s.name) : [e[key]||(key==="zone"?"Otros":"otro")]; for(const v of vals) m.set(v,(m.get(v)||0)+1); }
+  for (const e of state.events){ if (e.date<t) continue; const vals = key==="music"? (e.music||[]) : key==="source" ? (e.sources||[]).map(s=>s.name) : key==="venueKind" ? [e.venueKind||"otro"] : [e[key]||(key==="zone"?"Otros":"otro")]; for(const v of vals) m.set(v,(m.get(v)||0)+1); }
   return [...m.entries()].sort((a,b)=>b[1]-a[1]).map(([v,n])=>({v,n}));
 }
 function renderFilters(){
@@ -441,6 +447,7 @@ function renderFilters(){
   chipGroup($("#fPrice"), PRICE_OPTS, v=>f.price===v, v=>{f.price=v;});
   chipGroup($("#fMusic"), uniqueValues("music").map(o=>({v:o.v,l:(MUSIC_LABELS[o.v]||o.v)+" · "+o.n})), ...tri(f.music,f.musicNot));
   chipGroup($("#fZone"), uniqueValues("zone").map(o=>({v:o.v,l:o.v+" · "+o.n})), ...tri(f.zone,f.zoneNot));
+  chipGroup($("#fKind"), uniqueValues("venueKind").map(o=>({v:o.v,l:(KIND_LABELS[o.v]||o.v)+" · "+o.n})), ...tri(f.kind,f.kindNot));
   chipGroup($("#fType"), uniqueValues("type").map(o=>({v:o.v,l:(TYPE_LABELS[o.v]||o.v)+" · "+o.n})), ...tri(f.type,f.typeNot));
   chipGroup($("#fDress"), DRESS_OPTS, v=>f.dress===v, v=>{f.dress=v});
   chipGroup($("#fAge"), AGE_OPTS, v=>f.age===v, v=>{f.age=v});
@@ -448,7 +455,7 @@ function renderFilters(){
   for (const [id,on] of [["#swSold",f.hideSold],["#swFree",f.onlyFree],["#swFav",f.onlyFav]]){ const el=$(id); el.classList.toggle("on",on); el.setAttribute("aria-checked",on); }
   if(!$("#fMusic").children.length) $("#fMusic").innerHTML='<span class="src">Sin datos todavía</span>';
 }
-function clearFilters(){ state.f={price:null,music:new Set(),zone:new Set(),type:new Set(),dress:"any",age:null,source:new Set(),musicNot:new Set(),zoneNot:new Set(),typeNot:new Set(),sourceNot:new Set(),hideSold:false,onlyFree:false,onlyFav:false}; renderFilters(); }
+function clearFilters(){ state.f={price:null,music:new Set(),zone:new Set(),type:new Set(),dress:"any",age:null,source:new Set(),musicNot:new Set(),zoneNot:new Set(),typeNot:new Set(),sourceNot:new Set(),kind:new Set(),kindNot:new Set(),hideSold:false,onlyFree:false,onlyFav:false}; renderFilters(); }
 
 /* ---------- lista ---------- */
 function render(){
@@ -497,11 +504,12 @@ function card(e){
   const dress = e.dressCode && dressClass(e)==="smart" ? `<span class="tag dress" title="${esc(e.dressCode)}">👔 ${esc(short(e.dressCode))}</span>` : "";
   const age = e.ageMin && e.ageMin>18 ? `<span class="tag age">+${e.ageMin}</span>` : "";
   const type = e.type && e.type!=="club" ? `<span class="tag">${esc(TYPE_LABELS[e.type]||e.type)}</span>`:"";
+  const kind = e.venueKind && e.venueKind!=="otro" ? `<span class="tag kind">${esc(KIND_LABELS[e.venueKind]||e.venueKind)}</span>` : "";
   const srcs=(e.sources||[]).slice(0,4).map(s=>`<span class="src">${esc(s.name)}</span>`).join("");
   return `<article class="card ${e.status==="agotado"?"soldout":""}" data-id="${esc(e.id)}" tabindex="0" role="button" aria-label="${esc(e.title)}, ${esc(e.venue||"")}. Ver ficha">
     <div class="row"><div><h3>${esc(e.title)}</h3><div class="venue"><b>${esc(e.venue||"")}</b>${e.zone?" · "+esc(e.zone):""}</div></div>
       <div class="price"><span class="n ${p.free?"free":""}">${esc(p.n)}</span>${p.l?`<span class="l">${esc(p.l)}</span>`:""}</div></div>
-    <div class="meta">${time}${music}${type}${dress}${age}${statusTag(e)}</div>
+    <div class="meta">${time}${kind}${music}${type}${dress}${age}${statusTag(e)}</div>
     <div class="foot"><div class="srcs">${srcs}</div>
       <button type="button" class="fav ${fav?"on":""}" data-fav="${esc(e.id)}" aria-label="${fav?"Quitar de favoritos":"Añadir a favoritos"}" aria-pressed="${fav}"><svg viewBox="0 0 24 24" fill="${fav?"currentColor":"none"}" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.6-9.3-9.1C1 8.3 3.2 4.5 6.9 4.5c2 0 3.5 1.2 5.1 3 1.6-1.8 3.1-3 5.1-3 3.7 0 5.9 3.8 4.2 7.4C19 16.4 12 21 12 21z"/></svg></button></div>
   </article>`;
@@ -525,7 +533,7 @@ function openDetail(id){
   if (e.lineup?.length) kv.push(["Line-up", e.lineup.map(esc).join(", ")]);
   kv.push(["Dress code", e.dressCode? esc(e.dressCode) : '<small>No especificado</small>']);
   kv.push(["Edad", e.ageMin? `+${e.ageMin}` : '<small>No especificada (normalmente +18)</small>']);
-  if (e.type) kv.push(["Tipo", esc(TYPE_LABELS[e.type]||e.type)]);
+  if (e.type) kv.push(["Tipo", esc(TYPE_LABELS[e.type]||e.type)+(e.venueKind?` · ${esc(KIND_LABELS[e.venueKind]||e.venueKind)}`:"")]);
   if (e.status && e.status!=="desconocido") kv.push(["Entradas", e.status==="agotado"?'<span style="color:var(--bad)">Agotadas</span>':e.status==="ultimas"?'<span style="color:var(--warn)">Últimas entradas</span>':"Disponibles"]);
   // botón principal: el enlace de compra más barato (ticketUrl); después, el resto de fuentes
   const srcs=e.sources||[]; const ticket=e.ticketUrl||srcs[0]?.url; const buttons=[];

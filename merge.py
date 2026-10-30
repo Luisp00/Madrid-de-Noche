@@ -125,7 +125,7 @@ def source_name_for(url, default):
         if h in host: return n
     return default
 # fuentes que no se usan (petición del usuario, 30 oct 2026): se quitan de los eventos y, si un evento solo venía de ellas, se descarta
-EXCLUDED_SOURCES = {"Madrid Lux","MadridLux","madridlux.com"}
+EXCLUDED_SOURCES = {"Madrid Lux","MadridLux","madridlux.com","Songkick","Bclever","Studentfy"}   # Songkick/Bclever/Studentfy: enlaces de compra muertos o inexistentes (30 oct 2026)
 PUBCRAWL = re.compile(r"pub ?crawl|ruta de bares", re.I)
 EXCLUDED = re.compile(r"karaoke|bingo|\bclases? de\b|\btalleres?\b|\btablao\b|\bteatro\b|sin esperas|shisha|cena[ -]espect[aá]culo|candlelight|infantil|\bmuseo\b|\btributo a\b|\btribute to\b|\bdrag (show|queens?)\b|this is drag|\bmon[oó]logos?\b|stand[ -]?up|\bc[oó]mico\b", re.I)
 MUSICAL_TITLE = re.compile(r"\bmusical\b", re.I)                     # en el título

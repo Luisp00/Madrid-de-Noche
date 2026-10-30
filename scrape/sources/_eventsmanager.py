@@ -123,5 +123,5 @@ def scrape_ics(*, name, ics_url, venue, address, zone, today, end, club_music, c
         out.append(event(title=title, date=date, start=start, end=endt, venue=venue, address=address, zone=zone, type=typ,
                          music=(music_tags(title + " " + e["description"][:250]) or (club_music if typ == "club" else concert_music)),
                          priceMin=pmin, priceMax=pmax, priceText=ptxt, free=free, lineup=_lineup(title), description=(desc[:400] or None),
-                         status=status, sources=[{"name": name, "url": e["url"]}], ticketUrl=ticket or e["url"]))
+                         status=status, sources=[{"name": name, "url": e["url"]}], ticketUrl=(ticket.split()[0] if ticket and ticket.split() else None) or e["url"]))
     return out
